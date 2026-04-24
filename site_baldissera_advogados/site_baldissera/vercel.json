@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "name": "baldissera-advogados",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/public/index.html" },
+    { "source": "/sobre", "destination": "/public/sobre.html" },
+    { "source": "/atuacao", "destination": "/public/areas-de-atuacao.html" },
+    { "source": "/advogados", "destination": "/public/advogados.html" },
+    { "source": "/publicacoes", "destination": "/public/publicacoes.html" },
+    { "source": "/contato", "destination": "/public/contato.html" },
+    { "source": "/privacidade", "destination": "/public/politica-de-privacidade.html" },
+    { "source": "/provimento-205", "destination": "/public/aviso-provimento-205.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+      ]
+    }
+  ]
+}

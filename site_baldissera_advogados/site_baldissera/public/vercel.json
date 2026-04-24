@@ -1,10 +1,10 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
-    { "source": "/atuacao", "destination": "/areas-de-atuacao.html" },
-    { "source": "/privacidade", "destination": "/politica-de-privacidade.html" },
-    { "source": "/provimento-205", "destination": "/aviso-provimento-205.html" }
+  "redirects": [
+    { "source": "/atuacao", "destination": "/areas-de-atuacao", "permanent": false },
+    { "source": "/privacidade", "destination": "/politica-de-privacidade", "permanent": false },
+    { "source": "/provimento-205", "destination": "/aviso-provimento-205", "permanent": false }
   ],
   "headers": [
     {

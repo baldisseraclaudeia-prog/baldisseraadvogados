@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.baldisseraadvogados.com.br/sitemap.xml

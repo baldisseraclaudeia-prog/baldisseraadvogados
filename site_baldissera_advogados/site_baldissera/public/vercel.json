@@ -1,15 +1,8 @@
 {
-  "version": 2,
-  "name": "baldissera-advogados",
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/sobre", "destination": "/sobre.html" },
     { "source": "/atuacao", "destination": "/areas-de-atuacao.html" },
-    { "source": "/advogados", "destination": "/advogados.html" },
-    { "source": "/publicacoes", "destination": "/publicacoes.html" },
-    { "source": "/contato", "destination": "/contato.html" },
     { "source": "/privacidade", "destination": "/politica-de-privacidade.html" },
     { "source": "/provimento-205", "destination": "/aviso-provimento-205.html" }
   ],

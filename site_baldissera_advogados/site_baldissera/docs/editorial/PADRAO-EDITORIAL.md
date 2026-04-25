@@ -155,4 +155,6 @@ Workflow recomendado em quatro passos (ver `INSTRUCOES.md` para detalhes):
 
 ---
 
-*Padrão editorial preparado em 25/04/2026. Atualizar este documento sempre que houver mudança estrutural no template visual ou em convenções editoriais.*
+## 13. Aprendizados consolidados na prática
+
+> Esta seção reúne padrões refinados a partir de execuções reais do pipeline. Sempre que uma nova publica�

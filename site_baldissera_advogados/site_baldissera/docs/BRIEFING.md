@@ -283,7 +283,9 @@ Sistema dedicado para a produção contínua de conteúdo da aba `/publicacoes`.
 3. Claude entrega: HTML completo + atualização de `publicacoes.html` + linha nova para `sitemap.xml`.
 4. Revisar, comitar, pushar — Vercel publica em ~60-90s.
 
-**Espelho de referência:** `public/publicacao-cadeia-de-custodia.html` (publicação inaugural, jan/2026).
+**Espelhos de referência:**
+- `public/publicacao-cadeia-de-custodia.html` (Pub Nº 1 — ensaio dogmático sobre cadeia de custódia, jan/2026).
+- `public/publicacao-prova-digital-sem-hash.html` (Pub Nº 2 — comentário ao AgRg no HC 1.014.212/ES, abr/2026). **Primeira execução real do pipeline editorial.** Aprendizados consolidados estão na seção 13 do `PADRAO-EDITORIAL.md`.
 
 **Princípios invioláveis** (estão detalhados em `INSTRUCOES.md`):
 - Nunca inventar julgados, normas ou citações.

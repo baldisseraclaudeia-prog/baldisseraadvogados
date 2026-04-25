@@ -1,5 +1,33 @@
 # PENDÊNCIAS — Para fechar antes do go-live
 
+> **Atualização 25/04/2026 — sessão Cowork.** Vários itens deste documento foram resolvidos. Veja `BRIEFING.md` para o estado atual completo. Resumo do que mudou abaixo:
+>
+> **Resolvido nesta sessão:**
+> - **Site no ar em `https://www.baldisseraadvogados.com.br/`** com SSL automático da Vercel.
+> - Domínio próprio (apex + www) vinculado ao projeto na Vercel — antes dava `DEPLOYMENT_NOT_FOUND`.
+> - Vercel Authentication (Deployment Protection) desabilitada — site agora é público.
+> - CSS funcionando: `assets/` movido para `public/`, 26 referências corrigidas em 19 HTMLs.
+> - `vercel.json` movido para dentro de `public/` (Root Directory) e simplificado; rewrites convertidas em redirects.
+> - Equipe: Anderson Spanhol promovido a Sócio com foto integrada (currículo ainda pendente).
+> - Hero da home reformulado para refletir as 7 frentes técnicas (não só recursos).
+> - Site review completo: 19 meta descriptions reescritas, Open Graph + Twitter Card, formsubmit.co nos 2 forms (contato e newsletter), `robots.txt`, `sitemap.xml`, JSON-LD Schema.org LegalService, favicon (SVG + PNG + apple-touch-icon), `og-default.png` 1200×630, font preload, ajustes cosméticos.
+>
+> **Ainda pendente (precisa do Luiz):**
+> - Status final do RJ (operacional, em implantação ou omitir) — hoje incoerente em 4 lugares.
+> - Definir Porto Belo como 5ª unidade ou redefinir lotação do Anderson.
+> - Currículo do Luiz no `/perfil-luiz` — adicionar mestrados e instituições.
+> - Arquitetura nav vs `/sobre` (página hoje órfã do menu).
+> - Narrativa "três vetores" × "sete frentes" (alinhar `/sobre` com a home).
+> - Currículo do Anderson Spanhol → criar `perfil-anderson.html`.
+> - Forma jurídica formal da banca (item 7 abaixo) — ainda não confirmada.
+> - DNS/E-mail Workspace (itens 2 e 3 abaixo) — ainda não configurados.
+>
+> ---
+>
+> *Texto original do documento abaixo (preservado para referência histórica).*
+
+---
+
 Este documento lista todas as pendências identificadas até o momento da compilação deste pacote (21/04/2026). Algumas são bloqueantes para a publicação; outras podem ser resolvidas após o site já estar no ar.
 
 ---

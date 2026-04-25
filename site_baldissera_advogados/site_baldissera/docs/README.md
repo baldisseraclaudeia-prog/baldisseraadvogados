@@ -1,6 +1,16 @@
 # BALDISSERA ADVOGADOS — Site Institucional
 
-Pacote completo do site institucional da banca Baldissera Advogados, pronto para deploy.
+Site institucional da banca Baldissera Advogados, em produção em `https://www.baldisseraadvogados.com.br/`.
+
+> **Para o panorama técnico completo, convenções e pendências, ver `BRIEFING.md` neste mesmo diretório.**
+
+
+## STATUS ATUAL
+
+Site **no ar** em `https://www.baldisseraadvogados.com.br/` desde 24/04/2026, hospedado na Vercel. 
+Última atualização significativa: 25/04/2026 (review completo + SEO + formulários funcionais).
+
+Veja `BRIEFING.md` para histórico completo e `PENDENCIAS.md` para o que ainda está em aberto.
 
 ## CONTEÚDO
 
@@ -30,8 +40,11 @@ site_baldissera/
 │   ├── css/
 │   │   └── style.css                → CSS global compartilhado
 │   └── images/
-│       ├── luiz-henrique-baldissera.jpg → 600×750 PB editorial
-│       └── karla-sampaio.jpg            → 600×750 PB editorial
+│       ├── luiz-henrique-baldissera.jpg
+│       ├── charys-baldissera.jpg
+│       ├── karla-sampaio.jpg
+│       ├── anderson-spanhol.jpg
+│       └── og-default.png             → 1200×630 para Open Graph
 │
 └── docs/
     ├── README.md                    → Este documento
@@ -41,7 +54,7 @@ site_baldissera/
 
 ## ESPECIFICAÇÕES TÉCNICAS
 
-- **Total de páginas:** 18 HTMLs autônomos + 1 CSS global + 2 imagens
+- **Total de páginas:** 19 HTMLs + 1 CSS + 4 fotos + og-default + favicons + sitemap.xml + robots.txt
 - **Tamanho total:** aproximadamente 250 KB (extremamente leve)
 - **Tipografia:** Cormorant Garamond (Google Fonts) + sistema sans-serif
 - **Paleta:** Navy #0F172A · Dourado #9B7B3A · Ivory #F5F1E8

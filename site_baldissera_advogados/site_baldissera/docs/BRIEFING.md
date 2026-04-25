@@ -265,4 +265,32 @@ git push origin main
 
 ---
 
+## 16. Módulo editorial — produção de publicações
+
+Sistema dedicado para a produção contínua de conteúdo da aba `/publicacoes`. Documentação em `docs/editorial/`:
+
+| Arquivo | Função |
+|---|---|
+| `PADRAO-EDITORIAL.md` | Anatomia visual + tom + vedações Provimento 205 + convenções de citação |
+| `TEMPLATE.html` | Template HTML com marcadores `{{...}}` para preenchimento |
+| `INSTRUCOES.md` | Workflow operacional passo a passo para Claude executar a geração |
+
+**Modalidades cobertas:** comentário a julgado · ensaio dogmático · análise de tese recursal · roteiro de defesa.
+
+**Como usar em Claude Project:**
+1. Anexar os três arquivos do `docs/editorial/` como knowledge files do Project (junto com o `BRIEFING.md`).
+2. Colar o julgado (ementa, voto ou URL) com direcionamento curto sobre o ângulo desejado.
+3. Claude entrega: HTML completo + atualização de `publicacoes.html` + linha nova para `sitemap.xml`.
+4. Revisar, comitar, pushar — Vercel publica em ~60-90s.
+
+**Espelho de referência:** `public/publicacao-cadeia-de-custodia.html` (publicação inaugural, jan/2026).
+
+**Princípios invioláveis** (estão detalhados em `INSTRUCOES.md`):
+- Nunca inventar julgados, normas ou citações.
+- Nunca atribuir caso concreto da banca como exemplo.
+- Nunca prometer resultado.
+- Nunca quebrar o padrão visual sem solicitação explícita.
+
+---
+
 *Briefing preparado em sessão Cowork. Última atualização: 2026-04-25. Para usar como contexto em Claude Projects: copiar o conteúdo deste arquivo e colar como knowledge file no Project.*

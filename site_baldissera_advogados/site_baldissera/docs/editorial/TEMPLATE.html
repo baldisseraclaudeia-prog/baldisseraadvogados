@@ -1,0 +1,215 @@
+<!--
+============================================================================
+TEMPLATE de PUBLICAÇÃO — Baldissera Advogados
+Substitua os marcadores {{...}} pelo conteúdo correspondente.
+Veja PADRAO-EDITORIAL.md e INSTRUCOES.md neste mesmo diretório.
+============================================================================
+MARCADORES OBRIGATÓRIOS:
+{{TITULO_CURTO}}        — para o <title> e og:title (ex.: "Cadeia de custódia digital")
+{{TITULO_COMPLETO}}     — H1 do artigo (descritivo, com dois pontos)
+{{LEAD_AFORISMO}}       — frase italic gold-soft, 21px (ex.: "A prova penal não é a coisa em si...")
+{{META_DESCRIPTION}}    — ≤160 caracteres
+{{NUMERO_PUBLICACAO}}   — N.º incremental (ver último em publicacoes.html)
+{{AREA}}                — ex.: "Direito Penal", "Recursos aos Tribunais Superiores"
+{{MES_ANO}}             — ex.: "Abril de 2026"
+{{ANO_MES_DIA}}         — ex.: "2026-04-25" (para article:published_time)
+{{SLUG}}                — slug do arquivo sem extensão (ex.: "publicacao-cadeia-de-custodia")
+{{TEMPO_LEITURA}}       — minutos (palavras_corpo / 250)
+{{AUTOR_NOME}}          — ex.: "Luiz Henrique Baldissera"
+{{AUTOR_INICIAIS}}      — ex.: "L.H.B."
+{{AUTOR_OAB}}           — ex.: "OAB/PR 55.717"
+{{AUTOR_TITULO}}        — ex.: "Advogado criminalista"
+{{AUTOR_BIO_CURTA}}     — 1-2 frases
+{{AUTOR_FOTO}}          — nome do JPG em assets/images/
+{{AUTOR_PERFIL}}        — slug do perfil (ex.: "perfil-luiz")
+{{PROXIMA_MES_ANO}}     — ex.: "Maio · 2026"
+{{PROXIMA_TITULO}}      — título da próxima publicação prevista (do calendário)
+============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITULO_CURTO}} · Baldissera Advogados</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Baldissera Advogados">
+<meta property="og:title" content="{{TITULO_CURTO}} · Baldissera Advogados">
+<meta property="og:description" content="{{META_DESCRIPTION}}">
+<meta property="og:url" content="https://www.baldisseraadvogados.com.br/{{SLUG}}">
+<meta property="og:image" content="https://www.baldisseraadvogados.com.br/assets/images/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:author" content="{{AUTOR_NOME}}">
+<meta property="article:published_time" content="{{ANO_MES_DIA}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{TITULO_CURTO}} · Baldissera Advogados">
+<meta name="twitter:description" content="{{META_DESCRIPTION}}">
+<meta name="twitter:image" content="https://www.baldisseraadvogados.com.br/assets/images/og-default.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="b-header">
+<div class="logo-h">
+<div class="logo-cap"><span class="b-g">B</span><span class="a-n">A</span></div>
+<div class="logo-text"><p class="name">BALDISSERA</p><p class="sub">A D V O G A D O S</p></div>
+</div>
+<nav class="b-nav">
+<a href="index.html">Escritório</a>
+<a href="areas-de-atuacao.html">Atuação</a>
+<a href="advogados.html">Advogados</a>
+<a href="publicacoes.html" class="active">Publicações</a>
+<a href="contato.html">Contato</a>
+</nav>
+</header>
+
+<div class="breadcrumb"><a href="publicacoes.html">Publicações</a><span class="sep">/</span><span class="current">{{TITULO_CURTO}}</span></div>
+
+<!-- HERO DA PUBLICAÇÃO -->
+<section style="padding:60px 40px 40px;background:var(--ivory-bg);">
+<div style="max-width:760px;margin:0 auto;">
+<p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px;">PUBLICAÇÃO Nº {{NUMERO_PUBLICACAO}} · {{AREA}} · {{MES_ANO}}</p>
+<h1 style="font-family:var(--serif);font-weight:500;font-size:48px;line-height:1.15;letter-spacing:.005em;color:var(--navy);margin:0 0 22px;">{{TITULO_COMPLETO}}</h1>
+<p style="font-family:var(--serif);font-style:italic;font-size:21px;color:var(--gold-soft);line-height:1.5;margin:0 0 30px;letter-spacing:.005em;">{{LEAD_AFORISMO}}</p>
+<div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--text-muted);padding:18px 0;border-top:0.5px solid var(--border-medium);border-bottom:0.5px solid var(--border-medium);">
+<span style="color:var(--gold);font-family:var(--serif);font-style:italic;font-size:14px;">por</span>
+<span style="font-family:var(--serif);font-weight:500;font-size:15px;color:var(--navy);">{{AUTOR_NOME}}</span>
+<span style="color:var(--gold-light);">·</span>
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;">Advogado · {{AUTOR_OAB}}</span>
+<span style="color:var(--gold-light);">·</span>
+<span style="font-size:11px;letter-spacing:.04em;color:var(--text-light);">leitura: {{TEMPO_LEITURA}} min</span>
+</div>
+</div>
+</section>
+
+<!-- CORPO DO ARTIGO -->
+<section style="padding:50px 40px 40px;background:var(--ivory-bg);">
+<div style="max-width:680px;margin:0 auto;font-size:16px;line-height:1.85;color:var(--text-soft);">
+
+<!--
+  PULL QUOTE INICIAL (opcional). Frase curta de impacto.
+  REMOVER se não houver pull quote nesta publicação.
+-->
+<p style="font-family:var(--serif);font-size:24px;line-height:1.55;color:var(--navy);margin:0 0 32px;font-style:italic;border-left:2px solid var(--gold);padding-left:24px;">{{PULL_QUOTE_INICIAL}}</p>
+
+<!--
+  PARÁGRAFOS DE ABERTURA: cenário concreto, pergunta-tese, ancoragem normativa.
+  Cada parágrafo: <p style="margin:0 0 22px;">…</p>
+-->
+<p style="margin:0 0 22px;">{{PARAGRAFO_ABERTURA_1}}</p>
+<p style="margin:0 0 22px;">{{PARAGRAFO_ABERTURA_2}}</p>
+
+<!--
+  INTERTÍTULO H2 (50px de margem em cima)
+-->
+<h2 style="font-family:var(--serif);font-weight:500;font-size:30px;color:var(--navy);margin:50px 0 22px;letter-spacing:.005em;line-height:1.3;">{{INTERTITULO_1}}</h2>
+
+<p style="margin:0 0 22px;">{{PARAGRAFO_DESENVOLVIMENTO}}</p>
+
+<!--
+  BOX DESTACADO (opcional). Use para "hipóteses", "teses", "cinco passos", etc.
+  Repita o bloco quantas vezes precisar. REMOVER se não tiver boxes.
+-->
+<div style="background:var(--ivory);border-left:3px solid var(--gold);padding:30px 32px;margin:30px 0 22px;">
+<p style="font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold);font-size:18px;margin:0 0 6px;letter-spacing:.04em;">{{BOX_LABEL}}</p>
+<h3 style="font-family:var(--serif);font-weight:500;font-size:24px;color:var(--navy);margin:0 0 14px;letter-spacing:.005em;line-height:1.25;">{{BOX_TITULO}}</h3>
+<p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin:0;">{{BOX_DESCRICAO}}</p>
+</div>
+
+<p style="margin:0 0 22px;">{{PARAGRAFO_APOS_BOX}}</p>
+
+<!--
+  CITAÇÃO DE JURISPRUDÊNCIA — sempre em <strong> dentro do parágrafo:
+  Ex.: A Sexta Turma do STJ, no <strong>HC 653.515/RJ</strong> (Rel. Min. X, julgado em 23/11/2021), …
+-->
+
+<!--
+  ASSINATURA FINAL (italic gold, alinhada à direita).
+-->
+<p style="font-family:var(--serif);font-style:italic;color:var(--gold);font-size:15px;margin:50px 0 0;letter-spacing:.04em;text-align:right;">— {{AUTOR_INICIAIS}}</p>
+
+</div>
+</section>
+
+<!-- REFERÊNCIAS -->
+<section style="padding:60px 40px;background:var(--ivory);border-top:0.5px solid var(--border-soft);border-bottom:0.5px solid var(--border-soft);">
+<div style="max-width:680px;margin:0 auto;">
+<p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px;">referências</p>
+<h2 style="font-family:var(--serif);font-weight:500;font-size:26px;color:var(--navy);margin:0 0 26px;letter-spacing:.01em;">Normas e julgados citados.</h2>
+
+<div style="display:grid;grid-template-columns:1fr;gap:14px;">
+
+<!-- Repetir um <div> para cada referência citada no corpo. -->
+<div style="background:var(--ivory-bg);border:0.5px solid var(--border-medium);border-radius:6px;padding:18px 22px;">
+<p style="font-family:var(--serif);font-weight:500;font-size:16px;color:var(--navy);margin:0 0 6px;letter-spacing:.005em;">{{REFERENCIA_NOME}}</p>
+<p style="font-size:13px;line-height:1.65;color:var(--text-muted);margin:0;">{{REFERENCIA_DESCRICAO}}</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- BLOCO AUTOR -->
+<section style="padding:70px 40px;background:var(--ivory-bg);">
+<div style="max-width:680px;margin:0 auto;background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:34px 36px;display:grid;grid-template-columns:90px 1fr;gap:28px;align-items:start;">
+<div style="padding:6px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);">
+<img src="assets/images/{{AUTOR_FOTO}}" alt="{{AUTOR_NOME}}" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;display:block;">
+</div>
+<div>
+<p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin:0 0 6px;">SOBRE O AUTOR</p>
+<h3 style="font-family:var(--serif);font-weight:500;font-size:22px;color:var(--navy);margin:0 0 8px;letter-spacing:.01em;">{{AUTOR_NOME}}</h3>
+<p style="font-family:var(--serif);font-style:italic;font-size:13px;color:var(--gold);margin:0 0 12px;">{{AUTOR_TITULO}} · {{AUTOR_OAB}}</p>
+<p style="font-size:13px;line-height:1.7;color:var(--text-muted);margin:0 0 12px;">{{AUTOR_BIO_CURTA}}</p>
+<a href="{{AUTOR_PERFIL}}.html" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:500;">Ver perfil →</a>
+</div>
+</div>
+</section>
+
+<!-- NAVEGAÇÃO PRÓXIMAS PUBLICAÇÕES -->
+<section style="padding:50px 40px 70px;background:var(--ivory);border-top:0.5px solid var(--border-soft);">
+<div style="max-width:800px;margin:0 auto;">
+<p style="text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;font-weight:500;">próximas publicações</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+<div style="background:var(--ivory-bg);border:0.5px dashed var(--gold-light);border-radius:8px;padding:24px;">
+<p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;">{{PROXIMA_MES_ANO}}</p>
+<h4 style="font-family:var(--serif);font-weight:500;font-size:18px;color:var(--navy);margin:0;letter-spacing:.005em;line-height:1.3;">{{PROXIMA_TITULO}}</h4>
+</div>
+<a href="publicacoes.html" style="background:var(--ivory-bg);border:0.5px solid var(--border-medium);border-radius:8px;padding:24px;text-decoration:none;text-align:right;">
+<p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;">ver todas →</p>
+<h4 style="font-family:var(--serif);font-weight:500;font-size:18px;color:var(--navy);margin:0;letter-spacing:.005em;">Publicações</h4>
+</a>
+</div>
+</div>
+</section>
+
+<footer class="b-footer">
+<div class="foot-top">
+<div class="foot-brand">
+<p class="name">BALDISSERA</p><div class="line-sub"></div><p class="sub">ADVOGADOS</p>
+<p class="oab-line">Luiz Henrique Baldissera</p><p class="oab-line">OAB/PR 55.717</p>
+<p class="oab-line" style="margin-top:16px;">contato@baldisseraadvogados.com.br</p>
+<p class="oab-line">+55 45 99102-9806</p>
+</div>
+<div class="foot-col"><h4>Navegação</h4>
+<a href="index.html">Escritório</a><a href="areas-de-atuacao.html">Áreas</a><a href="advogados.html">Advogados</a>
+<a href="publicacoes.html">Publicações</a><a href="contato.html">Contato</a>
+<a href="politica-de-privacidade.html">Privacidade</a><a href="aviso-provimento-205.html">Provimento 205</a>
+</div>
+<div class="foot-col"><h4>Unidades</h4>
+<a href="contato.html">Cascavel · PR</a><a href="contato.html">Porto Alegre · RS</a>
+<a href="contato.html">Foz do Iguaçu · PR</a><a href="contato.html">Rio de Janeiro · RJ</a>
+</div>
+</div>
+<div class="foot-bottom"><span>© 2026 Baldissera Advogados</span><span>Provimento CFOAB 205/2021</span></div>
+</footer>
+</body>
+</html>

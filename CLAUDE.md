@@ -31,6 +31,17 @@ Site estático puro (HTML + CSS, sem framework, sem build). Servido pela Vercel 
 - `site_baldissera_advogados/site_baldissera/docs/DEPLOY.md` — guia histórico de deploy (parcialmente desatualizado; site já está no ar).
 - `site_baldissera_advogados/site_baldissera/docs/README.md` — inventário de arquivos.
 
+
+## Módulo editorial — geração de publicações
+
+Para gerar uma nova publicação para a aba `/publicacoes` (a partir de julgado, ensaio dogmático ou tema livre), seguir o protocolo em `site_baldissera_advogados/site_baldissera/docs/editorial/`:
+
+- `PADRAO-EDITORIAL.md` — anatomia visual, tom, vedações Provimento 205, convenções de citação.
+- `TEMPLATE.html` — template HTML pronto com marcadores `{{...}}`.
+- `INSTRUCOES.md` — workflow operacional passo a passo, princípios invioláveis e exemplos.
+
+Espelho de referência: `site_baldissera_advogados/site_baldissera/public/publicacao-cadeia-de-custodia.html`.
+
 ## Convenção de manutenção crítica
 
 Ao editar arquivos da pasta sincronizada com OneDrive (`C:\Users\LuizH\OneDrive\...`), **trabalhar primeiro em clone do sandbox** e sincronizar com `cp` em batch. Edição direta na pasta OneDrive durante sync ativa pode truncar arquivos (já aconteceu uma vez nesta base de código).

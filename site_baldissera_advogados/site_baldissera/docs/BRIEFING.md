@@ -295,4 +295,38 @@ Sistema dedicado para a produção contínua de conteúdo da aba `/publicacoes`.
 
 ---
 
+## 17. Captura de leads e analytics
+
+**Botão flutuante WhatsApp** em todas as páginas do site (`<a class="wa-float-btn">`, fixed bottom-right, navy + dourado, SVG nativo). Ao clicar, abre `/whatsapp.html` — uma página intermediária que registra o page view no Vercel Analytics e em ~250ms redireciona para `https://wa.me/5545991029806` com mensagem pré-preenchida.
+
+**Vercel Web Analytics** habilitado em Settings → Analytics. Plano Hobby: 50.000 events/mês, 30 dias de histórico, sem custom events (limitação do plano). Privacy-first: sem cookies, sem banner LGPD necessário. Script injetado em todas as páginas: `<script defer src="/_vercel/insights/script.js"></script>`.
+
+**Como o Luiz consulta os dados:**
+
+1. https://vercel.com/dashboard → clicar no projeto `baldisseraadvogados`.
+2. Na coluna esquerda, clicar em **Analytics**.
+3. Painel mostra: **Visitors** (visitantes únicos), **Page Views** (total de visualizações), **Bounce Rate**, **Top Pages** (URLs mais acessadas), **Top Referrers** (de onde vêm), **Geografia**, **Devices**, **Browsers**.
+4. Filtros: período (24h, 7d, 30d), ambiente (Production / Preview / All).
+
+**Como contar cliques no botão WhatsApp** (substituto dos custom events não disponíveis no Hobby):
+
+- Em **Top Pages** do painel de Analytics, procurar a URL `/whatsapp` (ou `/whatsapp.html`).
+- O número de Page Views dessa página = quantas vezes o botão WhatsApp foi clicado no período.
+- Cada clique gera um page view dessa URL antes do redirect para o wa.me.
+
+**Como contar engajamento por publicação:**
+
+- Em **Top Pages**, procurar `/publicacao-cadeia-de-custodia` e `/publicacao-prova-digital-sem-hash`.
+- Cada uma terá page views próprios.
+- A diferença em number e tempo permite avaliar qual gera mais engajamento.
+
+**Recomendações de leitura periódica:**
+
+- Olhar os números 1x por semana (ou após cada nova publicação) — não diariamente.
+- Comparar publicações entre si para entender quais temas atraem mais.
+- Observar de onde vêm os visitantes (referrers): se vier muito de LinkedIn, redobrar produção lá; se vier de Google, otimizar SEO técnico.
+- Cliques no WhatsApp como métrica-resultado mais relevante: visitas que não viram contato têm valor mais limitado.
+
+---
+
 *Briefing preparado em sessão Cowork. Última atualização: 2026-04-25. Para usar como contexto em Claude Projects: copiar o conteúdo deste arquivo e colar como knowledge file no Project.*

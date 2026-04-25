@@ -233,4 +233,35 @@ Recalibração informal:
 
 ---
 
+### 13.8 — Box "Para quem está chegando" no início de Comentários a Julgado
+
+Quando a publicação é um Comentário a Julgado destinado a público misto (cliente eventual + colega advogado), inserir, logo após o pull quote inicial e antes do primeiro intertítulo H2, um box destacado intitulado **"Para quem está chegando"** com 3-4 parágrafos em linguagem acessível (≈250-350 palavras totais) que:
+
+1. Abre com uma **parábola/analogia** que traduza o problema técnico em situação cotidiana ("Imagine que…").
+2. Conecta a parábola com **o caso real** sem usar jargão jurídico ("Foi mais ou menos isso que aconteceu nesse caso, mas em vez de…").
+3. Resume **o que o tribunal decidiu** em uma frase clara, sem prometer resultado.
+4. Faz a **ponte para a leitura técnica** que vem a seguir ("A história abaixo conta o caso em detalhe…").
+
+Esse bloco serve simultaneamente:
+- Ao **leitor leigo** (cliente potencial), que entende o caso em 90 segundos e percebe a sofisticação da defesa criminal sem precisar decifrar jargão.
+- Ao **leitor jurista**, que pula o box e vai direto à análise — mas vê que a publicação é cuidadosa o suficiente para acolher quem chega de fora.
+- À **conformidade Provimento 205**: a parábola é descritiva (não promete resultado), e a ponte explicita que o que vem abaixo é análise doutrinária, não consulta processual.
+
+Padrão de markup (idêntico ao box de "Quesitos da perícia complementar", apenas com rótulo distinto):
+
+```html
+<div style="background:var(--ivory);border-left:3px solid var(--gold);padding:30px 36px;margin:32px 0 40px;">
+<p style="font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold);font-size:18px;margin:0 0 14px;letter-spacing:.04em;">Para quem está chegando</p>
+<p style="font-size:15px;line-height:1.8;color:var(--text-soft);margin:0 0 14px;">Imagine que…</p>
+<p style="font-size:15px;line-height:1.8;color:var(--text-soft);margin:0 0 14px;">Foi mais ou menos isso que aconteceu…</p>
+<p style="font-size:15px;line-height:1.8;color:var(--text-soft);margin:0 0 14px;">[O que o tribunal decidiu, em uma frase].</p>
+<p style="font-size:15px;line-height:1.8;color:var(--text-soft);margin:0;">A história abaixo conta o caso em detalhe…</p>
+</div>
+```
+
+Posicionamento: **logo após o pull quote inicial, antes do primeiro `<h2>`**. Aplicado pela primeira vez na Pub Nº 2 (`publicacao-prova-digital-sem-hash.html`).
+
+
+---
+
 *Padrão editorial preparado em 25/04/2026. Atualizado em 25/04/2026 com a seção 13 (Aprendizados consolidados), a partir da Pub Nº 2 (AgRg no HC 1.014.212/ES). Atualizar este documento sempre que uma execução real revelar técnica ou cuidado replicável.*

@@ -1,73 +1,87 @@
 # Briefing — Site Baldissera Advogados
 
-> **Documento de contexto para Claude Projects.** Cole o conteúdo deste arquivo na knowledge base de um novo Project para que futuras sessões de Claude conheçam o site, o stack técnico, as convenções editoriais, o histórico recente e as pendências em aberto sem precisar reauditar do zero.
+> **Documento de contexto para Claude Projects e ferramentas de IA.**
+> Cole o conteúdo deste arquivo (ou anexe o `.md` diretamente) na knowledge base de um Project. Futuras sessões de Claude conhecerão o site, o stack técnico, as convenções editoriais, o histórico recente e as pendências em aberto sem precisar reauditar do zero.
+>
+> **Última atualização:** 25/04/2026.
 
 ---
 
 ## 1. Identidade do projeto
 
 - **Cliente / titular:** Luiz Henrique Baldissera — sócio titular da banca **Baldissera Advogados** (OAB/PR 55.717).
-- **Domínio em produção:** `https://www.baldisseraadvogados.com.br/`
-- **Domínio apex:** `https://baldisseraadvogados.com.br/` → redirect 307 para `www`.
+- **Domínio em produção:** `https://www.baldisseraadvogados.com.br/` (apex redireciona 307 → www).
 - **Domínio de staging Vercel:** `https://baldisseraadvogados.vercel.app/` (continua funcionando em paralelo).
-- **Repositório GitHub:** `github.com/baldisseraclaudeia-prog/baldisseraadvogados` (atenção: nome do repo é com `g`, **não** com `c` como o runbook original sugeria).
-- **Branch de produção:** `main` — push direto, sem PR. Vercel auto-deploya.
+- **Repositório GitHub:** `github.com/baldisseraclaudeia-prog/baldisseraadvogados` (atenção: nome do repo é com `g`, não `c`).
+- **Branch de produção:** `main`. Push direto, sem PR. Vercel auto-deploya em ~60-90s.
 - **Conta Vercel:** plano Hobby. Scope: `luiz-henrique-baldisseras-projects`. Project: `baldisseraadvogados`.
 
 ## 2. Stack técnico
 
 - **Stack:** site estático puro. **HTML + CSS** apenas. Sem framework, sem build step, sem JavaScript de aplicação. Vercel serve o conteúdo de `public/` como arquivos estáticos.
-- **Tipografia:** Cormorant Garamond (Google Fonts), carregada via `<link rel="preconnect">` + `<link rel="stylesheet">` no `<head>` de cada HTML.
-- **Identidade visual:** paleta navy (`#0F172A`) + dourado (`#9B7B3A`) + ivory (`#F5F1E8`/`#FAFAF7`). Variáveis CSS no `:root` do `style.css`.
-- **Formulários:** apontam para `https://formsubmit.co/contato@baldisseraadvogados.com.br` com captcha + honeypot. Não requer cadastro; basta confirmar uma vez o e-mail de ativação enviado pelo formsubmit.
-- **Deployment Protection:** **desabilitada** (Vercel Authentication off). Site é público.
+- **Tipografia:** Cormorant Garamond (Google Fonts), via `<link rel="preconnect">` + `<link rel="stylesheet">` no `<head>`.
+- **Identidade visual:** paleta navy (`#0F172A`) + dourado (`#9B7B3A`) + ivory (`#F5F1E8` / `#FAFAF7`). Variáveis CSS no `:root` do `style.css`.
+- **Formulários:** apontam para `https://formsubmit.co/contato@baldisseraadvogados.com.br` com captcha + honeypot. Não requer cadastro; basta confirmar uma vez o e-mail de ativação enviado pelo formsubmit no primeiro envio.
+- **Deployment Protection:** **desabilitada**. Site é público.
+- **Analytics:** **Vercel Web Analytics** habilitado (plano Hobby — 50.000 events/mês, 30 dias de histórico, sem cookies, sem banner LGPD necessário).
+- **SSL:** automático pela Vercel.
 
 ## 3. Estrutura do repo
 
 ```
 baldisseraadvogados/                                  ← repo root no GitHub
+├── CLAUDE.md                                         ← contexto para AI tooling
 └── site_baldissera_advogados/
-    └── site_baldissera/                              ← Vercel "Root Directory" aponta para abaixo
+    └── site_baldissera/
         ├── docs/
-        ├── public/                                   ← Vercel "Root Directory" REAL
-        │   ├── index.html                            ← home
-        │   ├── sobre.html
-        │   ├── advogados.html
-        │   ├── areas-de-atuacao.html
-        │   ├── publicacoes.html
-        │   ├── publicacao-cadeia-de-custodia.html
-        │   ├── contato.html
-        │   ├── politica-de-privacidade.html
-        │   ├── aviso-provimento-205.html
-        │   ├── area-direito-penal.html
-        │   ├── area-recursos-tribunais-superiores.html
-        │   ├── area-execucao-penal.html
-        │   ├── area-direito-imobiliario.html
-        │   ├── area-direito-civil.html
-        │   ├── area-familia-sucessoes.html
-        │   ├── area-direito-ambiental.html
-        │   ├── perfil-luiz.html
-        │   ├── perfil-charys.html
-        │   ├── perfil-karla.html
-        │   ├── vercel.json                           ← config: cleanUrls + redirects + headers
-        │   ├── robots.txt
-        │   ├── sitemap.xml
-        │   ├── favicon.svg
-        │   ├── favicon-32x32.png
-        │   ├── apple-touch-icon.png
-        │   └── assets/
-        │       ├── css/
-        │       │   └── style.css                     ← single CSS file
-        │       └── images/
-        │           ├── luiz-henrique-baldissera.jpg
-        │           ├── charys-baldissera.jpg
-        │           ├── karla-sampaio.jpg
-        │           ├── anderson-spanhol.jpg
-        │           └── og-default.png                ← 1200×630 para Open Graph
-        └── (outros)
+        │   ├── README.md
+        │   ├── DEPLOY.md
+        │   ├── PENDENCIAS.md
+        │   ├── BRIEFING.md                           ← este arquivo
+        │   └── editorial/
+        │       ├── PADRAO-EDITORIAL.md               ← guia editorial completo
+        │       ├── TEMPLATE.html                     ← template de publicação
+        │       └── INSTRUCOES.md                     ← workflow operacional
+        └── public/                                   ← Vercel Root Directory
+            ├── index.html                            ← home
+            ├── sobre.html
+            ├── advogados.html
+            ├── areas-de-atuacao.html
+            ├── publicacoes.html                      ← hub editorial (peer cards)
+            ├── publicacao-cadeia-de-custodia.html    ← Pub Nº 1 (jan/2026)
+            ├── publicacao-prova-digital-sem-hash.html ← Pub Nº 2 (abr/2026)
+            ├── contato.html                          ← form + 4 unidades + 3 cards canais diretos com ícones
+            ├── politica-de-privacidade.html
+            ├── aviso-provimento-205.html
+            ├── area-direito-penal.html
+            ├── area-recursos-tribunais-superiores.html
+            ├── area-execucao-penal.html
+            ├── area-direito-imobiliario.html
+            ├── area-direito-civil.html
+            ├── area-familia-sucessoes.html
+            ├── area-direito-ambiental.html
+            ├── perfil-luiz.html
+            ├── perfil-charys.html
+            ├── perfil-karla.html
+            ├── whatsapp.html                         ← redirect com Analytics tracking
+            ├── vercel.json                           ← cleanUrls + redirects + headers
+            ├── robots.txt
+            ├── sitemap.xml
+            ├── favicon.svg
+            ├── favicon-32x32.png
+            ├── apple-touch-icon.png
+            └── assets/
+                ├── css/
+                │   └── style.css                     ← single CSS, ~507 linhas
+                └── images/
+                    ├── luiz-henrique-baldissera.jpg
+                    ├── charys-baldissera.jpg
+                    ├── karla-sampaio.jpg
+                    ├── anderson-spanhol.jpg
+                    └── og-default.png                ← 1200×630 para Open Graph
 ```
 
-**Importante:** A Vercel está configurada com Root Directory = `site_baldissera_advogados/site_baldissera/public/`. Isso significa que **`vercel.json` precisa estar dentro de `public/`**, não no nível superior. Já está corrigido. As referências de assets nos HTMLs são relativas (`assets/css/style.css`, sem `../`).
+**Nota crítica:** Vercel está configurada com Root Directory = `site_baldissera_advogados/site_baldissera/public/`. Por isso `vercel.json` precisa estar dentro de `public/`. Referências de assets nos HTMLs são relativas (`assets/css/style.css`, sem `../`).
 
 ## 4. Configuração do `public/vercel.json`
 
@@ -94,34 +108,23 @@ baldisseraadvogados/                                  ← repo root no GitHub
 }
 ```
 
-Notas:
-- `cleanUrls: true` faz o Vercel servir `/sobre` → `sobre.html` automaticamente, sem precisar de rewrite explícita.
-- `redirects` (não rewrites) são usados para os três aliases curtos (atuacao, privacidade, provimento-205) — rewrites com destino `.html` entravam em loop com `cleanUrls`.
-- Headers de segurança (HSTS, frame, referrer policy) aplicados a todas as rotas.
-
 ## 5. Arquitetura de páginas
 
 | Slug | Função | Notas |
 |---|---|---|
-| `/` | Home institucional, hero + grid de áreas | hoje sem `<h1>` por escolha editorial |
-| `/sobre` | Página sobre o escritório | **órfã do nav principal** — pendência |
+| `/` | Home institucional | hero + grid de áreas, sem `<h1>` por escolha editorial |
+| `/sobre` | Página sobre o escritório | órfã do nav principal — pendência |
 | `/advogados` | Equipe (4 membros) | Anderson sem perfil dedicado ainda |
 | `/areas-de-atuacao` | Listagem das 7 áreas | aponta para `area-*.html` |
-| `/publicacoes` | Hub editorial | 1 publicação real + 12 pautas previstas |
-| `/publicacao-cadeia-de-custodia` | Único artigo publicado | autoria: Luiz |
-| `/contato` | 4 unidades + form | RJ marcado "em implantação" |
+| `/publicacoes` | Hub editorial | peer cards (Pub Nº 2 + Pub Nº 1), calendário 2026 |
+| `/publicacao-cadeia-de-custodia` | Pub Nº 1 — ensaio dogmático | jan/2026 |
+| `/publicacao-prova-digital-sem-hash` | Pub Nº 2 — comentário a julgado | abr/2026, com box "Para quem está chegando" |
+| `/contato` | 4 unidades + form + 3 cards canais diretos com ícones | RJ "em implantação" |
 | `/politica-de-privacidade` | LGPD | conformidade Lei 13.709/2018 |
 | `/aviso-provimento-205` | OAB 205 | declarações de conformidade |
-| `/area-direito-penal` | Núcleo I | |
-| `/area-recursos-tribunais-superiores` | Núcleo II | |
-| `/area-execucao-penal` | Núcleo III | menciona Catanduvas, Campo Grande, Porto Velho, Mossoró, Brasília |
-| `/area-direito-imobiliario` | Conexa IV | |
-| `/area-direito-civil` | Conexa V | |
-| `/area-familia-sucessoes` | Conexa VI | |
-| `/area-direito-ambiental` | Transversal VII | |
-| `/perfil-luiz` | Perfil Sócio Titular | currículo subdimensionado — pendência |
-| `/perfil-charys` | Perfil Sócia | inclui artigos no Migalhas |
-| `/perfil-karla` | Perfil Advogada Responsável (POA) | |
+| `/area-*` × 7 | Páginas de cada frente | núcleo I-III, conexas IV-VI, transversal VII |
+| `/perfil-luiz`, `/perfil-charys`, `/perfil-karla` | Perfis individuais | currículo do Luiz subdimensionado — pendência |
+| `/whatsapp` | Página de redirect | tracking de cliques via Analytics |
 
 ## 6. Equipe
 
@@ -132,52 +135,67 @@ Notas:
 | Karla da Costa Sampaio | Advogada responsável | OAB/RS 66.523 | Porto Alegre | ✓ | ✓ |
 | Anderson Spanhol | Sócio | OAB/PR 96.871 | Porto Belo | ✓ | ✗ (currículo em breve) |
 
-## 7. Histórico de commits desta sessão (cronológico)
+## 7. Captura de leads e analytics
 
-A sessão de Cowork começou com o site quebrado (CSS não carregava, vercel.json fora do lugar, domínio próprio dando `DEPLOYMENT_NOT_FOUND`, Vercel Authentication ativada bloqueando acesso público). Ao final, o site está em produção, estilizado, indexável e com formulários funcionais.
+### 7.1 — Top bar de contato (presente em todas as páginas)
 
-| Hash | Tema | O que mudou |
-|---|---|---|
-| `3279e55` | CSS | move `assets/` para dentro de `public/`, corrige 26 referências `../assets/` → `assets/` em 19 HTMLs |
-| `f4b6165` | Rewrites | remove prefixo `/public/` das destinations do vercel.json |
-| `b50c1fc` | Config | move `vercel.json` para dentro de `public/` (Root Directory da Vercel) |
-| `df67e46` | Config | simplifica `vercel.json` (drop `version`/`name` deprecados, remove rewrites redundantes) |
-| `942dd93` | Roteamento | converte rewrites de aliases em redirects (`/atuacao`, `/privacidade`, `/provimento-205`) |
-| `9a39f26` | Editorial | refaz hero da home — H1 e subtítulo refletem as 7 frentes (não só recursais) |
-| `c8a1b94` | Bug | restaura tags de fechamento truncadas no `index.html` (`</span></div></footer></body></html>`) |
-| `b2ec442` | Equipe | promove Anderson Spanhol a Sócio em `/advogados`, insere foto, mantém "Currículo em breve" |
-| `a78da66` | Editorial | remove o `<h1>` "Advocacia construída para o direito complexo" do hero da home |
-| `bc49735` | Site review | metas + Open Graph + Twitter Card em 19 páginas, formsubmit.co em 2 forms, robots.txt + sitemap.xml + JSON-LD LegalService, favicon, og-default.png, ajustes cosméticos (preconnect Google Fonts, reword "não generalista", remove redundância "Bacharelado · Graduação") |
+Barra fina alinhada à direita do topo de todas as 20 páginas, acima do header principal. Três canais diretos:
 
-## 8. Operações na Vercel feitas no painel (não em código)
+- **E-mail** (ícone envelope dourado) → `mailto:contato@baldisseraadvogados.com.br`.
+- **Telefone** (ícone aparelho dourado + número visível) → `tel:+5545991029806`. Em mobile (<600px), o texto do número esconde e fica só o ícone.
+- **WhatsApp** (ícone WhatsApp em verde `#25D366` discreto) → `/whatsapp.html`.
 
-1. **Deployment Protection desabilitada** em Settings → Deployment Protection. Sem isso, visitantes recebiam tela "You are logged in as…" (autenticação Vercel SSO) em vez do site.
-2. **Domínio próprio adicionado** em Settings → Domains:
-   - `baldisseraadvogados.com.br` (apex) com redirect 307 → `www`.
-   - `www.baldisseraadvogados.com.br` como Production.
-   - SSL provisionado automaticamente pela Vercel.
-   - Aviso "DNS Change Recommended" no www: Vercel sugere migrar do CNAME legado (`cname.vercel-dns.com`) para o novo (`bfeb0a03dfb72088.vercel-dns-017.com.`). O legado continua funcionando — atualização opcional.
+### 7.2 — Botão flutuante WhatsApp (todas as páginas)
 
-## 9. Conformidade — Provimento CFOAB 205/2021
+Fixed bottom-right, navy + ícone dourado, 58×58px (54×54 em mobile). Ao clicar, abre `/whatsapp.html`.
 
-O site está **em conformidade substancial**. Auditoria feita: não há promessa de resultado, menção a casos concretos, menção a clientes, superlativos mercadológicos comparativos, depoimentos, descontos ou ofertas mercantilizadas. A página `/aviso-provimento-205` é robusta.
+### 7.3 — Cards "Canais diretos" no /contato
+
+Três cards grandes na seção "Contato institucional." da página `/contato`, com SVG de envelope, telefone e WhatsApp em tamanho 32px. WhatsApp em verde, os outros em dourado da banca. WhatsApp aponta para `/whatsapp.html` (não direto para `wa.me`) para manter o tracking.
+
+### 7.4 — Vercel Web Analytics
+
+Habilitado em Settings → Analytics. Plano Hobby: 50.000 events/mês, 30 dias de histórico, privacy-first (sem cookies, sem banner LGPD necessário). Script injetado em todas as páginas: `<script defer src="/_vercel/insights/script.js"></script>`.
+
+**Como o Luiz consulta os dados:**
+
+1. https://vercel.com/dashboard → clicar no projeto `baldisseraadvogados`.
+2. Coluna esquerda → **Analytics**.
+3. Painel mostra: **Visitors** (únicos), **Page Views** (total), **Bounce Rate**, **Top Pages**, **Top Referrers**, **Geografia**, **Devices**, **Browsers**.
+4. Filtros de período: 24h, 7d, 30d. Filtros de ambiente: Production / Preview / All.
+
+**Como contar cliques no botão WhatsApp** (substituto dos custom events não disponíveis no Hobby):
+
+- Em **Top Pages**, procurar a URL `/whatsapp` (ou `/whatsapp.html`).
+- O número de Page Views dessa página = quantas vezes o botão WhatsApp foi clicado no período (somando top bar, botão flutuante e card de canais diretos — todos passam pela mesma página intermediária).
+
+**Como contar engajamento por publicação:**
+
+- Em **Top Pages**, procurar `/publicacao-cadeia-de-custodia` e `/publicacao-prova-digital-sem-hash`.
+- Cada uma terá page views próprios. Comparar entre si para entender quais temas atraem mais.
+
+**Cadência recomendada:** olhar 1x por semana ou após cada nova publicação. Não diariamente. Os números úteis começam a partir da terceira semana de coleta.
+
+## 8. Conformidade — Provimento CFOAB 205/2021
+
+Site em **conformidade substancial**. Auditoria feita: não há promessa de resultado, menção a casos concretos da banca, menção a clientes, superlativos mercadológicos comparativos, depoimentos, descontos ou ofertas mercantilizadas. A página `/aviso-provimento-205` é robusta.
 
 Borderlines mantidos por enquanto:
-- Em `/areas-de-atuacao` e `/perfil-luiz`, lista nominal das cinco unidades penitenciárias federais (Catanduvas, Campo Grande, Porto Velho, Mossoró, Brasília). Não é menção a casos — é escopo geográfico de prática. Se quiser maximizar zelo, suavizar para "atuação nos cinco estabelecimentos do sistema penitenciário federal" sem nomear.
+- Em `/areas-de-atuacao` e `/perfil-luiz`, lista nominal das cinco unidades penitenciárias federais (Catanduvas, Campo Grande, Porto Velho, Mossoró, Brasília). Não é menção a casos — é escopo geográfico de prática. Suavizável para "atuação nos cinco estabelecimentos do sistema penitenciário federal" sem nomear, se quiser maximizar zelo.
 - Headline "Banca construída sobre especialização técnica" em `/areas-de-atuacao` (versão neutra de "não generalista" — o original foi reformulado).
 
-## 10. Convenções editoriais
+## 9. Convenções editoriais
 
 - **Idioma:** português do Brasil em todo o site.
 - **Tom:** sóbrio, técnico, sem auto-elogio mercadológico.
-- **Tipografia:** Cormorant Garamond para serif (titulos, números, callouts); sans-serif system-stack para corpo.
-- **Cores:** navy + gold + ivory. Sem outras cores de marca.
-- **Pessoa:** terceira pessoa institucional ("a banca", "o escritório") nos institucionais; primeira pessoa só nos perfis individuais quando apropriado (atualmente nenhum usa).
-- **Provimento 205:** evitar "melhor", "maior", "garantia", "êxito", "especialista em X" em sentido comercial, depoimentos, comparações nominais, casos concretos.
+- **Tipografia:** Cormorant Garamond para serif (títulos, números, callouts); sans-serif system-stack para corpo.
+- **Cores:** navy + gold + ivory. Sem outras cores de marca, exceto verde WhatsApp (`#25D366`) usado pontualmente nos ícones de WhatsApp.
+- **Pessoa:** terceira pessoa institucional ("a banca", "o escritório") nos institucionais; primeira pessoa só nos perfis individuais quando apropriado.
+- **Provimento 205:** evitar "melhor", "maior", "garantia", "êxito", "especialista em X" comercial, depoimentos, comparações nominais, casos concretos da banca.
 - **Citações jurisprudenciais:** identificar tribunal, classe processual, número, relator e data quando possível.
 - **Sem emojis** em conteúdo do site.
 
-## 11. Convenções de manutenção
+## 10. Convenções de manutenção
 
 ### Workflow de edição
 
@@ -194,7 +212,7 @@ for f in public/*.html; do
   echo "$f: html=$(grep -c '<html' $f) /html=$(grep -c '</html>' $f)"
 done
 
-# contagem total de palavras/caracteres por página (proxy de densidade editorial)
+# contagem total de palavras/caracteres por página
 wc -w public/*.html | sort -n
 ```
 
@@ -209,124 +227,106 @@ wc -w public/*.html | sort -n
 
 ### Rollback
 
-Se algo quebrar:
 ```bash
 git revert HEAD
 git push origin main
 ```
 
-## 12. Pendências em aberto (que precisam de decisão do Luiz)
+## 11. Pendências em aberto (que precisam de decisão do Luiz)
 
 | # | Item | Decisão necessária |
 |---|---|---|
-| 1 | **Status do Rio de Janeiro** | Hoje incoerente em 4 lugares. Operacional? Em implantação? Omitir? Aplicar uma única linha em `/sobre`, `/contato`, footer (todas pgs), subtítulo home, perfil-luiz. |
-| 2 | **Porto Belo** | Adicionar como 5ª unidade formal (criar card em `/contato` + linha no footer + menção em `/sobre`)? Ou reatribuir lotação do Anderson? |
-| 3 | **Currículo do Luiz no `/perfil-luiz`** | Adicionar os dois mestrados (Recursos para Tribunais Superiores; Civil e Processo Civil) com instituição e ano. Nome da instituição do bacharelado e da pós em Ciências Criminais, se quiser listar. |
-| 4 | **Nav vs `/sobre`** | A página `/sobre` é órfã do nav. Três opções: (a) remover `/sobre` e mesclar conteúdo na home; (b) renomear "Escritório" no nav para apontar a `/sobre` e criar item "Início" para `/index`; (c) adicionar item "Sobre" ao nav. |
-| 5 | **Narrativa "três vetores" × "sete frentes"** | `/sobre` ainda diz "três vetores"; home diz sete. Definir e padronizar. |
-| 6 | **Currículo do Anderson Spanhol** | Quando chegar: (a) substituir "Currículo em breve" pela descrição curta no card de `/advogados`; (b) criar `perfil-anderson.html` no padrão dos outros três; (c) converter `<div>` do card em `<a href="perfil-anderson.html">`. |
+| 1 | **Status do Rio de Janeiro** | Hoje incoerente em 4 lugares (sobre, contato, footer, perfil-luiz, home). Operacional? Em implantação? Omitir? |
+| 2 | **Porto Belo** | Adicionar como 5ª unidade formal ou redefinir lotação do Anderson? |
+| 3 | **Currículo do Luiz** | Adicionar dois mestrados (Recursos para Tribunais Superiores; Civil e Processo Civil) com instituições e ano. |
+| 4 | **Nav vs `/sobre`** | A página `/sobre` é órfã do nav. Remover, renomear "Escritório" ou adicionar item "Sobre"? |
+| 5 | **Narrativa "três vetores" × "sete frentes"** | `/sobre` ainda diz "três vetores"; home diz sete. Padronizar. |
+| 6 | **Currículo do Anderson Spanhol** | Quando chegar: card no `/advogados` + criar `perfil-anderson.html`. |
 
 ### Opcionais (sem urgência)
 
-- **Submissão do sitemap ao Google Search Console** — autenticar conta Google → adicionar propriedade `baldisseraadvogados.com.br` → submeter `https://www.baldisseraadvogados.com.br/sitemap.xml`.
-- **Migração do CNAME do www** para o endpoint novo da Vercel — `bfeb0a03dfb72088.vercel-dns-017.com.` (no painel do provedor de DNS, provavelmente Registro.br).
-- **Atualizar e-mail de envio dos formulários** se quiser que cheguem em endereço diferente de `contato@baldisseraadvogados.com.br` — basta trocar o destino na URL `https://formsubmit.co/<email>` em `/contato.html` e `/publicacoes.html`.
+- **Submissão do sitemap ao Google Search Console** — adicionar propriedade `baldisseraadvogados.com.br` → submeter `https://www.baldisseraadvogados.com.br/sitemap.xml`.
+- **Migração do CNAME do www** para o endpoint novo da Vercel (`bfeb0a03dfb72088.vercel-dns-017.com.`) — não bloqueante.
+- **Áudio narrado das publicações** — gerar com ElevenLabs ou similar (TTS BR), embutir como `<audio>`. Decisão: pago (~$5-22/mês) ou gravação pessoal do Luiz.
 
-## 13. Acessos e credenciais
+## 12. Acessos e credenciais
 
-- **GitHub:** conta `baldisseraclaudeia-prog`. Push autenticado por PAT (Personal Access Token) com escopo `repo`. PATs usados nesta sessão foram revogados após o uso.
+- **GitHub:** conta `baldisseraclaudeia-prog`. Push autenticado por PAT (Personal Access Token) com escopo `repo`.
 - **Vercel:** conta de Luiz, plano Hobby. Login via Google.
-- **Domínio:** registrado em provedor brasileiro (provavelmente Registro.br, considerando `.com.br`).
+- **Domínio:** registrado em provedor brasileiro (provavelmente Registro.br).
 - **E-mail institucional:** `contato@baldisseraadvogados.com.br` — provedor a definir (Google Workspace foi mencionado como próximo passo no runbook original).
 - **formsubmit.co:** sem cadastro. Primeiro envio do form dispara confirmação no e-mail destino, basta clicar uma vez.
 
-## 14. Limites operacionais conhecidos
+## 13. Limites operacionais conhecidos
 
 - **OneDrive na pasta de trabalho local:** edições simultâneas em arquivos na pasta `C:\Users\LuizH\OneDrive\Área de Trabalho\site_baldissera_advogados\` durante sync do OneDrive podem truncar arquivos. Trabalhar sempre no sandbox e sincronizar com `cp` em batch.
-- **Sandbox Cowork:** sem egress para `vercel.com` ou `api.github.com` (cowork-egress-blocked). Operações no painel da Vercel feitas via Claude in Chrome com a sessão autenticada do usuário. Push para GitHub via `github.com` (sem proxy).
+- **Sandbox Cowork:** sem egress para `vercel.com` ou `api.github.com` (cowork-egress-blocked). Operações no painel da Vercel feitas via Claude in Chrome com a sessão autenticada. Push para GitHub via `github.com` (sem proxy).
 - **Claude in Chrome:** ocasionalmente engasga em screenshots/scrolls de páginas pesadas. Fallback: usar `get_page_text` que é mais leve.
+- **Vercel Hobby:** sem custom events em Analytics. Workaround: tracking de cliques via páginas intermediárias (ex.: `/whatsapp.html` para contar cliques no botão).
 
-## 15. Roadmap recomendado
+## 14. Histórico recente de commits (últimos relevantes)
 
-**Curto prazo** (próxima sessão de trabalho):
-- Resolver os 6 itens de decisão acima.
-- Quando o currículo do Anderson chegar, criar `perfil-anderson.html` e atualizar card.
+| Hash | Tema |
+|---|---|
+| `ebd326f` | Ícones nos cards de canais diretos do `/contato` |
+| `6f73b87` | Top bar de contato (e-mail · telefone · WhatsApp verde) em todas as páginas |
+| `9d340d5` | BRIEFING §17 (analytics) + PADRAO §13.8 (acessibility box) |
+| `b109728` | Botão flutuante WhatsApp + Vercel Web Analytics + box "Para quem está chegando" na Pub Nº 2 |
+| `44370ff` | Reescrita da Pub Nº 2 como narrativa de caso para público misto |
+| `d60052b` | Pub Nº 1 e Pub Nº 2 unificadas como peer cards |
+| `8b06a84` | Pub Nº 2 publicada (AgRg no HC 1.014.212/ES) |
+| `fcc096c` | Sistema editorial criado (PADRAO + TEMPLATE + INSTRUCOES) |
+| `e3a23b2` | BRIEFING.md, PENDENCIAS.md atualizados, CLAUDE.md criado |
+| `bc49735` | Site review (metas, OG, forms funcionais, SEO infra, favicons) |
 
-**Médio prazo:**
-- Integração de e-mail próprio (Google Workspace ou Zoho Mail) com `@baldisseraadvogados.com.br` — MX, SPF, DKIM, DMARC no DNS.
-- Submeter sitemap ao Google Search Console e Bing Webmaster Tools.
-- Adicionar mais publicações reais (atualizar `/publicacoes` à medida que os artigos saem).
-- Reorganizar publicações em subpasta `publicacoes/` se ultrapassar 5-6 artigos.
+## 15. Módulo editorial — produção de publicações
 
-**Longo prazo:**
-- Considerar versão em inglês (`/en/`) se houver atuação internacional.
-- Speed Insights / Analytics da Vercel para monitorar performance.
-- Integração com CMS leve (ex.: Decap CMS sobre o repo) se outras pessoas precisarem editar conteúdo sem tocar em código.
-
----
-
-## 16. Módulo editorial — produção de publicações
-
-Sistema dedicado para a produção contínua de conteúdo da aba `/publicacoes`. Documentação em `docs/editorial/`:
+Sistema dedicado em `docs/editorial/`:
 
 | Arquivo | Função |
 |---|---|
-| `PADRAO-EDITORIAL.md` | Anatomia visual + tom + vedações Provimento 205 + convenções de citação |
-| `TEMPLATE.html` | Template HTML com marcadores `{{...}}` para preenchimento |
-| `INSTRUCOES.md` | Workflow operacional passo a passo para Claude executar a geração |
+| `PADRAO-EDITORIAL.md` | Anatomia visual + tom + Provimento 205 + convenções de citação + aprendizados consolidados (seção 13) |
+| `TEMPLATE.html` | Template HTML com marcadores `{{...}}` |
+| `INSTRUCOES.md` | Workflow operacional para Claude executar a geração |
 
-**Modalidades cobertas:** comentário a julgado · ensaio dogmático · análise de tese recursal · roteiro de defesa.
+**Modalidades:** comentário a julgado · ensaio dogmático · análise de tese recursal · roteiro de defesa.
 
 **Como usar em Claude Project:**
-1. Anexar os três arquivos do `docs/editorial/` como knowledge files do Project (junto com o `BRIEFING.md`).
-2. Colar o julgado (ementa, voto ou URL) com direcionamento curto sobre o ângulo desejado.
+1. Anexar `BRIEFING.md` (este arquivo) + os três do `editorial/` como knowledge files.
+2. Colar o julgado ou tema com direcionamento curto.
 3. Claude entrega: HTML completo + atualização de `publicacoes.html` + linha nova para `sitemap.xml`.
-4. Revisar, comitar, pushar — Vercel publica em ~60-90s.
+4. Revisar, comitar, pushar — Vercel publica em ~90 segundos.
 
 **Espelhos de referência:**
 - `public/publicacao-cadeia-de-custodia.html` (Pub Nº 1 — ensaio dogmático sobre cadeia de custódia, jan/2026).
-- `public/publicacao-prova-digital-sem-hash.html` (Pub Nº 2 — comentário ao AgRg no HC 1.014.212/ES, abr/2026). **Primeira execução real do pipeline editorial.** Aprendizados consolidados estão na seção 13 do `PADRAO-EDITORIAL.md`.
+- `public/publicacao-prova-digital-sem-hash.html` (Pub Nº 2 — comentário ao AgRg no HC 1.014.212/ES, abr/2026, com box "Para quem está chegando" para público misto).
 
-**Princípios invioláveis** (estão detalhados em `INSTRUCOES.md`):
+**Princípios invioláveis:**
 - Nunca inventar julgados, normas ou citações.
 - Nunca atribuir caso concreto da banca como exemplo.
 - Nunca prometer resultado.
 - Nunca quebrar o padrão visual sem solicitação explícita.
 
----
+## 16. Roadmap recomendado
 
-## 17. Captura de leads e analytics
+**Curto prazo:**
+- Resolver os 6 itens de decisão pendentes.
+- Currículo do Anderson → criar `perfil-anderson.html`.
+- Próxima publicação: investigação defensiva à luz do Provimento CFOAB 188/2018 (próxima do calendário editorial).
 
-**Botão flutuante WhatsApp** em todas as páginas do site (`<a class="wa-float-btn">`, fixed bottom-right, navy + dourado, SVG nativo). Ao clicar, abre `/whatsapp.html` — uma página intermediária que registra o page view no Vercel Analytics e em ~250ms redireciona para `https://wa.me/5545991029806` com mensagem pré-preenchida.
+**Médio prazo:**
+- Integração de e-mail próprio (Google Workspace ou Zoho Mail) — MX, SPF, DKIM, DMARC no DNS.
+- Submeter sitemap ao Google Search Console e Bing Webmaster Tools.
+- Atualizar `/publicacoes` à medida que os artigos saem.
+- Reorganizar publicações em subpasta `publicacoes/` se ultrapassar 5-6 artigos.
+- Considerar áudio TTS narrando as publicações (acessibilidade).
 
-**Vercel Web Analytics** habilitado em Settings → Analytics. Plano Hobby: 50.000 events/mês, 30 dias de histórico, sem custom events (limitação do plano). Privacy-first: sem cookies, sem banner LGPD necessário. Script injetado em todas as páginas: `<script defer src="/_vercel/insights/script.js"></script>`.
-
-**Como o Luiz consulta os dados:**
-
-1. https://vercel.com/dashboard → clicar no projeto `baldisseraadvogados`.
-2. Na coluna esquerda, clicar em **Analytics**.
-3. Painel mostra: **Visitors** (visitantes únicos), **Page Views** (total de visualizações), **Bounce Rate**, **Top Pages** (URLs mais acessadas), **Top Referrers** (de onde vêm), **Geografia**, **Devices**, **Browsers**.
-4. Filtros: período (24h, 7d, 30d), ambiente (Production / Preview / All).
-
-**Como contar cliques no botão WhatsApp** (substituto dos custom events não disponíveis no Hobby):
-
-- Em **Top Pages** do painel de Analytics, procurar a URL `/whatsapp` (ou `/whatsapp.html`).
-- O número de Page Views dessa página = quantas vezes o botão WhatsApp foi clicado no período.
-- Cada clique gera um page view dessa URL antes do redirect para o wa.me.
-
-**Como contar engajamento por publicação:**
-
-- Em **Top Pages**, procurar `/publicacao-cadeia-de-custodia` e `/publicacao-prova-digital-sem-hash`.
-- Cada uma terá page views próprios.
-- A diferença em number e tempo permite avaliar qual gera mais engajamento.
-
-**Recomendações de leitura periódica:**
-
-- Olhar os números 1x por semana (ou após cada nova publicação) — não diariamente.
-- Comparar publicações entre si para entender quais temas atraem mais.
-- Observar de onde vêm os visitantes (referrers): se vier muito de LinkedIn, redobrar produção lá; se vier de Google, otimizar SEO técnico.
-- Cliques no WhatsApp como métrica-resultado mais relevante: visitas que não viram contato têm valor mais limitado.
+**Longo prazo:**
+- Versão em inglês (`/en/`) se houver atuação internacional.
+- Speed Insights / Analytics avançado para monitorar performance.
+- Integração com CMS leve (Decap CMS sobre o repo) se outras pessoas precisarem editar conteúdo.
 
 ---
 
-*Briefing preparado em sessão Cowork. Última atualização: 2026-04-25. Para usar como contexto em Claude Projects: copiar o conteúdo deste arquivo e colar como knowledge file no Project.*
+*Briefing preparado em sessão Cowork. Última atualização: 25/04/2026.*
+*Para usar como contexto em Claude Projects: copiar o conteúdo deste arquivo e colar como knowledge file no Project, ou fazer upload do `.md` diretamente.*

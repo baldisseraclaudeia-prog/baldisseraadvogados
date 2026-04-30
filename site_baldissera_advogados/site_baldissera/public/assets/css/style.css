@@ -51,6 +51,9 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
 }
 .b-header .logo-h { display: flex; align-items: center; gap: 16px; }
+.b-header a.logo-h, .b-header .logo-link { text-decoration: none; color: inherit; cursor: pointer; transition: opacity 0.2s ease; }
+.b-header a.logo-h:hover, .b-header .logo-link:hover { opacity: 0.78; }
+.b-header a.logo-h:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 2px; }
 .b-header .logo-cap {
   font-family: var(--serif);
   font-weight: 500;

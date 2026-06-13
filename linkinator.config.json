@@ -1,0 +1,7 @@
+{
+  "recurse": true,
+  "skip": [
+    "^https?:\\/\\/(?!localhost)",
+    "_vercel"
+  ]
+}

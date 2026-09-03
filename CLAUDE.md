@@ -58,5 +58,10 @@ skills do usuário ou enviadas à conta claude.ai.
   faculdades brasileiras. Três modos: orientação, modelo comentado e correção
   pelo espelho. Adapta-se ao curso (espelho, manual, formatação, nomenclatura,
   jurisdição, nível do aluno) com hierarquia de precedência explícita e piso
-  inegociável. Instalação e gatilhos em
+  inegociável. Traz módulo de pesquisa de jurisprudência que busca em portal
+  oficial e nunca fornece número de memória. Instalação e gatilhos em
   `.claude/skills/baldissera-civil-academico/INSTALACAO.md`.
+
+Versão distribuível a terceiros (sem convenções internas do escritório) é
+gerada por `python3 tools/build-skill-dist.py`, com saída em `dist/` e
+auditoria automática contra vazamento de termos da casa.

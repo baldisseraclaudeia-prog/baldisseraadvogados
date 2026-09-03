@@ -23,6 +23,7 @@ baldissera-civil-academico/
     ├── anatomia-das-pecas.md                 ← estrutura bloco a bloco de cada peça
     ├── competencia-e-enderecamento.md        ← escada de competência e linhas de endereçamento
     ├── base-legal.md                         ← âncoras CPC/CC/leis + prazos + protocolo antialucinação
+    ├── pesquisa-de-jurisprudencia.md          ← busca real em portal oficial, ficha do precedente
     ├── espelho-de-correcao.md                ← espelhos genéricos, erros que zeram, checklist
     └── formatacao-academica.md               ← formatação, assinatura acadêmica, vedações
 ```
@@ -55,6 +56,7 @@ Basta um gatilho em linguagem natural. Exemplos:
 - "corrige minha contestação" (+ o texto do aluno) → **Modo 3**, correção pelo
   espelho
 - "qual peça cabe aqui?" / "é agravo ou apelação?" → identificação com descarte
+- "acha jurisprudência do TJ sobre essa tese" → módulo de pesquisa
 
 Se o professor tiver fornecido **espelho de correção** ou critérios próprios,
 mande junto: eles prevalecem sobre o espelho genérico do agente.
@@ -94,6 +96,23 @@ de pendências do enunciado e o **quadro de fontes** com os marcadores
   acadêmica.
 - Não promete nota.
 - Não entrega texto pronto sem o raciocínio que o produziu.
+
+## Versão para distribuir a terceiros
+
+A pasta desta skill carrega convenções internas (nome da casa, inscrições OAB,
+referência às demais `baldissera-*`) que não devem sair daqui. Para enviar o
+agente a alguém de fora — um acadêmico, um estagiário, um amigo —, gere a
+versão limpa:
+
+```
+python3 tools/build-skill-dist.py
+```
+
+Saída em `dist/pecas-academicas-civil/` mais o `.zip` pronto para enviar. O
+script neutraliza tudo que é do escritório, troca o `INSTALACAO.md` por um
+`LEIA-ME.md` escrito para quem não tem contexto nenhum, e **falha o build** se
+sobrar qualquer termo interno (auditoria automática). A fonte de verdade
+continua sendo esta pasta: editou aqui, rode o script de novo.
 
 ## Governança
 

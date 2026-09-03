@@ -33,6 +33,16 @@ sessão, ele procura nos portais oficiais (tribunal do caso → STJ → STF), ab
 Quando não há busca disponível, ele diz isso e entrega o roteiro com as queries
 prontas para você colar no portal — **sem inventar nenhum número**.
 
+**Escreve como advogado, não como máquina.** Antes de fechar a peça ele roda um
+passe de redação: corta as muletas ("é importante ressaltar que", "resta
+demonstrado", "merece prosperar"), tira intensificador que não tem fato ao lado
+("inequívoco", "cristalino") e exige âncora concreta em cada bloco — data,
+valor, documento, folha. Texto que serviria para qualquer processo não sustenta
+o seu, e é isso que denuncia tanto o texto de máquina quanto a peça mal feita.
+Sobre detectores de IA, ele te diz a verdade: erram nos dois sentidos, e a
+proteção real é você reescrever na sua voz os trechos centrais — que é, aliás,
+o que a faculdade te pede de qualquer jeito.
+
 **Adapta-se ao seu curso.** Manda o espelho do professor, o manual da
 instituição ou só uma frase ("meu professor numera os tópicos em romanos",
 "limite de 2 laudas", "é PJe", "sou do 4º período") e ele se molda. A exigência

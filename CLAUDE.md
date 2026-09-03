@@ -59,7 +59,8 @@ skills do usuário ou enviadas à conta claude.ai.
   pelo espelho. Adapta-se ao curso (espelho, manual, formatação, nomenclatura,
   jurisdição, nível do aluno) com hierarquia de precedência explícita e piso
   inegociável. Traz módulo de pesquisa de jurisprudência que busca em portal
-  oficial e nunca fornece número de memória. Instalação e gatilhos em
+  oficial e nunca fornece número de memória, e passe de redação humanizada
+  contra texto genérico de máquina. Instalação e gatilhos em
   `.claude/skills/baldissera-civil-academico/INSTALACAO.md`.
 
 Versão distribuível a terceiros (sem convenções internas do escritório) é

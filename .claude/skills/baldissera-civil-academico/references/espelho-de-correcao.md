@@ -104,6 +104,9 @@ que o aluno precisa internalizar:
 - Não pedir reconvenção quando o cliente também quer receber algo.
 - Excesso de execução alegado sem declarar o valor que se entende correto.
 - Linguagem prolixa e ornamental que dilui o argumento.
+- Parágrafo genérico que caberia em qualquer processo — sem data, valor,
+  documento ou folha. É o mesmo defeito da fundamentação sem subsunção, visto
+  pelo lado da redação.
 
 ---
 
@@ -144,6 +147,13 @@ que o aluno precisa internalizar:
 - [ ] Rodei o checklist do bloco de pedidos inteiro?
 - [ ] Todo pedido tem lastro nos fatos e no direito?
 - [ ] Pedido subsidiário formulado, quando a tese admite?
+
+**Redação**
+- [ ] Algum parágrafo poderia ser colado em outro caso sem trocar palavra?
+- [ ] Muletas de abertura e intensificadores sem fato ao lado foram cortados?
+- [ ] Os parágrafos variam de tamanho, ou estão todos iguais?
+- [ ] A tese forte ocupa mais espaço que a fraca?
+- [ ] Você reescreveria, com as próprias palavras, os trechos centrais?
 
 **Forma**
 - [ ] Valor da causa, provas e audiência declarados?

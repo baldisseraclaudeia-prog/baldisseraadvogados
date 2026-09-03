@@ -23,6 +23,7 @@ baldissera-civil-academico/
     ├── anatomia-das-pecas.md                 ← estrutura bloco a bloco de cada peça
     ├── competencia-e-enderecamento.md        ← escada de competência e linhas de endereçamento
     ├── base-legal.md                         ← âncoras CPC/CC/leis + prazos + protocolo antialucinação
+    ├── redacao-humanizada.md                  ← tells de texto de máquina e o passe final
     ├── pesquisa-de-jurisprudencia.md          ← busca real em portal oficial, ficha do precedente
     ├── espelho-de-correcao.md                ← espelhos genéricos, erros que zeram, checklist
     └── formatacao-academica.md               ← formatação, assinatura acadêmica, vedações
@@ -57,6 +58,7 @@ Basta um gatilho em linguagem natural. Exemplos:
   espelho
 - "qual peça cabe aqui?" / "é agravo ou apelação?" → identificação com descarte
 - "acha jurisprudência do TJ sobre essa tese" → módulo de pesquisa
+- "deixa mais humano" / "está muito robótico" → passe de redação
 
 Se o professor tiver fornecido **espelho de correção** ou critérios próprios,
 mande junto: eles prevalecem sobre o espelho genérico do agente.

@@ -45,3 +45,24 @@ Espelho de referência: `site_baldissera_advogados/site_baldissera/public/public
 ## Convenção de manutenção crítica
 
 Ao editar arquivos da pasta sincronizada com OneDrive (`C:\Users\LuizH\OneDrive\...`), **trabalhar primeiro em clone do sandbox** e sincronizar com `cp` em batch. Edição direta na pasta OneDrive durante sync ativa pode truncar arquivos (já aconteceu uma vez nesta base de código).
+
+## Agentes (skills) versionados neste repositório
+
+Pasta `.claude/skills/`. Skills aqui são carregadas automaticamente por
+qualquer sessão aberta neste repositório e podem ser copiadas para a pasta de
+skills do usuário ou enviadas à conta claude.ai.
+
+- `baldissera-civil-academico/` — advogado sênior de direito civil e processo
+  civil orientando acadêmico de direito na produção das peças da faculdade
+  (Prática Jurídica, NPJ, estágio, simulados de 2ª fase), pela metodologia das
+  faculdades brasileiras. Três modos: orientação, modelo comentado e correção
+  pelo espelho. Adapta-se ao curso (espelho, manual, formatação, nomenclatura,
+  jurisdição, nível do aluno) com hierarquia de precedência explícita e piso
+  inegociável. Traz módulo de pesquisa de jurisprudência que busca em portal
+  oficial e nunca fornece número de memória, e passe de redação humanizada
+  contra texto genérico de máquina. Instalação e gatilhos em
+  `.claude/skills/baldissera-civil-academico/INSTALACAO.md`.
+
+Versão distribuível a terceiros (sem convenções internas do escritório) é
+gerada por `python3 tools/build-skill-dist.py`, com saída em `dist/` e
+auditoria automática contra vazamento de termos da casa.

@@ -70,6 +70,13 @@ SUBSTITUICOES = [
     ("**Regra de versionamento (regra fixa da casa):**", "**Regra de versionamento:**", False),
 ]
 
+# Unica excecao permitida: a URL publica de download do proprio pacote.
+# Ela carrega o nome do repositorio e nao ha como entregar o link sem ela.
+URL_PERMITIDA = (
+    "https://github.com/baldisseraclaudeia-prog/baldisseraadvogados"
+    "/raw/main/dist/pecas-academicas-civil.zip"
+)
+
 # Termos que NAO podem sobrar na versao distribuida
 PROIBIDOS = [
     r"Baldissera",
@@ -129,6 +136,8 @@ def main() -> None:
     vazamentos = []
     for p in sorted(DESTINO.rglob("*.md")):
         t = p.read_text(encoding="utf-8")
+        # mascara a URL de download antes de auditar: e a unica excecao aceita
+        t = t.replace(URL_PERMITIDA, "<URL-DE-DOWNLOAD>")
         for padrao in PROIBIDOS:
             for m in re.finditer(padrao, t, re.IGNORECASE):
                 linha = t[: m.start()].count("\n") + 1
@@ -149,6 +158,7 @@ def main() -> None:
         print("   ", g)
     print(f"zip: {ZIP.relative_to(RAIZ)} ({ZIP.stat().st_size} bytes)")
     print("auditoria: nenhum termo do escritorio na versao distribuida")
+    print("           (unica excecao permitida: a URL publica de download)")
 
 
 if __name__ == "__main__":

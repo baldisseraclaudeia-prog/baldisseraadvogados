@@ -56,5 +56,7 @@ skills do usuário ou enviadas à conta claude.ai.
   civil orientando acadêmico de direito na produção das peças da faculdade
   (Prática Jurídica, NPJ, estágio, simulados de 2ª fase), pela metodologia das
   faculdades brasileiras. Três modos: orientação, modelo comentado e correção
-  pelo espelho. Instalação e gatilhos em
+  pelo espelho. Adapta-se ao curso (espelho, manual, formatação, nomenclatura,
+  jurisdição, nível do aluno) com hierarquia de precedência explícita e piso
+  inegociável. Instalação e gatilhos em
   `.claude/skills/baldissera-civil-academico/INSTALACAO.md`.

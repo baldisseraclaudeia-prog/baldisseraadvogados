@@ -5,6 +5,10 @@
 > use o roteiro de busca de `base-legal.md`.
 > Os esqueletos abaixo são o **osso** da peça. A carne — fatos, teses,
 > pedidos — vem do enunciado e da análise, nunca de modelo pronto colado.
+> **Nomenclatura e ordem cedem ao manual do professor.** Se a instituição
+> exige "Síntese fática" em vez de "Dos Fatos", tópicos numerados em romanos
+> ou uma seção extra, é assim que se escreve — o conteúdo de cada bloco é que
+> não muda. Ver `adaptacao.md`.
 
 ---
 

@@ -29,7 +29,7 @@ Toda publicação segue **a mesma estrutura HTML** (ver `TEMPLATE.html`). Não i
 2. **`<header>`** institucional — sempre o mesmo.
 3. **Breadcrumb**: `Publicações / [título da publicação]`.
 4. **Hero da publicação**:
-   - **Eyebrow**: `PUBLICAÇÃO Nº X · ÁREA · MÊS DE ANO`
+   - **Eyebrow**: `PUBLICAÇÃO · ÁREA · MÊS DE ANO` (sem numeração — decisão de 25/09/2026)
    - **H1**: título descritivo, normalmente com dois pontos separando título e subtítulo (ex.: "Quando a cadeia de custódia se rompe: cinco hipóteses em que a falha do Estado pode anular a condenação.").
    - **Lead em itálico** (deck): aforismo ou síntese provocativa do tema, em Cormorant Garamond italic, gold-soft, 21px.
    - **Linha de autoria**: `por · [Nome] · OAB · leitura: X min`.
@@ -107,7 +107,7 @@ Formato canônico no bloco de referências:
 
 ## 8. Numeração e nomeação dos arquivos
 
-- **Próximo número de publicação**: ver `publicacoes.html` para o último `Nº X` usado e incrementar.
+- **Sem numeração**: desde 25/09/2026 as publicações não levam Nº. A lista em `publicacoes.html` mostra a mais nova no topo (logo abaixo do marcador `NOVAS-PUBLICACOES`).
 - **Nome do arquivo HTML**: `publicacao-[slug-curto].html` no diretório `public/`.
   - Exemplo: `publicacao-cadeia-de-custodia.html`.
   - Slug em minúsculas, sem acentos, sem caracteres especiais, hífens entre palavras.

@@ -1,5 +1,8 @@
 # Instruções operacionais — geração de publicações
 
+> **Caminho atual de publicação (desde 25/09/2026):** a publicação sai em JSON no formato de `../../tools/publicador/FORMATO.md` e o `tools/publicador/publicar.py` gera a página, encaixa o cartão em `publicacoes.html` (marcador `NOVAS-PUBLICACOES`) e inclui no `sitemap.xml`. Os advogados enviam pela página "Publicar no site" (Claude); o Dr. Luiz pelo comando `/publicar`. O TEMPLATE.html abaixo continua valendo como referência visual.
+
+
 > **Para Claude (e outros assistentes):** este é o manual de instrução para gerar uma publicação para o site Baldissera Advogados a partir de um julgado, um tema doutrinário, ou um texto bruto fornecido pelo usuário. Sempre leia primeiro `PADRAO-EDITORIAL.md` (ao lado deste arquivo).
 
 > **Para o Luiz:** este documento explica o fluxo de trabalho. A ideia é que você simplesmente cole o julgado em qualquer Project Claude que tenha esses arquivos como knowledge base, e ele entrega a publicação pronta.
@@ -111,7 +114,7 @@ Antes de escrever, montar mentalmente:
 2. Substituir todos os `{{MARCADORES}}` (ver lista no comentário do topo do template).
 3. **Não modificar a estrutura visual** (CSS inline, espaçamentos, cores). Apenas o conteúdo.
 4. **Calcular o tempo de leitura**: contar palavras do corpo do artigo, dividir por 250, arredondar.
-5. **Calcular o número da publicação**: ler `publicacoes.html` (bloco "publicação em destaque" ou "edições anteriores") e incrementar.
+5. **Sem número de publicação** (decisão de 25/09/2026): não numerar.
 6. **Gerar o slug do arquivo**: minúsculas, sem acentos, hífens entre palavras, prefixo `publicacao-`.
 
 ### Passo 5 — Atualizações colaterais
@@ -153,7 +156,7 @@ Apontar para a próxima do calendário editorial (ler `publicacoes.html`).
 Apresentar:
 
 1. **Link clicável** para o arquivo HTML criado (`computer://...`).
-2. **Resumo curto**: título, slug, número, área, comprimento, tempo de leitura.
+2. **Resumo curto**: título, slug, área, comprimento, tempo de leitura.
 3. **Lista das atualizações colaterais feitas** (publicacoes.html, sitemap.xml).
 4. **Avisos pertinentes**: se algum dado precisa de revisão humana, se alguma referência ficou borderline para Provimento 205, se houve pressuposto interpretativo digno de nota.
 

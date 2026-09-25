@@ -322,6 +322,11 @@ def main():
     ap.add_argument("--saida", help="pasta de saída do modo testar")
     a = ap.parse_args()
     p = json.loads(Path(a.json).read_text(encoding="utf-8"))
+    # aceita também o documento da fila da página "Publicar no site" (a publicação vem no campo "pub")
+    if isinstance(p.get("data"), dict) and "pub" in p["data"]:
+        p = p["data"]
+    if isinstance(p.get("pub"), dict):
+        p = p["pub"]
     erros = verificar(p)
     if erros:
         print("NÃO PUBLICADO — corrigir:\n- " + "\n- ".join(erros)); sys.exit(2)

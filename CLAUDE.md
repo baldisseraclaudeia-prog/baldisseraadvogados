@@ -45,3 +45,12 @@ Espelho de referência: `site_baldissera_advogados/site_baldissera/public/public
 ## Convenção de manutenção crítica
 
 Ao editar arquivos da pasta sincronizada com OneDrive (`C:\Users\LuizH\OneDrive\...`), **trabalhar primeiro em clone do sandbox** e sincronizar com `cp` em batch. Edição direta na pasta OneDrive durante sync ativa pode truncar arquivos (já aconteceu uma vez nesta base de código).
+
+## Publicação (desde 25/09/2026)
+
+- **Sem numeração** de publicação. A lista em `public/publicacoes.html` recebe cada nova publicação logo abaixo do marcador `<!-- NOVAS-PUBLICACOES ... -->` (a mais nova no topo).
+- **Publicador**: `site_baldissera_advogados/site_baldissera/tools/publicador/publicar.py` transforma uma publicação em JSON (`FORMATO.md`, ao lado) em página no padrão do site, encaixa o cartão e o sitemap; com `--push` envia (vai ao ar). Nunca editar à mão o HTML que ele gera: corrige-se o JSON e gera-se de novo.
+- **Página "Publicar no site"** (Claude, só advogados convidados como Editor): https://claude.ai/artifact/Bj4RTL3JUVUgESYEPV6MZw — fila `fila`. Fonte: `PAINEL-PUBLICACAO/publicar-no-site.html` (fora do git).
+- **Tarefas**: `publicador-site-baldissera` (a cada 30 min, 7h–23h; modo em `PAINEL-PUBLICACAO/MODO.txt`: `TESTE` ou `NO AR`) e `minutas-publicacoes-site` (dia sim, dia não, 6h; põe minuta na fila como "aguardando"). A rotina antiga da nuvem "Publicacoes diarias baldissera" foi pausada.
+- **Exceção à revisão do Dr. Luiz, decidida por ele em 25/09/2026, só para o site**: publicação aprovada por um advogado na página vai ao ar sem passar por ele; quem aprova responde pelo conteúdo. Minuta automática e pedido `/publicar` continuam esperando o "publica" do Dr. Luiz.
+- **Cópia de trabalho fora do OneDrive**: `C:\Users\LuizH\site-baldissera` (evita arquivo truncado pela sincronização). O publicador faz `pull` na cópia do OneDrive depois de publicar, se ela estiver limpa.

@@ -14,6 +14,7 @@ Uso:
   python publicar.py gerar   pub.json          -> só grava os arquivos (prévia local)
   python publicar.py publicar pub.json --push  -> grava, registra no git e envia (vai ao ar)
   python publicar.py verificar pub.json        -> só confere o JSON e diz o que falta
+  python publicar.py testar pub.json --saida DIR -> gera só a página em DIR (não mexe no site)
 """
 import argparse, datetime as dt, html, json, re, subprocess, sys, unicodedata
 from pathlib import Path
@@ -314,10 +315,11 @@ def git(*args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("acao", choices=["verificar", "gerar", "publicar"])
+    ap.add_argument("acao", choices=["verificar", "testar", "gerar", "publicar"])
     ap.add_argument("json")
     ap.add_argument("--push", action="store_true", help="envia ao GitHub (põe no ar)")
     ap.add_argument("--ramo", default="main")
+    ap.add_argument("--saida", help="pasta de saída do modo testar")
     a = ap.parse_args()
     p = json.loads(Path(a.json).read_text(encoding="utf-8"))
     erros = verificar(p)
@@ -325,6 +327,15 @@ def main():
         print("NÃO PUBLICADO — corrigir:\n- " + "\n- ".join(erros)); sys.exit(2)
     if a.acao == "verificar":
         print("OK — pronto para publicar"); return
+    if a.acao == "testar":
+        p = preparar(p)
+        destino = Path(a.saida or ".")
+        destino.mkdir(parents=True, exist_ok=True)
+        arq = destino / f"{p['_slug']}.html"
+        # na prévia de teste os caminhos relativos apontam para o site no ar, para a página abrir com estilo e fotos
+        arq.write_text(pagina(p).replace('href="assets/', f'href="{BASE}/assets/').replace('src="assets/', f'src="{BASE}/assets/'),
+                       encoding="utf-8", newline="\n")
+        print(json.dumps({"ok": True, "no_ar": False, "teste": True, "arquivo": str(arq)}, ensure_ascii=False)); return
     if a.acao == "publicar":
         if git("status", "--porcelain", "--untracked-files=no"):
             raise SystemExit("a cópia do site tem alterações não registradas; nada foi feito")

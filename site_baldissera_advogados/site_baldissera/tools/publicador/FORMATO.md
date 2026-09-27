@@ -31,3 +31,7 @@ Regras que o publicador aplica sozinho:
 - Tempo de leitura calculado pelas palavras do corpo (250 por minuto).
 - Endereço da página = `publicacao-` + título curto sem acento; se já existir, ganha `-2`, `-3`.
 - Assinatura no fim = iniciais do autor; bloco "Sobre o autor" com os dados da página Advogados.
+
+## Capas
+
+A cada publicação o publicador gera três capas com a marca (`capa.py`): `og` 1200x630 (prévia de link, usada no og:image), `quadrado` 1080x1080 e `vertical` 1080x1350 (posts). Ficam em `public/assets/images/capas/<endereço>-<formato>.png`. `capas_existentes.py` gerou as das publicações anteriores a 27/09/2026.

@@ -180,7 +180,7 @@ def pagina(p: dict) -> str:
 <meta property="og:title" content="{attr(titulo_curto)} · Baldissera Advogados">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{BASE}/assets/images/og-default.png">
+<meta property="og:image" content="{BASE}/assets/images/capas/{p['_slug']}-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="article:author" content="{attr(a['nome'])}">
@@ -188,7 +188,7 @@ def pagina(p: dict) -> str:
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{attr(titulo_curto)} · Baldissera Advogados">
 <meta name="twitter:description" content="{desc}">
-<meta name="twitter:image" content="{BASE}/assets/images/og-default.png">
+<meta name="twitter:image" content="{BASE}/assets/images/capas/{p['_slug']}-og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap">
@@ -340,7 +340,9 @@ def main():
         # na prévia de teste os caminhos relativos apontam para o site no ar, para a página abrir com estilo e fotos
         arq.write_text(pagina(p).replace('href="assets/', f'href="{BASE}/assets/').replace('src="assets/', f'src="{BASE}/assets/'),
                        encoding="utf-8", newline="\n")
-        print(json.dumps({"ok": True, "no_ar": False, "teste": True, "arquivo": str(arq)}, ensure_ascii=False)); return
+        import capa
+        capas = capa.gerar(p, ["og", "quadrado", "vertical"], destino)
+        print(json.dumps({"ok": True, "no_ar": False, "teste": True, "arquivo": str(arq), "capas": capas}, ensure_ascii=False)); return
     if a.acao == "publicar":
         if git("status", "--porcelain", "--untracked-files=no"):
             raise SystemExit("a cópia do site tem alterações não registradas; nada foi feito")
@@ -350,15 +352,17 @@ def main():
     p = preparar(p)
     (PUB / f"{p['_slug']}.html").write_text(pagina(p), encoding="utf-8", newline="\n")
     encaixar(p)
+    import capa
+    capas = capa.gerar(p, ["og", "quadrado", "vertical"], PUB / "assets" / "images" / "capas")
     url = f"{BASE}/{p['_slug']}"
     if a.acao == "publicar":
-        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "sitemap.xml"))
+        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "sitemap.xml"), *capas)
         git("commit", "-m", f"Publicação: {plano(p.get('titulo_curto') or p['titulo'])} ({p['_autor']['nome']})")
         if a.push:
             git("push", "origin", a.ramo)
-            print(json.dumps({"ok": True, "no_ar": True, "url": url, "arquivo": p["_slug"] + ".html"}, ensure_ascii=False))
+            print(json.dumps({"ok": True, "no_ar": True, "url": url, "arquivo": p["_slug"] + ".html", "capas": capas}, ensure_ascii=False))
             return
-    print(json.dumps({"ok": True, "no_ar": False, "url": url, "arquivo": p["_slug"] + ".html"}, ensure_ascii=False))
+    print(json.dumps({"ok": True, "no_ar": False, "url": url, "arquivo": p["_slug"] + ".html", "capas": capas}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

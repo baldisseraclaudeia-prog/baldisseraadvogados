@@ -104,8 +104,8 @@ h1{{font-size:{tamanho_titulo(len(titulo), 50)}px}}
 .foto{{position:absolute;left:0;right:0;top:0;height:{alto + 140}px;background:url("{foto}") center/cover no-repeat;z-index:1}}
 .veu{{position:absolute;inset:0;z-index:2;background:
   linear-gradient(180deg, rgba(15,23,42,.72) 0%, rgba(15,23,42,.10) 22%, rgba(15,23,42,0) 38%, rgba(15,23,42,.55) {int((alto - 40) / h * 100)}%, rgba(15,23,42,.985) {int((alto + 120) / h * 100)}%, {NAVY} 100%)}}
-.meio{{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:{alto - respiro + 20}px 0 {36 if vertical else 30}px}}
-h1{{font-size:{tamanho_titulo(len(titulo), 62 if vertical else 58)}px;max-width:{w - 2 * respiro}px}}
+.meio{{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:{alto - respiro - 40}px 0 {32 if vertical else 24}px;min-height:0}}
+h1{{font-size:{tamanho_titulo(len(titulo), 60 if vertical else 52)}px;max-width:{w - 2 * respiro}px}}
 """
         camadas = '<div class="foto"></div><div class="veu"></div>'
     else:

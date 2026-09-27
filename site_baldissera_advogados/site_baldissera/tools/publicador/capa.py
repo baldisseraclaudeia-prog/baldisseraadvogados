@@ -115,7 +115,9 @@ h1{{font-size:{tamanho_titulo(len(titulo), 64 if og else 78) + (0 if og else 4)}
 """
         camadas = ""
 
-    largura_marca = 330 if og else 380
+    # mesma largura em todos os formatos: na prévia de link (og) a marca menor deixava o
+    # "ADVOGADOS" fraco (ajuste pedido pelo Dr. Luiz em 27/09/2026)
+    largura_marca = 380
     return f"""<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=block" rel="stylesheet">
 <style>{base_css}{layout_css}</style></head><body>

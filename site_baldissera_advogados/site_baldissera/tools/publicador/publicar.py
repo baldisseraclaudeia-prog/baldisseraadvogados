@@ -57,6 +57,58 @@ AUTORES = {
 }
 TIPOS = {"destaque", "paragrafo", "intertitulo", "caixa", "citacao"}
 
+# As 7 áreas da lista de publicações (mesma ordem das pílulas de publicacoes.html).
+# Chave = identificador usado em data-area e no #âncora da lista.
+AREAS = {
+    "direito-penal": "Direito Penal",
+    "tribunais-superiores": "Tribunais Superiores",
+    "execucao-penal": "Execução Penal",
+    "imobiliario": "Imobiliário",
+    "civil": "Civil",
+    "familia-e-sucessoes": "Família e Sucessões",
+    "ambiental": "Ambiental",
+}
+# Nomes alternativos que o publicador aceita e traduz para a área oficial (comparação sem acento/caixa)
+AREA_ALIASES = {
+    "penal": "direito-penal", "direito penal": "direito-penal", "processo penal": "direito-penal",
+    "processual penal": "direito-penal", "direito processual penal": "direito-penal",
+    "direito constitucional": "direito-penal",
+    "tribunais superiores": "tribunais-superiores", "recursos aos tribunais superiores": "tribunais-superiores",
+    "recursos a tribunais superiores": "tribunais-superiores", "recursos": "tribunais-superiores",
+    "execucao penal": "execucao-penal", "direito imobiliario": "imobiliario", "imobiliario": "imobiliario",
+    "civil": "civil", "direito civil": "civil", "familia e sucessoes": "familia-e-sucessoes",
+    "familia": "familia-e-sucessoes", "sucessoes": "familia-e-sucessoes", "direito de familia": "familia-e-sucessoes",
+    "direito das sucessoes": "familia-e-sucessoes", "ambiental": "ambiental", "direito ambiental": "ambiental",
+}
+# Sinais de que a publicação analisa julgado do STF/STJ (entra também na janela "Tribunais Superiores")
+RE_SUPERIOR = re.compile(r"\bSTF\b|\bSTJ\b|Supremo Tribunal|Superior Tribunal de Justi|\bADPF\b|\bADI\b|\bREsp\b|\bAREsp\b|\bAgRg\b|\bRHC\b|\bRE\s?\d|Tema\s+\d+|repercuss[aã]o geral", re.I)
+
+
+def normalizar_area(texto: str) -> "str | None":
+    """Devolve a chave da área (ex.: 'execucao-penal') a partir de qualquer grafia aceita."""
+    if not texto:
+        return None
+
+    def chave(t):
+        t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode().lower()
+        return re.sub(r"\s+", " ", re.sub(r"[^a-z ]+", " ", t)).strip()
+
+    if chave(texto) in AREA_ALIASES:
+        return AREA_ALIASES[chave(texto)]
+    # rótulos compostos ("Direito Penal · Lei de Drogas", "Direito Civil / Sucessões"): vale a primeira parte reconhecida
+    for parte in re.split(r"[·•/|,;—–-]", texto):
+        if chave(parte) in AREA_ALIASES:
+            return AREA_ALIASES[chave(parte)]
+    return None
+
+
+def analisa_superior(p: dict) -> bool:
+    """Detecta STF/STJ no título, subtítulo, resumo, citações e referências."""
+    trechos = [p.get("titulo", ""), p.get("subtitulo", ""), p.get("resumo", "")]
+    trechos += [r.get("nome", "") + " " + r.get("descricao", "") for r in p.get("referencias") or []]
+    trechos += [b.get("fonte", "") for b in p.get("corpo") or [] if b.get("tipo") == "citacao"]
+    return bool(RE_SUPERIOR.search(" ".join(trechos)))
+
 
 # ------------------------------------------------------------------ utilidades
 def inline(t: str) -> str:
@@ -88,6 +140,8 @@ def verificar(p: dict) -> list:
             erros.append(f"falta o campo '{campo}'")
     if p.get("autor") and p["autor"] not in AUTORES:
         erros.append(f"autor desconhecido: {p['autor']} (use luiz, charys, karla ou anderson)")
+    if p.get("area") and normalizar_area(p["area"]) is None:
+        erros.append(f"área desconhecida: '{p['area']}' (use uma das 7: {', '.join(AREAS.values())})")
     for i, b in enumerate(p.get("corpo") or []):
         if b.get("tipo") not in TIPOS:
             erros.append(f"bloco {i + 1}: tipo inválido '{b.get('tipo')}'")
@@ -141,6 +195,10 @@ def preparar(p: dict) -> dict:
     palavras = sum(len(plano(b.get("texto", "")).split()) + len(plano(b.get("titulo", "")).split()) for b in p["corpo"])
     p["_leitura"] = max(1, round(palavras / 250))
     p["_autor"] = AUTORES[p["autor"]]
+    # área oficial (a pílula onde a publicação mora) e marca de julgado STF/STJ
+    p["_area_slug"] = normalizar_area(p["area"]) or "direito-penal"
+    p["area"] = AREAS[p["_area_slug"]]
+    p["_superior"] = p["superior"] if isinstance(p.get("superior"), bool) else analisa_superior(p)
     # ilustração: campo "imagem" (caminho ou nome) ou, automaticamente, IMAGENS\<slug>.png;
     # "imagem": false desliga.
     if p.get("imagem") is False:
@@ -309,7 +367,7 @@ def pagina(p: dict) -> str:
 # ------------------------------------------------------------------ cartão e sitemap
 def cartao(p: dict) -> str:
     a = p["_autor"]
-    return f"""<a href="{p['_slug']}.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+    return f"""<a href="{p['_slug']}.html" class="pub-card" data-area="{p['_area_slug']}" data-superior="{1 if p['_superior'] else 0}" data-data="{p['data']}" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
 <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">{html.escape(p['area'])}</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>

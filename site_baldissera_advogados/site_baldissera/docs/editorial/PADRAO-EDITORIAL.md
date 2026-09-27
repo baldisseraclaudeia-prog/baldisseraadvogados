@@ -33,6 +33,8 @@ Toda publicação segue **a mesma estrutura HTML** (ver `TEMPLATE.html`). Não i
    - **H1**: título descritivo, normalmente com dois pontos separando título e subtítulo (ex.: "Quando a cadeia de custódia se rompe: cinco hipóteses em que a falha do Estado pode anular a condenação.").
    - **Lead em itálico** (deck): aforismo ou síntese provocativa do tema, em Cormorant Garamond italic, gold-soft, 21px.
    - **Linha de autoria**: `por · [Nome] · OAB · leitura: X min`.
+   - **Imagem de abertura** (desde 27/09/2026): `<figure class="pub-fig">` logo abaixo da linha de autoria, 760px, 16:9, cantos 8px, borda 0,5px. É a ilustração editorial gerada pelo agente `baldissera-diretor-arte` (Canva) a partir do texto — nas cores da marca, **sem pessoas, martelo, balança, algemas, grades, brasão ou texto; sem alusão a caso ou cliente** (Provimento 205). `alt` descritivo e neutro. A mesma ilustração é o fundo das capas de compartilhamento. Publicação sem ilustração aprovada sai sem a figura (a capa vira tipográfica).
+   - **Área** é sempre uma das 7 da lista (`publicar.py: AREAS`); análise de julgado STF/STJ recebe `superior` e aparece também no botão "Tribunais Superiores" da lista, agrupada pela matéria.
 5. **Corpo do artigo** (section dedicada):
    - **Pull quote inicial** (font 24px, italic, navy, border-left gold) — frase curta de impacto que abre o texto. *Opcional, mas presente na publicação inaugural.*
    - Parágrafos de prosa fluida, font-size 16px, line-height 1.85, cor `var(--text-soft)`.
@@ -134,7 +136,7 @@ No `<head>` da publicação:
 - `og:title`, `twitter:title`: igual ao `<title>`.
 - `og:description`, `twitter:description`: igual à meta description.
 - `og:url`: `https://www.baldisseraadvogados.com.br/publicacao-[slug]` (sem `.html` — `cleanUrls` está ativo).
-- `og:image`: `https://www.baldisseraadvogados.com.br/assets/images/og-default.png` (padrão da banca).
+- `og:image` e `twitter:image`: a capa própria da publicação, `https://www.baldisseraadvogados.com.br/assets/images/capas/publicacao-[slug]-og.png` (1200×630, gerada por `capa.py`: ilustração + véu marinho + marca vetorial; sem ilustração, tipográfica). `og-default.png` só nas páginas institucionais.
 - `og:type`: `article` (não `website`) para publicações.
 - Adicionar também: `<meta property="article:author" content="Nome do Autor">` e `<meta property="article:published_time" content="2026-MM-DD">`.
 

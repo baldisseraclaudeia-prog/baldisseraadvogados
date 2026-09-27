@@ -32,6 +32,12 @@ Regras que o publicador aplica sozinho:
 - Endereço da página = `publicacao-` + título curto sem acento; se já existir, ganha `-2`, `-3`.
 - Assinatura no fim = iniciais do autor; bloco "Sobre o autor" com os dados da página Advogados.
 
+## Área e "Tribunais Superiores" (desde 27/09/2026)
+
+- `area` tem de ser uma das 7 da lista do site: **Direito Penal, Tribunais Superiores, Execução Penal, Imobiliário, Civil, Família e Sucessões, Ambiental**. O publicador aceita grafias próximas ("Direito Civil", "Processual Penal", "Recursos aos Tribunais Superiores", "Direito Penal · Lei de Drogas") e as traduz para a oficial; área desconhecida trava a publicação.
+- `superior` (opcional, `true`/`false`): marca a publicação como análise de julgado do STF/STJ, o que a faz aparecer também no botão "Tribunais Superiores" da lista, agrupada pela sua área. Sem o campo, o publicador detecta sozinho (STF, STJ, REsp, AREsp, ADPF, ADI, RE n., Tema n., repercussão geral no título, subtítulo, resumo, citações ou referências). Quem aprova pode desligar com `"superior": false`.
+- Cada cartão da lista sai com `class="pub-card" data-area data-superior data-data`; a página `publicacoes.html` filtra por esses atributos (botões) e ordena por data. `classificar_existentes.py` aplicou isso às publicações anteriores a 27/09/2026.
+
 ## Ilustração (desde 27/09/2026)
 
 Campos opcionais:

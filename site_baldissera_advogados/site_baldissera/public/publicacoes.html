@@ -70,15 +70,16 @@
 
 <section style="padding:40px 40px;background:var(--ivory-bg);border-bottom:0.5px solid var(--border-soft);">
 <p style="text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500;">tópicos cobertos</p>
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:900px;margin:0 auto;">
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:900px;margin:0 auto;" role="group" aria-label="Filtrar publicações por área">
+<button type="button" class="topico ativo" data-filtro="todas" aria-pressed="true">Todas</button>
+<button type="button" class="topico" data-filtro="direito-penal" aria-pressed="false">Direito Penal</button>
+<button type="button" class="topico" data-filtro="tribunais-superiores" aria-pressed="false">Tribunais Superiores</button>
+<button type="button" class="topico" data-filtro="execucao-penal" aria-pressed="false">Execução Penal</button>
+<button type="button" class="topico" data-filtro="imobiliario" aria-pressed="false">Imobiliário</button>
+<button type="button" class="topico" data-filtro="civil" aria-pressed="false">Civil</button>
+<button type="button" class="topico" data-filtro="familia-e-sucessoes" aria-pressed="false">Família e Sucessões</button>
+<button type="button" class="topico" data-filtro="ambiental" aria-pressed="false">Ambiental</button>
 
-<span style="padding:8px 18px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);font-size:12px;color:var(--navy);border-radius:40px;">Direito Penal</span>
-<span style="padding:8px 18px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);font-size:12px;color:var(--navy);border-radius:40px;">Tribunais Superiores</span>
-<span style="padding:8px 18px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);font-size:12px;color:var(--navy);border-radius:40px;">Execução Penal</span>
-<span style="padding:8px 18px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);font-size:12px;color:var(--navy);border-radius:40px;">Imobiliário</span>
-<span style="padding:8px 18px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);font-size:12px;color:var(--navy);border-radius:40px;">Civil</span>
-<span style="padding:8px 18px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);font-size:12px;color:var(--navy);border-radius:40px;">Família e Sucessões</span>
-<span style="padding:8px 18px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);font-size:12px;color:var(--navy);border-radius:40px;">Ambiental</span>
 </div>
 </section>
 
@@ -87,9 +88,10 @@
 <p style="text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;">edições publicadas</p>
 <h2 style="font-family:var(--serif);font-weight:500;font-size:32px;color:var(--navy);margin:0 0 36px;letter-spacing:.02em;text-align:center;">Publicações.</h2>
 
-<div style="display:grid;grid-template-columns:1fr;gap:18px;">
+<p id="lista-aviso" class="lista-aviso" hidden></p>
+<div id="lista-publicacoes" style="display:grid;grid-template-columns:1fr;gap:18px;">
 <!-- NOVAS-PUBLICACOES: o publicador insere cada publicação nova logo abaixo desta linha (a mais recente fica no topo) -->
-<a href="publicacao-adpf-347-na-execucao-penal.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-adpf-347-na-execucao-penal.html" class="pub-card" data-area="execucao-penal" data-superior="1" data-data="2026-09-27" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
 <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Execução Penal</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
@@ -107,9 +109,9 @@
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
 </a>
-<a href="publicacao-domiciliar-humanitaria-6t-stj.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-domiciliar-humanitaria-6t-stj.html" class="pub-card" data-area="direito-penal" data-superior="1" data-data="2026-05-26" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Processual Penal · Execução Penal</span>
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
 <span style="font-size:11px;letter-spacing:.06em;color:var(--text-light);font-style:italic;font-family:var(--serif);">Maio · 2026</span>
 </div>
@@ -125,27 +127,9 @@
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
 </a>
-<a href="publicacao-re-635659-ed-segundos-cannabis.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-colacao-doacao-dissimulada-resp-2171573-ms.html" class="pub-card" data-area="familia-e-sucessoes" data-superior="1" data-data="2026-05-06" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal · Lei de Drogas</span>
-<span style="color:var(--gold-light);font-family:var(--serif);">·</span>
-<span style="font-size:11px;letter-spacing:.06em;color:var(--text-light);font-style:italic;font-family:var(--serif);">Fevereiro · 2025</span>
-</div>
-<h3 style="font-family:var(--serif);font-weight:500;font-size:30px;color:var(--navy);margin:0 0 14px;letter-spacing:.005em;line-height:1.25;">STF rejeita os embargos no Tema 506 e fixa o que realmente importa: ônus da prova, abrangência da descriminalização e a sanção que ficou de fora.</h3>
-<p style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--gold-soft);margin:0 0 20px;line-height:1.55;letter-spacing:.005em;">No RE 635.659 ED-Segundos, o Plenário rejeitou por unanimidade os embargos de DPE/SP e MP/SP, mas a rejeição veio acompanhada de cinco esclarecimentos que reorganizam, na prática, o que a defesa precisa argumentar a partir de agora.</p>
-<p style="font-size:13.5px;line-height:1.75;color:var(--text-muted);margin:0 0 24px;">Análise dos cinco pontos que o STF esclareceu ao rejeitar os embargos de declaração no Tema 506: a inversão do ônus da prova que não houve (item 8 da tese), a descriminalização limitada à cannabis sativa, a exclusão do inciso II (prestação de serviços) do rol de sanções aplicáveis, a participação do MP nos mutirões carcerários e a ausência de modulação temporal — abrindo espaço para revisão criminal em casos pretéritos. Implicações práticas em audiência de custódia, fase processual, execução penal e Tribunal do Júri.</p>
-<div style="display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:0.5px solid var(--border-medium);">
-<div style="display:flex;align-items:center;gap:10px;">
-<span style="font-family:var(--serif);font-style:italic;color:var(--gold);font-size:13px;">por</span>
-<span style="font-family:var(--serif);font-weight:500;font-size:14px;color:var(--navy);">Karla da Costa Sampaio</span>
-<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">· OAB/RS 66.523</span>
-</div>
-<span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
-</div>
-</a>
-<a href="publicacao-colacao-doacao-dissimulada-resp-2171573-ms.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
-<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Civil · Sucessões</span>
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Família e Sucessões</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
 <span style="font-size:11px;letter-spacing:.06em;color:var(--text-light);font-style:italic;font-family:var(--serif);">Maio · 2026</span>
 </div>
@@ -161,10 +145,9 @@
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
 </a>
-
-<a href="publicacao-tema-931-resp-2090454-sp.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-tema-931-resp-2090454-sp.html" class="pub-card" data-area="execucao-penal" data-superior="1" data-data="2026-05-06" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal · Execução Penal</span>
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Execução Penal</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
 <span style="font-size:11px;letter-spacing:.06em;color:var(--text-light);font-style:italic;font-family:var(--serif);">Maio · 2026</span>
 </div>
@@ -180,10 +163,9 @@
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
 </a>
-
-<a href="publicacao-rif-coaf-re-1537165-sp.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-rif-coaf-re-1537165-sp.html" class="pub-card" data-area="direito-penal" data-superior="1" data-data="2026-04-30" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Constitucional · Processo Penal</span>
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
 <span style="font-size:11px;letter-spacing:.06em;color:var(--text-light);font-style:italic;font-family:var(--serif);">Abril · 2026</span>
 </div>
@@ -199,8 +181,7 @@
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
 </a>
-
-<a href="publicacao-impronuncia-aresp-3065825-pe.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-impronuncia-aresp-3065825-pe.html" class="pub-card" data-area="direito-penal" data-superior="1" data-data="2026-04-27" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
 <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
@@ -218,8 +199,7 @@
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
 </a>
-
-<a href="publicacao-prova-digital-sem-hash.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-prova-digital-sem-hash.html" class="pub-card" data-area="direito-penal" data-superior="1" data-data="2026-04-25" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
 <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
@@ -237,8 +217,7 @@
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
 </a>
-
-<a href="publicacao-cadeia-de-custodia.html" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<a href="publicacao-cadeia-de-custodia.html" class="pub-card" data-area="direito-penal" data-superior="0" data-data="2026-01-15" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
 <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal</span>
 <span style="color:var(--gold-light);font-family:var(--serif);">·</span>
@@ -252,6 +231,24 @@
 <span style="font-family:var(--serif);font-style:italic;color:var(--gold);font-size:13px;">por</span>
 <span style="font-family:var(--serif);font-weight:500;font-size:14px;color:var(--navy);">Luiz Henrique Baldissera</span>
 <span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">· OAB/PR 55.717</span>
+</div>
+<span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
+</div>
+</a>
+<a href="publicacao-re-635659-ed-segundos-cannabis.html" class="pub-card" data-area="direito-penal" data-superior="1" data-data="2025-02-01" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
+<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">Direito Penal</span>
+<span style="color:var(--gold-light);font-family:var(--serif);">·</span>
+<span style="font-size:11px;letter-spacing:.06em;color:var(--text-light);font-style:italic;font-family:var(--serif);">Fevereiro · 2025</span>
+</div>
+<h3 style="font-family:var(--serif);font-weight:500;font-size:30px;color:var(--navy);margin:0 0 14px;letter-spacing:.005em;line-height:1.25;">STF rejeita os embargos no Tema 506 e fixa o que realmente importa: ônus da prova, abrangência da descriminalização e a sanção que ficou de fora.</h3>
+<p style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--gold-soft);margin:0 0 20px;line-height:1.55;letter-spacing:.005em;">No RE 635.659 ED-Segundos, o Plenário rejeitou por unanimidade os embargos de DPE/SP e MP/SP, mas a rejeição veio acompanhada de cinco esclarecimentos que reorganizam, na prática, o que a defesa precisa argumentar a partir de agora.</p>
+<p style="font-size:13.5px;line-height:1.75;color:var(--text-muted);margin:0 0 24px;">Análise dos cinco pontos que o STF esclareceu ao rejeitar os embargos de declaração no Tema 506: a inversão do ônus da prova que não houve (item 8 da tese), a descriminalização limitada à cannabis sativa, a exclusão do inciso II (prestação de serviços) do rol de sanções aplicáveis, a participação do MP nos mutirões carcerários e a ausência de modulação temporal — abrindo espaço para revisão criminal em casos pretéritos. Implicações práticas em audiência de custódia, fase processual, execução penal e Tribunal do Júri.</p>
+<div style="display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:0.5px solid var(--border-medium);">
+<div style="display:flex;align-items:center;gap:10px;">
+<span style="font-family:var(--serif);font-style:italic;color:var(--gold);font-size:13px;">por</span>
+<span style="font-family:var(--serif);font-weight:500;font-size:14px;color:var(--navy);">Karla da Costa Sampaio</span>
+<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">· OAB/RS 66.523</span>
 </div>
 <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
 </div>
@@ -368,4 +365,59 @@
 <a href="/whatsapp.html" class="wa-float-btn" aria-label="Falar pelo WhatsApp" title="Falar pelo WhatsApp">
 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
+<!-- FILTRO-PUBLICACOES -->
+<script>
+(function () {
+  var ORDEM = ["direito-penal", "tribunais-superiores", "execucao-penal", "imobiliario", "civil", "familia-e-sucessoes", "ambiental"];
+  var NOMES = {"direito-penal": "Direito Penal", "tribunais-superiores": "Técnica recursal", "execucao-penal": "Execução Penal",
+               "imobiliario": "Imobiliário", "civil": "Civil", "familia-e-sucessoes": "Família e Sucessões", "ambiental": "Ambiental"};
+  var lista = document.getElementById("lista-publicacoes");
+  var aviso = document.getElementById("lista-aviso");
+  var botoes = document.querySelectorAll(".topico[data-filtro]");
+  if (!lista || !botoes.length) return;
+  var cards = Array.prototype.slice.call(lista.querySelectorAll("a.pub-card"));
+  cards.sort(function (a, b) { return (b.getAttribute("data-data") || "").localeCompare(a.getAttribute("data-data") || ""); });
+
+  function aplica(filtro, gravaHash) {
+    Array.prototype.forEach.call(lista.querySelectorAll(".grupo-materia"), function (e) { e.parentNode.removeChild(e); });
+    var visiveis = [];
+    cards.forEach(function (c) {
+      var area = c.getAttribute("data-area"), superior = c.getAttribute("data-superior") === "1";
+      var ok = filtro === "todas" || (filtro === "tribunais-superiores" ? (superior || area === "tribunais-superiores") : area === filtro);
+      c.classList.toggle("oculto", !ok);
+      if (ok) visiveis.push(c);
+    });
+    if (filtro === "tribunais-superiores") {
+      ORDEM.forEach(function (area) {
+        var grupo = visiveis.filter(function (c) { return c.getAttribute("data-area") === area; });
+        if (!grupo.length) return;
+        var h = document.createElement("p"); h.className = "grupo-materia"; h.textContent = NOMES[area];
+        lista.appendChild(h);
+        grupo.forEach(function (c) { lista.appendChild(c); });
+      });
+    } else {
+      visiveis.forEach(function (c) { lista.appendChild(c); });
+    }
+    cards.filter(function (c) { return c.classList.contains("oculto"); }).forEach(function (c) { lista.appendChild(c); });
+    if (aviso) {
+      if (!visiveis.length) { aviso.textContent = "Ainda não há publicações nesta área."; aviso.hidden = false; }
+      else { aviso.textContent = visiveis.length + (visiveis.length === 1 ? " publicação" : " publicações"); aviso.hidden = false; }
+    }
+    Array.prototype.forEach.call(botoes, function (b) {
+      var ativo = b.getAttribute("data-filtro") === filtro;
+      b.classList.toggle("ativo", ativo); b.setAttribute("aria-pressed", ativo ? "true" : "false");
+    });
+    if (gravaHash && history.replaceState) history.replaceState(null, "", filtro === "todas" ? location.pathname : "#" + filtro);
+  }
+  function filtroDoHash() {
+    var h = (location.hash || "").replace("#", "");
+    return (h === "todas" || ORDEM.indexOf(h) >= 0) ? h : "todas";
+  }
+  Array.prototype.forEach.call(botoes, function (b) {
+    b.addEventListener("click", function () { aplica(b.getAttribute("data-filtro"), true); });
+  });
+  window.addEventListener("hashchange", function () { aplica(filtroDoHash(), false); });
+  aplica(filtroDoHash(), false);
+})();
+</script>
 </body></html>

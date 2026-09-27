@@ -32,6 +32,22 @@ Regras que o publicador aplica sozinho:
 - Endereço da página = `publicacao-` + título curto sem acento; se já existir, ganha `-2`, `-3`.
 - Assinatura no fim = iniciais do autor; bloco "Sobre o autor" com os dados da página Advogados.
 
+## Ilustração (desde 27/09/2026)
+
+Campos opcionais:
+
+```json
+{
+  "imagem": "publicacao-adpf-347-na-execucao-penal.png",
+  "imagem_alt": "Arco de pedra sobre água noturna, com um caminho de folhas de papel que o atravessa."
+}
+```
+
+- `imagem`: nome (ou caminho) do PNG gerado pelo diretor de arte (agente `baldissera-diretor-arte`), guardado em `PAINEL-PUBLICACAO\IMAGENS\`. Se o campo faltar, o publicador procura sozinho `IMAGENS\<endereço>.png`; `"imagem": false` desliga a ilustração.
+- `imagem_alt`: descrição neutra da imagem (acessibilidade e buscadores). Sem ela, entra "Ilustração editorial da publicação".
+- O publicador converte o PNG em JPG leve (1600 px) em `public/assets/images/publicacoes/<endereço>.jpg`, põe a figura abaixo da linha de autoria do hero (`<figure class="pub-fig">`) e usa a mesma ilustração como fundo das capas.
+- Regras da imagem (checklist do agente): sem pessoas, martelo, balança, algemas, grades, brasão, texto; sem alusão a caso ou cliente; nas cores da marca.
+
 ## Capas
 
-A cada publicação o publicador gera três capas com a marca (`capa.py`): `og` 1200x630 (prévia de link, usada no og:image), `quadrado` 1080x1080 e `vertical` 1080x1350 (posts). Ficam em `public/assets/images/capas/<endereço>-<formato>.png`. `capas_existentes.py` gerou as das publicações anteriores a 27/09/2026.
+A cada publicação o publicador gera três capas com a marca (`capa.py`): `og` 1200x630 (prévia de link, usada no og:image), `quadrado` 1080x1080 e `vertical` 1080x1350 (posts). Ficam em `public/assets/images/capas/<endereço>-<formato>.png`. Com ilustração, ela ocupa o fundo da capa sob um véu marinho com a marca vetorial oficial (`public/assets/images/marca/baldissera-advogados-escuro.svg`); sem ilustração, a capa é tipográfica. `capas_existentes.py` gerou as das publicações anteriores a 27/09/2026.

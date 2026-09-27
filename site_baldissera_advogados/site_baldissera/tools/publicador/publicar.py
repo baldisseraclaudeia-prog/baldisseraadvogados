@@ -26,6 +26,12 @@ PUB = SITE / "public"
 REPO = SITE.parents[1]
 BASE = "https://www.baldisseraadvogados.com.br"
 MARCADOR = "<!-- NOVAS-PUBLICACOES"
+# Ilustrações geradas pelo diretor de arte (agente baldissera-diretor-arte) ficam FORA do git,
+# na pasta do painel; o publicador as copia (em JPG leve) para o site na hora de gerar.
+IMAGENS_DIR = Path(r"C:\Users\LuizH\OneDrive\Área de Trabalho\SITE BALDISSERA ADVOGADOS\PAINEL-PUBLICACAO\IMAGENS")
+IMAGENS_SITE = PUB / "assets" / "images" / "publicacoes"
+IMAGEM_LARGURA = 1600
+ALT_PADRAO = "Ilustração editorial da publicação"
 
 MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto",
          "Setembro", "Outubro", "Novembro", "Dezembro"]
@@ -87,12 +93,36 @@ def verificar(p: dict) -> list:
             erros.append(f"bloco {i + 1}: tipo inválido '{b.get('tipo')}'")
         elif not (b.get("texto") or "").strip():
             erros.append(f"bloco {i + 1}: sem texto")
+    if p.get("imagem") and p["imagem"] is not True and localizar_imagem(p["imagem"]) is None:
+        erros.append(f"ilustração não encontrada: {p['imagem']} (procurei em {IMAGENS_DIR})")
     txt = json.dumps(p, ensure_ascii=False)
     if "{{" in txt:
         erros.append("sobrou marcador {{...}} no texto")
     if re.search(r"<\s*(script|iframe|style)", txt, re.I):
         erros.append("o texto contém código de página (script, iframe ou style); por segurança nada foi publicado")
     return erros
+
+
+def localizar_imagem(ref) -> "Path | None":
+    """Acha o PNG da ilustração: caminho completo, nome na pasta IMAGENS (com ou sem .png)."""
+    if not ref or ref is True:
+        return None
+    for cand in (Path(str(ref)), IMAGENS_DIR / str(ref), IMAGENS_DIR / f"{ref}.png"):
+        if cand.is_file():
+            return cand
+    return None
+
+
+def converter_imagem(fonte: Path, destino: Path) -> Path:
+    """PNG grande do Canva -> JPG leve (1600 px, nitidez leve), no padrão das imagens do site."""
+    from PIL import Image, ImageFilter
+    im = Image.open(fonte).convert("RGB")
+    if im.width > IMAGEM_LARGURA:
+        im = im.resize((IMAGEM_LARGURA, round(im.height * IMAGEM_LARGURA / im.width)), Image.LANCZOS)
+    im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=110, threshold=2))
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    im.save(destino, "JPEG", quality=84, optimize=True, progressive=True)
+    return destino
 
 
 def preparar(p: dict) -> dict:
@@ -111,6 +141,15 @@ def preparar(p: dict) -> dict:
     palavras = sum(len(plano(b.get("texto", "")).split()) + len(plano(b.get("titulo", "")).split()) for b in p["corpo"])
     p["_leitura"] = max(1, round(palavras / 250))
     p["_autor"] = AUTORES[p["autor"]]
+    # ilustração: campo "imagem" (caminho ou nome) ou, automaticamente, IMAGENS\<slug>.png;
+    # "imagem": false desliga.
+    if p.get("imagem") is False:
+        fonte = None
+    else:
+        fonte = localizar_imagem(p.get("imagem")) or localizar_imagem(f"{slug}.png")
+    p["_imagem_fonte"] = fonte
+    p["_imagem_web"] = f"assets/images/publicacoes/{slug}.jpg" if fonte else None
+    p["_imagem_alt"] = plano(p.get("imagem_alt") or "") or ALT_PADRAO
     return p
 
 
@@ -164,6 +203,8 @@ def pagina(p: dict) -> str:
 </section>
 """
     bio = f'<p style="font-size:13px;line-height:1.7;color:var(--text-muted);margin:0 0 12px;">{html.escape(a["bio"])}</p>\n' if a["bio"] else ""
+    figura = (f'\n<figure class="pub-fig"><img src="{p["_imagem_web"]}" alt="{attr(p["_imagem_alt"])}" width="1600" height="900" fetchpriority="high" decoding="async"></figure>'
+              if p.get("_imagem_web") else "")
     wa_txt = f"{plano(p['titulo'])}\n\n{plano(p['resumo'])}\n\nAnálise completa:\n{url}\n\n— Baldissera Advogados\nWhatsApp do escritório: https://wa.me/5545991029806"
     desc = attr(p["resumo"])[:300]
 
@@ -217,7 +258,7 @@ def pagina(p: dict) -> str:
 <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;">{html.escape(a['titulo'])}</span>
 <span style="color:var(--gold-light);">·</span>
 <span style="font-size:11px;letter-spacing:.04em;color:var(--text-light);">leitura: {p['_leitura']} min</span>
-</div>
+</div>{figura}
 </div>
 </section>
 
@@ -337,12 +378,18 @@ def main():
         destino = Path(a.saida or ".")
         destino.mkdir(parents=True, exist_ok=True)
         arq = destino / f"{p['_slug']}.html"
+        pg = pagina(p)
+        imagem = None
+        if p.get("_imagem_fonte"):
+            # a ilustração ainda não está no ar: fica ao lado da prévia, com caminho local
+            imagem = str(converter_imagem(p["_imagem_fonte"], destino / f"{p['_slug']}.jpg"))
+            pg = pg.replace(f'src="{p["_imagem_web"]}"', f'src="{p["_slug"]}.jpg"')
         # na prévia de teste os caminhos relativos apontam para o site no ar, para a página abrir com estilo e fotos
-        arq.write_text(pagina(p).replace('href="assets/', f'href="{BASE}/assets/').replace('src="assets/', f'src="{BASE}/assets/'),
+        arq.write_text(pg.replace('href="assets/', f'href="{BASE}/assets/').replace('src="assets/', f'src="{BASE}/assets/'),
                        encoding="utf-8", newline="\n")
         import capa
         capas = capa.gerar(p, ["og", "quadrado", "vertical"], destino)
-        print(json.dumps({"ok": True, "no_ar": False, "teste": True, "arquivo": str(arq), "capas": capas}, ensure_ascii=False)); return
+        print(json.dumps({"ok": True, "no_ar": False, "teste": True, "arquivo": str(arq), "imagem": imagem, "capas": capas}, ensure_ascii=False)); return
     if a.acao == "publicar":
         if git("status", "--porcelain", "--untracked-files=no"):
             raise SystemExit("a cópia do site tem alterações não registradas; nada foi feito")
@@ -352,17 +399,21 @@ def main():
     p = preparar(p)
     (PUB / f"{p['_slug']}.html").write_text(pagina(p), encoding="utf-8", newline="\n")
     encaixar(p)
+    extras = []
+    if p.get("_imagem_fonte"):
+        extras.append(str(converter_imagem(p["_imagem_fonte"], PUB / p["_imagem_web"])))
     import capa
     capas = capa.gerar(p, ["og", "quadrado", "vertical"], PUB / "assets" / "images" / "capas")
     url = f"{BASE}/{p['_slug']}"
+    saida = {"ok": True, "no_ar": False, "url": url, "arquivo": p["_slug"] + ".html",
+             "imagem": extras[0] if extras else None, "capas": capas}
     if a.acao == "publicar":
-        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "sitemap.xml"), *capas)
+        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "sitemap.xml"), *extras, *capas)
         git("commit", "-m", f"Publicação: {plano(p.get('titulo_curto') or p['titulo'])} ({p['_autor']['nome']})")
         if a.push:
             git("push", "origin", a.ramo)
-            print(json.dumps({"ok": True, "no_ar": True, "url": url, "arquivo": p["_slug"] + ".html", "capas": capas}, ensure_ascii=False))
-            return
-    print(json.dumps({"ok": True, "no_ar": False, "url": url, "arquivo": p["_slug"] + ".html", "capas": capas}, ensure_ascii=False))
+            saida["no_ar"] = True
+    print(json.dumps(saida, ensure_ascii=False))
 
 
 if __name__ == "__main__":

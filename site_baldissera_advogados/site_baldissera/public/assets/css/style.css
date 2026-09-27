@@ -557,3 +557,23 @@ a { color: inherit; text-decoration: none; }
   .page-hero.hero-split .hero-fig { max-width: 420px; }
   .page-hero.hero-split .hero-fig img { aspect-ratio: 16 / 10; object-position: 70% center; }
 }
+
+/* ============================================
+   IMAGEM DE ABERTURA DA PUBLICAÇÃO (.pub-fig)
+   Gerada pelo diretor de arte; entra abaixo da
+   linha de autoria do hero · 27/09/2026
+   ============================================ */
+.pub-fig { margin: 34px 0 0; }
+.pub-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 0.5px solid var(--border-medium);
+}
+@media (max-width: 768px) {
+  .pub-fig { margin-top: 24px; }
+  .pub-fig img { aspect-ratio: 16 / 10; object-position: 60% center; }
+}

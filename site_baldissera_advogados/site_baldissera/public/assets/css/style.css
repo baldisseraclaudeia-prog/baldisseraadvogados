@@ -559,23 +559,43 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================
-   IMAGEM DE ABERTURA DA PUBLICAÇÃO (.pub-fig)
-   Gerada pelo diretor de arte; entra abaixo da
-   linha de autoria do hero · 27/09/2026
+   CAPA DA PUBLICAÇÃO AO LADO DO TÍTULO (estilo blog)
+   REGRA do Dr. Luiz, 27/09/2026: capa quadrada com a
+   logo à direita do título/subtítulo/autoria; no
+   celular, empilha abaixo do texto.
    ============================================ */
-.pub-fig { margin: 34px 0 0; }
-.pub-fig img {
+.pub-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 56px;
+  align-items: center;
+}
+.pub-hero-grid h1:not(.eyebrow), .pub-hero-grid .post-title { font-size: 42px !important; line-height: 1.15 !important; }
+.pub-fig { margin: 0; }
+.pub-fig.lateral img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 8px;
   border: 0.5px solid var(--border-medium);
+  box-shadow: 0 22px 44px -28px rgba(15, 23, 42, 0.55);
 }
-@media (max-width: 768px) {
-  .pub-fig { margin-top: 24px; }
-  .pub-fig img { aspect-ratio: 16 / 10; object-position: 60% center; }
+/* páginas no molde antigo (post-wrap, coluna de 760px): a grade sai da coluna e ocupa 1060px */
+.post-article .pub-hero-grid {
+  width: min(1060px, calc(100vw - 40px));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 0 8px;
+}
+.post-article .pub-hero-grid .post-deck { max-width: none; }
+.pub-insta a:hover { color: var(--gold) !important; }
+@media (max-width: 900px) {
+  .pub-hero-grid { grid-template-columns: 1fr; gap: 28px; }
+  .pub-fig.lateral { max-width: 420px; }
+  .pub-hero-grid h1:not(.eyebrow), .pub-hero-grid .post-title { font-size: 34px !important; }
 }
 
 /* ============================================
@@ -617,3 +637,30 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-muted);
   margin: -20px 0 26px;
 }
+
+/* cartão da lista com a capa da publicação ao lado (estilo blog) · 27/09/2026 */
+.pub-card.com-capa {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 34px;
+  align-items: center;
+}
+.pub-card-capa {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 0.5px solid var(--border-medium);
+  box-shadow: 0 16px 32px -22px rgba(15, 23, 42, 0.55);
+  transition: transform 0.25s ease;
+}
+.pub-card.com-capa:hover .pub-card-capa { transform: translateY(-3px); }
+.pub-card.com-capa.oculto { display: none !important; }
+@media (max-width: 700px) {
+  .pub-card.com-capa { grid-template-columns: 1fr; gap: 22px; padding: 26px 22px !important; }
+  .pub-card-capa { order: -1; max-width: 260px; }
+}
+@media (prefers-reduced-motion: reduce) { .pub-card-capa { transition: none; } }
+

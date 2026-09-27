@@ -80,7 +80,8 @@ h1{{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1
 .fio{{width:88px;height:2px;background:{GOLD};margin-top:{28 if og else 34}px}}
 .pe{{display:flex;justify-content:space-between;align-items:flex-end;font-size:{16 if og else 17}px;color:#C9C5B8}}
 .pe b{{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:{22 if og else 24}px;color:{IVORY};display:block;margin-bottom:4px}}
-.site{{font-size:{14 if og else 15}px;letter-spacing:.08em;color:{GOLD_CLARO}}}
+.site{{font-size:{14 if og else 15}px;letter-spacing:.08em;color:{GOLD_CLARO};text-align:right;line-height:1.55}}
+.site .insta{{display:block;color:{IVORY};letter-spacing:.04em;font-size:{14 if og else 16}px}}
 """
 
     if imagem:
@@ -131,7 +132,7 @@ h1{{font-size:{tamanho_titulo(len(titulo), 64 if og else 78) + (0 if og else 4)}
     <div class="fio"></div>
   </div>
   <div class="pe"><div><b>{autor}</b>{oab}</div>
-    <div class="site">baldisseraadvogados.com.br</div></div>
+    <div class="site"><span class="insta">{html.escape(' · '.join('@' + u for u, _ in P.INSTAGRAM))}</span>baldisseraadvogados.com.br</div></div>
 </div>
 </body></html>"""
 

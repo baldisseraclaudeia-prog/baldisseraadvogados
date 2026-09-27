@@ -15,6 +15,10 @@ Uso:
   python publicar.py publicar pub.json --push  -> grava, registra no git e envia (vai ao ar)
   python publicar.py verificar pub.json        -> só confere o JSON e diz o que falta
   python publicar.py testar pub.json --saida DIR -> gera só a página em DIR (não mexe no site)
+  python publicar.py slug pub.json             -> diz o endereço (slug), a área oficial e se é julgado STF/STJ
+
+Rodar pelo PowerShell: as capas (capa.py) usam o Edge em modo invisível, que não grava
+a imagem quando chamado pelo Bash em sandbox.
 """
 import argparse, datetime as dt, html, json, re, subprocess, sys, unicodedata
 from pathlib import Path
@@ -31,7 +35,20 @@ MARCADOR = "<!-- NOVAS-PUBLICACOES"
 IMAGENS_DIR = Path(r"C:\Users\LuizH\OneDrive\Área de Trabalho\SITE BALDISSERA ADVOGADOS\PAINEL-PUBLICACAO\IMAGENS")
 IMAGENS_SITE = PUB / "assets" / "images" / "publicacoes"
 IMAGEM_LARGURA = 1600
+LATERAL_LARGURA = 800            # capa quadrada ao lado do título (≈400 px na tela, dobro para tela retina)
 ALT_PADRAO = "Ilustração editorial da publicação"
+# REGRA do Dr. Luiz (27/09/2026): toda publicação leva os dois Instagram — na página e nas capas
+INSTAGRAM = [("luizhbaldissera", "https://www.instagram.com/luizhbaldissera/"),
+             ("baldisseraadvocacia", "https://www.instagram.com/baldisseraadvocacia/")]
+
+
+def instagram_html() -> str:
+    """Linha 'Siga no Instagram' do bloco de compartilhar (mesma em todos os moldes de página)."""
+    links = ' <span style="color:var(--gold-light,#C9B98A);">·</span> '.join(
+        f'<a href="{url}" target="_blank" rel="noopener" style="color:var(--navy,#0F172A);text-decoration:none;border-bottom:0.5px solid var(--gold-light,#C9B98A);">@{u}</a>'
+        for u, url in INSTAGRAM)
+    return (f'<p class="pub-insta" style="font-size:13px;letter-spacing:.02em;color:var(--text-muted,#7a7468);margin:18px 0 0;">'
+            f'Siga no Instagram: {links}</p>')
 
 MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto",
          "Setembro", "Outubro", "Novembro", "Dezembro"]
@@ -167,16 +184,23 @@ def localizar_imagem(ref) -> "Path | None":
     return None
 
 
-def converter_imagem(fonte: Path, destino: Path) -> Path:
-    """PNG grande do Canva -> JPG leve (1600 px, nitidez leve), no padrão das imagens do site."""
+def converter_imagem(fonte: Path, destino: Path, largura: int = IMAGEM_LARGURA, nitidez: bool = True) -> Path:
+    """PNG grande -> JPG leve (nitidez leve), no padrão das imagens do site."""
     from PIL import Image, ImageFilter
     im = Image.open(fonte).convert("RGB")
-    if im.width > IMAGEM_LARGURA:
-        im = im.resize((IMAGEM_LARGURA, round(im.height * IMAGEM_LARGURA / im.width)), Image.LANCZOS)
-    im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=110, threshold=2))
+    if im.width > largura:
+        im = im.resize((largura, round(im.height * largura / im.width)), Image.LANCZOS)
+    if nitidez:
+        im = im.filter(ImageFilter.UnsharpMask(radius=1.6, percent=110, threshold=2))
     destino.parent.mkdir(parents=True, exist_ok=True)
     im.save(destino, "JPEG", quality=84, optimize=True, progressive=True)
     return destino
+
+
+def lateral_da_capa(capa_quadrada: Path, destino: Path) -> Path:
+    """Capa quadrada (PNG 1080) -> JPG 800 px que vai ao lado do título na página (sem nitidez extra:
+    a capa já tem texto nítido)."""
+    return converter_imagem(capa_quadrada, destino, largura=LATERAL_LARGURA, nitidez=False)
 
 
 def preparar(p: dict) -> dict:
@@ -206,7 +230,8 @@ def preparar(p: dict) -> dict:
     else:
         fonte = localizar_imagem(p.get("imagem")) or localizar_imagem(f"{slug}.png")
     p["_imagem_fonte"] = fonte
-    p["_imagem_web"] = f"assets/images/publicacoes/{slug}.jpg" if fonte else None
+    # na página vai a CAPA QUADRADA (ilustração + logo + título) ao lado do título, estilo blog
+    p["_imagem_web"] = f"assets/images/publicacoes/{slug}-lateral.jpg" if fonte else None
     p["_imagem_alt"] = plano(p.get("imagem_alt") or "") or ALT_PADRAO
     return p
 
@@ -261,8 +286,11 @@ def pagina(p: dict) -> str:
 </section>
 """
     bio = f'<p style="font-size:13px;line-height:1.7;color:var(--text-muted);margin:0 0 12px;">{html.escape(a["bio"])}</p>\n' if a["bio"] else ""
-    figura = (f'\n<figure class="pub-fig"><img src="{p["_imagem_web"]}" alt="{attr(p["_imagem_alt"])}" width="1600" height="900" fetchpriority="high" decoding="async"></figure>'
-              if p.get("_imagem_web") else "")
+    lateral = bool(p.get("_imagem_web"))
+    figura = (f'\n</div>\n<figure class="pub-fig lateral"><img src="{p["_imagem_web"]}" alt="{attr("Capa da publicação: " + p["_imagem_alt"])}" width="800" height="800" fetchpriority="high" decoding="async"></figure>'
+              if lateral else "")
+    hero_abre = ('<div class="pub-hero-grid" style="max-width:1060px;margin:0 auto;">\n<div class="pub-hero-texto">'
+                 if lateral else '<div style="max-width:760px;margin:0 auto;">')
     wa_txt = f"{plano(p['titulo'])}\n\n{plano(p['resumo'])}\n\nAnálise completa:\n{url}\n\n— Baldissera Advogados\nWhatsApp do escritório: https://wa.me/5545991029806"
     desc = attr(p["resumo"])[:300]
 
@@ -305,7 +333,7 @@ def pagina(p: dict) -> str:
 
 <!-- HERO DA PUBLICAÇÃO -->
 <section style="padding:60px 40px 40px;background:var(--ivory-bg);">
-<div style="max-width:760px;margin:0 auto;">
+{hero_abre}
 <p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px;">PUBLICAÇÃO · {html.escape(p['area'])} · {p['_mes_ano']}</p>
 <h1 style="font-family:var(--serif);font-weight:500;font-size:48px;line-height:1.15;letter-spacing:.005em;color:var(--navy);margin:0 0 22px;">{inline(p['titulo'])}</h1>
 <p style="font-family:var(--serif);font-style:italic;font-size:21px;color:var(--gold-soft);line-height:1.5;margin:0 0 30px;letter-spacing:.005em;">{inline(p['subtitulo'])}</p>
@@ -358,6 +386,7 @@ def pagina(p: dict) -> str:
 <p style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold,#b08a3e);margin:0 0 16px;font-weight:500;">Achou útil? Encaminhe a colegas e clientes</p>
 <a href="https://wa.me/?text={quote(wa_txt, safe='')}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:32px;font-family:-apple-system,'Segoe UI',sans-serif;font-size:14px;font-weight:500;letter-spacing:.03em;line-height:1;box-shadow:0 2px 6px rgba(37,211,102,0.18);">Compartilhar no WhatsApp</a>
 <p style="font-size:12px;color:var(--text-muted,#7a7468);margin:16px 0 0;font-style:italic;font-family:var(--serif,'Cormorant Garamond',Georgia,serif);line-height:1.45;">A mensagem inclui o resumo, o link para a análise completa e o contato direto do escritório pelo WhatsApp.</p>
+{instagram_html()}
 </aside>
 {rodape}</body>
 </html>
@@ -365,7 +394,24 @@ def pagina(p: dict) -> str:
 
 
 # ------------------------------------------------------------------ cartão e sitemap
+def capa_do_cartao(slug: str, titulo: str) -> str:
+    """Miniatura da capa quadrada no cartão da lista (estilo blog)."""
+    return (f'<img class="pub-card-capa" src="assets/images/publicacoes/{slug}-lateral.jpg" '
+            f'alt="Capa da publicação: {attr(titulo)}" width="800" height="800" loading="lazy" decoding="async">')
+
+
 def cartao(p: dict) -> str:
+    html_ = cartao_texto(p)
+    if not p.get("_imagem_web"):
+        return html_
+    # cartão com capa: texto à esquerda, capa quadrada à direita
+    abre = html_.index(">") + 1
+    fecha = html_.rindex("</a>")
+    return (html_[:abre].replace('class="pub-card"', 'class="pub-card com-capa"', 1) + '\n<div class="pub-card-texto">'
+            + html_[abre:fecha] + "</div>\n" + capa_do_cartao(p["_slug"], plano(p["titulo"])) + "\n" + html_[fecha:])
+
+
+def cartao_texto(p: dict) -> str:
     a = p["_autor"]
     return f"""<a href="{p['_slug']}.html" class="pub-card" data-area="{p['_area_slug']}" data-superior="{1 if p['_superior'] else 0}" data-data="{p['data']}" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
 <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
@@ -414,7 +460,7 @@ def git(*args):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("acao", choices=["verificar", "testar", "gerar", "publicar"])
+    ap.add_argument("acao", choices=["verificar", "slug", "testar", "gerar", "publicar"])
     ap.add_argument("json")
     ap.add_argument("--push", action="store_true", help="envia ao GitHub (põe no ar)")
     ap.add_argument("--ramo", default="main")
@@ -431,22 +477,28 @@ def main():
         print("NÃO PUBLICADO — corrigir:\n- " + "\n- ".join(erros)); sys.exit(2)
     if a.acao == "verificar":
         print("OK — pronto para publicar"); return
+    if a.acao == "slug":
+        # endereço que a publicação terá, área oficial e marca STF/STJ — usado pela rotina de minutas
+        # para o diretor de arte gravar a ilustração com o nome certo (IMAGENS\<slug>.png)
+        p = preparar(p)
+        print(json.dumps({"slug": p["_slug"], "area": p["area"], "superior": p["_superior"],
+                          "ilustracao": str(p["_imagem_fonte"] or "")}, ensure_ascii=False)); return
     if a.acao == "testar":
         p = preparar(p)
         destino = Path(a.saida or ".")
         destino.mkdir(parents=True, exist_ok=True)
         arq = destino / f"{p['_slug']}.html"
+        import capa
+        capas = capa.gerar(p, ["og", "quadrado", "vertical"], destino)
         pg = pagina(p)
         imagem = None
         if p.get("_imagem_fonte"):
-            # a ilustração ainda não está no ar: fica ao lado da prévia, com caminho local
-            imagem = str(converter_imagem(p["_imagem_fonte"], destino / f"{p['_slug']}.jpg"))
-            pg = pg.replace(f'src="{p["_imagem_web"]}"', f'src="{p["_slug"]}.jpg"')
+            # a capa lateral ainda não está no ar: fica ao lado da prévia, com caminho local
+            imagem = str(lateral_da_capa(destino / f"{p['_slug']}-quadrado.png", destino / f"{p['_slug']}-lateral.jpg"))
+            pg = pg.replace(f'src="{p["_imagem_web"]}"', f'src="{p["_slug"]}-lateral.jpg"')
         # na prévia de teste os caminhos relativos apontam para o site no ar, para a página abrir com estilo e fotos
         arq.write_text(pg.replace('href="assets/', f'href="{BASE}/assets/').replace('src="assets/', f'src="{BASE}/assets/'),
                        encoding="utf-8", newline="\n")
-        import capa
-        capas = capa.gerar(p, ["og", "quadrado", "vertical"], destino)
         print(json.dumps({"ok": True, "no_ar": False, "teste": True, "arquivo": str(arq), "imagem": imagem, "capas": capas}, ensure_ascii=False)); return
     if a.acao == "publicar":
         if git("status", "--porcelain", "--untracked-files=no"):
@@ -455,13 +507,13 @@ def main():
         if a.push:
             git("pull", "--ff-only", "origin", a.ramo)
     p = preparar(p)
-    (PUB / f"{p['_slug']}.html").write_text(pagina(p), encoding="utf-8", newline="\n")
-    encaixar(p)
-    extras = []
-    if p.get("_imagem_fonte"):
-        extras.append(str(converter_imagem(p["_imagem_fonte"], PUB / p["_imagem_web"])))
     import capa
     capas = capa.gerar(p, ["og", "quadrado", "vertical"], PUB / "assets" / "images" / "capas")
+    extras = []
+    if p.get("_imagem_fonte"):
+        extras.append(str(lateral_da_capa(PUB / "assets" / "images" / "capas" / f"{p['_slug']}-quadrado.png", PUB / p["_imagem_web"])))
+    (PUB / f"{p['_slug']}.html").write_text(pagina(p), encoding="utf-8", newline="\n")
+    encaixar(p)
     url = f"{BASE}/{p['_slug']}"
     saida = {"ok": True, "no_ar": False, "url": url, "arquivo": p["_slug"] + ".html",
              "imagem": extras[0] if extras else None, "capas": capas}

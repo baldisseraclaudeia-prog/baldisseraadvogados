@@ -51,7 +51,8 @@ Campos opcionais:
 
 - `imagem`: nome (ou caminho) do PNG gerado pelo diretor de arte (agente `baldissera-diretor-arte`), guardado em `PAINEL-PUBLICACAO\IMAGENS\`. Se o campo faltar, o publicador procura sozinho `IMAGENS\<endereço>.png`; `"imagem": false` desliga a ilustração.
 - `imagem_alt`: descrição neutra da imagem (acessibilidade e buscadores). Sem ela, entra "Ilustração editorial da publicação".
-- O publicador converte o PNG em JPG leve (1600 px) em `public/assets/images/publicacoes/<endereço>.jpg`, põe a figura abaixo da linha de autoria do hero (`<figure class="pub-fig">`) e usa a mesma ilustração como fundo das capas.
+- O publicador usa a ilustração como fundo das três capas e põe a **capa quadrada ao lado do título, estilo blog** (`.pub-hero-grid` + `<figure class="pub-fig lateral">`, JPG 800 px em `public/assets/images/publicacoes/<endereço>-lateral.jpg`) — regra do Dr. Luiz de 27/09/2026.
+- Toda publicação leva **@luizhbaldissera** e **@baldisseraadvocacia** (linha "Siga no Instagram" no bloco de compartilhar e rodapé das capas) — regra do Dr. Luiz de 27/09/2026; os endereços ficam em `publicar.py: INSTAGRAM`.
 - Regras da imagem (checklist do agente): sem pessoas, martelo, balança, algemas, grades, brasão, texto; sem alusão a caso ou cliente; nas cores da marca.
 
 ## Capas

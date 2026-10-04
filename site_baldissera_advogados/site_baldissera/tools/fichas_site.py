@@ -26,7 +26,7 @@ INSTAGRAM_ESCRITORIO = "https://www.instagram.com/baldisseraadvocacia/"
 # CEP conferido na base pública dos Correios (ViaCEP) em 04/10/2026 pelo número do imóvel.
 # [DECIDIR] Cascavel: o timbrado diz 85805-002, que é o lado PAR da rua (bairro Centro);
 #           o nº 1.631 é ímpar e cai em 85807-435 (Recanto Tropical, de 1423 ao fim).
-# Porto Belo: 88210-000, informado pelo Dr. Luiz (04/10/2026) e usado no timbrado; é o CEP geral
+# Porto Belo: 88211-002, informado pelo Dr. Luiz (04/10/2026) e usado no timbrado; é o CEP geral
 # da cidade. Nos Correios, a avenida no Perequê tem 88211-002 (contrato da sala confirma).
 UNIDADES = {
     "cascavel": dict(rua="Av. Pres. Juscelino Kubitschek, 1.631", bairro="Recanto Tropical",
@@ -36,7 +36,7 @@ UNIDADES = {
     "foz-do-iguacu": dict(rua="Av. Pedro Basso, 744", bairro="Polo Centro",
                           cidade="Foz do Iguaçu", uf="PR", cep="85863-756"),
     "porto-belo": dict(rua="Av. Senador Atílio Fontana, 2.085, sala 02", bairro="Perequê",
-                       cidade="Porto Belo", uf="SC", cep="88210-000"),
+                       cidade="Porto Belo", uf="SC", cep="88211-002"),
 }
 SEDE = "cascavel"
 

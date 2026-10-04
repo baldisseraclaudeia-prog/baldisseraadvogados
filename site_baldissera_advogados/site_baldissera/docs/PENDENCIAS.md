@@ -14,7 +14,7 @@
 >
 > **Ainda pendente (precisa do Luiz):**
 > - Status final do RJ (operacional, em implantação ou omitir) — hoje incoerente em 4 lugares.
-> - ~~Definir Porto Belo como 5ª unidade ou redefinir lotação do Anderson.~~ Resolvido em 04/10/2026: Porto Belo/SC é unidade (Av. Senador Atílio Fontana, 2.085, sala 02, Perequê, CEP 88210-000), por ordem do Dr. Luiz.
+> - ~~Definir Porto Belo como 5ª unidade ou redefinir lotação do Anderson.~~ Resolvido em 04/10/2026: Porto Belo/SC é unidade (Av. Senador Atílio Fontana, 2.085, sala 02, Perequê, CEP 88211-002), por ordem do Dr. Luiz.
 > - Currículo do Luiz no `/perfil-luiz` — adicionar mestrados e instituições.
 > - Arquitetura nav vs `/sobre` (página hoje órfã do menu).
 > - Narrativa "três vetores" × "sete frentes" (alinhar `/sobre` com a home).

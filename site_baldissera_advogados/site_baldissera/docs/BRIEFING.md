@@ -237,7 +237,7 @@ git push origin main
 | # | Item | Decisão necessária |
 |---|---|---|
 | 1 | **Status do Rio de Janeiro** | Hoje incoerente em 4 lugares (sobre, contato, footer, perfil-luiz, home). Operacional? Em implantação? Omitir? |
-| 2 | **Porto Belo** | Resolvido em 04/10/2026: unidade formal (Av. Senador Atílio Fontana, 2.085, sala 02, Perequê, CEP 88210-000), no site e no timbrado. |
+| 2 | **Porto Belo** | Resolvido em 04/10/2026: unidade formal (Av. Senador Atílio Fontana, 2.085, sala 02, Perequê, CEP 88211-002), no site e no timbrado. |
 | 3 | **Currículo do Luiz** | Adicionar dois mestrados (Recursos para Tribunais Superiores; Civil e Processo Civil) com instituições e ano. |
 | 4 | **Nav vs `/sobre`** | A página `/sobre` é órfã do nav. Remover, renomear "Escritório" ou adicionar item "Sobre"? |
 | 5 | **Narrativa "três vetores" × "sete frentes"** | `/sobre` ainda diz "três vetores"; home diz sete. Padronizar. |

@@ -144,6 +144,15 @@ def attr(t: str) -> str:
     return html.escape(plano(t), quote=True)
 
 
+def resumo_curto(texto: str, limite: int = 160) -> str:
+    """Resumo para o Google: até 160 caracteres, cortado na última palavra inteira."""
+    t = " ".join(plano(texto).split())
+    if len(t) <= limite:
+        return attr(t)
+    corte = t[: limite - 1].rsplit(" ", 1)[0].rstrip(" ,;:—-")
+    return attr(corte + "…")
+
+
 def slugify(t: str) -> str:
     t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode().lower()
     t = re.sub(r"[^a-z0-9]+", "-", t).strip("-")
@@ -292,7 +301,7 @@ def pagina(p: dict) -> str:
     hero_abre = ('<div class="pub-hero-grid" style="max-width:1060px;margin:0 auto;">\n<div class="pub-hero-texto">'
                  if lateral else '<div style="max-width:760px;margin:0 auto;">')
     wa_txt = f"{plano(p['titulo'])}\n\n{plano(p['resumo'])}\n\nAnálise completa:\n{url}\n\n— Baldissera Advogados\nWhatsApp do escritório: https://wa.me/5545991029806"
-    desc = attr(p["resumo"])[:300]
+    desc = resumo_curto(p["resumo"])
 
     return f"""<!DOCTYPE html>
 <html lang="pt-br">
@@ -307,6 +316,7 @@ def pagina(p: dict) -> str:
 <meta property="og:title" content="{attr(titulo_curto)} · Baldissera Advogados">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
+<link rel="canonical" href="{url}">
 <meta property="og:image" content="{BASE}/assets/images/capas/{p['_slug']}-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

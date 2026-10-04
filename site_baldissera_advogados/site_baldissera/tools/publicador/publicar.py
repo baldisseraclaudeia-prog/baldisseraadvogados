@@ -509,6 +509,8 @@ def encaixar(p: dict):
     i = s.index(MARCADOR)
     i = s.index("\n", i) + 1
     lista.write_text(s[:i] + cartao(p) + s[i:], encoding="utf-8", newline="\n")
+    import home_recentes  # as 3 mais recentes também aparecem na página inicial
+    home_recentes.atualizar(PUB)
     sm = PUB / "sitemap.xml"
     t = sm.read_text(encoding="utf-8")
     loc = f"{BASE}/{p['_slug']}"
@@ -585,7 +587,7 @@ def main():
     saida = {"ok": True, "no_ar": False, "url": url, "arquivo": p["_slug"] + ".html",
              "imagem": extras[0] if extras else None, "capas": capas}
     if a.acao == "publicar":
-        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "sitemap.xml"), *extras, *capas)
+        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "index.html"), str(PUB / "sitemap.xml"), *extras, *capas)
         git("commit", "-m", f"Publicação: {plano(p.get('titulo_curto') or p['titulo'])} ({p['_autor']['nome']})")
         if a.push:
             git("push", "origin", a.ramo)

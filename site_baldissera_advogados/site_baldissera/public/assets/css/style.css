@@ -3,6 +3,10 @@
    Versão 1.0 · 21/04/2026
    Tipografia: Cormorant Garamond + sistema
    Paleta: Navy #0F172A · Dourado #9B7B3A · Ivory #F5F1E8
+   Contraste (04/10/2026): --gold e --gold-soft passaram a tons
+   mais escuros, que se leem em letra pequena (WCAG AA, 4,5:1
+   sobre o marfim). O dourado original fica em --gold-brand,
+   só para a logo, filetes e ornamentos (não é texto).
    ============================================ */
 
 
@@ -11,15 +15,16 @@
 :root {
   --navy: #0F172A;
   --navy-soft: #1E293B;
-  --gold: #9B7B3A;
-  --gold-soft: #8C7640;
+  --gold-brand: #9B7B3A;
+  --gold: #806328;
+  --gold-soft: #7D6127;
   --gold-light: #C9B98A;
   --ivory: #F5F1E8;
   --ivory-bg: #FAFAF7;
   --text: #0F172A;
   --text-soft: #333;
   --text-muted: #555;
-  --text-light: #888;
+  --text-light: #6B6B6B;
   --border-soft: #E8E6DF;
   --border-medium: #E5DFD0;
   --footer-text: #C9C5B8;
@@ -65,7 +70,7 @@ a { color: inherit; text-decoration: none; }
   padding-right: 16px;
   display: flex;
 }
-.b-header .logo-cap .b-g { color: var(--gold); transform: translateX(3px); }
+.b-header .logo-cap .b-g { color: var(--gold-brand); transform: translateX(3px); }
 .b-header .logo-cap .a-n { color: var(--navy); transform: translateX(-6px); }
 .b-header .logo-text .name {
   font-family: var(--serif);
@@ -156,7 +161,7 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   gap: 12px;
 }
-.page-hero .hd-orn .line { height: 0.5px; background: var(--gold); width: 60px; }
+.page-hero .hd-orn .line { height: 0.5px; background: var(--gold-brand); width: 60px; }
 .page-hero .hd-orn .d {
   width: 4px; height: 4px;
   background: var(--gold);
@@ -276,7 +281,7 @@ a { color: inherit; text-decoration: none; }
   gap: 12px;
   margin: 0 auto 26px;
 }
-.sec-cta .cta-orn .line { height: 0.5px; background: var(--gold); width: 60px; }
+.sec-cta .cta-orn .line { height: 0.5px; background: var(--gold-brand); width: 60px; }
 .sec-cta .cta-orn .d {
   width: 4px; height: 4px;
   background: var(--gold);
@@ -339,7 +344,7 @@ a { color: inherit; text-decoration: none; }
 }
 .b-footer .foot-brand .line-sub {
   height: 0.5px;
-  background: var(--gold-soft);
+  background: var(--gold-brand);
   width: 60px;
   margin: 14px 0;
 }
@@ -658,9 +663,179 @@ a { color: inherit; text-decoration: none; }
 }
 .pub-card.com-capa:hover .pub-card-capa { transform: translateY(-3px); }
 .pub-card.com-capa.oculto { display: none !important; }
+/* celular (04/10/2026): cartão compacto — capa pequena ao lado da área e da data,
+   título logo abaixo, subtítulo em até 3 linhas, sem o resumo longo (que está na página) */
 @media (max-width: 700px) {
-  .pub-card.com-capa { grid-template-columns: 1fr; gap: 22px; padding: 26px 22px !important; }
-  .pub-card-capa { order: -1; max-width: 260px; }
+  .pub-card.com-capa { grid-template-columns: 72px minmax(0, 1fr); gap: 14px 16px; padding: 22px 20px !important; align-items: center; }
+  .pub-card.com-capa .pub-card-texto { display: contents; }
+  .pub-card.com-capa .pub-card-capa { grid-column: 1; grid-row: 1; width: 72px; box-shadow: none; }
+  .pub-card.com-capa .pub-card-texto > div:first-child { grid-column: 2; grid-row: 1; margin: 0 !important; flex-direction: column; align-items: flex-start !important; gap: 2px !important; }
+  .pub-card.com-capa .pub-card-texto > div:first-child > span:nth-child(2) { display: none; }
+  .pub-card.com-capa .pub-card-texto > :not(:first-child) { grid-column: 1 / -1; }
+  .pub-card.com-capa h3 { font-size: 23px !important; margin: 0 !important; }
+  .pub-card.com-capa .pub-card-texto > p:nth-of-type(1) { font-size: 15.5px !important; margin: 0 !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .pub-card.com-capa .pub-card-texto > p:nth-of-type(2) { display: none; }
+  .pub-card.com-capa .pub-card-texto > div:last-child { padding-top: 14px !important; flex-wrap: wrap; gap: 8px; }
+  .pub-card.com-capa .pub-card-texto > div:last-child > div { flex-wrap: wrap; gap: 2px 8px !important; }
 }
 @media (prefers-reduced-motion: reduce) { .pub-card-capa { transition: none; } }
+
+/* ============================================
+   PÁGINA INICIAL — abertura com título e
+   publicações recentes (04/10/2026; substitui
+   a foto conceitual de gabinete)
+   ============================================ */
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 88px 40px 80px;
+}
+.home-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin: 0 0 22px;
+}
+.home-hero h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 54px;
+  line-height: 1.08;
+  letter-spacing: 0.005em;
+  color: var(--navy);
+  margin: 0 0 26px;
+}
+.home-hero .lede {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--text-soft);
+  margin: 0 0 34px;
+  max-width: 560px;
+}
+.home-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+.home-acoes .cta-btn { padding: 15px 32px; }
+.home-link {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  padding: 12px 0;
+}
+.home-link:hover { color: var(--navy); }
+.cta-btn:focus-visible, .home-link:focus-visible, .rec-item:focus-visible,
+.home-recentes-topo a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.home-recentes {
+  background: var(--ivory);
+  border: 0.5px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 26px 28px 10px;
+}
+.home-recentes-topo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 0.5px solid var(--border-medium);
+}
+.home-recentes-topo h2 {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin: 0;
+  font-family: var(--sans);
+}
+.home-recentes-topo a {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  white-space: nowrap;
+  padding: 6px 0;
+}
+.home-recentes-topo a:hover { color: var(--gold); }
+.home-recentes ul { list-style: none; margin: 0; padding: 0; }
+.home-recentes li + li { border-top: 0.5px solid var(--border-medium); }
+.rec-item {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px 0;
+}
+.rec-item img, .rec-sem-capa {
+  display: block;
+  width: 76px;
+  height: 76px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 0.5px solid var(--border-medium);
+  background: var(--navy);
+}
+.rec-meta {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.rec-titulo {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.28;
+  color: var(--navy);
+  transition: color 0.15s;
+}
+.rec-item:hover .rec-titulo { color: var(--gold); }
+@media (max-width: 900px) {
+  .home-hero { grid-template-columns: 1fr; gap: 44px; padding: 60px 40px 64px; }
+  .home-hero h1 { font-size: 44px; }
+}
+@media (max-width: 600px) {
+  .home-hero { padding: 44px 20px 52px; gap: 36px; }
+  .home-hero h1 { font-size: 35px; line-height: 1.12; margin-bottom: 20px; }
+  .home-hero .lede { font-size: 15.5px; margin-bottom: 28px; }
+  .home-recentes { padding: 22px 18px 6px; }
+  .rec-item { grid-template-columns: 64px minmax(0, 1fr); gap: 14px; padding: 16px 0; }
+  .rec-item img, .rec-sem-capa { width: 64px; height: 64px; }
+  .rec-titulo { font-size: 18px; -webkit-line-clamp: 3; }
+}
+
+/* ============================================
+   CELULAR — menu numa linha só, áreas de toque
+   maiores e botão do WhatsApp que recolhe ao
+   rolar para baixo (assets/js/site.js) · 04/10/2026
+   ============================================ */
+.wa-float-btn { transition: transform .25s ease, opacity .25s ease, box-shadow .2s ease, background .2s ease, color .2s ease; }
+.wa-float-btn.recolhido { transform: translateY(120px); opacity: 0; pointer-events: none; }
+.wa-float-btn:focus-visible { transform: none; opacity: 1; outline: 2px solid var(--gold-light); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .wa-float-btn { transition: none; } }
+/* "Compartilhar no WhatsApp" das publicações: o verde claro com letra branca
+   não se lia (1,98:1); verde mais fechado chega a 5:1 sem mexer no HTML gerado */
+.share-wa a[href^="https://wa.me/"] { background: #15803D !important; }
+.share-wa a[href^="https://wa.me/"]:hover { background: #166534 !important; }
+@media (max-width: 600px) {
+  .b-nav { width: 100%; justify-content: space-between; gap: 0; flex-wrap: nowrap; }
+  .b-nav a { font-size: 10.5px; letter-spacing: 0.05em; padding: 10px 0; }
+  .b-nav a.active::after { bottom: 4px; }
+  .contact-bar { gap: 4px; }
+  .contact-bar a { padding: 8px; }
+  .b-footer { padding-bottom: 96px; }
+}
 

@@ -74,6 +74,54 @@ AUTORES = {
 }
 TIPOS = {"destaque", "paragrafo", "intertitulo", "caixa", "citacao"}
 
+# Ficha técnica (dados estruturados schema.org) — SEO de 04/10/2026.
+# O escritório tem um identificador único (@id) definido na ficha da página inicial; artigos e
+# perfis apontam para ele. As inscrições na OAB são as mesmas de AUTORES[...]["titulo"].
+ESCRITORIO_ID = f"{BASE}/#escritorio"
+LOGO = f"{BASE}/apple-touch-icon.png"
+OABS = {"luiz": ["OAB/PR 55.717", "OAB/SC 78.938-A"], "charys": ["OAB/PR 69.897"],
+        "karla": ["OAB/RS 66.523"], "anderson": ["OAB/PR 96.871"]}
+LIMITE_TITULO = 60       # o Google mostra cerca de 60 caracteres do título
+LIMITE_RESUMO = 160      # e cerca de 160 do resumo (PADRAO-EDITORIAL, seção 10)
+SUFIXO_TITULO = " · Baldissera Advogados"
+
+
+def json_ld(dados: dict) -> str:
+    """Bloco <script type="application/ld+json">; '</' é escapado para não fechar o script."""
+    corpo = json.dumps(dados, ensure_ascii=False, indent=2).replace("</", "<\\/")
+    return f'<script type="application/ld+json">\n{corpo}\n</script>'
+
+
+def pessoa_ref(chave: str) -> dict:
+    """Autor como pessoa: nome, cargo, OAB e o perfil no site (o @id liga à ficha do perfil)."""
+    a = AUTORES[chave]
+    pagina_perfil = f"{BASE}/{a['perfil'][:-5]}"            # perfil-luiz.html -> /perfil-luiz
+    p = {"@type": "Person", "name": a["nome"], "jobTitle": a["titulo"].split(" · ")[0],
+         "identifier": [{"@type": "PropertyValue", "propertyID": o.split(" ")[0], "value": o.split(" ", 1)[1]}
+                        for o in OABS[chave]],
+         "url": pagina_perfil, "worksFor": {"@id": ESCRITORIO_ID}}
+    if a["perfil"].startswith("perfil-"):                   # só quem tem página própria ganha @id
+        p["@id"] = f"{pagina_perfil}#pessoa"
+    return p
+
+
+def ficha_artigo(titulo: str, resumo: str, url: str, data: str, autor: str, imagem: str) -> str:
+    """Ficha técnica de artigo (schema.org Article): título, resumo, data, autor com OAB, imagem."""
+    return json_ld({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": titulo,
+        "description": resumo,
+        "url": url,
+        "mainEntityOfPage": url,
+        "datePublished": data,
+        "inLanguage": "pt-BR",
+        "image": imagem,
+        "author": pessoa_ref(autor),
+        "publisher": {"@type": "LegalService", "@id": ESCRITORIO_ID, "name": "Baldissera Advogados",
+                      "url": BASE, "logo": LOGO},
+    })
+
 # As 7 áreas da lista de publicações (mesma ordem das pílulas de publicacoes.html).
 # Chave = identificador usado em data-area e no #âncora da lista.
 AREAS = {
@@ -173,6 +221,10 @@ def verificar(p: dict) -> list:
             erros.append(f"bloco {i + 1}: tipo inválido '{b.get('tipo')}'")
         elif not (b.get("texto") or "").strip():
             erros.append(f"bloco {i + 1}: sem texto")
+    if p.get("resumo_google") and len(plano(p["resumo_google"])) > LIMITE_RESUMO:
+        erros.append(f"resumo_google tem {len(plano(p['resumo_google']))} caracteres (máximo {LIMITE_RESUMO})")
+    if p.get("titulo_google") and len(plano(p["titulo_google"]) + SUFIXO_TITULO) > LIMITE_TITULO:
+        erros.append(f"titulo_google + '{SUFIXO_TITULO}' passa de {LIMITE_TITULO} caracteres")
     if p.get("imagem") and p["imagem"] is not True and localizar_imagem(p["imagem"]) is None:
         erros.append(f"ilustração não encontrada: {p['imagem']} (procurei em {IMAGENS_DIR})")
     txt = json.dumps(p, ensure_ascii=False)
@@ -301,14 +353,18 @@ def pagina(p: dict) -> str:
     hero_abre = ('<div class="pub-hero-grid" style="max-width:1060px;margin:0 auto;">\n<div class="pub-hero-texto">'
                  if lateral else '<div style="max-width:760px;margin:0 auto;">')
     wa_txt = f"{plano(p['titulo'])}\n\n{plano(p['resumo'])}\n\nAnálise completa:\n{url}\n\n— Baldissera Advogados\nWhatsApp do escritório: https://wa.me/5545991029806"
-    desc = resumo_curto(p["resumo"])
+    # resumo e título para o Google: campo próprio (resumo_google / titulo_google) ou derivado
+    desc = attr(p["resumo_google"]) if p.get("resumo_google") else resumo_curto(p["resumo"])
+    titulo_aba = plano(p.get("titulo_google") or titulo_curto)
+    ficha = ficha_artigo(plano(p["titulo"]), html.unescape(desc), url, p["data"], p["autor"],
+                         f"{BASE}/assets/images/capas/{p['_slug']}-og.png")
 
     return f"""<!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{attr(titulo_curto)} · Baldissera Advogados</title>
+<title>{attr(titulo_aba)}{SUFIXO_TITULO}</title>
 <meta name="description" content="{desc}">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
@@ -333,6 +389,7 @@ def pagina(p: dict) -> str:
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="stylesheet" href="assets/css/style.css">
+{ficha}
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>

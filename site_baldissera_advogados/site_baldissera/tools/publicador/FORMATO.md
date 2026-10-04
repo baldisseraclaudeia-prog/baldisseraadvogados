@@ -32,6 +32,22 @@ Regras que o publicador aplica sozinho:
 - Endereço da página = `publicacao-` + título curto sem acento; se já existir, ganha `-2`, `-3`.
 - Assinatura no fim = iniciais do autor; bloco "Sobre o autor" com os dados da página Advogados.
 
+## Google: título, resumo e ficha técnica (desde 04/10/2026)
+
+Campos opcionais:
+
+```json
+{
+  "titulo_google": "Título da aba e do Google (com ' · Baldissera Advogados', até 60 caracteres)",
+  "resumo_google": "Uma frase para o Google, até 160 caracteres"
+}
+```
+
+- `titulo_google`: sem ele, vale `titulo_curto` (ou o título). Passou de 60 caracteres somando " · Baldissera Advogados", a publicação trava.
+- `resumo_google`: sem ele, o publicador corta o `resumo` em 160 caracteres na última palavra inteira (com reticências). Passou de 160, trava.
+- Toda página sai com a **ficha técnica de artigo** (dados estruturados schema.org `Article`, que buscadores e inteligências artificiais leem): título, resumo, data, imagem, autor com as inscrições na OAB (`publicar.py: OABS`) ligado à ficha do perfil, e o escritório como editor (`ESCRITORIO_ID`, a ficha da página inicial).
+- `seo_existentes.py` aplicou o mesmo às publicações anteriores a 04/10/2026 (e trocou os intertítulos do molde antigo por `h2`).
+
 ## Área e "Tribunais Superiores" (desde 27/09/2026)
 
 - `area` tem de ser uma das 7 da lista do site: **Direito Penal, Tribunais Superiores, Execução Penal, Imobiliário, Civil, Família e Sucessões, Ambiental**. O publicador aceita grafias próximas ("Direito Civil", "Processual Penal", "Recursos aos Tribunais Superiores", "Direito Penal · Lei de Drogas") e as traduz para a oficial; área desconhecida trava a publicação.

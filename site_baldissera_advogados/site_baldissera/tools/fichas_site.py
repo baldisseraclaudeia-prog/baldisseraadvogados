@@ -23,11 +23,10 @@ EMAIL = "contato@baldisseraadvogados.com.br"
 IMAGEM = f"{BASE}/assets/images/og-default.png"
 INSTAGRAM_ESCRITORIO = "https://www.instagram.com/baldisseraadvocacia/"
 
-# CEP conferido na base pública dos Correios (ViaCEP) em 04/10/2026 pelo número do imóvel.
-# [DECIDIR] Cascavel: o timbrado diz 85805-002, que é o lado PAR da rua (bairro Centro);
-#           o nº 1.631 é ímpar e cai em 85807-435 (Recanto Tropical, de 1423 ao fim).
-# Porto Belo: 88211-002, informado pelo Dr. Luiz (04/10/2026) e usado no timbrado; é o CEP geral
-# da cidade. Nos Correios, a avenida no Perequê tem 88211-002 (contrato da sala confirma).
+# CEPs conferidos na base pública dos Correios (ViaCEP) e decididos pelo Dr. Luiz em 04/10/2026;
+# os mesmos do timbrado (LOGO\MODELO_PETICAO_BALDISSERA.docx) e do Perfil da Empresa no Google.
+# Cascavel: 85807-435 (nº 1.631, lado ímpar, Recanto Tropical; o antigo 85805-002 era o lado par).
+# Porto Belo: 88211-002 (a avenida no Perequê; o antigo 88210-000 era o CEP geral da cidade).
 UNIDADES = {
     "cascavel": dict(rua="Av. Pres. Juscelino Kubitschek, 1.631", bairro="Recanto Tropical",
                      cidade="Cascavel", uf="PR", cep="85807-435"),

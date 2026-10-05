@@ -57,7 +57,7 @@ PERFIS = {
 }
 AREAS_ESCRITORIO = ["Direito Penal", "Recursos aos Tribunais Superiores", "Execução Penal",
                     "Direito Imobiliário", "Direito Civil", "Direito de Família e Sucessões",
-                    "Direito Ambiental"]
+                    "Direito Ambiental", "Assessoria em Leilões"]
 
 RE_FICHA = re.compile(r'<script type="application/ld\+json">.*?</script>\n', re.S)
 

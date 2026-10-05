@@ -908,14 +908,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ============================================
-   PÁGINA INICIAL — notícias do STJ (feed oficial,
-   rotina diária noticias_stj.py) · 04/10/2026
+   PÁGINA INICIAL — notícias dos tribunais (STJ, STF, Corte IDH,
+   rotina diária tools/noticias/noticias.py) · 04/10/2026
    ============================================ */
-.stj-noticias {
+.trib-noticias {
   padding: 80px 40px;
   background: var(--ivory-bg);
 }
-.stj-noticias .sec-label {
+.trib-noticias .sec-label {
   text-align: center;
   font-size: 10px;
   letter-spacing: 0.3em;
@@ -924,7 +924,7 @@ a { color: inherit; text-decoration: none; }
   margin: 0 0 14px;
   font-weight: 500;
 }
-.stj-noticias h2 {
+.trib-noticias h2 {
   font-family: var(--serif);
   font-weight: 500;
   font-size: 38px;
@@ -933,7 +933,7 @@ a { color: inherit; text-decoration: none; }
   margin: 0 0 44px;
   letter-spacing: 0.02em;
 }
-.stj-grid {
+.trib-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 28px;
@@ -941,9 +941,9 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
   align-items: start;
 }
-.stj-grid:not(:has(.stj-destaques li)) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
-.stj-destaques:not(:has(li)) { display: none; }
-.stj-grid h3 {
+.trib-grid:not(:has(.trib-destaques li)) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.trib-destaques:not(:has(li)) { display: none; }
+.trib-grid h4 {
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -953,10 +953,10 @@ a { color: inherit; text-decoration: none; }
   padding-bottom: 14px;
   border-bottom: 0.5px solid var(--border-medium);
 }
-.stj-grid ul { list-style: none; margin: 0; padding: 0; }
-.stj-grid li + li { border-top: 0.5px solid var(--border-soft); }
-.stj-grid li a { display: block; padding: 16px 0; }
-.stj-grid time {
+.trib-grid ul { list-style: none; margin: 0; padding: 0; }
+.trib-grid li + li { border-top: 0.5px solid var(--border-soft); }
+.trib-grid li a { display: block; padding: 16px 0; }
+.trib-grid time {
   display: block;
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -974,18 +974,18 @@ a { color: inherit; text-decoration: none; }
 .noticia-titulo { font-size: 18px; }
 .destaque-titulo { font-size: 21px; margin-bottom: 6px; }
 .noticia-titulo::after, .destaque-titulo::after { content: " ↗"; font-family: var(--sans); font-size: 12px; color: var(--gold); }
-.destaque-resumo { display: block; font-size: 13.5px; line-height: 1.65; color: var(--text-muted); }
-.stj-grid li a:hover .noticia-titulo, .stj-grid li a:hover .destaque-titulo { color: var(--gold); }
-.stj-grid li a:focus-visible, .stj-todas:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
-.stj-destaques {
+.destaque-resumo { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; font-size: 13.5px; line-height: 1.65; color: var(--text-muted); }
+.trib-grid li a:hover .noticia-titulo, .trib-grid li a:hover .destaque-titulo { color: var(--gold); }
+.trib-grid li a:focus-visible, .trib-todas:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.trib-destaques {
   background: var(--ivory);
   border: 0.5px solid var(--border-medium);
   border-left: 2px solid var(--gold-brand);
   border-radius: 8px;
   padding: 24px 28px 8px;
 }
-.stj-ultimas { padding-top: 24px; }
-.stj-todas {
+.trib-ultimas { padding-top: 24px; }
+.trib-todas {
   display: inline-block;
   margin-top: 10px;
   padding: 8px 0;
@@ -995,16 +995,16 @@ a { color: inherit; text-decoration: none; }
   color: var(--gold);
   font-weight: 500;
 }
-.stj-todas::after { content: " ↗"; }
-.stj-todas:hover { color: var(--navy); }
+.trib-todas::after { content: " ↗"; }
+.trib-todas:hover { color: var(--navy); }
 @media (max-width: 900px) {
-  .stj-grid { grid-template-columns: minmax(0, 1fr); }
-  .stj-ultimas { padding-top: 0; }
+  .trib-grid { grid-template-columns: minmax(0, 1fr); }
+  .trib-ultimas { padding-top: 0; }
 }
 @media (max-width: 600px) {
-  .stj-noticias { padding: 50px 20px; }
-  .stj-noticias h2 { font-size: 28px; margin-bottom: 30px; }
-  .stj-destaques { padding: 20px 18px 4px; }
+  .trib-noticias { padding: 50px 20px; }
+  .trib-noticias h2 { font-size: 28px; margin-bottom: 30px; }
+  .trib-destaques { padding: 20px 18px 4px; }
   .destaque-titulo { font-size: 19px; }
 }
 
@@ -1026,3 +1026,41 @@ a { color: inherit; text-decoration: none; }
 }
 /* blocos centralizados: justificados, com a última linha centralizada */
 .fontes-intro, .sec-cta p { text-align-last: center; }
+
+/* abas STJ | STF | Corte IDH (assets/js/site.js); sem JavaScript os três painéis aparecem */
+.trib-abas { display: none; }
+.trib-noticias.com-abas .trib-abas {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: -16px auto 36px;
+}
+.trib-abas button {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--ivory-bg);
+  border: 0.5px solid var(--gold-light);
+  border-radius: 40px;
+  padding: 10px 22px;
+  min-height: 40px;
+  cursor: pointer;
+}
+.trib-abas button:hover { border-color: var(--gold); }
+.trib-abas button[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: var(--ivory); }
+.trib-abas button:focus-visible, .trib-painel:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.trib-painel + .trib-painel { margin-top: 56px; }
+.trib-noticias.com-abas .trib-painel + .trib-painel { margin-top: 0; }
+.trib-nome {
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--navy);
+  margin: 0 0 26px;
+}
+.trib-noticias.com-abas .trib-nome { font-size: 20px; color: var(--text-muted); font-style: italic; }
+.trib-painel .fontes-nota { max-width: 760px; margin-left: auto; margin-right: auto; }

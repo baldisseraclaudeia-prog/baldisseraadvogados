@@ -177,24 +177,31 @@
 </div>
 </section>
 
-<!-- NOTÍCIAS DO STJ: tools/noticias/noticias_stj.py reescreve as duas listas (rotina diária) -->
-<section class="stj-noticias" aria-labelledby="titulo-stj">
-<p class="sec-label">superior tribunal de justiça</p>
-<h2 id="titulo-stj">Do STJ.</h2>
-<div class="stj-grid">
-<div class="stj-destaques">
-<h3>Destaques em matéria penal</h3>
+<!-- NOTÍCIAS DOS TRIBUNAIS: tools/noticias/noticias.py reescreve as listas (rotina diária noticias-stj-site) -->
+<section class="trib-noticias" aria-labelledby="titulo-trib">
+<p class="sec-label">notícias dos tribunais</p>
+<h2 id="titulo-trib">Dos tribunais.</h2>
+<div class="trib-abas" role="tablist" aria-label="Escolha o tribunal">
+<button type="button" role="tab" id="aba-stj" aria-controls="painel-stj" aria-selected="true">STJ</button>
+<button type="button" role="tab" id="aba-stf" aria-controls="painel-stf" aria-selected="false" tabindex="-1">STF</button>
+<button type="button" role="tab" id="aba-corteidh" aria-controls="painel-corteidh" aria-selected="false" tabindex="-1">Corte IDH</button>
+</div>
+<div class="trib-painel" id="painel-stj" role="tabpanel" aria-labelledby="aba-stj" tabindex="0">
+<h3 class="trib-nome">Superior Tribunal de Justiça</h3>
+<div class="trib-grid">
+<div class="trib-destaques">
+<h4>Destaques em matéria penal</h4>
 <ul>
-<!-- DESTAQUES-PENAL-INICIO: gerado por noticias_stj.py (não editar à mão) -->
+<!-- DESTAQUES-STJ-INICIO: gerado por tools/noticias/noticias.py (não editar à mão) -->
 <li><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/2026/16092026-Terceira-Secao-fixa-teses-repetitivas-sobre-uso-de-provas-do-inquerito-e-validade-do-testemunho-indireto-na.aspx" target="_blank" rel="noopener"><time datetime="2026-09-16">16/09/2026</time><span class="destaque-titulo">Terceira Seção fixa teses repetitivas sobre uso de provas do inquérito e validade do testemunho indireto na pronúncia</span><span class="destaque-resumo">Colegiado afastou possibilidade de uso indiscriminado de elementos colhidos apenas no inquérito e reforçou limitações para o aproveitamento do testemunho de “ouvir dizer”, mas fez ressalvas sobre situações de intimidação e de atuação de facções criminosas</span><span class="sr-only"> (abre em nova aba, no site do STJ)</span></a></li>
 <li><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/2026/11092026-Quinta-Turma-ve-atuacao-irregular-de-grupo-especializado-do-MPSP-e-manda-trancar-acao-penal.aspx" target="_blank" rel="noopener"><time datetime="2026-09-11">11/09/2026</time><span class="destaque-titulo">Quinta Turma vê atuação irregular de grupo especializado do MPSP e manda trancar ação penal</span><span class="sr-only"> (abre em nova aba, no site do STJ)</span></a></li>
-<!-- DESTAQUES-PENAL-FIM -->
+<!-- DESTAQUES-STJ-FIM -->
 </ul>
 </div>
-<div class="stj-ultimas">
-<h3>Últimas notícias</h3>
+<div class="trib-ultimas">
+<h4>Últimas notícias</h4>
 <ul>
-<!-- NOTICIAS-STJ-INICIO: gerado por noticias_stj.py (não editar à mão) -->
+<!-- NOTICIAS-STJ-INICIO: gerado por tools/noticias/noticias.py (não editar à mão) -->
 <li><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/2026/03102026Nota-do-presidente-do-STJ-e-do-CJF--ministro-Luis-Felipe-Salomao.aspx" target="_blank" rel="noopener"><time datetime="2026-10-03">03/10/2026</time><span class="noticia-titulo">Nota do presidente do STJ e do CJF, ministro Luis Felipe Salomão</span><span class="sr-only"> (abre em nova aba, no site do STJ)</span></a></li>
 <li><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/2026/02102026STJ-deve-adotar-conta-gov-br-como-autenticacao-nos-servicos-digitais-ao-cidadao.aspx" target="_blank" rel="noopener"><time datetime="2026-10-02">02/10/2026</time><span class="noticia-titulo">STJ deve adotar conta gov.br como autenticação nos serviços digitais ao cidadão</span><span class="sr-only"> (abre em nova aba, no site do STJ)</span></a></li>
 <li><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/2026/02102026-Tribunal-regulamenta-sessoes-virtuais-especiais-para-julgar-agravos-da-Presidencia-em-processos-de-direito-privado.aspx" target="_blank" rel="noopener"><time datetime="2026-10-02">02/10/2026</time><span class="noticia-titulo">Tribunal regulamenta sessões virtuais especiais para julgar agravos da Presidência em processos de direito privado</span><span class="sr-only"> (abre em nova aba, no site do STJ)</span></a></li>
@@ -202,10 +209,65 @@
 <li><a href="https://www.stj.jus.br/sites/portalp/Paginas/Comunicacao/Noticias/2026/02102026-Primeira-Turma-mantem-acao-de-improbidade-contra-servidor-apos-reversao-da-demissao-em-PAD.aspx" target="_blank" rel="noopener"><time datetime="2026-10-02">02/10/2026</time><span class="noticia-titulo">Primeira Turma mantém ação de improbidade contra servidor após reversão da demissão em PAD</span><span class="sr-only"> (abre em nova aba, no site do STJ)</span></a></li>
 <!-- NOTICIAS-STJ-FIM -->
 </ul>
-<a class="stj-todas" href="https://www.stj.jus.br/sites/portalp/Inicio" target="_blank" rel="noopener">Portal do STJ<span class="sr-only"> (abre em nova aba)</span></a>
+<a class="trib-todas" href="https://www.stj.jus.br/sites/portalp/Inicio" target="_blank" rel="noopener">Portal do STJ<span class="sr-only"> (abre em nova aba)</span></a>
 </div>
 </div>
-<p class="fontes-nota">Títulos, datas e resumos reproduzidos do portal oficial do STJ, que se abre em nova aba.</p>
+<p class="fontes-nota">Títulos, datas e resumos reproduzidos do portal oficial do STJ.</p>
+</div>
+<div class="trib-painel" id="painel-stf" role="tabpanel" aria-labelledby="aba-stf" tabindex="0">
+<h3 class="trib-nome">Supremo Tribunal Federal</h3>
+<div class="trib-grid">
+<div class="trib-destaques">
+<h4>Destaques em matéria penal</h4>
+<ul>
+<!-- DESTAQUES-STF-INICIO: gerado por tools/noticias/noticias.py (não editar à mão) -->
+<!-- DESTAQUES-STF-FIM -->
+</ul>
+</div>
+<div class="trib-ultimas">
+<h4>Últimas notícias</h4>
+<ul>
+<!-- NOTICIAS-STF-INICIO: gerado por tools/noticias/noticias.py (não editar à mão) -->
+<li><a href="https://noticias.stf.jus.br/postsnoticias/presidente-do-stf-reafirma-importancia-de-eleicoes-livres-transparentes-e-auditaveis/" target="_blank" rel="noopener"><time datetime="2026-10-04">04/10/2026</time><span class="noticia-titulo">Presidente do STF reafirma importância de eleições livres, transparentes e auditáveis</span><span class="sr-only"> (abre em nova aba, no site do STF)</span></a></li>
+<li><a href="https://noticias.stf.jus.br/postsnoticias/ministros-lamentam-falecimento-do-jornalista-marcio-chaer/" target="_blank" rel="noopener"><time datetime="2026-10-03">03/10/2026</time><span class="noticia-titulo">Ministros lamentam falecimento do jornalista Márcio Chaer</span><span class="sr-only"> (abre em nova aba, no site do STF)</span></a></li>
+<li><a href="https://noticias.stf.jus.br/postsnoticias/presidente-do-stf-lamenta-falecimento-do-jornalista-marcio-chaer/" target="_blank" rel="noopener"><time datetime="2026-10-03">03/10/2026</time><span class="noticia-titulo">Presidente do STF lamenta falecimento do jornalista Márcio Chaer</span><span class="sr-only"> (abre em nova aba, no site do STF)</span></a></li>
+<li><a href="https://noticias.stf.jus.br/postsnoticias/julgamento-sobre-aplicacao-do-estatuto-do-idoso-a-planos-de-saude-e-destaque-no-supremo-na-semana/" target="_blank" rel="noopener"><time datetime="2026-10-03">03/10/2026</time><span class="noticia-titulo">Julgamento sobre aplicação do estatuto do idoso a planos de saúde é destaque no Supremo na Semana</span><span class="sr-only"> (abre em nova aba, no site do STF)</span></a></li>
+<li><a href="https://noticias.stf.jus.br/postsnoticias/subvencao-para-tarifa-social-de-energia-nao-pode-ser-tributada-pelo-icms-decide-stf/" target="_blank" rel="noopener"><time datetime="2026-10-02">02/10/2026</time><span class="noticia-titulo">Subvenção para tarifa social de energia não pode ser tributada pelo ICMS, decide STF</span><span class="sr-only"> (abre em nova aba, no site do STF)</span></a></li>
+<!-- NOTICIAS-STF-FIM -->
+</ul>
+<a class="trib-todas" href="https://portal.stf.jus.br/" target="_blank" rel="noopener">Portal do STF<span class="sr-only"> (abre em nova aba)</span></a>
+</div>
+</div>
+<p class="fontes-nota">Títulos, datas e resumos reproduzidos do portal de notícias do STF.</p>
+</div>
+<div class="trib-painel" id="painel-corteidh" role="tabpanel" aria-labelledby="aba-corteidh" tabindex="0">
+<h3 class="trib-nome">Corte Interamericana de Direitos Humanos</h3>
+<div class="trib-grid">
+<div class="trib-destaques">
+<h4>Destaques em matéria penal</h4>
+<ul>
+<!-- DESTAQUES-CORTEIDH-INICIO: gerado por tools/noticias/noticias.py (não editar à mão) -->
+<li><a href="https://www.corteidh.or.cr/docs/comunicados/cp_57_2026_POR.pdf" target="_blank" rel="noopener"><time datetime="2026-08-21">21/08/2026</time><span class="destaque-titulo">A Argentina é responsável pela violação de garantias judiciais em processo penal contra os advogados Carlos Alberto López de Belva e Arturo Jorge Podestá</span><span class="destaque-resumo">Na Sentença do Caso López de Belva e outro Vs. Argentina, notificada hoje, a Corte Interamericana de Direitos Humanos declarou a responsabilidade internacional da República Argentina pela violação dos direitos a ser ouvido por um juiz ou tribunal imparcial, a ser julgado dentro de um prazo razoável e a interrogar as testemunhas presentes no tribunal, em detrimento dos senhores Carlos Alberto López de Belva e Arturo Jorge Podestá, no âmbito de um processo penal instaurado contra eles entre 1991 e 2006.</span><span class="sr-only"> (abre em nova aba, no site do Corte IDH)</span></a></li>
+<li><a href="https://www.corteidh.or.cr/docs/comunicados/cp_52_2026_POR.pdf" target="_blank" rel="noopener"><time datetime="2026-08-13">13/08/2026</time><span class="destaque-titulo">A Nicarágua é responsável pela detenção arbitrária, por tratos cruéis, desumanos e degradantes e pela deportação ilegal de Jason Puracal e por violações à sua família</span><span class="destaque-resumo">Na Sentença do Caso Puracal e outros Vs. Nicarágua, notificada hoje, a Corte Interamericana de Direitos Humanos declarou a responsabilidade internacional do Estado da Nicarágua pela detenção ilegal e arbitrária do senhor Jason Zachary Puracal, bem como pelos tratos cruéis, desumanos e degradantes sofridos durante sua privação de liberdade. Do mesmo modo, em razão das condições de seu encarceramento, declarou que o Estado violou seus direitos à saúde, à água e ao saneamento.</span><span class="sr-only"> (abre em nova aba, no site do Corte IDH)</span></a></li>
+<!-- DESTAQUES-CORTEIDH-FIM -->
+</ul>
+</div>
+<div class="trib-ultimas">
+<h4>Últimas notícias</h4>
+<ul>
+<!-- NOTICIAS-CORTEIDH-INICIO: gerado por tools/noticias/noticias.py (não editar à mão) -->
+<li><a href="https://www.corteidh.or.cr/docs/comunicados/cp_69_2026.pdf" target="_blank" rel="noopener"><time datetime="2026-10-02">02/10/2026</time><span class="noticia-titulo" lang="es">Corte Interamericana realizó audiencias de supervisión de cumplimiento de sentencias en Argentina</span><span class="sr-only"> (abre em nova aba, no site do Corte IDH)</span></a></li>
+<li><a href="https://www.corteidh.or.cr/docs/comunicados/cp_68_2026.pdf" target="_blank" rel="noopener"><time datetime="2026-10-02">02/10/2026</time><span class="noticia-titulo" lang="es">La Corte Interamericana de Derechos Humanos celebrará su 196° Período Ordinario de Sesiones</span><span class="sr-only"> (abre em nova aba, no site do Corte IDH)</span></a></li>
+<li><a href="https://www.corteidh.or.cr/docs/comunicados/cp_67_2026.pdf" target="_blank" rel="noopener"><time datetime="2026-10-01">01/10/2026</time><span class="noticia-titulo" lang="es">Corte Interamericana de Derechos Humanos celebró en Uruguay su 195° Período Ordinario de Sesiones</span><span class="sr-only"> (abre em nova aba, no site do Corte IDH)</span></a></li>
+<li><a href="https://www.corteidh.or.cr/docs/comunicados/cp_66_2026.pdf" target="_blank" rel="noopener"><time datetime="2026-09-30">30/09/2026</time><span class="noticia-titulo" lang="es">Corte Interamericana de Derechos Humanos realizó diligencia probatoria in situ en el Caso Comunidad de Salango vs. Ecuador</span><span class="sr-only"> (abre em nova aba, no site do Corte IDH)</span></a></li>
+<li><a href="https://www.corteidh.or.cr/docs/comunicados/cp_65_2026_POR.pdf" target="_blank" rel="noopener"><time datetime="2026-09-21">21/09/2026</time><span class="noticia-titulo">A Corte Interamericana de Direitos Humanos inaugurou o seu 195° Período Ordinário de Sessões no Uruguai</span><span class="sr-only"> (abre em nova aba, no site do Corte IDH)</span></a></li>
+<!-- NOTICIAS-CORTEIDH-FIM -->
+</ul>
+<a class="trib-todas" href="https://www.corteidh.or.cr/comunicados_prensa.cfm?lang=pt" target="_blank" rel="noopener">Comunicados da Corte IDH<span class="sr-only"> (abre em nova aba)</span></a>
+</div>
+</div>
+<p class="fontes-nota">Títulos, datas e resumos reproduzidos dos comunicados oficiais da Corte IDH; os que não têm versão em português aparecem em espanhol.</p>
+</div>
 </section>
 
 <!-- FONTES OFICIAIS: links conferidos nos portais em 04/10/2026 -->

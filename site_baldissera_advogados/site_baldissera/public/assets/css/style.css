@@ -839,3 +839,190 @@ a { color: inherit; text-decoration: none; }
   .b-footer { padding-bottom: 96px; }
 }
 
+
+/* ============================================
+   PÁGINA INICIAL — fontes oficiais de
+   jurisprudência (STJ, STF, Corte IDH) · 04/10/2026
+   ============================================ */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+.fontes-oficiais h2 { margin-bottom: 18px; }
+.fontes-intro {
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 44px;
+}
+.fontes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.fonte-col {
+  background: var(--ivory-bg);
+  border: 0.5px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 26px 26px 12px;
+}
+.fonte-col h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 1.25;
+  color: var(--navy);
+  margin: 0 0 8px;
+  padding-bottom: 14px;
+  border-bottom: 0.5px solid var(--border-medium);
+}
+.fonte-col ul { list-style: none; margin: 0; padding: 0; }
+.fonte-col li + li { border-top: 0.5px solid var(--border-soft); }
+.fonte-col a { display: block; padding: 14px 0; }
+.fonte-nome {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 3px;
+  transition: color 0.15s;
+}
+.fonte-nome::after { content: " ↗"; color: var(--gold); font-weight: 400; }
+.fonte-desc { display: block; font-size: 13px; line-height: 1.6; color: var(--text-muted); }
+.fonte-col a:hover .fonte-nome { color: var(--gold); }
+.fonte-col a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.fontes-nota {
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 30px 0 0;
+}
+@media (max-width: 900px) {
+  .fontes-grid { grid-template-columns: 1fr; max-width: 560px; }
+}
+
+/* ============================================
+   PÁGINA INICIAL — notícias do STJ (feed oficial,
+   rotina diária noticias_stj.py) · 04/10/2026
+   ============================================ */
+.stj-noticias {
+  padding: 80px 40px;
+  background: var(--ivory-bg);
+}
+.stj-noticias .sec-label {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 14px;
+  font-weight: 500;
+}
+.stj-noticias h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 38px;
+  text-align: center;
+  color: var(--navy);
+  margin: 0 0 44px;
+  letter-spacing: 0.02em;
+}
+.stj-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+.stj-grid:not(:has(.stj-destaques li)) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.stj-destaques:not(:has(li)) { display: none; }
+.stj-grid h3 {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin: 0 0 6px;
+  padding-bottom: 14px;
+  border-bottom: 0.5px solid var(--border-medium);
+}
+.stj-grid ul { list-style: none; margin: 0; padding: 0; }
+.stj-grid li + li { border-top: 0.5px solid var(--border-soft); }
+.stj-grid li a { display: block; padding: 16px 0; }
+.stj-grid time {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+.noticia-titulo, .destaque-titulo {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.3;
+  transition: color 0.15s;
+}
+.noticia-titulo { font-size: 18px; }
+.destaque-titulo { font-size: 21px; margin-bottom: 6px; }
+.noticia-titulo::after, .destaque-titulo::after { content: " ↗"; font-family: var(--sans); font-size: 12px; color: var(--gold); }
+.destaque-resumo { display: block; font-size: 13.5px; line-height: 1.65; color: var(--text-muted); }
+.stj-grid li a:hover .noticia-titulo, .stj-grid li a:hover .destaque-titulo { color: var(--gold); }
+.stj-grid li a:focus-visible, .stj-todas:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 2px; }
+.stj-destaques {
+  background: var(--ivory);
+  border: 0.5px solid var(--border-medium);
+  border-left: 2px solid var(--gold-brand);
+  border-radius: 8px;
+  padding: 24px 28px 8px;
+}
+.stj-ultimas { padding-top: 24px; }
+.stj-todas {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 0;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+.stj-todas::after { content: " ↗"; }
+.stj-todas:hover { color: var(--navy); }
+@media (max-width: 900px) {
+  .stj-grid { grid-template-columns: minmax(0, 1fr); }
+  .stj-ultimas { padding-top: 0; }
+}
+@media (max-width: 600px) {
+  .stj-noticias { padding: 50px 20px; }
+  .stj-noticias h2 { font-size: 28px; margin-bottom: 30px; }
+  .stj-destaques { padding: 20px 18px 4px; }
+  .destaque-titulo { font-size: 19px; }
+}
+
+/* ============================================
+   TEXTO JUSTIFICADO (pedido do Dr. Luiz, 04/10/2026):
+   parágrafos de corpo justificados, com hifenização
+   automática (lang="pt-br") para não abrir buracos no
+   celular; títulos seguem alinhados à esquerda/centro.
+   ============================================ */
+.home-hero .lede,
+.sub-card p,
+.destaque-resumo,
+.fonte-desc,
+.fontes-intro,
+.sec-cta p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+/* blocos centralizados: justificados, com a última linha centralizada */
+.fontes-intro, .sec-cta p { text-align-last: center; }

@@ -21,10 +21,18 @@ Fontes (conferidas em 04/10/2026):
 
     python noticias.py candidatos --fonte stj|stf|corteidh [--dias 7]
     python noticias.py registrar  --fonte stj|stf|corteidh <arquivo.json>
-        arquivo: {"avaliadas":[links], "destaques":[{"link","motivo"}], "ocultar":[links]}
+        arquivo: {"avaliadas":[links], "destaques":[{"link","motivo"}], "ocultar":[links],
+                  "materias": {link: ["direito-penal", "execucao-penal", ...]}}
+        (desde 06/10/2026, "materias" classifica a notícia nas páginas de área; a matéria é
+        decidida pela rotina, que lê o texto — este programa não adivinha por palavra-chave;
+        os destaques penais entram sozinhos na página de Direito Penal)
     python noticias.py atualizar [--push]      # reescreve os quadros dos três; --push põe no ar
 
 A última linha da saída é sempre um JSON {"ok": ...}. Fonte fora do ar = o quadro dela fica como estava.
+
+Visual "liturgia" (06/10/2026): na home, os três tribunais em colunas alinhadas (as 5 últimas de
+cada um) e a hora real da última atualização; os destaques e as notícias classificadas por matéria
+vão para as páginas de área (marcadores NOTICIAS-AREA-INICIO/FIM em public/area-*.html).
 """
 import argparse
 import base64
@@ -46,6 +54,15 @@ NAVEGADOR_PY = Path(r"C:\Users\LuizH\scrapling-mcp\.venv\Scripts\python.exe")
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                     "Chrome/140.0 Safari/537.36 (site Baldissera Advogados; noticias.py)"}
 ULTIMAS, MAX_DESTAQUES = 5, 4
+MAX_AREA = 6
+PUBLIC = HOME.parent
+# matéria (chave) -> página de área; os destaques penais vão para "direito-penal"
+AREAS = {"direito-penal": "area-direito-penal.html", "tribunais-superiores": "area-recursos-tribunais-superiores.html",
+         "execucao-penal": "area-execucao-penal.html", "imobiliario": "area-direito-imobiliario.html",
+         "civil": "area-direito-civil.html", "familia-e-sucessoes": "area-familia-sucessoes.html",
+         "ambiental": "area-direito-ambiental.html", "leiloes": "area-leiloes.html"}
+NOME_TRIBUNAL = {"stj": "Superior Tribunal de Justiça", "stf": "Supremo Tribunal Federal",
+                 "corteidh": "Corte Interamericana de Direitos Humanos"}
 BRASILIA = dt.timezone(dt.timedelta(hours=-3))
 CONTEUDO = "{http://purl.org/rss/1.0/modules/content/}encoded"
 MESES = {"jan": 1, "fev": 2, "feb": 2, "mar": 3, "abr": 4, "apr": 4, "mai": 5, "may": 5, "jun": 6, "jul": 7,
@@ -212,10 +229,24 @@ def registrar(fonte: str, arquivo: str) -> dict:
             vistas.append(i["link"])
         aceitos.append(i["titulo"])
     atuais.sort(key=lambda x: x["quando"], reverse=True)
+    # classificação por matéria (página de área), decidida pela rotina
+    materias = carregar(d / "materias.json", [])
+    por_link = {x["link"]: x for x in materias}
+    classificadas = []
+    for link, areas in (pedido.get("materias") or {}).items():
+        i = feed.get(link)
+        areas = [a for a in (areas or []) if a in AREAS]
+        if not i or not areas:
+            recusados.append(link); continue
+        por_link[link] = {**{k: i[k] for k in ("link", "titulo", "quando", "data", "resumo", "lang")}, "areas": areas,
+                          "classificado_em": dt.datetime.now().isoformat(timespec="minutes")}
+        classificadas.append(i["titulo"])
+    materias = sorted(por_link.values(), key=lambda x: x["quando"], reverse=True)[:300]
+    gravar(d / "materias.json", materias)
     gravar(d / "destaques_penal.json", atuais)
     gravar(d / "avaliadas.json", vistas[-1000:])
     gravar(d / "ocultas.json", ocultas[-500:])
-    return {"ok": True, "fonte": fonte, "destaques_novos": aceitos,
+    return {"ok": True, "fonte": fonte, "destaques_novos": aceitos, "classificadas_por_materia": classificadas,
             "recusados_link_fora_da_fonte_ou_sem_motivo": recusados, "ocultas": len(ocultas)}
 
 
@@ -225,24 +256,65 @@ def _lang(i):
 
 
 def li_ultimas(itens: list, sigla: str) -> str:
+    """Itens de uma coluna da home (data em cima, título com link)."""
     return "\n".join(
-        f'<li><a href="{html.escape(i["link"], quote=True)}" target="_blank" rel="noopener">'
-        f'<time datetime="{i["quando"][:10]}">{i["data"]}</time>'
-        f'<span class="noticia-titulo"{_lang(i)}>{html.escape(i["titulo"])}</span>'
-        f'<span class="sr-only"> (abre em nova aba, no site do {sigla})</span></a></li>'
+        f'<li role="listitem"><time datetime="{i["quando"][:10]}">{i["data"]}</time>'
+        f'<a href="{html.escape(i["link"], quote=True)}" target="_blank" rel="noopener"{_lang(i)}>{html.escape(i["titulo"])}'
+        f'<span class="so-leitor"> (abre em nova aba, no site do {sigla})</span></a></li>'
         for i in itens)
 
 
 def li_destaques(itens: list, sigla: str) -> str:
-    return "\n".join(
-        f'<li><a href="{html.escape(i["link"], quote=True)}" target="_blank" rel="noopener">'
-        f'<time datetime="{i["quando"][:10]}">{i["data"]}</time>'
-        f'<span class="destaque-titulo"{_lang(i)}>{html.escape(i["titulo"])}</span>'
-        # a fonte repete o título quando a notícia não tem resumo: aí o resumo não aparece
-        + (f'<span class="destaque-resumo"{_lang(i)}>{html.escape(i["resumo"])}</span>'
-           if i["resumo"] and i["resumo"] != i["titulo"] else "") +
-        f'<span class="sr-only"> (abre em nova aba, no site do {sigla})</span></a></li>'
-        for i in itens)
+    """Mantido para compatibilidade: a home não tem mais quadro de destaques (vão para as áreas)."""
+    return li_area([{**i, "_fonte": sigla} for i in itens])
+
+
+def li_area(itens: list) -> str:
+    """Decisões e notícias de uma matéria (página de área): data, tribunal, título com link e resumo oficial."""
+    if not itens:
+        return ('<li class="decisao-vazia"><p>Ainda não há decisões ou notícias recentes classificadas nesta matéria. '
+                'As fontes oficiais de jurisprudência estão na seção seguinte.</p></li>')
+    out = []
+    for i in itens:
+        nome = NOME_TRIBUNAL.get(i.get("_fonte"), i.get("_fonte", ""))
+        resumo = (f'\n<p{_lang(i)}>{html.escape(i["resumo"])}</p>' if i.get("resumo") and i["resumo"] != i["titulo"] else "")
+        out.append(f'<li>\n<p class="decisao-meta"><time datetime="{i["quando"][:10]}">{i["data"]}</time> <span>{nome}</span></p>\n'
+                   f'<h3><a href="{html.escape(i["link"], quote=True)}" target="_blank" rel="noopener"{_lang(i)}>{html.escape(i["titulo"])}'
+                   f'<span class="so-leitor"> (abre em nova aba, no site do tribunal)</span></a></h3>{resumo}\n</li>')
+    return "\n".join(out)
+
+
+def itens_por_area() -> dict:
+    """Junta, por matéria, os destaques (penal) e as notícias classificadas pela rotina, dos três tribunais."""
+    por = {k: {} for k in AREAS}
+    for fonte in FONTES:
+        d = pasta(fonte)
+        for x in carregar(d / "destaques_penal.json", []):
+            for area in x.get("areas") or ["direito-penal"]:
+                if area in por:
+                    por[area][x["link"]] = {**x, "_fonte": fonte}
+        for x in carregar(d / "materias.json", []):
+            for area in x.get("areas", []):
+                if area in por:
+                    por[area].setdefault(x["link"], {**x, "_fonte": fonte})
+    return {k: sorted(v.values(), key=lambda i: i["quando"], reverse=True)[:MAX_AREA] for k, v in por.items()}
+
+
+def atualizar_areas() -> list:
+    """Reescreve o bloco NOTICIAS-AREA de cada página de área. Devolve as páginas que mudaram."""
+    mudaram = []
+    for area, itens in itens_por_area().items():
+        pag = PUBLIC / AREAS[area]
+        if not pag.exists():
+            continue
+        s = pag.read_text(encoding="utf-8")
+        if "<!-- NOTICIAS-AREA-INICIO" not in s:
+            continue
+        novo = trocar(s, "NOTICIAS-AREA", li_area(itens))
+        if novo != s:
+            pag.write_text(novo, encoding="utf-8", newline="\n")
+            mudaram.append(pag)
+    return mudaram
 
 
 def trocar(s: str, marca: str, miolo: str) -> str:
@@ -273,22 +345,28 @@ def atualizar(push: bool) -> dict:
                 raise RuntimeError(f"a fonte trouxe só {len(itens)} notícia(s) válida(s)")
             dest = carregar(d / "destaques_penal.json", [])[:MAX_DESTAQUES]
             novo = trocar(novo, f"NOTICIAS-{marca}", li_ultimas(itens[:ULTIMAS], sigla_site[fonte]))
-            novo = trocar(novo, f"DESTAQUES-{marca}", li_destaques(dest, sigla_site[fonte]))
+            if f"<!-- DESTAQUES-{marca}-INICIO" in novo:          # home antiga (antes de 06/10/2026)
+                novo = trocar(novo, f"DESTAQUES-{marca}", li_destaques(dest, sigla_site[fonte]))
             relato[fonte] = {"ultimas": [f"{i['data']} {i['titulo']}" for i in itens[:ULTIMAS]],
                              "destaques": [f"{x['data']} {x['titulo']}" for x in dest]}
         except Exception as e:  # uma fonte fora do ar não derruba as outras
             erros[fonte] = str(e)[:200]
+    if relato and "<!-- ATUALIZADO-INICIO" in novo:
+        agora = dt.datetime.now(BRASILIA)
+        novo = trocar(novo, "ATUALIZADO", f'<time datetime="{agora.isoformat(timespec="minutes")}">{agora.strftime("%d/%m/%Y, às %Hh%M")}</time>')
     mudou = novo != s
     if mudou:
         HOME.write_text(novo, encoding="utf-8", newline="\n")
+    areas_mudadas = atualizar_areas()
     no_ar = False
     estado = [str(p) for p in AQUI.glob("*/*.json")]
-    if push and (mudou or git("status", "--porcelain", "--", *estado)):
-        git("add", "--", str(HOME), *estado)
+    if push and (mudou or areas_mudadas or git("status", "--porcelain", "--", *estado)):
+        git("add", "--", str(HOME), *[str(x) for x in areas_mudadas], *estado)
         git("commit", "-m", f"Notícias dos tribunais na home ({dt.date.today().strftime('%d/%m/%Y')})")
         git("push", "origin", "main")
         no_ar = True
-    return {"ok": not erros or bool(relato), "mudou": mudou, "no_ar": no_ar, "fontes": relato, "erros": erros}
+    return {"ok": not erros or bool(relato), "mudou": mudou, "areas": [x.name for x in areas_mudadas],
+            "no_ar": no_ar, "fontes": relato, "erros": erros}
 
 
 def main():

@@ -33,6 +33,8 @@ MARCADOR = "<!-- NOVAS-PUBLICACOES"
 # Ilustrações geradas pelo diretor de arte (agente baldissera-diretor-arte) ficam FORA do git,
 # na pasta do painel; o publicador as copia (em JPG leve) para o site na hora de gerar.
 IMAGENS_DIR = Path(r"C:\Users\LuizH\OneDrive\Área de Trabalho\SITE BALDISSERA ADVOGADOS\PAINEL-PUBLICACAO\IMAGENS")
+if sys.platform == "darwin":  # Mac: a mesma pasta, pelo OneDrive do Mac
+    IMAGENS_DIR = Path.home() / "Library/CloudStorage/OneDrive-Pessoal/Área de Trabalho/SITE BALDISSERA ADVOGADOS/PAINEL-PUBLICACAO/IMAGENS"
 IMAGENS_SITE = PUB / "assets" / "images" / "publicacoes"
 IMAGEM_LARGURA = 1600
 LATERAL_LARGURA = 800            # capa quadrada ao lado do título (≈400 px na tela, dobro para tela retina)
@@ -298,67 +300,108 @@ def preparar(p: dict) -> dict:
 
 
 # ------------------------------------------------------------------ página da publicação
-def pagina(p: dict) -> str:
-    idx = (PUB / "index.html").read_text(encoding="utf-8")
-    contato = idx[idx.index('<div class="contact-bar">'):idx.index('<header class="b-header">')]
-    cabecalho = idx[idx.index('<header class="b-header">'):idx.index("</header>") + 9]
-    cabecalho = cabecalho.replace('<a href="index.html" class="active">', '<a href="index.html">').replace(
-        '<a href="publicacoes.html">', '<a href="publicacoes.html" class="active">')
-    rodape = idx[idx.index('<footer class="b-footer">'):idx.index("</body>")]
+# Visual "liturgia" (06/10/2026): cabeçalho, rodapé e recursos de <head> vêm de tools/molde.py;
+# a mesma função montar_publicacao() serve à publicação nova (JSON) e ao revestimento das antigas.
+sys.path.insert(0, str(AQUI.parent))
+import molde  # noqa: E402
+
+# página da área de cada chave de área (a trilha da publicação aponta para ela)
+AREA_PAGINA = {"direito-penal": "area-direito-penal.html", "tribunais-superiores": "area-recursos-tribunais-superiores.html",
+               "execucao-penal": "area-execucao-penal.html", "imobiliario": "area-direito-imobiliario.html",
+               "civil": "area-direito-civil.html", "familia-e-sucessoes": "area-familia-sucessoes.html",
+               "ambiental": "area-direito-ambiental.html"}
+NOTA_WA = "A mensagem inclui o resumo, o link para a análise completa e o contato direto do escritório pelo WhatsApp."
+
+
+def corpo_html(blocos: list, iniciais: str) -> str:
+    """Blocos do JSON -> HTML do corpo, só com classes (nenhum style="")."""
+    out = []
+    for b in blocos:
+        t = b["tipo"]
+        if t == "destaque":
+            out.append(f'<p class="destaque">{inline(b["texto"])}</p>')
+        elif t == "paragrafo":
+            out.append(f"<p>{inline(b['texto'])}</p>")
+        elif t == "intertitulo":
+            out.append(f"<h2>{inline(b['texto'])}</h2>")
+        elif t == "caixa":
+            rot = f'<p class="caixa-rotulo">{inline(b["rotulo"])}</p>\n' if b.get("rotulo") else ""
+            tit = f"<h3>{inline(b['titulo'])}</h3>\n" if b.get("titulo") else ""
+            out.append(f'<div class="caixa">\n{rot}{tit}<p>{inline(b["texto"])}</p>\n</div>')
+        elif t == "citacao":
+            fonte = f'<span class="fonte">{inline(b["fonte"])}</span>' if b.get("fonte") else ""
+            out.append(f"<blockquote>{inline(b['texto'])}{fonte}</blockquote>")
+    out.append(f'<p class="assinatura">— {iniciais}</p>')
+    return "\n".join(out)
+
+
+def montar_publicacao(head: str, *, slug: str, titulo_html: str, subtitulo_html: str, area: str, area_slug: str,
+                      mes_ano: str, autor: str, leitura: int, imagem_web, imagem_alt: str, corpo: str,
+                      referencias: list, wa_href: str, bio: str = None) -> str:
+    """Página inteira da publicação no visual novo. `head` é o <head> técnico (preservado);
+    `referencias` = [(nome_html, descricao_html)]; `corpo` já em HTML com classes."""
+    a = AUTORES[autor]
+    area_pag = AREA_PAGINA.get(area_slug, "publicacoes.html")
+    figura = (f'\n  <figure><img src="{imagem_web}" alt="{html.escape(imagem_alt, quote=True)}" width="800" height="800" '
+              f'fetchpriority="high" decoding="async"></figure>' if imagem_web else "")
+    sem_fig = "" if imagem_web else " sem-figura"
+    refs = ""
+    if referencias:
+        itens = "\n".join(f'<li><span class="ref-nome">{n}</span><span class="ref-desc">{dsc}</span></li>' for n, dsc in referencias)
+        refs = f'\n<section class="referencias" aria-labelledby="t-refs">\n<h2 id="t-refs">Normas e julgados citados</h2>\n<ul>\n{itens}\n</ul>\n</section>'
+    bio = bio if bio is not None else html.escape(a["bio"])     # a publicação revestida mantém a biografia que tinha
+    bio = f'\n    <p class="bio">{bio}</p>' if bio else ""
+    sobre = "Sobre a autora" if autor in ("charys", "karla") else "Sobre o autor"
+    redes = " e ".join(f'<a href="{u}" target="_blank" rel="noopener">@{n}</a>' for n, u in INSTAGRAM)
+    corpo_pag = f"""<p class="trilha"><a href="publicacoes.html">Publicações</a> / <a href="{area_pag}">{html.escape(area)}</a></p>
+
+<article>
+<header class="cabeca-pub{sem_fig}">
+  <div>
+    <p class="meta">{html.escape(area)}, {mes_ano.lower()}</p>
+    <h1>{titulo_html}</h1>
+    <p class="autoria">Por <a href="{a['perfil']}">{html.escape(a['nome'])}</a>, {html.escape(a['titulo'])}. Leitura de {leitura} {"minuto" if leitura == 1 else "minutos"}.</p>
+  </div>{figura}
+</header>
+
+<p class="ementa"><span class="rotulo">Ementa</span>{subtitulo_html}</p>
+
+<div class="corpo">
+{corpo}
+</div>
+{refs}
+
+<section class="autor-bloco" aria-label="{sobre}">
+  <img src="{a['foto']}" alt="{html.escape(a['nome'])}" width="600" height="750" loading="lazy">
+  <div>
+    <p class="rotulo">{sobre}</p>
+    <h2>{html.escape(a['nome'])}</h2>
+    <p class="cargo">{html.escape(a['titulo'])}</p>{bio}
+    <a class="remissao" href="{a['perfil']}">Ver perfil</a>
+  </div>
+</section>
+
+<aside class="compartilhar" aria-label="Compartilhar">
+  <p class="rotulo">Achou útil? Encaminhe a colegas e clientes</p>
+  <a class="botao" href="{wa_href}" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+  <p class="nota">{NOTA_WA}</p>
+  <p class="redes">No Instagram: {redes}</p>
+</aside>
+
+<p class="mais-publicacoes"><a class="remissao" href="publicacoes.html">Todas as publicações</a></p>
+</article>"""
+    return molde.pagina(head, corpo_pag, atual="Publicações")
+
+
+def head_publicacao(p: dict) -> str:
+    """<head> técnico da publicação nova (título, resumo, og, ficha de artigo)."""
     a = p["_autor"]
     url = f"{BASE}/{p['_slug']}"
     titulo_curto = plano(p.get("titulo_curto") or p["titulo"])
-
-    corpo = []
-    for b in p["corpo"]:
-        t = b["tipo"]
-        if t == "destaque":
-            corpo.append(f'<p style="font-family:var(--serif);font-size:24px;line-height:1.55;color:var(--navy);margin:0 0 32px;font-style:italic;border-left:2px solid var(--gold);padding-left:24px;">{inline(b["texto"])}</p>')
-        elif t == "paragrafo":
-            corpo.append(f'<p style="margin:0 0 22px;">{inline(b["texto"])}</p>')
-        elif t == "intertitulo":
-            corpo.append(f'<h2 style="font-family:var(--serif);font-weight:500;font-size:30px;color:var(--navy);margin:50px 0 22px;letter-spacing:.005em;line-height:1.3;">{inline(b["texto"])}</h2>')
-        elif t == "caixa":
-            rot = f'<p style="font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold);font-size:18px;margin:0 0 6px;letter-spacing:.04em;">{inline(b["rotulo"])}</p>\n' if b.get("rotulo") else ""
-            tit = f'<h3 style="font-family:var(--serif);font-weight:500;font-size:24px;color:var(--navy);margin:0 0 14px;letter-spacing:.005em;line-height:1.25;">{inline(b["titulo"])}</h3>\n' if b.get("titulo") else ""
-            corpo.append(f'<div style="background:var(--ivory);border-left:3px solid var(--gold);padding:30px 32px;margin:30px 0 22px;">\n{rot}{tit}<p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin:0;">{inline(b["texto"])}</p>\n</div>')
-        elif t == "citacao":
-            fonte = f'<span style="display:block;margin-top:10px;font-style:normal;font-family:var(--sans);font-size:12px;letter-spacing:.04em;color:var(--text-muted);">{inline(b["fonte"])}</span>' if b.get("fonte") else ""
-            corpo.append(f'<blockquote style="margin:30px 0;padding:22px 26px;background:var(--ivory);border-left:2px solid var(--navy);font-style:italic;font-size:15px;line-height:1.75;color:var(--text-soft);">{inline(b["texto"])}{fonte}</blockquote>')
-    corpo.append(f'<p style="font-family:var(--serif);font-style:italic;color:var(--gold);font-size:15px;margin:50px 0 0;letter-spacing:.04em;text-align:right;">— {a["iniciais"]}</p>')
-
-    refs = ""
-    if p.get("referencias"):
-        itens = "\n".join(
-            f'<div style="background:var(--ivory-bg);border:0.5px solid var(--border-medium);border-radius:6px;padding:18px 22px;">\n'
-            f'<p style="font-family:var(--serif);font-weight:500;font-size:16px;color:var(--navy);margin:0 0 6px;letter-spacing:.005em;">{inline(r.get("nome", ""))}</p>\n'
-            f'<p style="font-size:13px;line-height:1.65;color:var(--text-muted);margin:0;">{inline(r.get("descricao", ""))}</p>\n</div>'
-            for r in p["referencias"])
-        refs = f"""
-<!-- REFERÊNCIAS -->
-<section style="padding:60px 40px;background:var(--ivory);border-top:0.5px solid var(--border-soft);border-bottom:0.5px solid var(--border-soft);">
-<div style="max-width:680px;margin:0 auto;">
-<p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px;">referências</p>
-<h2 style="font-family:var(--serif);font-weight:500;font-size:26px;color:var(--navy);margin:0 0 26px;letter-spacing:.01em;">Normas e julgados citados.</h2>
-<div style="display:grid;grid-template-columns:1fr;gap:14px;">
-{itens}
-</div>
-</div>
-</section>
-"""
-    bio = f'<p style="font-size:13px;line-height:1.7;color:var(--text-muted);margin:0 0 12px;">{html.escape(a["bio"])}</p>\n' if a["bio"] else ""
-    lateral = bool(p.get("_imagem_web"))
-    figura = (f'\n</div>\n<figure class="pub-fig lateral"><img src="{p["_imagem_web"]}" alt="{attr("Capa da publicação: " + p["_imagem_alt"])}" width="800" height="800" fetchpriority="high" decoding="async"></figure>'
-              if lateral else "")
-    hero_abre = ('<div class="pub-hero-grid" style="max-width:1060px;margin:0 auto;">\n<div class="pub-hero-texto">'
-                 if lateral else '<div style="max-width:760px;margin:0 auto;">')
-    wa_txt = f"{plano(p['titulo'])}\n\n{plano(p['resumo'])}\n\nAnálise completa:\n{url}\n\n— Baldissera Advogados\nWhatsApp do escritório: https://wa.me/5545991029806"
-    # resumo e título para o Google: campo próprio (resumo_google / titulo_google) ou derivado
     desc = attr(p["resumo_google"]) if p.get("resumo_google") else resumo_curto(p["resumo"])
     titulo_aba = plano(p.get("titulo_google") or titulo_curto)
     ficha = ficha_artigo(plano(p["titulo"]), html.unescape(desc), url, p["data"], p["autor"],
                          f"{BASE}/assets/images/capas/{p['_slug']}-og.png")
-
     return f"""<!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -382,82 +425,25 @@ def pagina(p: dict) -> str:
 <meta name="twitter:title" content="{attr(titulo_curto)} · Baldissera Advogados">
 <meta name="twitter:description" content="{desc}">
 <meta name="twitter:image" content="{BASE}/assets/images/capas/{p['_slug']}-og.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/style.css">
 {ficha}
 <script defer src="/_vercel/insights/script.js"></script>
-</head>
-<body>
-
-{contato}{cabecalho}
-
-<div class="breadcrumb"><a href="publicacoes.html">Publicações</a><span class="sep">/</span><span class="current">{inline(titulo_curto)}</span></div>
-
-<!-- HERO DA PUBLICAÇÃO -->
-<section style="padding:60px 40px 40px;background:var(--ivory-bg);">
-{hero_abre}
-<p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:18px;">PUBLICAÇÃO · {html.escape(p['area'])} · {p['_mes_ano']}</p>
-<h1 style="font-family:var(--serif);font-weight:500;font-size:48px;line-height:1.15;letter-spacing:.005em;color:var(--navy);margin:0 0 22px;">{inline(p['titulo'])}</h1>
-<p style="font-family:var(--serif);font-style:italic;font-size:21px;color:var(--gold-soft);line-height:1.5;margin:0 0 30px;letter-spacing:.005em;">{inline(p['subtitulo'])}</p>
-<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;font-size:12px;color:var(--text-muted);padding:18px 0;border-top:0.5px solid var(--border-medium);border-bottom:0.5px solid var(--border-medium);">
-<span style="color:var(--gold);font-family:var(--serif);font-style:italic;font-size:14px;">por</span>
-<span style="font-family:var(--serif);font-weight:500;font-size:15px;color:var(--navy);">{html.escape(a['nome'])}</span>
-<span style="color:var(--gold-light);">·</span>
-<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;">{html.escape(a['titulo'])}</span>
-<span style="color:var(--gold-light);">·</span>
-<span style="font-size:11px;letter-spacing:.04em;color:var(--text-light);">leitura: {p['_leitura']} min</span>
-</div>{figura}
-</div>
-</section>
-
-<!-- CORPO DO ARTIGO -->
-<section style="padding:50px 40px 40px;background:var(--ivory-bg);">
-<div style="max-width:680px;margin:0 auto;font-size:16px;line-height:1.85;color:var(--text-soft);">
-
-{chr(10).join(corpo)}
-
-</div>
-</section>
-{refs}
-<!-- BLOCO AUTOR -->
-<section style="padding:70px 40px;background:var(--ivory-bg);">
-<div style="max-width:680px;margin:0 auto;background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:34px 36px;display:grid;grid-template-columns:90px 1fr;gap:28px;align-items:start;">
-<div style="padding:6px;background:var(--ivory-bg);border:0.5px solid var(--gold-light);">
-<img src="{a['foto']}" alt="{html.escape(a['nome'])}" style="width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;display:block;">
-</div>
-<div>
-<p style="font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:500;margin:0 0 6px;">SOBRE {'A AUTORA' if p['autor'] in ('charys', 'karla') else 'O AUTOR'}</p>
-<h3 style="font-family:var(--serif);font-weight:500;font-size:22px;color:var(--navy);margin:0 0 8px;letter-spacing:.01em;">{html.escape(a['nome'])}</h3>
-<p style="font-family:var(--serif);font-style:italic;font-size:13px;color:var(--gold);margin:0 0 12px;">{html.escape(a['titulo'])}</p>
-{bio}<a href="{a['perfil']}" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:500;">Ver perfil →</a>
-</div>
-</div>
-</section>
-
-<!-- NAVEGAÇÃO -->
-<section style="padding:50px 40px 70px;background:var(--ivory);border-top:0.5px solid var(--border-soft);">
-<div style="max-width:800px;margin:0 auto;text-align:center;">
-<a href="publicacoes.html" style="display:inline-block;background:var(--ivory-bg);border:0.5px solid var(--border-medium);border-radius:8px;padding:24px 40px;text-decoration:none;">
-<p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 6px;">ver todas →</p>
-<h4 style="font-family:var(--serif);font-weight:500;font-size:18px;color:var(--navy);margin:0;letter-spacing:.005em;">Publicações</h4>
-</a>
-</div>
-</section>
-
-<aside class="share-wa" style="max-width:760px;margin:48px auto 32px;padding:32px 24px 28px;border-top:0.5px solid var(--border-medium,#d8d3c5);border-bottom:0.5px solid var(--border-medium,#d8d3c5);text-align:center;">
-<p style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold,#b08a3e);margin:0 0 16px;font-weight:500;">Achou útil? Encaminhe a colegas e clientes</p>
-<a href="https://wa.me/?text={quote(wa_txt, safe='')}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:32px;font-family:-apple-system,'Segoe UI',sans-serif;font-size:14px;font-weight:500;letter-spacing:.03em;line-height:1;box-shadow:0 2px 6px rgba(37,211,102,0.18);">Compartilhar no WhatsApp</a>
-<p style="font-size:12px;color:var(--text-muted,#7a7468);margin:16px 0 0;font-style:italic;font-family:var(--serif,'Cormorant Garamond',Georgia,serif);line-height:1.45;">A mensagem inclui o resumo, o link para a análise completa e o contato direto do escritório pelo WhatsApp.</p>
-{instagram_html()}
-</aside>
-{rodape}</body>
-</html>
 """
+
+
+def link_whatsapp(p: dict) -> str:
+    url = f"{BASE}/{p['_slug']}"
+    wa_txt = f"{plano(p['titulo'])}\n\n{plano(p['resumo'])}\n\nAnálise completa:\n{url}\n\n— Baldissera Advogados\nWhatsApp do escritório: https://wa.me/5545991029806"
+    return f"https://wa.me/?text={quote(wa_txt, safe='')}"
+
+
+def pagina(p: dict) -> str:
+    return montar_publicacao(
+        head_publicacao(p), slug=p["_slug"], titulo_html=inline(p["titulo"]), subtitulo_html=inline(p["subtitulo"]),
+        area=p["area"], area_slug=p["_area_slug"], mes_ano=p["_mes_ano"], autor=p["autor"], leitura=p["_leitura"],
+        imagem_web=p.get("_imagem_web"), imagem_alt="Capa da publicação: " + p["_imagem_alt"],
+        corpo=corpo_html(p["corpo"], p["_autor"]["iniciais"]),
+        referencias=[(inline(r.get("nome", "")), inline(r.get("descricao", ""))) for r in p.get("referencias") or []],
+        wa_href=link_whatsapp(p))
 
 
 # ------------------------------------------------------------------ cartão e sitemap
@@ -468,37 +454,17 @@ def capa_do_cartao(slug: str, titulo: str) -> str:
 
 
 def cartao(p: dict) -> str:
-    html_ = cartao_texto(p)
-    if not p.get("_imagem_web"):
-        return html_
-    # cartão com capa: texto à esquerda, capa quadrada à direita
-    abre = html_.index(">") + 1
-    fecha = html_.rindex("</a>")
-    return (html_[:abre].replace('class="pub-card"', 'class="pub-card com-capa"', 1) + '\n<div class="pub-card-texto">'
-            + html_[abre:fecha] + "</div>\n" + capa_do_cartao(p["_slug"], plano(p["titulo"])) + "\n" + html_[fecha:])
-
-
-def cartao_texto(p: dict) -> str:
+    """Cartão da lista de publicações (visual "liturgia"). Os atributos data-* alimentam o filtro
+    de publicacoes.html, o bloco da home (home_recentes.py) e as páginas de área (area_recentes.py)."""
     a = p["_autor"]
-    return f"""<a href="{p['_slug']}.html" class="pub-card" data-area="{p['_area_slug']}" data-superior="{1 if p['_superior'] else 0}" data-data="{p['data']}" style="background:var(--ivory);border:0.5px solid var(--gold-light);border-radius:8px;padding:36px 38px;display:block;text-decoration:none;transition:border-color 0.2s;">
-<div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
-<span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">{html.escape(p['area'])}</span>
-<span style="color:var(--gold-light);font-family:var(--serif);">·</span>
-<span style="font-size:11px;letter-spacing:.06em;color:var(--text-light);font-style:italic;font-family:var(--serif);">{p['_mes_card']}</span>
-</div>
-<h3 style="font-family:var(--serif);font-weight:500;font-size:30px;color:var(--navy);margin:0 0 14px;letter-spacing:.005em;line-height:1.25;">{inline(p['titulo'])}</h3>
-<p style="font-family:var(--serif);font-style:italic;font-size:17px;color:var(--gold-soft);margin:0 0 20px;line-height:1.55;letter-spacing:.005em;">{inline(p['subtitulo'])}</p>
-<p style="font-size:13.5px;line-height:1.75;color:var(--text-muted);margin:0 0 24px;">{inline(p['resumo'])}</p>
-<div style="display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:0.5px solid var(--border-medium);">
-<div style="display:flex;align-items:center;gap:10px;">
-<span style="font-family:var(--serif);font-style:italic;color:var(--gold);font-size:13px;">por</span>
-<span style="font-family:var(--serif);font-weight:500;font-size:14px;color:var(--navy);">{html.escape(a['nome'])}</span>
-<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);">· {html.escape(a['oab_card'])}</span>
-</div>
-<span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:500;">Ler →</span>
-</div>
-</a>
-"""
+    capa = (f'<img class="pub-card-capa" src="{p["_imagem_web"]}" alt="" width="800" height="800" loading="lazy" decoding="async">\n'
+            if p.get("_imagem_web") else "")
+    return (f'<a href="{p["_slug"]}.html" class="pub-card" data-area="{p["_area_slug"]}" data-superior="{1 if p["_superior"] else 0}" data-data="{p["data"]}">\n'
+            f'{capa}<span class="pub-meta">{html.escape(p["area"])}, {p["_mes_ano"].lower()}</span>\n'
+            f'<h3>{inline(p["titulo"])}</h3>\n'
+            f'<p class="pub-resumo">{inline(p["resumo"])}</p>\n'
+            f'<span class="pub-autor">{html.escape(a["nome"])}</span>\n'
+            f'</a>\n')
 
 
 def encaixar(p: dict):
@@ -509,8 +475,8 @@ def encaixar(p: dict):
     i = s.index(MARCADOR)
     i = s.index("\n", i) + 1
     lista.write_text(s[:i] + cartao(p) + s[i:], encoding="utf-8", newline="\n")
-    import home_recentes  # as 3 mais recentes também aparecem na página inicial
-    home_recentes.atualizar(PUB)
+    import vitrines  # manchete e "Você sabia?" da home, publicações por área e índice da busca
+    p["_vitrines"] = [str(f) for f in vitrines.atualizar_tudo(PUB)]
     sm = PUB / "sitemap.xml"
     t = sm.read_text(encoding="utf-8")
     loc = f"{BASE}/{p['_slug']}"
@@ -587,7 +553,8 @@ def main():
     saida = {"ok": True, "no_ar": False, "url": url, "arquivo": p["_slug"] + ".html",
              "imagem": extras[0] if extras else None, "capas": capas}
     if a.acao == "publicar":
-        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "index.html"), str(PUB / "sitemap.xml"), *extras, *capas)
+        git("add", "--", str(PUB / f"{p['_slug']}.html"), str(PUB / "publicacoes.html"), str(PUB / "index.html"), str(PUB / "sitemap.xml"),
+            *p.get("_vitrines", []), *extras, *capas)
         git("commit", "-m", f"Publicação: {plano(p.get('titulo_curto') or p['titulo'])} ({p['_autor']['nome']})")
         if a.push:
             git("push", "origin", a.ramo)

@@ -55,7 +55,7 @@ Toda publicação segue **a mesma estrutura HTML** (ver `TEMPLATE.html`). Não i
 
 ## 4. Tom e voz
 
-- **Pessoa narrativa**: terceira pessoa institucional ("o defensor", "a defesa", "o Estado") **com** uso pontual de primeira pessoa autoral ("vinte e poucos anos de prática criminal me ensinaram que…"). A primeira pessoa é admitida quando o autor reflete ou compartilha experiência prática genérica — **nunca** para narrar caso concreto que conduziu.
+- **Pessoa narrativa**: terceira pessoa institucional ("o defensor", "a defesa", "o Estado") **com** uso pontual de primeira pessoa autoral ("dezesseis anos de prática criminal me ensinaram que…"; o tempo de atuação é 16 anos, ordem do Dr. Luiz de 04/10/2026). A primeira pessoa é admitida quando o autor reflete ou compartilha experiência prática genérica — **nunca** para narrar caso concreto que conduziu.
 - **Cadência**: alternar frases longas e curtas. Frases curtas para pontuar (ex.: "A pergunta que importa é simples."). Frases longas para análise dogmática.
 - **Vocabulário técnico**: preciso, sem pedantismo. Latim e termos estrangeiros em itálico (`<em>habeas corpus</em>`, `<em>distinguishing</em>`, `<em>UFDR</em>`, `<em>mesmidade</em>`).
 - **Recursos retóricos admitidos**: aforismo de abertura e fechamento (mesma frase reaparece com variação no final), pull quote inicial, perguntas retóricas curtas, paralelismos, anáforas pontuais.

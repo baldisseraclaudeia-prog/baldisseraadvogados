@@ -18,14 +18,29 @@ Uso:
   python capa.py <publicacao.json> [--formatos og,quadrado,vertical] [--saida DIR] [--imagem ARQ.png]
 Sem --saida grava em public/assets/images/capas/<slug>-<formato>.png
 """
-import argparse, html, json, re, subprocess, sys, tempfile, unicodedata
+import argparse, html, json, os, re, subprocess, sys, tempfile, time, unicodedata
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 sys.path.insert(0, str(AQUI))
 import publicar as P  # reaproveita autores, slug, datas e a localização da ilustração
 
-EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+NAVEGADORES = [
+    r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",            # Windows (Edge)
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",                # Mac (Chrome)
+    "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",              # Mac (Edge)
+]
+
+
+def navegador() -> str:
+    """Navegador invisível que fotografa a capa: o primeiro instalado da lista (a variável NAVEGADOR_CAPA manda)."""
+    for n in [os.environ.get("NAVEGADOR_CAPA")] + NAVEGADORES:
+        if n and Path(n).exists():
+            return n
+    raise SystemExit("nenhum navegador para gerar a capa (instale o Chrome ou o Edge, ou defina NAVEGADOR_CAPA)")
+
+
+EDGE = navegador()  # nome mantido: carrossel.py e outros scripts usam capa.EDGE
 FORMATOS = {"og": (1200, 630), "quadrado": (1080, 1080), "vertical": (1080, 1350)}
 MARCA_SVG = P.PUB / "assets" / "images" / "marca" / "baldissera-advogados-escuro.svg"
 
@@ -146,14 +161,44 @@ def gerar(p: dict, formatos, saida: Path) -> list:
             src = Path(tmp) / f"{f}.html"
             src.write_text(html_capa(p, w, h), encoding="utf-8")
             out = saida / f"{p['_slug']}-{f}.png"
-            subprocess.run([EDGE, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files",
-                            f"--user-data-dir={Path(tmp) / 'perfil'}", "--virtual-time-budget=8000",
-                            f"--window-size={w},{h}", f"--screenshot={out}", src.as_uri()],
-                           capture_output=True, timeout=120)
-            if not out.exists():
-                raise SystemExit(f"não consegui gerar a capa {f}")
+            fotografar(src, out, w, h, Path(tmp) / "perfil")
             feitos.append(str(out))
     return feitos
+
+
+def fotografar(src: Path, out: Path, w: int, h: int, perfil: Path, limite: int = 120) -> None:
+    """Abre o HTML no navegador invisível e grava o PNG.
+
+    No Windows o Edge se fecha sozinho depois da foto. No Mac o Chrome grava o PNG em
+    segundos mas continua aberto: espera-se o arquivo ficar pronto (tamanho estável) e
+    fecha-se o navegador aqui.
+    """
+    out.unlink(missing_ok=True)
+    proc = subprocess.Popen([EDGE, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files",
+                             "--no-first-run", "--no-default-browser-check",
+                             f"--user-data-dir={perfil}", "--virtual-time-budget=8000",
+                             f"--window-size={w},{h}", f"--screenshot={out}", src.as_uri()],
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    inicio, tamanho = time.time(), -1
+    try:
+        while time.time() - inicio < limite:
+            if proc.poll() is not None:
+                break
+            if out.exists():
+                atual = out.stat().st_size
+                if atual > 0 and atual == tamanho:
+                    break
+                tamanho = atual
+            time.sleep(0.5)
+    finally:
+        if proc.poll() is None:
+            proc.terminate()
+            try:
+                proc.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+    if not out.exists() or out.stat().st_size == 0:
+        raise SystemExit(f"não consegui gerar {out.name}")
 
 
 def main():

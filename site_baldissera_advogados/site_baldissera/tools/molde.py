@@ -26,7 +26,7 @@ WHATSAPP = "https://wa.me/5545991029806"
 EMAIL = "contato@baldisseraadvogados.com.br"
 TELEFONE = ("+5545991029806", "+55 45 99102-9806")
 
-NAV = [("Escritório", "index.html"), ("Atuação", "areas-de-atuacao.html"), ("Advogados", "advogados.html"),
+NAV = [("Escritório", "sobre.html"), ("Atuação", "areas-de-atuacao.html"), ("Advogados", "advogados.html"),
        ("Publicações", "publicacoes.html"), ("Contato", "contato.html"), ("Agendar atendimento", "agendar.html")]
 
 UNIDADES = [("Cascavel", "Paraná", "cascavel"), ("Porto Alegre", "Rio Grande do Sul", "porto-alegre"),

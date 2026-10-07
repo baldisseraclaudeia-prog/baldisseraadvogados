@@ -640,3 +640,62 @@ form textarea {
 form textarea:focus-visible { outline: 2px solid var(--toga); outline-offset: 1px; border-color: var(--toga); }
 .unidades-cartoes p + p { margin-top: 0.6rem; }
 .canais li { overflow-wrap: anywhere; }
+
+/* ---------- símbolo do WhatsApp (barra superior e botões) ---------- */
+.ico-whats { display: inline-block; width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 0.4em; fill: currentColor; }
+.barra-topo .ico-whats { fill: #25D366; }
+.botao .ico-whats { width: 1.15em; height: 1.15em; }
+
+/* ---------- página do escritório (sobre.html): o mapa da casa ---------- */
+.mapa-abertura {
+  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 2rem 4rem; align-items: center;
+  margin: 1.5rem 0 0; padding: 3rem 3.5rem 2.5rem; background: var(--toga); color: #F5F1E8;
+  border-top: 4px double var(--ouro); border-bottom: 4px double var(--ouro);
+}
+.mapa-texto h1 { margin: 0; font: 500 var(--t-7)/1.05 var(--titulo); color: #F5F1E8; text-wrap: balance; }
+.mapa-texto .fundacao { margin: 1rem 0 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(155,123,58,.55); font: italic 500 var(--t-3)/1.3 var(--titulo); color: #C9B98A; }
+.mapa-texto p { margin: 0 0 1rem; max-width: 27rem; color: #D9D3C4; text-wrap: pretty; }
+.mapa-texto .fonte-mapa { margin: 1.75rem 0 0; font-size: var(--t-0); color: #8E8878; }
+.mapa-sul { display: block; width: 100%; height: auto; max-height: 36rem; overflow: visible; }
+.mapa-sul .uf { fill: rgba(247,243,234,.04); stroke: var(--ouro); stroke-width: 1.1; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.mapa-sul .cidade circle { fill: #F5F1E8; stroke: var(--ouro); stroke-width: 2; }
+.mapa-sul .cidade text { font: 400 15px/1 var(--texto); fill: #E7E1D2; letter-spacing: 0.03em; paint-order: stroke; stroke: var(--toga); stroke-width: 4px; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) {
+  .mapa-sul .uf { stroke-dasharray: 1; stroke-dashoffset: 1; animation: tracar 2.4s cubic-bezier(.4,0,.2,1) .2s forwards; }
+  .mapa-sul .cidade { opacity: 0; animation: surgir .8s ease-out 2.2s forwards; }
+  @keyframes tracar { to { stroke-dashoffset: 0; } }
+  @keyframes surgir { to { opacity: 1; } }
+}
+
+.leitura { max-width: var(--medida); margin: 0 auto; padding: 3.25rem 0 0.5rem; }
+.leitura section { padding: 0 0 2.75rem; }
+.leitura h2 { margin: 0 0 1.4rem; font: 500 var(--t-5)/1.1 var(--titulo); color: var(--toga); }
+.leitura p { margin: 0 0 1rem; text-align: justify; hyphens: auto; }
+.leitura p.capitular::first-letter {
+  float: left; font: 500 4.9rem/0.78 var(--titulo); color: var(--ouro-texto);
+  padding: 0.35rem 0.55rem 0 0; margin-bottom: -0.2rem;
+}
+
+.remissoes-casa { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 4rem; max-width: 54rem; margin: 0 auto; padding: 2.5rem 0 1rem; border-top: 1px solid var(--linha); }
+.remissoes-casa h2 { margin: 0 0 0.7rem; font: 500 var(--t-4)/1.15 var(--titulo); color: var(--toga); }
+.remissoes-casa p { margin: 0 0 0.8rem; font-size: var(--t-1); color: var(--tinta-2); line-height: 1.6; }
+.remissoes-casa .remissao { font-size: var(--t-1); color: var(--toga); }
+
+.colofon { max-width: 38rem; margin: 2.5rem auto 4.5rem; padding-top: 2rem; border-top: 3px double var(--ouro); text-align: center; }
+.colofon h2 { margin: 0 0 1.25rem; font: 500 var(--t-4)/1.1 var(--titulo); color: var(--toga); }
+.colofon p { margin: 0 0 0.45rem; font-size: var(--t-1); line-height: 1.6; }
+.colofon .nome-sociedade { font: 600 var(--t-3)/1.2 var(--titulo); color: var(--toga); }
+.colofon .colofon-aviso { margin-top: 1.25rem; font-size: var(--t-0); color: var(--tinta-2); font-style: italic; }
+
+@media (max-width: 960px) {
+  .mapa-abertura { grid-template-columns: 1fr; padding: 2.5rem 2rem 2rem; }
+  .mapa-sul { max-height: 28rem; margin: 0 auto; }
+}
+@media (max-width: 560px) {
+  .mapa-abertura { padding: 2rem 1.25rem 1.5rem; }
+  .mapa-texto h1 { font-size: var(--t-6); }
+  .mapa-sul .cidade text { font-size: 20px; }
+  .remissoes-casa { grid-template-columns: 1fr; }
+  .leitura p.capitular::first-letter { font-size: 3.8rem; }
+}
+

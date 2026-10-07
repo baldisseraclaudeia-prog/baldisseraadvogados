@@ -645,6 +645,7 @@ form textarea:focus-visible { outline: 2px solid var(--toga); outline-offset: 1p
 .ico-whats { display: inline-block; width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 0.4em; fill: currentColor; }
 .barra-topo .ico-whats { fill: #25D366; }
 .botao .ico-whats { width: 1.15em; height: 1.15em; }
+.ico-insta { display: inline-block; width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 0.4em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---------- página do escritório (sobre.html): o mapa da casa ---------- */
 .mapa-abertura {

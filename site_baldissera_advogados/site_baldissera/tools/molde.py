@@ -99,8 +99,9 @@ def rodape() -> str:
     <div>
       <img src="assets/images/marca/baldissera-advogados-escuro.svg" alt="Baldissera Advogados" width="224" height="75">
       <div class="assinatura-casa">
-        <p class="nome">Luiz Henrique Baldissera</p>
-        <p>OAB/PR 55.717 &nbsp; OAB/SC 78.938-A</p>
+        <p class="nome">Baldissera Advogados</p>
+        <p>Sociedade de Advogados · OAB/PR 4.545</p>
+        <p>CNPJ 24.129.499/0001-08</p>
         <p class="fecho-contato"><a href="mailto:{EMAIL}">{EMAIL}</a><br><a href="tel:{TELEFONE[0]}">{TELEFONE[1]}</a></p>
       </div>
     </div>

@@ -345,7 +345,7 @@ def corpo_html(blocos: list, iniciais: str) -> str:
             out.append(f"<h2>{inline(b['texto'])}</h2>")
         elif t == "caixa":
             rot = f'<p class="caixa-rotulo">{inline(b["rotulo"])}</p>\n' if b.get("rotulo") else ""
-            tit = f"<h3>{inline(b['titulo'])}</h3>\n" if b.get("titulo") else ""
+            tit = f"<h2>{inline(b['titulo'])}</h2>\n" if b.get("titulo") else ""
             out.append(f'<div class="caixa">\n{rot}{tit}<p>{inline(b["texto"])}</p>\n</div>')
         elif t == "citacao":
             fonte = f'<span class="fonte">{inline(b["fonte"])}</span>' if b.get("fonte") else ""

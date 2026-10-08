@@ -33,10 +33,15 @@
   // ---------- cabeçalho: compacto ao rolar; botão voltar ao topo ----------
   var cab = document.getElementById('cabecalho');
   var topo = document.querySelector('.voltar-topo');
+  var fecho = document.querySelector('.fecho');
   function aoRolar() {
     var y = window.scrollY || 0;
-    if (cab) cab.classList.toggle('compacto', y > 120);
-    if (topo) topo.hidden = y < 900;
+    // histerese: compacta depois de 140 px, volta antes de 60 px (sem piscar no limite)
+    if (cab) {
+      if (y > 140) cab.classList.add('compacto');
+      else if (y < 60) cab.classList.remove('compacto');
+    }
+    if (topo) topo.hidden = y < 900 || (fecho && fecho.getBoundingClientRect().top < window.innerHeight);
   }
   window.addEventListener('scroll', aoRolar, { passive: true });
   aoRolar();
@@ -59,6 +64,9 @@
       if (e.key === 'Escape' && menu.classList.contains('aberto')) {
         botaoMenu.setAttribute('aria-expanded', 'false'); menu.classList.remove('aberto'); botaoMenu.focus();
       }
+    });
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) { botaoMenu.setAttribute('aria-expanded', 'false'); menu.classList.remove('aberto'); }
     });
   }
 

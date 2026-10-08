@@ -22,7 +22,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/liturgia.css?v=20261007e">
+<link rel="stylesheet" href="assets/css/liturgia.css?v=20261008b">
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -211,14 +211,30 @@
 </footer>
 
 <button class="voltar-topo" type="button" hidden>Voltar ao topo</button>
-<script src="assets/js/site.js?v=20261007e"></script>
+<script src="assets/js/site.js?v=20261008b"></script>
 <script>
-  // Mensagem de confirmação depois do envio (o formsubmit volta para ?enviado=1)
+  // Confirmação depois do envio (o formsubmit volta para ?enviado=1); unidade só no atendimento presencial
   (function () {
-    var r = document.querySelector('#agendar .resposta');
-    if (r && /[?&]enviado=1/.test(location.search)) {
-      r.textContent = 'Pedido enviado. Um advogado do escritório vai responder para confirmar o horário.';
-      r.scrollIntoView({ block: 'center' });
+    var form = document.getElementById('agendar');
+    if (!form) return;
+    var unidade = document.getElementById('unidade');
+    function ajustarUnidade() {
+      var presencial = form.querySelector('input[name="forma"][value="Presencial"]').checked;
+      unidade.disabled = !presencial; unidade.required = presencial;
+      if (!presencial) unidade.value = '';
+    }
+    form.querySelectorAll('input[name="forma"]').forEach(function (r) { r.addEventListener('change', ajustarUnidade); });
+    ajustarUnidade();
+    if (/[?&]enviado=1/.test(location.search)) {
+      var c = document.createElement('div');
+      c.className = 'confirmacao'; c.setAttribute('role', 'status'); c.tabIndex = -1;
+      c.innerHTML = '<strong>Pedido enviado.</strong> Um advogado do escritório vai responder pelo contato informado para confirmar o horário.';
+      form.parentNode.insertBefore(c, form);
+      form.hidden = true;
+      var outro = document.createElement('p'); outro.className = 'nota-secao';
+      outro.innerHTML = '<a class="remissao" href="agendar.html#t-form">Fazer outro pedido</a>';
+      c.after(outro);
+      c.focus({ preventScroll: true }); c.scrollIntoView({ block: 'center' });
     }
   })();
 </script>

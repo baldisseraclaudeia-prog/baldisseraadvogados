@@ -418,6 +418,54 @@ def git(*args):
     return r.stdout.strip()
 
 
+# ------------------------------------------------------------------ trava entre Mac e Windows
+TRAVA = "refs/heads/trava-noticias"   # marcador no GitHub: só um computador o cria de cada vez
+TRAVA_HORAS = 2                       # reserva esquecida por rotina que travou vence sozinha
+
+
+def _trava_atual():
+    """(máquina, quando) do marcador no GitHub, ou None se ninguém está rodando."""
+    if not git("ls-remote", "origin", TRAVA):
+        return None
+    git("fetch", "-q", "origin", f"+{TRAVA}:refs/remotes/origin/trava-noticias")
+    msg = git("log", "-1", "--format=%s", "refs/remotes/origin/trava-noticias")
+    partes = msg.split("|")
+    if len(partes) != 3 or partes[0] != "trava-noticias":
+        return ("?", "1970-01-01T00:00")
+    return partes[1], partes[2]
+
+
+def trava_reservar(maquina: str) -> dict:
+    """Reserva a rodada no GitHub. O push de criação é atômico: se o outro computador reservou antes, falha."""
+    atual = _trava_atual()
+    if atual:
+        dono, quando = atual
+        idade = dt.datetime.now() - dt.datetime.fromisoformat(quando)
+        if dono == maquina:
+            return {"ok": True, "trava": "já era desta máquina", "desde": quando}
+        if idade < dt.timedelta(hours=TRAVA_HORAS):
+            return {"ok": False, "trava": f"ocupada por {dono} desde {quando}; esta rodada não roda"}
+        git("push", "-q", "origin", "--delete", "trava-noticias")      # reserva vencida
+    agora = dt.datetime.now().isoformat(timespec="minutes")
+    arvore = git("rev-parse", "HEAD^{tree}")
+    sha = git("commit-tree", arvore, "-p", "HEAD", "-m", f"trava-noticias|{maquina}|{agora}")
+    try:
+        git("push", "-q", "origin", f"{sha}:{TRAVA}")
+    except RuntimeError:
+        return {"ok": False, "trava": "o outro computador reservou no mesmo instante; esta rodada não roda"}
+    return {"ok": True, "trava": f"reservada por {maquina}", "desde": agora}
+
+
+def trava_liberar(maquina: str) -> dict:
+    atual = _trava_atual()
+    if not atual:
+        return {"ok": True, "trava": "já estava livre"}
+    if atual[0] != maquina:
+        return {"ok": False, "trava": f"é de {atual[0]}; não liberei"}
+    git("push", "-q", "origin", "--delete", "trava-noticias")
+    return {"ok": True, "trava": "liberada"}
+
+
 def atualizar(push: bool) -> dict:
     s = HOME.read_text(encoding="utf-8")
     novo, relato, erros = s, {}, {}
@@ -457,13 +505,20 @@ def atualizar(push: bool) -> dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("acao", choices=["candidatos", "registrar", "atualizar"])
+    ap.add_argument("acao", choices=["candidatos", "registrar", "atualizar", "trava-reservar", "trava-liberar"])
+    ap.add_argument("--maquina", choices=["mac", "windows", "manual"])
     ap.add_argument("arquivo", nargs="?")
     ap.add_argument("--fonte", choices=list(FONTES))
     ap.add_argument("--dias", type=int, default=7)
     ap.add_argument("--push", action="store_true", help="registra e envia ao GitHub (põe no ar)")
     a = ap.parse_args()
     try:
+        if a.acao.startswith("trava-"):
+            if not a.maquina:
+                raise RuntimeError("informe --maquina mac, windows ou manual")
+            r = trava_reservar(a.maquina) if a.acao == "trava-reservar" else trava_liberar(a.maquina)
+            print(json.dumps(r, ensure_ascii=False))
+            sys.exit(0 if r.get("ok") else 1)
         if a.acao in ("candidatos", "registrar") and not a.fonte:
             raise RuntimeError("informe --fonte stj, stf ou corteidh")
         if a.acao == "atualizar" and a.push:

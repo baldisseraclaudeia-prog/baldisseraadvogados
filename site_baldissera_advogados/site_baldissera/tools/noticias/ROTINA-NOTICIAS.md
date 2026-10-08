@@ -81,3 +81,13 @@ Notícia em espanhol ou inglês (em regra da Corte IDH) fica no site com o títu
 ```
 
 As traduções ficam em `<fonte>/traducoes.json`. O idioma é detectado pelo texto do título (o site da Corte às vezes publica título em inglês na página em português).
+
+## Trava entre o Mac e o Windows (ordem do Dr. Luiz, 08/10/2026: "sim, faça o aviso")
+
+Antes de qualquer outro passo, toda rodada (Windows, Mac ou manual) reserva a vez no GitHub:
+
+    python noticias.py trava-reservar --maquina windows|mac|manual
+
+- `{"ok": true}` → segue a rodada. `{"ok": false}` → o outro computador está rodando: a rodada **não roda** e só relata.
+- Ao terminar, **sempre**, inclusive depois de erro: `python noticias.py trava-liberar --maquina <a mesma>`.
+- A reserva é o marcador `trava-noticias` no GitHub; o GitHub só aceita um de cada vez (dois computadores ao mesmo tempo: só um consegue). Reserva esquecida por rotina que travou vence sozinha em 2 horas.

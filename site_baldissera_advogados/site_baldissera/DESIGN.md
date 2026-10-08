@@ -25,12 +25,12 @@ colors:
   whatsapp: "#1FA855"
 typography:
   display:
-    fontFamily: "Cormorant Garamond, Garamond, Times New Roman, serif"
+    fontFamily: "EB Garamond, Garamond, Times New Roman, serif"
     fontSize: "3.75rem"
     fontWeight: 500
     lineHeight: 1.08
   heading:
-    fontFamily: "Cormorant Garamond, Garamond, Times New Roman, serif"
+    fontFamily: "EB Garamond, Garamond, Times New Roman, serif"
     fontSize: "2.25rem"
     fontWeight: 500
     lineHeight: 1.15
@@ -95,7 +95,7 @@ A página é uma peça forense: timbre, filete duplo dourado, seções numeradas
 
 ## Typography
 
-Cormorant Garamond para títulos; Source Serif 4 para o corpo. Escala de razão ~1,25 sobre 18 px (`--t-0` 13 px a `--t-7` 60 px). Rótulos em versalete (`all-small-caps`) com espaçamento 0,06–0,10em: é só para rótulos curtos, nunca para parágrafo.
+EB Garamond para títulos (desde 08/10/2026: a Cormorant Garamond desenha o circunflexo fora do lugar em ê ô â; a troca foi decisão do Dr. Luiz); Source Serif 4 para o corpo. As capas e o carrossel do Instagram (`capa.py`) continuam em Cormorant, por decisão dele de manter as capas como estão. Escala de razão ~1,25 sobre 18 px (`--t-0` 13 px a `--t-7` 60 px). Rótulos em versalete (`all-small-caps`) com espaçamento 0,06–0,10em: é só para rótulos curtos, nunca para parágrafo.
 
 ### Hierarchy
 - Título de abertura: `--t-7`; título de página/publicação: `--t-6`; seção: `--t-5`; subtítulo: `--t-4`/`--t-3`.

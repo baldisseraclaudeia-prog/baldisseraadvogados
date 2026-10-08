@@ -50,7 +50,10 @@ from pathlib import Path
 AQUI = Path(__file__).resolve().parent
 REPO = AQUI.parents[3]
 HOME = REPO / "site_baldissera_advogados" / "site_baldissera" / "public" / "index.html"
-NAVEGADOR_PY = Path(r"C:\Users\LuizH\scrapling-mcp\.venv\Scripts\python.exe")
+# navegador automático: Windows (scrapling-mcp) ou Mac (scrapling instalado pelo uv, 07/10/2026)
+NAVEGADOR_PY = next((p for p in (Path(r"C:\Users\LuizH\scrapling-mcp\.venv\Scripts\python.exe"),
+                               Path.home() / ".local" / "share" / "uv" / "tools" / "scrapling" / "bin" / "python")
+                     if p.exists()), Path(r"C:\Users\LuizH\scrapling-mcp\.venv\Scripts\python.exe"))
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                     "Chrome/140.0 Safari/537.36 (site Baldissera Advogados; noticias.py)"}
 ULTIMAS, MAX_DESTAQUES = 5, 4
@@ -133,11 +136,23 @@ def ler_stj() -> list:
     return ler_rss(baixar("https://res.stj.jus.br/hrestp-c-portalp/RSS.xml"), "https://www.stj.jus.br/", True)
 
 
+def baixar_stf(url: str) -> bytes:
+    """O STF ora aceita a requisição simples (Mac, 07/10/2026), ora barra (Windows): tenta a simples,
+    e só abre o navegador automático se ela falhar ou vier sem notícia."""
+    try:
+        raw = baixar(url)
+        if b"<item>" in raw:
+            return raw
+    except Exception:
+        pass
+    return baixar_navegador(url)
+
+
 def ler_stf() -> list:
     base = "https://noticias.stf.jus.br/feed/?post_type=postsnoticias"
-    itens = ler_rss(baixar_navegador(base), "https://noticias.stf.jus.br/", False)
+    itens = ler_rss(baixar_stf(base), "https://noticias.stf.jus.br/", False)
     try:
-        itens += ler_rss(baixar_navegador(base + "&paged=2"), "https://noticias.stf.jus.br/", False)
+        itens += ler_rss(baixar_stf(base + "&paged=2"), "https://noticias.stf.jus.br/", False)
     except Exception:
         pass  # a segunda página é só reforço
     vistos, unicos = set(), []

@@ -309,12 +309,12 @@ CONTRA = [
      "A prática de falta grave interrompe a contagem do prazo para a progressão de regime de cumprimento de pena, o qual se reinicia "
      "a partir do cometimento dessa infração.",
      "(Súmula 534, Terceira Seção, julgada em 10/6/2015, DJe de 15/6/2015.)",
-     "A regra pesa contra o condenado, mas fixa a data certa: a do cometimento, não a da homologação. É justamente aí que aparece um dos erros mais comuns."),
+     "A regra pesa contra o condenado, mas fixa a data certa: a do cometimento, não a da homologação. Essa data é um dos pontos que a revisão confere."),
     ("STJ · Tema Repetitivo 1.161", "O comportamento para o livramento considera todo o histórico",
      "A valoração do requisito subjetivo para concessão do livramento condicional - bom comportamento durante da execução da pena "
      "(art. 83, inciso III, alínea \"a\", do Código Penal) - deve considerar todo o histórico prisional, não se limitando ao período "
      "de 12 meses referido na alínea \"b\" do mesmo inciso III do art. 83 do Código Penal.",
-     "(STJ, Tema Repetitivo 1.161, Terceira Seção, tese firmada conforme o portal de precedentes qualificados.)",
+     "(REsp n. 1.970.217 e REsp n. 1.974.104, relator Ministro Ribeiro Dantas, Terceira Seção, Tema Repetitivo 1.161; tese conferida no portal de precedentes qualificados do STJ em 22/6/2026.)",
      "A falta grave não reinicia o prazo do livramento, mas continua pesando na avaliação do comportamento."),
     ("STF · Tema 941 de repercussão geral", "A audiência de justificação pode suprir o procedimento disciplinar",
      "A oitiva do condenado pelo Juízo da Execução Penal, em audiência de justificação realizada na presença do defensor e do Ministério "
@@ -363,8 +363,9 @@ DADOS_TEXTO = [
      "Foram levantados 107.755 processos de execução penal com incidentes vencidos. Dos 86.398 fora de São Paulo, 24,6% foram analisados "
      "e 75,4% ainda dependiam de análise judicial; entre os analisados, houve concessão de progressões, livramentos, extinções de pena e "
      "outros benefícios em 14.027 processos e resposta negativa em 3.105. O relatório registra que, algumas vezes, o direito já estava "
-     "implementado mas não lançado no sistema e, outras vezes, a própria análise estava atrasada. O relatório conta processos e "
-     "incidentes, que não correspondem a pessoas distintas.",
+     "implementado mas não lançado no sistema e, outras vezes, a própria análise estava atrasada. No gráfico da mesma página, os 24,6% aparecem "
+     "como incidentes instaurados e os 75,4% como a instaurar, e, entre os instaurados, há 4.100 pendentes: analisar, ali, não "
+     "significa decisão concluída. O relatório conta processos e incidentes, que não correspondem a pessoas distintas.",
      "Relatório final, p. 15, 28, 29 e 30 · cnj.jus.br/wp-content/uploads/2025/11/relatorio-final-mutirao-2025-v5.pdf"),
     ("2024 · CNJ, Mutirão Processual Penal",
      "No tema do sistema eletrônico de execução, o relatório lista, entre os processos saneados, 25.918 de término de pena, 16.979 de "
@@ -390,8 +391,8 @@ DADOS_TEXTO = [
 
 CADEIAS = [
     ("Data-base fixada na data da decisão, e não na da falta",
-     "O intervalo entre a falta e a decisão que a homologa vira tempo perdido, e o atraso se repete em toda a sequência de "
-     "progressões. Se o mesmo lançamento desloca a data do livramento, que não deveria mudar, o erro dobra. E, se a falta "
+     "O intervalo entre a falta e a decisão que a homologa vira tempo perdido, e o atraso tende a passar para as progressões "
+     "seguintes. Se o mesmo lançamento desloca também a data do livramento, que não deveria mudar, o erro atinge dois benefícios. E, se a falta "
      "não foi validamente reconhecida, a própria interrupção não deveria existir."),
     ("Detração não computada",
      "Um período de prisão que não entrou no cálculo não aparece como erro: simplesmente desaparece. Todas as datas correm "
@@ -445,8 +446,8 @@ def estudo() -> str:
         f"<li><span>{i}</span><span>{esc(s)}</span></li>" for i, s in enumerate(secoes, 1)) + "</ol>")
     c.append('<div class="caixa"><p class="rot">Como ler</p><p>Este estudo é informativo. Os exemplos são hipotéticos e as frações, '
              'ilustrativas: em caso real, cada fração depende da data do fato, da natureza do crime e da reincidência, e as frações do '
-             'art. 112 da Lei de Execução Penal foram reescritas mais de uma vez, a última em 2026, com a nova redação questionada no '
-             'Supremo Tribunal Federal. Os precedentes são reproduzidos na íntegra do texto oficial (tese, enunciado ou ementa), com a '
+             'art. 112 da Lei de Execução Penal foram reescritas mais de uma vez, a última em 2026 (Leis 15.358/2026 e 15.402/2026; a segunda é '
+             'objeto das ADIs 7.966, 7.967, 7.968 e 7.969 no Supremo Tribunal Federal, sem julgamento até 8/10/2026). Os precedentes são reproduzidos na íntegra do texto oficial (tese, enunciado ou ementa), com a '
              'referência completa. Os dados oficiais trazem a fonte e a página.</p></div>')
     c.append('<h2 class="cap nova"><span class="num">1</span>Apresentação</h2><div class="recuo">'
              '<p class="abre">A execução penal é a fase em que a pena fixada na condenação é efetivamente cumprida. É também a fase em que '
@@ -474,7 +475,7 @@ def estudo() -> str:
              'e não se somam. Os números acima são reproduzidos com a grandeza que a fonte oficial indica.</p>')
     c.append('<h2 class="cap nova"><span class="num">4</span>O efeito cascata</h2>')
     c.append('<p>Na execução, os benefícios são encadeados: cada um é contado a partir de uma pena e de uma data-base que dependem das '
-             'etapas anteriores. Por isso o erro se propaga. Abaixo, as cadeias mais frequentes.</p>')
+             'etapas anteriores. Por isso o erro se propaga. Abaixo, algumas dessas cadeias.</p>')
     c.append('<ol class="passos">' + "".join(f"<li><h4>{esc(t)}</h4><p>{esc(p)}</p></li>" for t, p in CADEIAS) + "</ol>")
     c.append('<h3>Um exemplo com a conta</h3>')
     c.append(P.grafico_svg())

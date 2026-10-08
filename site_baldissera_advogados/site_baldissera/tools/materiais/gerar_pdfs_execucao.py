@@ -212,7 +212,7 @@ def guia() -> str:
     c.append('<h3>O efeito cascata, em um exemplo</h3>')
     c.append(P.grafico_svg())
     c.append(quadro())
-    c.append('<h2 class="cap nova"><span class="num">III</span>Os doze erros mais frequentes</h2>')
+    c.append('<h2 class="cap nova"><span class="num">III</span>Doze erros que a revisão procura</h2>')
     c.append("<table><thead><tr><th>Erro</th><th>Efeito</th></tr></thead><tbody>" + "".join(
         f"<tr><td><strong>{esc(t)}</strong></td><td>{esc(e[0].upper() + e[1:])}</td></tr>" for t, _c, e, _b in P.ERROS) + "</tbody></table>")
     c.append('<h2 class="cap nova"><span class="num">IV</span>O que a revisão confere</h2>')
@@ -322,11 +322,6 @@ CONTRA = [
      "insuficiência de defesa técnica no PAD instaurado para apurar a prática de falta grave durante o cumprimento da pena.",
      "(RE n. 972.598/RS, relator Ministro Roberto Barroso, Tribunal Pleno, julgado em 4/5/2020, DJe de 6/8/2020, Tema 941.)",
      "Limita a alegação de nulidade do procedimento disciplinar quando houve audiência judicial com defesa."),
-    ("STF · Súmula 715", "O limite de cumprimento não é base para os benefícios",
-     "A pena unificada para atender ao limite de trinta anos de cumprimento, determinado pelo art. 75 do Código Penal, não é "
-     "considerada para a concessão de outros benefícios, como o livramento condicional ou regime mais favorável de execução.",
-     "(Súmula 715, Supremo Tribunal Federal, sessão plenária de 24/9/2003.)",
-     "Os benefícios são calculados sobre a pena total, não sobre o limite máximo de cumprimento."),
 ]
 
 EP102 = {
@@ -368,11 +363,13 @@ DADOS_TEXTO = [
      "Foram levantados 107.755 processos de execução penal com incidentes vencidos. Dos 86.398 fora de São Paulo, 24,6% foram analisados "
      "e 75,4% ainda dependiam de análise judicial; entre os analisados, houve concessão de progressões, livramentos, extinções de pena e "
      "outros benefícios em 14.027 processos e resposta negativa em 3.105. O relatório registra que, algumas vezes, o direito já estava "
-     "implementado mas não lançado no sistema e, outras vezes, a própria análise estava atrasada.",
+     "implementado mas não lançado no sistema e, outras vezes, a própria análise estava atrasada. O relatório conta processos e "
+     "incidentes, que não correspondem a pessoas distintas.",
      "Relatório final, p. 15, 28, 29 e 30 · cnj.jus.br/wp-content/uploads/2025/11/relatorio-final-mutirao-2025-v5.pdf"),
     ("2024 · CNJ, Mutirão Processual Penal",
-     "No tema do sistema eletrônico de execução, foram saneados 50.926 processos: 25.918 de término de pena, 16.979 de progressão de regime "
-     "com incidente vencido e 8.056 de livramento condicional com incidente vencido. O CNJ ressalvou que os dados não permitem separar "
+     "No tema do sistema eletrônico de execução, o relatório lista, entre os processos saneados, 25.918 de término de pena, 16.979 de "
+     "progressão de regime com incidente vencido e 8.056 de livramento condicional com incidente vencido (o total informado é de 50.926 "
+     "processos; as três parcelas somam 50.953, divergência que consta da própria fonte). O CNJ ressalvou que os dados não permitem separar "
      "os casos de simples saneamento do sistema daqueles em que um direito adquirido foi garantido pela intervenção.",
      "Relatório final, p. 22 · cnj.jus.br/relatorio-mutirao-processual-2024/"),
     ("2023 · CNJ, Mutirão Processual Penal",
@@ -515,7 +512,7 @@ def estudo() -> str:
     for j in P.JULGADOS + JULG_PDF_EXTRA:
         c.append(julgado_html(j))
     c.append('<h2 class="cap nova"><span class="num">9</span>O que pesa contra</h2>')
-    c.append('<p>Uma revisão séria mostra também o que limita as teses favoráveis. Os enunciados abaixo são aplicados pelos tribunais e '
+    c.append('<p>A revisão mostra também o que limita as teses favoráveis. Os enunciados abaixo são aplicados pelos tribunais e '
              'precisam ser considerados em cada cálculo.</p>')
     for trib, tese, txt, ref, nota in CONTRA:
         c.append(f'<div class="julgado"><p class="trib">{esc(trib)}</p><h3>{esc(tese)}</h3><p>{esc(nota)}</p>'

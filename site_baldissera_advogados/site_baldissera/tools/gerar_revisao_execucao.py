@@ -51,8 +51,8 @@ CASCATA = [
      "O cálculo adota setembro como novo início. Os seis meses entre a falta e a decisão deixam de contar.",
      "Seis meses de atraso na progressão seguinte"),
     ("A etapa seguinte herda o atraso",
-     "Como cada progressão é contada a partir da anterior, o deslocamento passa para o semiaberto, para o aberto e para "
-     "tudo o que deles depende.", "O mesmo atraso, repetido"),
+     "Como cada progressão é contada a partir da anterior, o deslocamento tende a passar para as etapas seguintes e para "
+     "o que delas depende.", "O atraso passa adiante"),
     ("O mesmo lançamento alcança o livramento",
      "A falta grave interrompe apenas a contagem da progressão. Se o cálculo reinicia também o prazo do livramento "
      "condicional, ou o tempo exigido para indulto e comutação, o erro passa a atingir benefícios que a lei preservou.",
@@ -92,7 +92,7 @@ CAPITULOS = [
       ("Natureza de cada crime", "comum ou hediondo, com ou sem violência, primário ou reincidente, conforme a lei da data do fato e não conforme o cadastro."),
       ("Pena já cumprida", "condenação integralmente cumprida que continua pesando na base dos requisitos.")]),
     ("Prisão, detração e tempo cumprido",
-     "Todo tempo de privação de liberdade antes da condenação se desconta da pena. O que não é lançado simplesmente desaparece.",
+     "O tempo de prisão provisória, e as restrições que a lei e a jurisprudência equiparam a ela, se descontam da pena. O que não é lançado simplesmente desaparece.",
      [("Prisão provisória do próprio processo", "flagrante e preventiva lançados com as datas reais, e não com a data do mandado definitivo."),
       ("Prisão em outro processo", "período de prisão em processo que terminou em absolvição ou arquivamento, quando cabe o desconto."),
       ("Recolhimento domiciliar noturno", "as horas de recolhimento convertidas em dias de pena cumprida."),
@@ -106,7 +106,7 @@ CAPITULOS = [
       ("Decisão lançada", "a remição reconhecida pelo juiz conferida contra o número efetivamente digitado no cálculo."),
       ("Perda por falta grave", "perda limitada pela lei e dependente de decisão que justifique a fração aplicada.")]),
     ("Progressão de regime e datas-base",
-     "A progressão depende de três dados: a pena, a fração legal e a data-base. Um erro em qualquer deles desloca todas as etapas.",
+     "O requisito de tempo da progressão depende de três dados: a pena, a fração legal e a data-base. Um erro em qualquer deles desloca as etapas seguintes; os demais requisitos são avaliados à parte.",
      [("Fração da lei do fato", "a fração conferida no texto legal vigente na data de cada crime; lei posterior mais grave não alcança fato anterior."),
       ("Duas leis, duas contas", "quando a lei mudou, as duas contas lado a lado, com a regra que decide qual se aplica."),
       ("Fração sobre o saldo", "a partir da segunda progressão, a fração incide sobre o que resta de pena."),
@@ -123,7 +123,7 @@ CAPITULOS = [
     ("Livramento condicional",
      "O livramento corre em paralelo à progressão, com prazo e data-base próprios, e costuma ser esquecido.",
      [("Data-base própria", "conta-se da primeira prisão e não se altera por falta grave."),
-      ("Fração por processo", "a condição de primário ou reincidente aferida na data de cada fato."),
+      ("Primariedade e reincidência", "conferidas nas certidões e nas datas de cada condenação, e não apenas no cadastro do sistema."),
       ("Extinção que apaga a primeira prisão", "encerrar uma guia antiga pode deslocar o marco do livramento para uma prisão posterior."),
       ("Fim do período de prova", "suspensão ou revogação decretada depois de terminado o período de prova."),
       ("Revogação e tempo de prova", "situações em que o período em liberdade condicional conta como pena cumprida.")]),
@@ -160,7 +160,7 @@ CAPITULOS = [
 ERROS = [
     ("Remição reconhecida e lançada a menor",
      "O juiz reconhece trinta dias de desconto por trabalho ou estudo; no sistema, entram três. Ou remições antigas não são implantadas na migração dos autos para o meio eletrônico.",
-     "a diferença inteira de dias some do fim da pena e atrasa a progressão e o livramento.",
+     "como o tempo remido conta como pena cumprida, a diferença atrasa cada data ainda não alcançada: progressão, livramento e fim da pena.",
      "LEP, arts. 126 e 128."),
     ("Decisão favorável que não chega ao cálculo",
      "Comutação deferida, detração reconhecida ou data-base corrigida em recurso que nunca é lançada. Deferir e lançar são etapas distintas.",
@@ -216,11 +216,11 @@ EXEMPLOS = [
      [("Remição reconhecida", "30 dias"), ("Remição lançada", "3 dias"), ("Diferença no fim da pena", "27 dias")]),
     ("A falta que reiniciou o prazo errado",
      "Pena de nove anos, cumprida desde janeiro de 2022. Com um terço (fração ilustrativa), o livramento caberia em janeiro de 2025. Em janeiro de 2024, uma falta grave. O cálculo reiniciou o livramento a partir da falta: um terço dos sete anos restantes.",
-     "A falta grave não reinicia o prazo do livramento. Ela pesa na avaliação do comportamento, mas a data do requisito temporal continua sendo a original.",
+     "A falta grave não reinicia o prazo do livramento. A data do requisito de tempo continua sendo a original; o comportamento, avaliado em todo o histórico da execução, e os demais requisitos continuam a ser examinados à parte.",
      [("Data lançada", "maio de 2026"), ("Data do requisito temporal", "janeiro de 2025"), ("Diferença", "1 ano e 4 meses")]),
-    ("Três furtos que eram um só",
+    ("Três furtos, uma só pena",
      "Três condenações em processos diferentes, por três furtos semelhantes, na mesma semana e no mesmo bairro, dois anos cada. Na execução, as penas foram somadas.",
-     "Reconhecida a continuidade, aplica-se a pena de um dos crimes, aumentada de um quinto pelo número de crimes.",
+     "Se presentes os requisitos da continuidade delitiva (crimes da mesma espécie, em condições semelhantes de tempo, lugar e modo de execução), aplica-se a pena de um dos crimes, aumentada de um quinto pelo número de crimes.",
      [("Penas somadas", "6 anos"), ("Pena unificada", "2 anos, 4 meses e 24 dias"), ("Diferença", "3 anos, 7 meses e 6 dias")]),
     ("O decreto que ninguém examinou",
      "Na data de um decreto antigo de comutação que reduzia um quinto da pena restante (fração ilustrativa), o condenado tinha cinco anos a cumprir e preenchia os requisitos. O pedido nunca foi feito.",
@@ -249,9 +249,10 @@ JULGADOS = [
      "publicacao": "publicacao-recolhimento-noturno-desconta-da-pena.html"},
     {"trib": "STJ · Tema Repetitivo 1.354",
      "tese": "Cada condenação segue a lei do seu tempo: a fração mais dura da lei nova não alcança crime antigo",
-     "ponte": "Na mesma execução, cada condenação recebe a fração de progressão da lei mais favorável ao seu fato. Aplicar a todas "
-              "a fração mais pesada, ou a fração de uma lei posterior a um crime anterior, é erro de cálculo que se corrige "
-              "condenação por condenação.",
+     "ponte": "Quando a lei mudou entre um crime e outro, cada condenação recebe a fração de progressão da lei mais favorável ao seu "
+              "fato: a fração mais dura da lei nova não alcança o crime anterior a ela. É uma questão de lei no tempo. Outra questão, a "
+              "de crimes com e sem violência sob a mesma lei, foi decidida pelo Plenário do STF em sentido diverso, aplicando a fração "
+              "mais grave sobre toda a pena (EP 102 AgR-segundo); por isso cada cálculo é conferido à luz dos dois entendimentos.",
      "rotulo_integral": "Ler a tese firmada, na íntegra",
      "integral_html": "<strong>É possível, para fins de cálculo para progressão de regime, a aplicação de percentuais distintos para cada "
                       "condenação isoladamente, em uma mesma execução</strong>, reconhecendo-se a retroatividade da Lei n. 13.964/2019 e a "
@@ -315,7 +316,7 @@ METODO = [
     ("Confronto com o cálculo oficial", "Cada número recalculado é comparado com o oficial. A divergência é confrontada com o título antes de ser apontada como erro."),
     ("Cenários quando falta documento", "Faltando um dado, a data aparece como hipótese declarada, nunca como certeza. O que não foi apurado não é tratado como inexistente."),
     ("Posição processual", "Antes de propor qualquer pedido, verifica-se o que já foi requerido, decidido e recorrido, para não repetir pedido nem perder prazo."),
-    ("Divergências nos dois sentidos", "Divergência que favorece o condenado também é registrada, em seção própria, para que a defesa nunca seja surpreendida."),
+    ("Divergências nos dois sentidos", "Divergência que favorece o condenado também é registrada, em seção própria, para que a defesa conheça a situação inteira da execução."),
     ("Revisão e responsabilidade", "O relatório passa por conferência independente antes de chegar ao cliente. Pedidos e recursos são assinados pelo advogado responsável."),
 ]
 
@@ -347,11 +348,10 @@ FAQ = [
      "não há erro, a revisão entrega a linha do tempo, a memória de cálculo e o calendário dos benefícios, o que permite pedir "
      "cada um no momento em que se torna cabível."),
     ("Quem pode pedir a revisão?",
-     "A atuação do advogado na execução depende de procuração do próprio condenado. Familiares podem procurar o escritório para "
-     "entender o procedimento e reunir documentos."),
+     "Para atuar no processo de execução, o advogado precisa ser constituído pelo condenado, em regra por procuração. Familiares "
+     "costumam ajudar a reunir os documentos."),
     ("Já existe advogado no processo. A revisão é possível?",
-     "Sim, mas o Código de Ética e Disciplina da OAB exige o prévio conhecimento do advogado já constituído. A revisão pode ser "
-     "feita em apoio à defesa existente."),
+     "Sim. A revisão pode ser feita em apoio à defesa já constituída, em diálogo com o colega responsável pelo processo."),
     ("Um erro antigo ainda pode ser apontado?",
      "O cálculo de pena acompanha toda a execução e é atualizado a cada incidente. Erro de cálculo demonstrado pode ser levado ao "
      "juízo da execução enquanto a pena é cumprida; a forma e o momento dependem do caso."),
@@ -430,7 +430,7 @@ def corpo_html() -> str:
       <a href="#problema">O problema</a>
       <a href="#cascata">O efeito cascata</a>
       <a href="#conferencias">O que se confere</a>
-      <a href="#erros">Erros frequentes</a>
+      <a href="#erros">Erros</a>
       <a href="#exemplos">Exemplos</a>
       <a href="#tribunais">Tribunais</a>
       <a href="#metodo">Método</a>
@@ -497,10 +497,10 @@ def corpo_html() -> str:
 ''', f"{len(CAPITULOS)} capítulos e {total} pontos de conferência, na ordem em que a execução é examinada. Toque em cada capítulo para abrir."))
     # IV — erros
     er = "\n".join(f'''      <li><h3>{esc(t)}</h3><p>{esc(c)}</p><p class="rv-efeito">{esc(e)}</p><p class="rv-base">{esc(b)}</p></li>''' for t, c, e, b in ERROS)
-    s.append(secao("erros", "IV", "Dos erros mais frequentes", f'''    <ul class="rv-erros">
+    s.append(secao("erros", "IV", "Dos erros que a revisão procura", f'''    <ul class="rv-erros">
 {er}
     </ul>
-''', "Os doze erros que mais aparecem nos cálculos de execução. O estudo completo, em PDF, trata de mais de quarenta."))
+''', "Doze erros, entre os mais de quarenta que a revisão procura, descritos de forma genérica. O estudo completo, em PDF, trata de todos."))
     # V — exemplos
     ex = []
     for t, cena, sol, conta in EXEMPLOS:
@@ -572,7 +572,7 @@ def corpo_html() -> str:
       <li><a href="{PDF_ESTUDO}" download>{ico}<span class="b-titulo">Estudo completo</span><span class="b-desc">Versão aprofundada: o catálogo de erros, os exemplos com a conta, os dados oficiais e os precedentes.</span><span class="b-acao">Baixar PDF</span></a></li>
     </ul>
     <div class="atendimento">
-      <p>Para a revisão de uma execução, o primeiro passo é uma conversa técnica sobre o caso e os documentos disponíveis.</p>
+      <p>Atendimento nas unidades de Cascavel, Porto Alegre e Foz do Iguaçu, com agendamento prévio.</p>
       <p><a class="botao" href="agendar.html">Agendar atendimento</a> <a class="remissao" href="area-execucao-penal.html">Execução Penal</a></p>
     </div>
     <p class="rv-aviso">Conteúdo informativo, nos termos do Provimento CFOAB 205/2021. Os exemplos são hipotéticos e não se referem a casos do escritório. O resultado de cada execução depende dos documentos e das circunstâncias do caso. Dados oficiais com fonte e página indicadas; consulta em 8 de outubro de 2026.</p>

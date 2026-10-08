@@ -512,11 +512,14 @@ form .enviar { margin-top: 2rem; text-align: center; }
 .unidades-cartoes li { border-top: 3px double var(--ouro); padding-top: 1rem; }
 .unidades-cartoes h3 { font: 600 var(--t-3)/1.25 var(--titulo); color: var(--toga); margin: 0 0 0.4rem; }
 .unidades-cartoes p { margin: 0; font-size: var(--t-1); color: var(--tinta-2); line-height: 1.6; }
-.canais { list-style: none; margin: 0 auto 2.5rem; padding: 0; max-width: 46rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; text-align: center; }
+.canais { list-style: none; margin: 0 auto 2.5rem; padding: 0; max-width: 46rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; text-align: center; }
 .canais li { border-top: 1px solid var(--linha); padding-top: 0.9rem; }
 .canais .rotulo { display: block; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.08em; }
 .canais a { font-size: var(--t-1); text-decoration: none; }
 .canais a:hover { text-decoration: underline; }
+.canais .ico-whats { fill: #1FA855; }
+.ico-linha { display: inline-block; width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 0.4em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ico-insta-cor { stroke-width: 2; }
 .fecho-contato { margin-top: 0.6rem !important; font-size: var(--t-0) !important; line-height: 1.7; }
 .fecho-contato a { color: #C9C3B4; }
 

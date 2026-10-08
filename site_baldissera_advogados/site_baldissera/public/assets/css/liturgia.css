@@ -520,6 +520,10 @@ form .enviar { margin-top: 2rem; text-align: center; }
 .canais .ico-whats { fill: #1FA855; }
 .ico-linha { display: inline-block; width: 1.05em; height: 1.05em; vertical-align: -0.18em; margin-right: 0.4em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .ico-insta-cor { stroke-width: 2; }
+.contatos .ico-insta-cor, .fecho-contato .ico-insta-cor { stroke-width: 2.2; }
+.fecho-contato .ico-whats, .versalete + br + a .ico-whats, main .ico-whats { fill: #1FA855; }
+.barra-topo .ico-whats, .fecho-contato .ico-whats { fill: #25D366; }
+.botao .ico-whats { fill: currentColor; }
 .fecho-contato { margin-top: 0.6rem !important; font-size: var(--t-0) !important; line-height: 1.7; }
 .fecho-contato a { color: #C9C3B4; }
 

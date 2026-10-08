@@ -44,6 +44,12 @@ INSTAGRAM = [("luizhbaldissera", "https://www.instagram.com/luizhbaldissera/"),
              ("baldisseraadvocacia", "https://www.instagram.com/baldisseraadvocacia/")]
 
 
+def redes_html() -> str:
+    """Linha "No Instagram" do bloco de compartilhar: os dois perfis, cada um com o símbolo da marca (07/10/2026)."""
+    return " e ".join(f'<a href="{u}" target="_blank" rel="noopener">{molde.ico_insta("ig-redes-" + str(i))}@{n}</a>'
+                      for i, (n, u) in enumerate(INSTAGRAM, 1))
+
+
 def instagram_html() -> str:
     """Linha 'Siga no Instagram' do bloco de compartilhar (mesma em todos os moldes de página)."""
     links = ' <span style="color:var(--gold-light,#C9B98A);">·</span> '.join(
@@ -94,11 +100,24 @@ def json_ld(dados: dict) -> str:
     return f'<script type="application/ld+json">\n{corpo}\n</script>'
 
 
-def pessoa_ref(chave: str) -> dict:
+# "criminalista" só nas matérias penais (ordem do Dr. Luiz, 07/10/2026: "nas matérias que eu publico e
+# não são penais, não precisa colocar advogado criminalista"). O perfil continua com o título completo.
+AREAS_PENAIS = {"direito-penal", "execucao-penal"}
+
+
+def titulo_autor(chave: str, area_slug: str = None) -> str:
+    """Cargo do autor na publicação: sem "criminalista" quando a área não é penal."""
+    t = AUTORES[chave]["titulo"]
+    if area_slug is not None and area_slug not in AREAS_PENAIS:
+        t = t.replace(" criminalista", "", 1)
+    return t
+
+
+def pessoa_ref(chave: str, area_slug: str = None) -> dict:
     """Autor como pessoa: nome, cargo, OAB e o perfil no site (o @id liga à ficha do perfil)."""
     a = AUTORES[chave]
     pagina_perfil = f"{BASE}/{a['perfil'][:-5]}"            # perfil-luiz.html -> /perfil-luiz
-    p = {"@type": "Person", "name": a["nome"], "jobTitle": a["titulo"].split(" · ")[0],
+    p = {"@type": "Person", "name": a["nome"], "jobTitle": titulo_autor(chave, area_slug).split(" · ")[0],
          "identifier": [{"@type": "PropertyValue", "propertyID": o.split(" ")[0], "value": o.split(" ", 1)[1]}
                         for o in OABS[chave]],
          "url": pagina_perfil, "worksFor": {"@id": ESCRITORIO_ID}}
@@ -107,7 +126,7 @@ def pessoa_ref(chave: str) -> dict:
     return p
 
 
-def ficha_artigo(titulo: str, resumo: str, url: str, data: str, autor: str, imagem: str) -> str:
+def ficha_artigo(titulo: str, resumo: str, url: str, data: str, autor: str, imagem: str, area_slug: str = None) -> str:
     """Ficha técnica de artigo (schema.org Article): título, resumo, data, autor com OAB, imagem."""
     return json_ld({
         "@context": "https://schema.org",
@@ -119,7 +138,7 @@ def ficha_artigo(titulo: str, resumo: str, url: str, data: str, autor: str, imag
         "datePublished": data,
         "inLanguage": "pt-BR",
         "image": imagem,
-        "author": pessoa_ref(autor),
+        "author": pessoa_ref(autor, area_slug),
         "publisher": {"@type": "LegalService", "@id": ESCRITORIO_ID, "name": "Baldissera Advogados",
                       "url": BASE, "logo": LOGO},
     })
@@ -341,6 +360,7 @@ def montar_publicacao(head: str, *, slug: str, titulo_html: str, subtitulo_html:
     """Página inteira da publicação no visual novo. `head` é o <head> técnico (preservado);
     `referencias` = [(nome_html, descricao_html)]; `corpo` já em HTML com classes."""
     a = AUTORES[autor]
+    cargo = titulo_autor(autor, area_slug)
     area_pag = AREA_PAGINA.get(area_slug, "publicacoes.html")
     figura = (f'\n  <figure><img src="{imagem_web}" alt="{html.escape(imagem_alt, quote=True)}" width="800" height="800" '
               f'fetchpriority="high" decoding="async"></figure>' if imagem_web else "")
@@ -352,7 +372,7 @@ def montar_publicacao(head: str, *, slug: str, titulo_html: str, subtitulo_html:
     bio = bio if bio is not None else html.escape(a["bio"])     # a publicação revestida mantém a biografia que tinha
     bio = f'\n    <p class="bio">{bio}</p>' if bio else ""
     sobre = "Sobre a autora" if autor in ("charys", "karla") else "Sobre o autor"
-    redes = " e ".join(f'<a href="{u}" target="_blank" rel="noopener">@{n}</a>' for n, u in INSTAGRAM)
+    redes = redes_html()
     corpo_pag = f"""<p class="trilha"><a href="publicacoes.html">Publicações</a> / <a href="{area_pag}">{html.escape(area)}</a></p>
 
 <article>
@@ -360,7 +380,7 @@ def montar_publicacao(head: str, *, slug: str, titulo_html: str, subtitulo_html:
   <div>
     <p class="meta">{html.escape(area)}, {mes_ano.lower()}</p>
     <h1>{titulo_html}</h1>
-    <p class="autoria">Por <a href="{a['perfil']}">{html.escape(a['nome'])}</a>, {html.escape(a['titulo'])}. Leitura de {leitura} {"minuto" if leitura == 1 else "minutos"}.</p>
+    <p class="autoria">Por <a href="{a['perfil']}">{html.escape(a['nome'])}</a>, {html.escape(cargo)}. Leitura de {leitura} {"minuto" if leitura == 1 else "minutos"}.</p>
   </div>{figura}
 </header>
 
@@ -376,14 +396,14 @@ def montar_publicacao(head: str, *, slug: str, titulo_html: str, subtitulo_html:
   <div>
     <p class="rotulo">{sobre}</p>
     <h2>{html.escape(a['nome'])}</h2>
-    <p class="cargo">{html.escape(a['titulo'])}</p>{bio}
+    <p class="cargo">{html.escape(cargo)}</p>{bio}
     <a class="remissao" href="{a['perfil']}">Ver perfil</a>
   </div>
 </section>
 
 <aside class="compartilhar" aria-label="Compartilhar">
   <p class="rotulo">Achou útil? Encaminhe a colegas e clientes</p>
-  <a class="botao" href="{wa_href}" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+  <a class="botao" href="{wa_href}" target="_blank" rel="noopener">{molde.ICO_WHATS}Compartilhar no WhatsApp</a>
   <p class="nota">{NOTA_WA}</p>
   <p class="redes">No Instagram: {redes}</p>
 </aside>
@@ -401,7 +421,7 @@ def head_publicacao(p: dict) -> str:
     desc = attr(p["resumo_google"]) if p.get("resumo_google") else resumo_curto(p["resumo"])
     titulo_aba = plano(p.get("titulo_google") or titulo_curto)
     ficha = ficha_artigo(plano(p["titulo"]), html.unescape(desc), url, p["data"], p["autor"],
-                         f"{BASE}/assets/images/capas/{p['_slug']}-og.png")
+                         f"{BASE}/assets/images/capas/{p['_slug']}-og.png", p["_area_slug"])
     return f"""<!DOCTYPE html>
 <html lang="pt-br">
 <head>

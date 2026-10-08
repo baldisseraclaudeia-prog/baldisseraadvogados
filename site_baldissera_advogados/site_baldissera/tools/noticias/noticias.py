@@ -167,10 +167,16 @@ _ES = re.compile(r"\b(la|las|los|del|el|sobre la|en materia|y)\b", re.I)
 _PT = re.compile(r"(ção|ções|ão\b|\bdo\b|\bda\b|\bdos\b|\bdas\b|\bnão\b|\bé\b)", re.I)
 
 
+_LATIM = re.compile(r"\b(in dubio|pro reo|habeas|data venia|in limine|ex officio|in totum|ad hoc|per se|in loco)\b", re.I)
+
+
 def idioma(texto: str, padrao: str = "pt-br") -> str:
-    """Idioma do título: português, espanhol ou inglês (contagem de palavras típicas)."""
-    pt, es, en = len(_PT.findall(texto)), len(_ES.findall(texto)), len(_EN.findall(texto))
-    if en > max(pt, es):
+    """Idioma do título: português, espanhol ou inglês (letras e palavras típicas; latim jurídico não conta)."""
+    t = _LATIM.sub(" ", texto)
+    if re.search(r"[ãõç]", t, re.I):          # letras que o espanhol e o inglês não usam
+        return "pt-br"
+    pt, es, en = len(_PT.findall(t)), len(_ES.findall(t)), len(_EN.findall(t))
+    if en >= 2 and en > max(pt, es):
         return "en"
     if es > pt:
         return "es"
@@ -231,8 +237,16 @@ def candidatos(fonte: str, dias: int) -> dict:
     todos = ler(fonte)
     novos = [{k: i[k] for k in ("link", "titulo", "data", "resumo", "texto", "lang")}
              for i in todos if i["link"] not in vistas and i["quando"] >= limite]
-    sem = [{"link": i["link"], "lang": i["lang"], "titulo": i["titulo"], "resumo": i["resumo"]}
-           for i in todos[:ULTIMAS] if i.get("lang", "pt-br") != "pt-br" and i["link"] not in trad]
+    ocultas = set(carregar(pasta(fonte) / "ocultas.json", []))
+    exibidos = [i for i in todos if i["link"] not in ocultas][:ULTIMAS]
+    exibidos += carregar(pasta(fonte) / "materias.json", []) + carregar(pasta(fonte) / "destaques_penal.json", [])
+    sem, vistos_t = [], set()
+    for i in exibidos:
+        t = trad.get(i["link"])
+        if i.get("lang", "pt-br") == "pt-br" or i["link"] in vistos_t or (t and t.get("original") == i["titulo"]):
+            continue
+        vistos_t.add(i["link"])
+        sem.append({"link": i["link"], "lang": i["lang"], "titulo": i["titulo"], "resumo": i.get("resumo", "")})
     return {"ok": True, "fonte": fonte, "candidatos": novos, "traduzir": sem}
 
 
@@ -279,10 +293,12 @@ def registrar(fonte: str, arquivo: str) -> dict:
     traduzidas = []
     for link, t in (pedido.get("traducoes") or {}).items():
         titulo = " ".join(str((t or {}).get("titulo", "")).split())
-        if link not in feed or not titulo:
+        guardado = {x["link"]: x for x in carregar(d / "materias.json", []) + carregar(d / "destaques_penal.json", [])}
+        orig = feed.get(link) or guardado.get(link)
+        if not orig or not titulo:
             recusados.append(link); continue
         trad[link] = {"titulo": titulo, "resumo": " ".join(str(t.get("resumo", "")).split()),
-                      "original": feed[link]["titulo"], "lang": feed[link].get("lang"),
+                      "original": orig["titulo"], "resumo_original": orig.get("resumo", ""), "lang": orig.get("lang"),
                       "traduzido_em": dt.datetime.now().isoformat(timespec="minutes")}
         traduzidas.append(titulo)
     gravar(d / "traducoes.json", trad)
@@ -311,7 +327,8 @@ def traducao(i: dict) -> dict:
     if not _TRAD:
         for f in FONTES:
             _TRAD.update(carregar(pasta(f) / "traducoes.json", {}))
-    return _TRAD.get(i["link"], {})
+    t = _TRAD.get(i["link"], {})
+    return t if t and t.get("original", i["titulo"]) == i["titulo"] else {}
 
 
 def _trad_html(texto: str) -> str:

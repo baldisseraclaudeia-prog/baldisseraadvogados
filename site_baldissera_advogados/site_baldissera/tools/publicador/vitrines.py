@@ -119,7 +119,7 @@ def bloco_recentes(cs: list, pub: Path = None) -> str:
 def frase(resumo: str) -> str:
     """Primeira frase do resumo (ou as duas primeiras, se a primeira for curta demais)."""
     # não corta depois de abreviatura ("Rel. Min. Fulano", "art. 5º")
-    partes = re.split(r"(?<!\bMin\.)(?<!\bRel\.)(?<!\bDes\.)(?<!\bart\.)(?<!\bArt\.)(?<!\bn\.)(?<!\bDr\.)(?<!\bDra\.)(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÀÇ])", resumo.strip())
+    partes = re.split(r"(?<!\bMin\.)(?<!\bRel\.)(?<!\bDes\.)(?<!\bart\.)(?<!\bArt\.)(?<!\bn\.)(?<!\bDr\.)(?<!\bDra\.)(?<!\bProf\.)(?<!\bProfa\.)(?<!\bSr\.)(?<!\bSra\.)(?<!\bInc\.)(?<!\binc\.)(?<!\bfls\.)(?<!\bfl\.)(?<!\bp\.)(?<!\bv\.)(?<!\bAg\.)(?<!\barts\.)(?<!\bArts\.)(?<!\bEx\.)(?<!\bExmo\.)(?<!\bExma\.)(?<!\bMin\.)(?<!\bnº\.)(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÀÇ])", resumo.strip())
     # frase que só identifica o julgado ("Comentário ao REsp ...") não informa: usa a seguinte
     if len(partes) > 1 and re.match(r"Coment[áa]rio (ao|à|a)\b", partes[0]):
         partes = partes[1:]

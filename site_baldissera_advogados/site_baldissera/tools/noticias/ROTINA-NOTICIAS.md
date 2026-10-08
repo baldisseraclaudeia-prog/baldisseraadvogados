@@ -1,8 +1,8 @@
 # Rotina diária de notícias dos tribunais — regras do Dr. Luiz (07/10/2026)
 
 Fonte única das instruções da rotina `noticias-stj-site` (Windows, 7h), da rotina `noticias-tribunais-mac`
-(Mac, 7h30, desde 08/10/2026, ordem do Dr. Luiz) e de qualquer rodada feita à mão. Trava contra duplicidade:
-se já houver commit "Notícias dos tribunais na home" do dia, a segunda rotina só faz as traduções que faltarem. O programa é `noticias.py`; quem lê e decide é a rotina (Claude), não o programa.
+(Mac, 8h30, desde 08/10/2026, ordem do Dr. Luiz) e de qualquer rodada feita à mão. Trava contra duplicidade:
+se já houver commit "Notícias dos tribunais na home" do dia, a segunda rotina faz só o complemento: triagem das notícias que entraram depois e as traduções que faltarem; erro de git = para e avisa, nunca força. O programa é `noticias.py`; quem lê e decide é a rotina (Claude), não o programa.
 
 ## Ordem do Dr. Luiz (07/10/2026, verbatim)
 

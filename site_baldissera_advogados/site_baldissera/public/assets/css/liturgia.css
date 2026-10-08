@@ -723,7 +723,8 @@ form textarea:focus-visible { outline: 2px solid var(--toga); outline-offset: 1p
 
 /* ---------- acabamento (08/10/2026) ---------- */
 ::selection { background: rgba(155,123,58,.30); color: var(--toga); }
-.cabecalho ::selection, .fecho ::selection, .voce-sabia ::selection, .mapa-abertura ::selection { background: rgba(201,185,138,.45); color: #0A1020; }
+.cabecalho ::selection, .fecho ::selection, .voce-sabia ::selection, .mapa-abertura ::selection, .barra-topo ::selection { background: #C9B98A; color: #0A1020; }
+html.contraste ::selection { background: #000; color: #FFF; }
 html { scrollbar-color: #B9AE95 var(--papel); }
 .ref-nome, .ref-desc, .decisao-meta, .pub-meta, .pub-data, .res-meta, .cabeca-pub .meta, .ementario .meta, .col-trib time, .corpo dl, .equipe .adv-oab, .equipe-lista .adv-oab, .perfil-oab { font-variant-numeric: lining-nums; }
 @media (max-width: 560px) {

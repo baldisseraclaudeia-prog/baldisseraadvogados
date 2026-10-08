@@ -458,7 +458,7 @@ def link_whatsapp(p: dict) -> str:
 
 def pagina(p: dict) -> str:
     return montar_publicacao(
-        head_publicacao(p), slug=p["_slug"], titulo_html=inline(p["titulo"]), subtitulo_html=inline(p["subtitulo"]),
+        head_publicacao(p), slug=p["_slug"], titulo_html=inline(p["titulo"].rstrip().rstrip(".")), subtitulo_html=inline(p["subtitulo"]),
         area=p["area"], area_slug=p["_area_slug"], mes_ano=p["_mes_ano"], autor=p["autor"], leitura=p["_leitura"],
         imagem_web=p.get("_imagem_web"), imagem_alt="Capa da publicação: " + p["_imagem_alt"],
         corpo=corpo_html(p["corpo"], p["_autor"]["iniciais"]),
@@ -481,7 +481,7 @@ def cartao(p: dict) -> str:
             if p.get("_imagem_web") else "")
     return (f'<a href="{p["_slug"]}.html" class="pub-card" data-area="{p["_area_slug"]}" data-superior="{1 if p["_superior"] else 0}" data-data="{p["data"]}">\n'
             f'{capa}<span class="pub-meta">{html.escape(p["area"])}, {p["_mes_ano"].lower()}</span>\n'
-            f'<h3>{inline(p["titulo"])}</h3>\n'
+            f'<h3>{inline(p["titulo"].rstrip().rstrip("."))}</h3>\n'
             f'<p class="pub-resumo">{inline(p["resumo"])}</p>\n'
             f'<span class="pub-autor">{html.escape(a["nome"])}</span>\n'
             f'</a>\n')

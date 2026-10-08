@@ -43,7 +43,7 @@ def main():
 """
     corpo = f"""<section class="cabeca-pagina">
   <p class="sobretitulo">Erro 404</p>
-  <h1>Página não encontrada.</h1>
+  <h1>Página não encontrada</h1>
   <p class="preambulo">O endereço procurado não existe ou mudou de lugar. O conteúdo do escritório continua disponível pelos caminhos abaixo.</p>
 </section>
 <div class="pagina-texto">

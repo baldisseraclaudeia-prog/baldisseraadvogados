@@ -162,6 +162,21 @@ def ler_stf() -> list:
     return unicos
 
 
+_EN = re.compile(r"\b(the|of|on|and|in|for|with|court|beginning)\b", re.I)
+_ES = re.compile(r"\b(la|las|los|del|el|sobre la|en materia|y)\b", re.I)
+_PT = re.compile(r"(ção|ções|ão\b|\bdo\b|\bda\b|\bdos\b|\bdas\b|\bnão\b|\bé\b)", re.I)
+
+
+def idioma(texto: str, padrao: str = "pt-br") -> str:
+    """Idioma do título: português, espanhol ou inglês (contagem de palavras típicas)."""
+    pt, es, en = len(_PT.findall(texto)), len(_ES.findall(texto)), len(_EN.findall(texto))
+    if en > max(pt, es):
+        return "en"
+    if es > pt:
+        return "es"
+    return "pt-br" if pt else padrao
+
+
 def ler_corteidh() -> list:
     raiz = "https://www.corteidh.or.cr/"
     s = baixar(raiz + "comunicados_prensa.cfm?lang=pt").decode("utf-8", "replace")
@@ -181,7 +196,7 @@ def ler_corteidh() -> list:
         q = dt.datetime(int("".join(m.group(3, 4, 5, 6))), MESES[m.group(2).lower()], int(m.group(1)), 12, 0)
         resumo = texto[m.end():].lstrip(" .-").split(" Espanhol versión")[0].strip()
         # o título vem em português quando há versão em português; senão, em espanhol
-        itens.append(item(titulo, raiz + (por or esp), q, resumo, resumo, "pt-br" if por else "es"))
+        itens.append(item(titulo, raiz + (por or esp), q, resumo, resumo, idioma(titulo, "pt-br" if por else "es")))
     return itens
 
 
@@ -212,9 +227,13 @@ def ler(fonte: str) -> list:
 def candidatos(fonte: str, dias: int) -> dict:
     vistas = set(carregar(pasta(fonte) / "avaliadas.json", []))
     limite = (dt.datetime.now() - dt.timedelta(days=dias)).isoformat(timespec="minutes")
-    novos = [{k: i[k] for k in ("link", "titulo", "data", "resumo", "texto")}
-             for i in ler(fonte) if i["link"] not in vistas and i["quando"] >= limite]
-    return {"ok": True, "fonte": fonte, "candidatos": novos}
+    trad = carregar(pasta(fonte) / "traducoes.json", {})
+    todos = ler(fonte)
+    novos = [{k: i[k] for k in ("link", "titulo", "data", "resumo", "texto", "lang")}
+             for i in todos if i["link"] not in vistas and i["quando"] >= limite]
+    sem = [{"link": i["link"], "lang": i["lang"], "titulo": i["titulo"], "resumo": i["resumo"]}
+           for i in todos[:ULTIMAS] if i.get("lang", "pt-br") != "pt-br" and i["link"] not in trad]
+    return {"ok": True, "fonte": fonte, "candidatos": novos, "traduzir": sem}
 
 
 def registrar(fonte: str, arquivo: str) -> dict:
@@ -256,18 +275,48 @@ def registrar(fonte: str, arquivo: str) -> dict:
         por_link[link] = {**{k: i[k] for k in ("link", "titulo", "quando", "data", "resumo", "lang")}, "areas": areas,
                           "classificado_em": dt.datetime.now().isoformat(timespec="minutes")}
         classificadas.append(i["titulo"])
+    trad = carregar(d / "traducoes.json", {})
+    traduzidas = []
+    for link, t in (pedido.get("traducoes") or {}).items():
+        titulo = " ".join(str((t or {}).get("titulo", "")).split())
+        if link not in feed or not titulo:
+            recusados.append(link); continue
+        trad[link] = {"titulo": titulo, "resumo": " ".join(str(t.get("resumo", "")).split()),
+                      "original": feed[link]["titulo"], "lang": feed[link].get("lang"),
+                      "traduzido_em": dt.datetime.now().isoformat(timespec="minutes")}
+        traduzidas.append(titulo)
+    gravar(d / "traducoes.json", trad)
     materias = sorted(por_link.values(), key=lambda x: x["quando"], reverse=True)[:300]
     gravar(d / "materias.json", materias)
     gravar(d / "destaques_penal.json", atuais)
     gravar(d / "avaliadas.json", vistas[-1000:])
     gravar(d / "ocultas.json", ocultas[-500:])
     return {"ok": True, "fonte": fonte, "destaques_novos": aceitos, "classificadas_por_materia": classificadas,
+            "traduzidas": traduzidas,
             "recusados_link_fora_da_fonte_ou_sem_motivo": recusados, "ocultas": len(ocultas)}
 
 
 # ------------------------------------------------------------------ home
 def _lang(i):
-    return ' lang="es"' if i.get("lang") == "es" else ""
+    return f' lang="{i["lang"]}"' if i.get("lang") in ("es", "en") else ""
+
+
+_TRAD = {}
+
+
+def traducao(i: dict) -> dict:
+    """Tradução gravada pela rotina para item em espanhol ou inglês ({} se não houver ou se já for português)."""
+    if i.get("lang", "pt-br") == "pt-br":
+        return {}
+    if not _TRAD:
+        for f in FONTES:
+            _TRAD.update(carregar(pasta(f) / "traducoes.json", {}))
+    return _TRAD.get(i["link"], {})
+
+
+def _trad_html(texto: str) -> str:
+    return f'<span class="traducao" lang="pt-br"><span class="traducao-rotulo">Tradução</span> {html.escape(texto)}</span>'
+
 
 
 def li_ultimas(itens: list, sigla: str) -> str:
@@ -275,7 +324,8 @@ def li_ultimas(itens: list, sigla: str) -> str:
     return "\n".join(
         f'<li role="listitem"><time datetime="{i["quando"][:10]}">{i["data"]}</time>'
         f'<a href="{html.escape(i["link"], quote=True)}" target="_blank" rel="noopener"{_lang(i)}>{html.escape(i["titulo"])}'
-        f'<span class="so-leitor"> (abre em nova aba, no site do {sigla})</span></a></li>'
+        f'<span class="so-leitor"> (abre em nova aba, no site {"da" if sigla.startswith("Corte") else "do"} {sigla})</span></a>'
+        + (_trad_html(traducao(i)["titulo"]) if traducao(i) else "") + '</li>'
         for i in itens)
 
 
@@ -293,6 +343,10 @@ def li_area(itens: list) -> str:
     for i in itens:
         nome = NOME_TRIBUNAL.get(i.get("_fonte"), i.get("_fonte", ""))
         resumo = (f'\n<p{_lang(i)}>{html.escape(i["resumo"])}</p>' if i.get("resumo") and i["resumo"] != i["titulo"] else "")
+        t = traducao(i)
+        if t:
+            resumo = f'\n<p class="traducao-titulo">{_trad_html(t["titulo"])}</p>' + resumo + (
+                f'\n<p>{_trad_html(t["resumo"])}</p>' if t.get("resumo") and resumo else "")
         out.append(f'<li>\n<p class="decisao-meta"><time datetime="{i["quando"][:10]}">{i["data"]}</time> <span>{nome}</span></p>\n'
                    f'<h3><a href="{html.escape(i["link"], quote=True)}" target="_blank" rel="noopener"{_lang(i)}>{html.escape(i["titulo"])}'
                    f'<span class="so-leitor"> (abre em nova aba, no site do tribunal)</span></a></h3>{resumo}\n</li>')

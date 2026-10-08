@@ -69,3 +69,14 @@ publica: a rotina recebe a lista, lê, classifica pelas regras acima e segue do 
 - `noticias.py` passou a ler o STF por requisição simples quando o servidor responde (é o caso do Mac)
   e só abre o navegador automático se falhar; reconhece o scrapling do Mac
   (`~/.local/share/uv/tools/scrapling/bin/python`).
+
+
+## Tradução das notícias em outra língua (ordem do Dr. Luiz, 08/10/2026)
+
+Notícia em espanhol ou inglês (em regra da Corte IDH) fica no site com o título original, exatamente como está no site da fonte, e logo abaixo a tradução fiel para o português, com o rótulo "Tradução". O `candidatos` devolve a lista `traduzir` (itens das últimas notícias sem tradução); a rotina traduz cada um com exatidão, sem resumir, adaptar ou acrescentar, e manda no `registrar`:
+
+```json
+{"traducoes": {"<link>": {"titulo": "<tradução fiel do título>", "resumo": "<tradução fiel do resumo, se o resumo também estiver em outra língua>"}}}
+```
+
+As traduções ficam em `<fonte>/traducoes.json`. O idioma é detectado pelo texto do título (o site da Corte às vezes publica título em inglês na página em português).

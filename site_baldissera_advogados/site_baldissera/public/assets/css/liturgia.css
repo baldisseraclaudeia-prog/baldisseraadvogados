@@ -730,3 +730,15 @@ html { scrollbar-color: #B9AE95 var(--papel); }
   .voltar-topo { width: 2.75rem; height: 2.75rem; padding: 0; font-size: 0; right: 1rem; bottom: 1rem; }
   .voltar-topo::before { content: ""; display: block; width: 0.7rem; height: 0.7rem; margin: 0.3rem auto 0; border-left: 1.5px solid currentColor; border-top: 1.5px solid currentColor; transform: rotate(45deg); }
 }
+.traducao { display: block; margin-top: 0.3rem; font-size: var(--t-0); line-height: 1.45; color: var(--tinta-2); font-style: italic; }
+.traducao-rotulo { font-style: normal; font-variant-caps: all-small-caps; letter-spacing: 0.06em; color: var(--ouro-texto); margin-right: 0.25em; }
+.decisoes .traducao-titulo { margin: -0.3rem 0 0.5rem; }
+@media (max-width: 560px) {
+  /* barra de contatos numa linha: só os símbolos (o texto continua para leitor de tela) e a acessibilidade ao lado */
+  .barra-interna { justify-content: space-between; flex-wrap: nowrap; gap: 0.5rem; padding: 0.25rem 0.75rem; }
+  .contatos { gap: 0; flex-wrap: nowrap; }
+  .contatos a { font-size: 0; display: inline-flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; }
+  .contatos a svg { width: 1.2rem; height: 1.2rem; margin: 0; vertical-align: middle; }
+  .acess { gap: 0.25rem; }
+  .acess button { padding: 0.45rem 0.5rem; }
+}

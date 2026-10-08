@@ -25,7 +25,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/liturgia.css?v=20261008b">
+<link rel="stylesheet" href="assets/css/liturgia.css?v=20261008c">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -170,14 +170,14 @@
 <main id="conteudo" tabindex="-1">
   <section class="cabeca-pagina">
     <p class="sobretitulo">Contato institucional</p>
-    <h1>Contato.</h1>
+    <h1>Contato</h1>
     <p class="preambulo">Para análise técnica de caso, atendimento a cliente ou informações institucionais sobre o escritório, utilize os canais abaixo. Todas as demandas recebem resposta em até vinte e quatro horas úteis.</p>
   </section>
 
   <section class="secao" id="canais" aria-labelledby="t-canais">
     <header>
       <span class="numeral" aria-hidden="true">I</span>
-      <h2 id="t-canais">Contato institucional.</h2>
+      <h2 id="t-canais">Dos canais de contato</h2>
     </header>
     <ul class="canais">
       <li><span class="rotulo">E-mail</span> <a href="mailto:contato@baldisseraadvogados.com.br"><svg class="ico-linha" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>contato@baldisseraadvogados.com.br</a></li>
@@ -190,7 +190,7 @@
   <section class="secao" id="unidades-contato" aria-labelledby="t-unidades">
     <header>
       <span class="numeral" aria-hidden="true">II</span>
-      <h2 id="t-unidades">Quatro unidades. Atuação nacional.</h2>
+      <h2 id="t-unidades">Das unidades</h2>
     </header>
     <ul class="unidades-cartoes">
       <li id="cascavel">
@@ -227,8 +227,8 @@
   <section class="secao" id="formulario" aria-labelledby="t-form">
     <header>
       <span class="numeral" aria-hidden="true">III</span>
-      <h2 id="t-form">Mensagem institucional.</h2>
-      <p class="nota-secao">Descreva sucintamente a matéria para análise preliminar.</p>
+      <h2 id="t-form">Do formulário</h2>
+      <p class="nota-secao">Basta indicar a matéria; os detalhes do caso ficam para a conversa com o advogado.</p>
     </header>
     <div class="pagina-texto">
       <p>Para marcar um horário com um advogado, use <a href="agendar.html">Agendar atendimento</a>.</p>
@@ -243,32 +243,30 @@
         <div class="duas">
           <div class="campo">
             <label for="contato-nome">Nome completo</label>
-            <input id="contato-nome" type="text" name="nome" placeholder="Nome" autocomplete="name">
+            <input id="contato-nome" type="text" name="nome" autocomplete="name" required>
           </div>
           <div class="campo">
-            <label for="contato-email">E-mail</label>
-            <input id="contato-email" type="email" name="email" placeholder="seu@email.com" autocomplete="email">
+            <label for="contato-email">E-mail <span class="dica">Opcional</span></label>
+            <input id="contato-email" type="email" name="email" autocomplete="email">
           </div>
         </div>
 
         <div class="duas">
           <div class="campo">
             <label for="contato-telefone">Telefone</label>
-            <input id="contato-telefone" type="tel" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel">
+            <input id="contato-telefone" type="tel" name="telefone" inputmode="tel" autocomplete="tel" required>
           </div>
           <div class="campo">
-            <label for="contato-area">Área de interesse</label>
-            <select id="contato-area" name="area">
-              <option>Selecione</option><option>Direito Penal</option><option>Recursos aos Tribunais Superiores</option>
-              <option>Execução Penal</option><option>Direito Imobiliário</option><option>Direito Civil</option>
-              <option>Família, Sucessões e Planejamento</option><option>Direito Ambiental</option><option>Assessoria em Leilões</option><option>Outro</option>
+            <label for="contato-area">Matéria do caso</label>
+            <select id="contato-area" name="materia" required>
+              <option value="">Escolha a matéria</option>
+              <optgroup label="Criminal"><option>Direito Penal</option><option>Execução Penal</option></optgroup>
+              <optgroup label="Cível"><option>Direito Civil</option><option>Direito Imobiliário</option><option>Leilões</option><option>Família e Sucessões</option></optgroup>
+              <optgroup label="Ambiental"><option>Direito Ambiental</option></optgroup>
+              <optgroup label="Tribunais superiores"><option>Recursos aos Tribunais Superiores</option></optgroup>
+              <option>Não sei informar</option>
             </select>
           </div>
-        </div>
-
-        <div class="campo">
-          <label for="contato-mensagem">Mensagem</label>
-          <textarea id="contato-mensagem" name="mensagem" placeholder="Descreva a matéria de forma sucinta, sem incluir dados sensíveis sobre o caso."></textarea>
         </div>
 
         <div class="campo consentimento">
@@ -285,7 +283,7 @@
   <section class="secao atendimento" id="primeiro-contato" aria-labelledby="t-primeiro">
     <header>
       <span class="numeral" aria-hidden="true">IV</span>
-      <h2 id="t-primeiro">Sobre o primeiro contato.</h2>
+      <h2 id="t-primeiro">Do primeiro contato</h2>
     </header>
     <p>O escritório responde a todas as mensagens em até vinte e quatro horas úteis. O primeiro contato é destinado à análise preliminar da matéria, sem compromisso de aceitação do caso e sem cobrança de honorários.</p>
     <p>Questões sensíveis ou urgentes recebem atenção prioritária — nesses casos, o telefone institucional é o canal recomendado.</p>
@@ -331,6 +329,6 @@
 </footer>
 
 <button class="voltar-topo" type="button" hidden>Voltar ao topo</button>
-<script src="assets/js/site.js?v=20261008b"></script>
+<script src="assets/js/site.js?v=20261008c"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/liturgia.css?v=20261008b">
+<link rel="stylesheet" href="assets/css/liturgia.css?v=20261008c">
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -111,18 +111,14 @@
           <input id="cidade" name="cidade" type="text" autocomplete="address-level2" placeholder="Cascavel, PR" required>
         </div>
         <div class="campo">
-          <label for="area">Assunto</label>
-          <select id="area" name="assunto" required>
-            <option value="">Escolha a área</option>
-            <option>Ambiental</option>
-            <option>Civil</option>
-            <option>Direito Penal</option>
-            <option>Execução Penal</option>
-            <option>Família e Sucessões</option>
-            <option>Imobiliário</option>
-            <option>Leilões</option>
-            <option>Recursos aos Tribunais Superiores</option>
-            <option>Não sei informar</option>
+          <label for="area">Matéria do caso</label>
+          <select id="area" name="materia" required>
+              <option value="">Escolha a matéria</option>
+              <optgroup label="Criminal"><option>Direito Penal</option><option>Execução Penal</option></optgroup>
+              <optgroup label="Cível"><option>Direito Civil</option><option>Direito Imobiliário</option><option>Leilões</option><option>Família e Sucessões</option></optgroup>
+              <optgroup label="Ambiental"><option>Direito Ambiental</option></optgroup>
+              <optgroup label="Tribunais superiores"><option>Recursos aos Tribunais Superiores</option></optgroup>
+              <option>Não sei informar</option>
           </select>
         </div>
       </div>
@@ -211,7 +207,7 @@
 </footer>
 
 <button class="voltar-topo" type="button" hidden>Voltar ao topo</button>
-<script src="assets/js/site.js?v=20261008b"></script>
+<script src="assets/js/site.js?v=20261008c"></script>
 <script>
   // Confirmação depois do envio (o formsubmit volta para ?enviado=1); unidade só no atendimento presencial
   (function () {

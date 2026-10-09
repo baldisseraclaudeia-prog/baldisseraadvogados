@@ -46,7 +46,7 @@ PREAMBULO = ("Quem cumpre pena, e quem acompanha a execução de um parente, rec
              "com o endereço do tribunal e a data em que foi conferida.")
 COMO_LER = [
     ("Tema repetitivo e repercussão geral", "Quando muitos processos levantam a mesma pergunta, o STJ (tema repetitivo) ou o STF "
-     "(repercussão geral) escolhe um deles e fixa uma resposta que os demais juízes têm de seguir. É por isso que cada bloco desta "
+     "(repercussão geral) escolhe um deles e fixa uma resposta que os demais juízes têm de seguir. No STF, o reconhecimento da repercussão geral só diz que a questão é relevante: para saber se o mérito já foi decidido, é preciso conferir a situação do tema. É por isso que cada bloco desta "
      "página traz o número do tema: ele identifica a resposta obrigatória."),
     ("Em vigor, afetado, pendente", "\"Em vigor\" é a tese já fixada e aplicável. \"Afetado\" é o tema que o STJ escolheu para julgar e "
      "ainda não julgou. \"Repercussão geral reconhecida\" é a questão que o STF admitiu e ainda vai decidir. Nos pendentes, o bloco "
@@ -84,7 +84,7 @@ def situacao_linha(j: dict) -> str:
     if s.get("julgamento"):
         partes.append(f'tese fixada em {fmt_data(s["julgamento"])}')
     elif s.get("publicacao"):
-        partes.append(f'admitido em {fmt_data(s["publicacao"])}')
+        partes.append(f'acórdão de repercussão geral publicado em {fmt_data(s["publicacao"])}')
     partes.append(f'conferido em {fmt_data(s["verificado_em"])}')
     return " · ".join(partes)
 
@@ -212,7 +212,7 @@ def corpo_html(js: list, contato: str, rascunhos: bool) -> str:
     <header>
       <span class="numeral" aria-hidden="true">II</span>
       <h2 id="t-vale">Do que já vale</h2>
-      <p class="nota-secao">Teses fixadas pelo STJ e pelo STF com efeito obrigatório para os juízes. Cada bloco diz a quem pode alcançar e o que pode impedir o efeito.</p>
+      <p class="nota-secao">Leis, súmulas, temas repetitivos e decisões do STJ e do STF sobre o cumprimento da pena. Cada bloco identifica a fonte, seu alcance e seus limites, diz a quem pode alcançar e o que pode impedir o efeito.</p>
     </header>
     <div class="filtros" role="group" aria-label="Filtrar por matéria">{filtros}</div>
     <p id="ex-aviso" class="nota-secao centro" hidden></p>''')

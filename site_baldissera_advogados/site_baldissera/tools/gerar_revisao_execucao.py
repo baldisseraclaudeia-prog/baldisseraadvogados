@@ -40,7 +40,7 @@ NUMEROS = [
     ("75,4%",
      "dos 86.398 processos e incidentes de execução com incidente vencido (marco de progressão, livramento, extinção ou prescrição "
      "já atingido no sistema, sem decisão), levantados pelo CNJ fora de São Paulo no mutirão de 30/6 a 30/7/2025, ainda dependiam "
-     "de análise judicial segundo o relatório final.",
+     "de análise judicial segundo o relatório final (no gráfico do relatório, \"a instaurar\").",
      "Unidade: processos e incidentes, não pessoas. O CNJ registra que, em parte dos casos, o direito já estava implementado e "
      "apenas não fora lançado no sistema; em outros, a própria análise estava atrasada.",
      "CNJ, Relatório do I Mutirão Processual Penal — Pena Justa (2025), p. 28 a 30",
@@ -369,10 +369,10 @@ JULGADOS = [
      "publicacao": "publicacao-recolhimento-noturno-desconta-da-pena.html"},
     {"trib": "STJ · Tema Repetitivo 1.354 · STF · EP 102 AgR-segundo",
      "tese": "Cada condenação com a lei mais favorável ao seu fato; para crimes com e sem violência sob a mesma lei, o STF decidiu em sentido diverso",
-     "ponte": "Quando a lei mudou entre um crime e outro, cada condenação recebe a fração de progressão da lei mais favorável ao seu "
-              "fato: é uma questão de lei no tempo. Outra questão, a de crimes com e sem violência sob a mesma lei, foi decidida pelo "
+     "ponte": "Quando leis sucessivas alteram as frações de progressão, compara-se a regra aplicável a cada condenação, inclusive "
+              "quando todos os crimes são anteriores à lei nova. Outra questão, a de crimes com e sem violência sob a mesma lei, foi decidida pelo "
               "Plenário do Supremo Tribunal Federal em sentido diverso, com a fração mais grave sobre toda a pena unificada. Por isso "
-              "cada cálculo é conferido à luz dos dois entendimentos.",
+              "cada cálculo é conferido à luz dos dois entendimentos; a distinção entre eles não se resolve só pela data dos crimes.",
      "partes": [("Tese firmada no Tema 1.354",
                  "<strong>É possível, para fins de cálculo para progressão de regime, a aplicação de percentuais distintos para cada "
                  "condenação isoladamente, em uma mesma execução</strong>, reconhecendo-se a retroatividade da Lei n. 13.964/2019 e a "
@@ -395,7 +395,7 @@ JULGADOS = [
                  "o momento em que preenchido o último requisito pendente, seja ele o objetivo ou o subjetivo. Se por último for "
                  "preenchido o requisito subjetivo, independentemente da anterior implementação do requisito objetivo, será aquele "
                  "(o subjetivo) o marco para fixação da data-base para efeito de nova progressão de regime.",
-                 "(REsp n. 1.972.187/SP, relator Ministro Og Fernandes, Terceira Seção, julgado em 14/8/2024, DJe de 2/12/2024. Tese conferida no portal de precedentes qualificados do STJ.)")]},
+                 "(REsp n. 1.972.187/SP, relator Desembargador convocado Jesuíno Rissato (TJDFT), Terceira Seção, julgado em 14/8/2024, DJEN de 2/12/2024. Tese conferida no portal de precedentes qualificados do STJ.)")]},
     {"trib": "STJ · Tema Repetitivo 1.006",
      "tese": "A soma de uma nova condenação não altera, por si, a data-base dos benefícios",
      "ponte": "Quando chega uma condenação nova, as penas são somadas ou unificadas, mas a data-base dos benefícios não muda por "
@@ -403,7 +403,7 @@ JULGADOS = [
               "confunde com a falta grave, que interrompe a contagem da progressão.",
      "partes": [("Tese firmada",
                  "<strong>A unificação de penas não enseja a alteração da data-base para concessão de novos benefícios executórios.</strong>",
-                 "(REsp n. 1.753.512/PR e REsp n. 1.753.509/PR, relator Ministro Rogerio Schietti Cruz, Terceira Seção, julgado em 18/12/2018, DJe de 11/3/2019.)")]},
+                 "(ProAfR no REsp n. 1.753.512/PR e ProAfR no REsp n. 1.753.509/PR, relator Ministro Rogerio Schietti Cruz, Terceira Seção, julgado em 18/12/2018, DJe de 11/3/2019.)")]},
     {"trib": "STJ · Súmulas 441 e 535 · Jurisprudência em Teses n. 7 · Tema Repetitivo 1.161",
      "tese": "A falta grave não reinicia o prazo do livramento, do indulto nem da comutação, mas pesa no comportamento",
      "ponte": "A falta grave interrompe a contagem para a progressão. O prazo do livramento continua correndo, mas a falta pesa no "
@@ -415,7 +415,7 @@ JULGADOS = [
                  "Jurisprudência em Teses n. 7, tese 10: A prática de falta grave não interrompe o prazo para fim de comutação de pena "
                  "ou indulto, salvo se houver expressa previsão a respeito no decreto concessivo dos benefícios.<br>"
                  "Tema Repetitivo 1.161: " + TEMA_1161,
-                 "(Súmula 441, Terceira Seção, julgada em 28/4/2010, DJe de 13/5/2010; Súmula 535, Terceira Seção, julgada em 10/6/2015, DJe de 15/6/2015; STJ, Jurisprudência em Teses n. 7, tese 10; REsp n. 1.970.217 e REsp n. 1.974.104, relator Ministro Ribeiro Dantas, Terceira Seção, Tema Repetitivo 1.161.)")]},
+                 "(Súmula 441, Terceira Seção, julgada em 28/4/2010, DJe de 13/5/2010; Súmula 535, Terceira Seção, julgada em 10/6/2015, DJe de 15/6/2015; STJ, Jurisprudência em Teses n. 7, tese 10; REsp n. 1.970.217/MG e REsp n. 1.974.104/RS, relator Ministro Ribeiro Dantas, Terceira Seção, Tema Repetitivo 1.161.)")]},
 ]
 
 # ---------------------------------------------------------------- perguntas, aviso, contato

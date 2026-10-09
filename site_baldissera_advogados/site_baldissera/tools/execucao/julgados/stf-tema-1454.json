@@ -40,7 +40,7 @@
   },
   "audio": {
     "roteiro": "Este é um julgamento aguardado, explicado em linguagem simples. O Supremo Tribunal Federal vai decidir se o tempo em que a pessoa ficou recolhida em casa à noite, durante o processo, desconta da pena. Imagine uma conta de luz que a distribuidora já recalculou a favor do consumidor, e a agência reguladora anuncia que vai reexaminar o critério. Enquanto a agência não decide, o recálculo continua valendo, e quem tem a conta na mão pode pedir o acerto agora. Na execução penal, o recálculo já feito é a decisão do Superior Tribunal de Justiça, a agência é o Supremo, e a conta na mão é o atestado de pena. Até o julgamento, a regra do STJ obriga os juízes, e o pedido de desconto pode ser feito hoje. O que pode mudar: o Supremo pode confirmar, restringir ou ampliar a regra, e não há data. As condições e os limites estão no texto. O documento que mostra é o atestado de pena.",
-    "narracao": {"arquivo": "assets/audio/execucao/stf-tema-1454-narracao.mp3", "hash": null, "voz_id": null, "modelo": null, "gerado_em": null, "duracao_s": null, "caracteres": null},
+    "narracao": {"arquivo": "assets/audio/execucao/stf-tema-1454-narracao.mp3", "hash": "17eeb46a33aa62783ed4599ad5f51d1399aa619b7c371b13fbb1f28e26c391ed", "roteiro_hash": "84ea582fbf56a2d5", "voz_id": "bJrNspxJVFovUxNBQ0wh", "modelo": "eleven_multilingual_v2", "velocidade": 1.2, "gerado_em": "2026-10-09", "duracao_s": 50, "caracteres": 877},
     "titular": {"arquivo": "assets/audio/execucao/stf-tema-1454-titular.m4a", "gravado_em": null, "duracao_s": null}
   }
 }

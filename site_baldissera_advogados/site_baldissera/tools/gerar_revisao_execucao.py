@@ -375,7 +375,7 @@ FAQ = [
 AVISO = ("Conteúdo informativo, nos termos do Provimento CFOAB 205/2021. Os exemplos são fictícios e não se referem a casos do "
          "escritório. O resultado de cada execução depende dos documentos e das circunstâncias do caso. Dados oficiais com fonte e "
          "página indicadas; consulta em 8 de outubro de 2026.")
-CONTATO_FRASE = "Atendimento nas unidades de Cascavel, Porto Alegre e Foz do Iguaçu, com agendamento prévio."
+CONTATO_FRASE = "Atendimento virtual em todo o Brasil e atendimento presencial nas unidades de Cascavel, Porto Alegre, Foz do Iguaçu e Porto Belo, mediante agendamento prévio."
 BIO = "Defesa criminal, habeas corpus e recursos perante o STJ e o STF, execução penal e sistema penitenciário federal."
 
 

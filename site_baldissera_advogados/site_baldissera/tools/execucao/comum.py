@@ -22,7 +22,7 @@ CONTATO_PADRAO = "B"
 AVISO = ("Conteúdo informativo, nos termos do Provimento CFOAB 205/2021. Os exemplos são fictícios e não se referem a casos do "
          "escritório. O resultado de cada execução depende dos documentos e das circunstâncias do caso. Julgados citados com "
          "tribunal, número, relator, data e endereço oficial; a data da conferência consta em cada um.")
-CONTATO_FRASE = "Atendimento nas unidades de Cascavel, Porto Alegre e Foz do Iguaçu, com agendamento prévio."
+CONTATO_FRASE = "Atendimento virtual em todo o Brasil e atendimento presencial nas unidades de Cascavel, Porto Alegre, Foz do Iguaçu e Porto Belo, mediante agendamento prévio."
 BIO = "Defesa criminal, habeas corpus e recursos perante o STJ e o STF, execução penal e sistema penitenciário federal."
 AUTOR = "Luiz Henrique Baldissera"
 CARGO = "Advogado criminalista · OAB/PR 55.717 · OAB/SC 78.938-A"

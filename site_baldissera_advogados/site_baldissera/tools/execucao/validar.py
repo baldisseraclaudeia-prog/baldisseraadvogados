@@ -26,7 +26,7 @@ MATERIAS = ("progressao", "remicao", "detracao", "livramento", "indulto", "falta
 SITUACOES = ("rascunho", "aguarda-selagem", "publicar")
 SITUACOES_PUBLICAS = ("em vigor", "afetado", "repercussão geral reconhecida", "aguardando publicação", "pendente (ADI)",
                       "sobrestado", "superado")
-DOMINIOS = ("stj.jus.br", "portal.stf.jus.br", "jurisprudencia.stf.jus.br", "planalto.gov.br", "legis.senado.leg.br")
+DOMINIOS = ("stj.jus.br", "portal.stf.jus.br", "jurisprudencia.stf.jus.br", "noticias.stf.jus.br", "planalto.gov.br", "legis.senado.leg.br")
 OBRIGATORIOS = ("id", "materia", "ordem", "situacao", "pendente", "titulo", "alcance", "parabola", "exemplo", "decidiu",
                 "limites", "documento", "selagem", "relacionados", "audio")
 SELAGEM_OBRIGATORIA = ("tribunal", "orgao", "classe", "tese_verbatim", "url_oficial", "situacao_publica", "verificado_em",

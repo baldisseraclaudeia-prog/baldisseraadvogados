@@ -1,0 +1,68 @@
+{
+  "id": "tema-1374",
+  "materia": "progressao",
+  "ordem": 40,
+  "situacao": "publicar",
+  "pendente": false,
+  "titulo": "Mãe, gestante ou responsável condenada por associação para o tráfico pode progredir de regime com 1/8 da pena",
+  "alcance": "A mulher presa que está grávida, ou que é mãe ou responsável por criança ou por pessoa com deficiência, condenada por associação para o tráfico ou por associação criminosa. Essa condenação não basta para negar a progressão especial com 1/8 da pena, se os demais requisitos da lei estiverem cumpridos.",
+  "parabola": "Imagine um condomínio cujo regulamento dá vaga coberta aos moradores com filho pequeno, exceto a quem integrar a comissão definida em um anexo do regulamento. Um morador participa de uma associação de bairro, e o síndico lhe nega a vaga, dizendo que associação é tudo a mesma coisa. Mas o regulamento excluiu só quem se enquadra na definição do anexo; o síndico não pode estender a exceção a quem o texto não alcançou. Na execução penal, o regulamento é a Lei de Execução Penal, a vaga coberta é a progressão com 1/8, a comissão definida no anexo representa a organização criminosa definida na Lei 12.850/2013, e a associação de bairro é a associação para o tráfico.",
+  "exemplo": {
+    "premissas": "Exemplo fictício: mãe de criança de 5 anos, primária, com bom comportamento, condenada a 8 anos (5 por tráfico não privilegiado, sem resultado morte, e 3 por associação para o tráfico), fatos de 2023, sem violência ou grave ameaça, sem crime contra filho ou dependente e sem condenação por organização criminosa; início no regime fechado. Consideram-se preenchidos os demais requisitos legais.",
+    "conta": "Progressão especial: 96 meses × 1/8 = 12 meses. Comparação simplificada para estes dois crimes de 2023, com as frações da Lei 13.964/2019: tráfico, 60 meses × 40% = 24 meses; associação, 36 meses × 16% = 5,76 meses; total 29,76 meses.",
+    "texto": "Com a progressão especial, o requisito de tempo é de 1 ano; pela regra geral, seriam cerca de 2 anos e 6 meses. Nesta comparação simplificada, a diferença no requisito de tempo é de 17,76 meses; a progressão depende dos demais requisitos. A Lei 15.358/2026 elevou a fração do tráfico, mas, mais gravosa, não alcança fatos de 2023."
+  },
+  "decidiu": "A Terceira Seção do STJ fixou, com efeito obrigatório para os demais juízes, que, para o impedimento do inciso V, organização criminosa corresponde à condenação nos termos da Lei 12.850/2013; associação para o tráfico e associação criminosa não impedem.",
+  "limites": [
+    "Os cinco requisitos do § 3º são cumulativos: não ter cometido crime com violência ou grave ameaça a pessoa, nem crime contra o próprio filho ou dependente; ter cumprido 1/8 da pena no regime anterior; ser primária e ter bom comportamento comprovado pelo diretor do estabelecimento; e não ter integrado organização criminosa. A progressão depende de decisão do juiz da execução.",
+    "O cometimento de novo crime doloso ou de falta grave revoga o benefício (art. 112, § 4º, da Lei de Execução Penal).",
+    "Há acórdãos anteriores em sentido contrário, inclusive o AgRg no HC 1.060.234/MS, da Quinta Turma, julgado em 15/04/2026, anterior ao repetitivo. A correção do cálculo depende de apreciação pelo juiz da execução, de ofício ou mediante provocação.",
+    "O Ministério Público de Minas Gerais opôs embargos de declaração ao acórdão do repetitivo em 02/09/2026. Na captura consultada, constavam os embargos; decisão posterior e trânsito em julgado não foram confirmados."
+  ],
+  "documento": "O atestado de pena mostra a fração usada e a data prevista para a progressão. Se o cálculo exigiu mais que 1/8 por causa da condenação por associação, o pedido de retificação é feito ao juiz da execução, com a prova da maternidade ou da responsabilidade pela criança ou pessoa com deficiência e dos demais requisitos.",
+  "em_jogo": null,
+  "ate_la": null,
+  "selagem": {
+    "tribunal": "STJ",
+    "orgao": "Terceira Seção",
+    "classe": "Tema Repetitivo 1.374 (REsp 2.204.349/MG)",
+    "relator": "Ministro Sebastião Reis Júnior",
+    "julgamento": "2026-08-12",
+    "publicacao": "2026-08-20",
+    "transito": null,
+    "tese_verbatim": "Em atenção aos princípios da legalidade, da taxatividade e do favor rei, a interpretação do art. 112, § 3°, V, da LEP deve se dar de modo restritivo. Portanto, organização criminosa é somente a hipótese de condenação nos termos da Lei 12.850/2013, não abrangendo apenada que tenha participado de associação criminosa (art. 288 do CP) ou associação para o tráfico (art. 35 da Lei 11.343/2006).",
+    "url_oficial": "https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?cod_tema_final=1374&cod_tema_inicial=1374&novaConsulta=true&tipo_pesquisa=T",
+    "situacao_publica": "em vigor",
+    "nota_situacao": "Acórdão publicado em 20/08/2026. A consulta processual registra embargos de declaração do MPMG em 02/09/2026 e conclusão ao relator na mesma data. Trânsito não confirmado; decisão posterior dos embargos não confirmada nesta conferência. A representação da consulta processual utilizada foi identificada como captura da semana anterior; não confirma movimentações posteriores até 09/10/2026.",
+    "verificado_em": "2026-10-09",
+    "verificado_por": "Codex, portal de precedentes qualificados do STJ, consulta processual (ww2.stj.jus.br) e SCON, 09/10/2026, duas aberturas do cadastro; LEP art. 112, §§ 3º e 4º, no Planalto e no Senado; AgRg no HC 1.060.234/MS no SCON. Leitura crítica do Claude.",
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote3-revisao-e-selagem/02-resposta-codex.md"
+  },
+  "relacionados": {
+    "publicacao": "publicacao-tema-1374-e-a-progressao-especial.html",
+    "revisao_ancora": "#conferencias",
+    "blocos": [
+      "tema-1354"
+    ],
+    "erros_catalogo": []
+  },
+  "audio": {
+    "roteiro": "Este é um dos direitos de quem cumpre pena, explicado em linguagem simples. A regra alcança a mulher presa gestante, mãe ou responsável por criança ou pessoa com deficiência. Ela pode progredir após cumprir um oitavo da pena, se preencher os demais requisitos. Um deles é não ter integrado organização criminosa. Havia decisões que negavam o benefício pela condenação por associação para o tráfico. Imagine um condomínio que restringe vagas aos integrantes de uma comissão definida no regulamento. O síndico aplica a restrição também à associação de bairro. Na comparação, a comissão representa a organização criminosa definida em lei. A associação de bairro representa a associação para o tráfico. No exemplo fictício, o requisito de tempo difere em mais de dezessete meses. A progressão depende dos demais requisitos. O Superior Tribunal de Justiça decidiu isso em tema repetitivo, que obriga os demais juízes. O que pode impedir ou reduzir esse efeito? Os requisitos são cumulativos. Novo crime doloso ou falta grave revoga o benefício. As condições e os limites estão no texto. O documento que mostra é o atestado de pena.",
+    "narracao": {
+      "arquivo": "assets/audio/execucao/tema-1374-narracao.mp3",
+      "hash": "05ab1b31664fe403d7e1f1c2e3d03f887d349aeefa4a3635ae0ba77e8eeabd73",
+      "roteiro_hash": "cd9a63ca411fc67e",
+      "voz_id": "bJrNspxJVFovUxNBQ0wh",
+      "modelo": "eleven_multilingual_v2",
+      "velocidade": 1.2,
+      "gerado_em": "2026-10-09",
+      "duracao_s": 69,
+      "caracteres": 1126
+    },
+    "titular": {
+      "arquivo": "assets/audio/execucao/tema-1374-titular.m4a",
+      "gravado_em": null,
+      "duracao_s": null
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "id": "stf-adis-7966-7969",
+  "materia": "progressao",
+  "ordem": 90,
+  "situacao": "publicar",
+  "pendente": true,
+  "titulo": "O STF vai decidir se a lei de 2026 que mudou as regras de progressão é válida; até 9/10, sem suspensão geral",
+  "alcance": "Quem cumpre pena e tem a progressão de regime ou a remição calculada pelas regras da Lei 15.402/2026. A decisão definitiva sobre a constitucionalidade terá alcance geral, nos limites fixados pelo STF.",
+  "parabola": "Imagine uma tabela de tarifas publicada pela prefeitura e já em cobrança. Os autores de quatro ações pedem ao tribunal que a declare inválida. O pedido, por si só, não suspende a tabela; o tribunal pode determinar uma suspensão. Até agora, o relator só afastou a aplicação da tabela num grupo de contas que ele mesmo identificou. Na execução penal, a tabela é a Lei 15.402/2026, o tribunal é o STF, e o grupo de contas são as execuções penais indicadas nas decisões do relator, de condenados pelos atos de 8 de janeiro de 2023.",
+  "exemplo": {
+    "premissas": null,
+    "conta": null,
+    "texto": null
+  },
+  "decidiu": "As ações chegaram ao STF em maio de 2026 e seguem o procedimento do pedido de medida cautelar (art. 10 da Lei 9.868/1999). Na consulta de 9 de outubro de 2026 às quatro ADIs, não foi localizada liminar nem pauta de julgamento.",
+  "em_jogo": "O STF vai dizer se a Lei 15.402/2026 é compatível com a Constituição, inclusive quanto à forma como o Congresso apreciou o veto. Três saídas são possíveis: manter a lei, invalidá-la por inteiro ou invalidar só parte dela. Nenhuma tem data.",
+  "ate_la": "Na consulta de 9 de outubro de 2026, não havia decisão que suspendesse a lei de forma geral. Em 9 de maio de 2026, o relator suspendeu a aplicação da lei nas execuções penais de condenados pelos atos de 8 de janeiro de 2023 em que decidiu (EPs 41, 43, 52, 61, 72, 100, 102 e 134). Nos demais casos, a fração exige conferência em cada condenação, considerando a data de cada fato e eventual lei posterior mais favorável.",
+  "limites": [
+    "O bloco será revisto quando houver decisão que altere a situação aqui informada. Se o STF invalidar a lei, pode fixar a partir de quando a decisão produz efeitos (modulação).",
+    "Lei posterior mais gravosa não alcança fatos anteriores; a mais benéfica retroage. Saber qual é a mais benéfica depende do perfil de cada condenação (primária ou reincidente, com ou sem violência, hediondo ou não), nunca de uma tabela única.",
+    "As notícias sobre a suspensão da lei referem-se às execuções penais indicadas nas decisões do relator; na consulta de 9 de outubro de 2026, não havia suspensão geral."
+  ],
+  "documento": "O atestado de pena e o cálculo de liquidação mostram qual redação do art. 112 da Lei de Execução Penal foi aplicada a cada condenação.",
+  "selagem": {
+    "tribunal": "STF",
+    "orgao": "Plenário",
+    "classe": "ADIs 7.966, 7.967, 7.968 e 7.969 (Lei 15.402/2026)",
+    "relator": "Ministro Alexandre de Moraes",
+    "julgamento": null,
+    "publicacao": null,
+    "transito": null,
+    "tese_verbatim": "As entidades questionam a promulgação da Lei 15.402/2026, que alterou dispositivos da Lei de Execução Penal e do Código Penal para inserir novas regras de progressão de regime e remição da pena a condenados por crimes contra o Estado Democrático de Direito, além de criar causa especial de diminuição de pena para delitos praticados em contexto de multidão.",
+    "url_oficial": "https://noticias.stf.jus.br/postsnoticias/stf-recebe-primeiras-acoes-contra-lei-da-dosimetria/",
+    "situacao_publica": "pendente (ADI)",
+    "nota_situacao": "Trecho da notícia oficial do STF de 08/05/2026 (\"STF recebe primeiras ações contra Lei da Dosimetria\"), sobre as ADIs 7.966 e 7.967. Processo: https://portal.stf.jus.br/processos/detalhe.asp?incidente=7587580. Requerentes: ABI (ADI 7.966); Federação PSOL-Rede, PSOL e Rede (ADI 7.967); PDT (ADI 7.968); PV, PT e PCdoB (ADI 7.969). Despachos de 08/05/2026 nas ADIs 7.966 e 7.967 e de 11/05/2026 nas ADIs 7.968 e 7.969: rito do art. 10 da Lei 9.868/1999. Último andamento das quatro: conclusos ao relator em 08/07/2026; sem liminar e sem pauta na consulta de 09/10/2026.",
+    "verificado_em": "2026-10-09",
+    "verificado_por": "Claude, portal do STF (abas Partes, Andamentos, Decisões, Pautas e Informações das ADIs 7.966, 7.967, 7.968 e 7.969) e noticias.stf.jus.br (notícias de 08/05/2026 e 09/05/2026), aberto em 09/10/2026 porque o Codex declarou que não abriu (HTTP 403), pela regra do titular.",
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote3-revisao-e-selagem/03-leitura-claude.md"
+  },
+  "rotulo_integra": "Ler trecho oficial sobre as primeiras ações",
+  "relacionados": {
+    "publicacao": null,
+    "revisao_ancora": "#conferencias",
+    "blocos": [
+      "tema-1354"
+    ],
+    "erros_catalogo": [
+      "E-09"
+    ]
+  },
+  "audio": {
+    "roteiro": "Este é um julgamento aguardado, explicado em linguagem simples. Uma lei de dois mil e vinte e seis alterou regras de progressão e remição. O Supremo Tribunal Federal examina se ela respeita a Constituição. Imagine uma tabela de tarifas publicada pela prefeitura. Os autores de quatro ações pedem que o tribunal a declare inválida. O pedido, por si só, não suspende a tabela. O tribunal pode determinar uma suspensão. Até agora, o relator só afastou a tabela num grupo de contas que ele identificou. Na comparação, a tabela representa a lei nova. O grupo separado são execuções de condenados pelos atos de oito de janeiro, indicadas nas decisões do relator. Na consulta de nove de outubro, não havia suspensão geral da lei. Nos demais casos, a fração exige conferência em cada condenação. Importam a data do fato e eventual lei posterior mais favorável. O Supremo pode manter a lei ou invalidá-la, integralmente ou em parte. As condições e os limites estão no texto. O documento que mostra é o atestado de pena.",
+    "narracao": {
+      "arquivo": "assets/audio/execucao/stf-adis-7966-7969-narracao.mp3",
+      "hash": "678aa8386fbd8e6304d250e85cce2efaca988c1ec591be593300b709c25df19d",
+      "roteiro_hash": "a282a639e9fa8d33",
+      "voz_id": "bJrNspxJVFovUxNBQ0wh",
+      "modelo": "eleven_multilingual_v2",
+      "velocidade": 1.2,
+      "gerado_em": "2026-10-09",
+      "duracao_s": 58,
+      "caracteres": 1010
+    },
+    "titular": {
+      "arquivo": "assets/audio/execucao/stf-adis-7966-7969-titular.m4a",
+      "gravado_em": null,
+      "duracao_s": null
+    }
+  }
+}

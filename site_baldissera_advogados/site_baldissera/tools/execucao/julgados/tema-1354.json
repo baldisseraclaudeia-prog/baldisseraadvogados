@@ -1,0 +1,67 @@
+{
+  "id": "tema-1354",
+  "materia": "progressao",
+  "ordem": 30,
+  "situacao": "publicar",
+  "pendente": false,
+  "titulo": "Quem reúne mais de uma condenação pode ter a progressão calculada pela regra mais favorável a cada uma",
+  "alcance": "Quem cumpre, na mesma execução, mais de uma condenação atingida pela mudança das frações de progressão do Pacote Anticrime (Lei 13.964/2019). Cada condenação pode receber a fração mais favorável entre a regra anterior e a posterior, inclusive quando todos os crimes são anteriores à lei.",
+  "parabola": "Imagine uma família que paga, na mesma fatura, as parcelas de dois contratos diferentes. Uma lei muda os juros: para um tipo de contrato, a regra nova ficou mais cara; para o outro, mais barata. A própria lei diz que contrato antigo não paga o aumento, mas aproveita a redução. Juntar as parcelas na mesma fatura não muda isso: cada parcela é conferida pela regra mais favorável ao seu contrato, e só depois as duas são somadas. Na execução penal, a fatura é a execução unificada, cada contrato é uma condenação, a mudança de juros é a nova lei, e a parcela conferida é a fração exigida para progredir.",
+  "exemplo": {
+    "premissas": "Exemplo fictício: dois crimes de 2018; reincidência apenas em crime comum. A: 12 anos, crime comum sem violência ou grave ameaça (regra anterior, 1/6; Lei 13.964/2019, 20%). B: 5 anos, tráfico sem resultado morte (regra anterior, 3/5; Lei 13.964/2019, 40%).",
+    "conta": "A: 144 meses × 1/6 = 24 meses (a regra anterior é melhor). B: 60 meses × 40% = 24 meses (a regra de 2019 é melhor). Total: 48 meses. Só a regra de 2019: 28,8 + 24 = 52,8 meses. Só a anterior: 24 + 36 = 60 meses.",
+    "texto": "Comparadas as regras condenação por condenação, o requisito de tempo é de 48 meses; uma regra só para tudo daria 52,8 ou 60, em comparação simplificada. A Lei 15.358/2026 elevou a fração do caso B, mas, mais gravosa, não alcança fatos de 2018."
+  },
+  "decidiu": "A Terceira Seção do STJ fixou, com efeito obrigatório para os demais juízes, que numa mesma execução é possível aplicar frações distintas a cada condenação, pela lei mais favorável ao fato, sem que isso seja combinação de leis.",
+  "limites": [
+    "Na EP 102 (agravo regimental julgado em 14/04/2026), o Plenário do STF aplicou 25% sobre toda a pena unificada numa execução com crimes com e sem violência ou grave ameaça, sob a redação então aplicável do art. 112 da Lei de Execução Penal, sem frações separadas. O Tema 1.354 trata da comparação entre leis sucessivas e seu cadastro oficial não registra superação; a correspondência com o precedente do STF precisa ser examinada em cada caso.",
+    "Para o mesmo crime, a lei aplicada é uma só, por inteiro: não se combinam partes da lei antiga e da nova (Súmula 501 do STJ, no tráfico).",
+    "A comparação vale nos dois sentidos: a regra posterior se aplica quando é mais branda, e a anterior quando a posterior é mais gravosa."
+  ],
+  "documento": "O cálculo de liquidação, nos autos do processo de execução, mostra a fração aplicada a cada condenação. A conferência compara essa fração com a regra mais favorável aplicável a cada uma; havendo regra mais gravosa aplicada indevidamente, a correção é pedida ao juiz da execução.",
+  "em_jogo": null,
+  "ate_la": null,
+  "selagem": {
+    "tribunal": "STJ",
+    "orgao": "Terceira Seção",
+    "classe": "Tema Repetitivo 1.354 (REsp 2.037.377/SC e REsp 2.037.447/SC)",
+    "relator": "Ministra Maria Marluce Caldas",
+    "julgamento": "2026-06-18",
+    "publicacao": "2026-07-02",
+    "transito": "2026-09-02",
+    "tese_verbatim": "É possível, para fins de cálculo para progressão de regime, a aplicação de percentuais distintos para cada condenação isoladamente, em uma mesma execução, reconhecendo-se a retroatividade da Lei n. 13.964/2019 e a ultratividade da redação anterior do art. 112 da Lei de Execução Penal, em respeito à norma mais favorável ao executado.",
+    "url_oficial": "https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?cod_tema_final=1354&cod_tema_inicial=1354&novaConsulta=true&tipo_pesquisa=T",
+    "situacao_publica": "em vigor",
+    "nota_situacao": "O STF, na EP 102 AgR-segundo (Plenário, j. 14/04/2026), aplicou 25% sobre a pena unificada em execução com crimes com e sem violência.",
+    "verificado_em": "2026-10-09",
+    "verificado_por": "Codex, portal de precedentes qualificados e SCON do STJ, 09/10/2026, duas passadas independentes; leitura crítica do Claude. EP 102/STF: a ficha do AgR-segundo registra conferência no portal oficial em 28/08/2026; os ED-segundos (pendentes de selagem pelo titular) não são citados no bloco. Reabertura de 09/10/2026 falhou por erro do portal do STF.",
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote1-selagem-1165-1006-1354/02-resposta-codex.md"
+  },
+  "relacionados": {
+    "publicacao": "publicacao-tema-1354-e-a-progressao-por-condenacao.html",
+    "revisao_ancora": "#conferencias",
+    "blocos": [
+      "tema-1006"
+    ],
+    "erros_catalogo": []
+  },
+  "audio": {
+    "roteiro": "Este é um dos direitos de quem cumpre pena, explicado em linguagem simples. Quem reúne mais de uma condenação pode ter a progressão calculada pela regra mais favorável a cada uma. Isso vale quando a lei mudou as frações de progressão. Imagine uma família que paga, na mesma fatura, parcelas de dois contratos. Uma lei muda os juros. Para um contrato ficou mais caro, para o outro mais barato. Contrato antigo não paga o aumento, mas aproveita a redução. Juntar tudo na mesma fatura não muda isso. Na execução penal, cada contrato é uma condenação, e os juros são a fração exigida para progredir. Num exemplo fictício, comparadas as regras uma a uma, o tempo exigido é de quarenta e oito meses. Com uma regra só para tudo, seria mais. O Superior Tribunal de Justiça decidiu isso em tema repetitivo, que obriga os demais juízes. O que pode impedir ou reduzir esse efeito? Há um precedente contrário. Em outro julgamento, o Supremo aplicou fração única à execução com crimes violentos e não violentos. E, para o mesmo crime, a lei é uma só, por inteiro. As condições e os limites estão no texto. O documento que mostra é o atestado de pena.",
+    "narracao": {
+      "arquivo": "assets/audio/execucao/tema-1354-narracao.mp3",
+      "hash": "c901d8eb989ce3290806017d715ecc02a6d69c38a80dc8ec2440fa80963425f3",
+      "roteiro_hash": "29a4110358032b37",
+      "voz_id": "bJrNspxJVFovUxNBQ0wh",
+      "modelo": "eleven_multilingual_v2",
+      "velocidade": 1.2,
+      "gerado_em": "2026-10-09",
+      "duracao_s": 68,
+      "caracteres": 1137
+    },
+    "titular": {
+      "arquivo": "assets/audio/execucao/tema-1354-titular.m4a",
+      "gravado_em": null,
+      "duracao_s": null
+    }
+  }
+}

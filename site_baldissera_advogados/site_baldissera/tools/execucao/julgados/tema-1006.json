@@ -1,0 +1,68 @@
+{
+  "id": "tema-1006",
+  "materia": "progressao",
+  "ordem": 20,
+  "situacao": "publicar",
+  "pendente": false,
+  "titulo": "Quem recebe nova condenação durante a pena pode manter contado o tempo já cumprido para os próximos benefícios",
+  "alcance": "Quem já cumpria pena e teve outra condenação somada ou unificada à execução. A soma das penas aumenta o total, mas não muda, por si só, a data de início da contagem para a progressão e os demais benefícios.",
+  "parabola": "Imagine alguém pagando um carnê na loja e, no meio do pagamento, a loja lança na mesma conta outra compra que tinha ficado de fora. O saldo aumenta e o carnê fica mais longo, mas as parcelas já pagas continuam pagas; ninguém volta a contar o carnê do zero por causa da compra acrescentada. Na execução penal, a loja é o Estado, a conta é o processo de execução, a compra acrescentada é a nova condenação, as parcelas pagas são o tempo de pena já cumprido, e a contagem do carnê é a contagem para o próximo benefício.",
+  "exemplo": {
+    "premissas": "Data-base para a próxima progressão em 1º de janeiro de 2024. Em 1º de janeiro de 2025, nova condenação por fato anterior é somada à execução. Exemplo fictício.",
+    "conta": "Data-base mantida: 1º/01/2024 (o ano de 2024 continua contado). Data-base trocada pela da nova condenação: 1º/01/2025 (o ano de 2024 desaparece da contagem).",
+    "texto": "O cálculo passa a considerar a nova condenação, as frações aplicáveis a cada uma e o tempo já cumprido, mas continua contado a partir de 1º de janeiro de 2024. Trocar a data-base para 1º de janeiro de 2025 apagaria da contagem um ano já cumprido."
+  },
+  "decidiu": "A Terceira Seção do STJ fixou, com efeito obrigatório para os demais juízes, que a unificação de penas não altera a data-base para a concessão de novos benefícios na execução.",
+  "limites": [
+    "A prática de fato definido como crime doloso durante a execução é falta grave. Reconhecida a falta, a contagem para a progressão reinicia na data do fato (Súmula 534 do STJ). Se esse fato já interrompeu a contagem como falta grave, a condenação e a soma posteriores não a interrompem de novo.",
+    "A data-base se mantém, mas o tempo que ainda falta pode aumentar, porque o cálculo passa a incluir a nova pena; a data prevista para o benefício pode se afastar.",
+    "A condenação pode levar à regressão de regime se a nova pena, somada ao restante da pena em execução, tornar incabível o regime atual (arts. 111, parágrafo único, e 118, II, da Lei de Execução Penal)."
+  ],
+  "documento": "O cálculo de liquidação feito depois da soma das penas, nos autos do processo de execução, e o atestado de pena mostram a data-base usada. Se ela mudou apenas por causa da nova condenação ou da soma, a correção é pedida ao juiz da execução. Havendo falta grave reconhecida, o marco correspondente é a data da infração.",
+  "em_jogo": null,
+  "ate_la": null,
+  "selagem": {
+    "tribunal": "STJ",
+    "orgao": "Terceira Seção",
+    "classe": "Tema Repetitivo 1.006 (ProAfR no REsp 1.753.512/PR e ProAfR no REsp 1.753.509/PR)",
+    "relator": "Ministro Rogerio Schietti Cruz",
+    "julgamento": "2018-12-18",
+    "publicacao": "2019-03-11",
+    "transito": "2019-04-08",
+    "tese_verbatim": "A unificação de penas não enseja a alteração da data-base para concessão de novos benefícios executórios.",
+    "url_oficial": "https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?cod_tema_final=1006&cod_tema_inicial=1006&novaConsulta=true&tipo_pesquisa=T",
+    "situacao_publica": "em vigor",
+    "nota_situacao": "Julgado por reafirmação de jurisprudência, em sessão eletrônica de 12 a 18/12/2018.",
+    "verificado_em": "2026-10-09",
+    "verificado_por": "Codex, portal de precedentes qualificados e SCON do STJ, 09/10/2026, duas passadas independentes; leitura crítica do Claude",
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote1-selagem-1165-1006-1354/02-resposta-codex.md"
+  },
+  "relacionados": {
+    "publicacao": null,
+    "revisao_ancora": "#conferencias",
+    "blocos": [
+      "tema-1165",
+      "tema-1354"
+    ],
+    "erros_catalogo": []
+  },
+  "audio": {
+    "roteiro": "Este é um dos direitos de quem cumpre pena, explicado em linguagem simples. Quem recebe outra condenação durante a execução pode preservar a contagem para os próximos benefícios. A soma aumenta a pena total. Mas não zera, por si só, a contagem. Imagine alguém pagando um carnê. No meio do pagamento, a loja lança na mesma conta outra compra que tinha ficado de fora. O carnê fica mais longo. Mas as parcelas pagas continuam pagas. A conta não recomeça do zero. Na execução penal, a compra acrescentada é a nova condenação. As parcelas pagas são o tempo de pena já cumprido. Num exemplo fictício, a contagem começou em janeiro de dois mil e vinte e quatro. A nova condenação chegou um ano depois. Esse ano continua contado. O Superior Tribunal de Justiça decidiu isso em tema repetitivo, que obriga os demais juízes. O que pode impedir ou reduzir esse efeito? Crime doloso cometido durante a execução é falta grave. Reconhecida a falta, a contagem para a progressão reinicia na data do fato. Mas a mesma falta não reinicia duas vezes. E o tempo que falta pode aumentar com a nova pena. As condições e os limites estão no texto. O documento que mostra é o atestado de pena.",
+    "narracao": {
+      "arquivo": "assets/audio/execucao/tema-1006-narracao.mp3",
+      "hash": "6ba9b3a4be28d320698b085520a66d344710760bc1e8c5e51cf983dc51d6d81b",
+      "roteiro_hash": "fff2c5edc0a1fb51",
+      "voz_id": "bJrNspxJVFovUxNBQ0wh",
+      "modelo": "eleven_multilingual_v2",
+      "velocidade": 1.2,
+      "gerado_em": "2026-10-09",
+      "duracao_s": 68,
+      "caracteres": 1171
+    },
+    "titular": {
+      "arquivo": "assets/audio/execucao/tema-1006-titular.m4a",
+      "gravado_em": null,
+      "duracao_s": null
+    }
+  }
+}

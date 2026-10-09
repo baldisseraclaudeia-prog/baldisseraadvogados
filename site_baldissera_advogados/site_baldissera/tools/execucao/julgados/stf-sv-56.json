@@ -1,0 +1,67 @@
+{
+  "id": "stf-sv-56",
+  "materia": "condicoes",
+  "ordem": 10,
+  "situacao": "publicar",
+  "pendente": false,
+  "titulo": "Quem progrediu e não encontra vaga no regime devido não pode ser mantido, por isso, em regime mais grave",
+  "alcance": "Quem teve reconhecido o regime semiaberto ou aberto, mas continua em regime mais severo porque falta vaga em estabelecimento adequado. A falta de vaga não autoriza mantê-lo no regime mais grave; devem ser adotadas as soluções que o STF definiu.",
+  "parabola": "Imagine um passageiro encaminhado a um ônibus em que deve viajar sentado. No embarque, a empresa informa que não há assento disponível. Essa falha não permite impor ao passageiro uma viagem em pé: é preciso reorganizar o embarque e encontrar uma solução compatível com a condição prevista para ele. Na execução penal, a empresa representa o Estado, a viagem sentada representa o regime devido, a viagem em pé representa o regime mais severo, e as soluções são as medidas que o STF definiu.",
+  "exemplo": {
+    "premissas": "Exemplo fictício: progressão ao semiaberto deferida em 1º de março; a transferência só acontece em 1º de setembro, por falta de vaga.",
+    "conta": "De 1º de março a 1º de setembro: 184 dias.",
+    "texto": "São 184 dias, cerca de seis meses, cumpridos em regime mais grave que o fixado. Pela súmula, a falta de vaga não justifica essa permanência: devem ser adotadas as soluções definidas pelo STF."
+  },
+  "decidiu": "O STF editou súmula vinculante, obrigatória para juízes e administração pública, segundo a qual a falta de estabelecimento adequado não autoriza manter o condenado em regime mais gravoso, observados os parâmetros do RE 641.320.",
+  "limites": [
+    "A falta de vaga não leva automaticamente à prisão domiciliar: a decisão deve observar antes as providências do RE 641.320, como a saída antecipada de outro sentenciado, a liberdade monitorada e, no aberto, penas alternativas ou estudo (Tema 993 do STJ). Enquanto essas medidas não estiverem estruturadas, o STF admite que o juiz defira prisão domiciliar, consideradas as circunstâncias da pessoa e da execução.",
+    "O juiz pode considerar adequado estabelecimento diferente de colônia agrícola ou casa de albergado: o que se examina são as condições reais de cumprimento. Ficar no mesmo presídio, em ala separada, não viola a súmula; o que o STF vedou é o alojamento conjunto com presos do regime fechado.",
+    "A avaliação de que a unidade é adequada cabe ao juiz da execução e ao tribunal local; a reclamação ao STF não reexamina essa conclusão de fato.",
+    "A súmula protege o regime já reconhecido; não antecipa progressão que ainda depende de requisitos."
+  ],
+  "documento": "A decisão que deferiu a progressão, com a data, e o registro da unidade onde a pena está sendo cumprida mostram a diferença entre o regime fixado e o real. Se a permanência em regime mais grave decorre da falta de vaga, o pedido é feito ao juiz da execução. Cabe reclamação ao STF contra decisão judicial ou ato administrativo que contrarie a súmula, nas hipóteses legais; contra ato ou omissão administrativa, é preciso esgotar antes as vias administrativas.",
+  "em_jogo": null,
+  "ate_la": null,
+  "selagem": {
+    "tribunal": "STF",
+    "orgao": "Tribunal Pleno",
+    "classe": "Súmula Vinculante 56",
+    "relator": "Ministro Ricardo Lewandowski (Presidente e Relator)",
+    "julgamento": "2016-06-29",
+    "publicacao": "2016-08-08",
+    "transito": null,
+    "tese_verbatim": "A falta de estabelecimento penal adequado não autoriza a manutenção do condenado em regime prisional mais gravoso, devendo-se observar, nessa hipótese, os parâmetros fixados no RE 641.320/RS.",
+    "url_oficial": "https://jurisprudencia.stf.jus.br/pages/search/seq-sumula815/false",
+    "situacao_publica": "em vigor",
+    "nota_situacao": "Aprovada na Sessão Plenária de 29/06/2016; publicada no DJe nº 165 de 08/08/2016 e no DOU de 08/08/2016 (a data de 01/08/2017 é a do acórdão da PSV 57, que aprovou a súmula). Parâmetros do RE 641.320/RS (Tema 423, j. 11-5-2016, DJe 159 de 1º-8-2016). Alas separadas: Rcl 26.374 AgR (2ª T., DJE 9-11-2018). Tema 993/STJ: REsp 1.710.674/MG, j. 22/08/2018, publicado em 03/09/2018.",
+    "verificado_em": "2026-10-09",
+    "verificado_por": "Inteiro teor do acórdão da PSV 57 (que aprovou a SV 56), PDF oficial do STF baixado pelo Dr. Luiz em 09/10/2026 (lote-2/fontes/STF-PSV-57-acordao-SV56.pdf; DJe nº 168, divulgação 31/07/2017, publicação 01/08/2017; autenticação STF nº 11522466): extrato de ata verbatim — \"O Tribunal, por maioria, aprovou a proposta da edição da Súmula vinculante nº 56, nos seguintes termos: 'A falta de estabelecimento penal adequado não autoriza a manutenção do condenado em regime prisional mais gravoso, devendo-se observar, nessa hipótese, os parâmetros fixados no RE 641.320/RS', vencido o Ministro Marco Aurélio [...] Plenário, 29.06.2016.\" Antes: registro oficial do STF (jurisprudencia.stf.jus.br) e página de aplicação, abertos pelo Claude em 09/10/2026 porque o Codex declarou que não abriu; Codex: SELADO, com essa ressalva. Tema 993 conferido pelo Codex no portal do STJ.",
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote2-selagem/02-resposta-codex.md"
+  },
+  "rotulo_integra": "Ler o enunciado da Súmula Vinculante 56, na íntegra",
+  "relacionados": {
+    "publicacao": "publicacao-adpf-347-na-execucao-penal.html",
+    "revisao_ancora": "#conferencias",
+    "blocos": [],
+    "erros_catalogo": []
+  },
+  "audio": {
+    "roteiro": "Este é um dos direitos de quem cumpre pena, explicado em linguagem simples. Às vezes, quem progrediu de regime não encontra vaga no regime devido. Nesse caso, não pode ser mantido, por isso, em regime mais grave. Imagine um passageiro que deve viajar sentado. A empresa informa que não há assento. Isso não autoriza impor uma viagem em pé. É a empresa que precisa reorganizar o embarque. Na execução penal, a viagem sentada é o regime fixado pelo juiz. A viagem em pé é o regime mais grave. Num exemplo fictício, a progressão saiu em março, e a vaga só apareceu em setembro. Foram cerca de seis meses em regime mais grave que o fixado. O Supremo Tribunal Federal editou súmula vinculante sobre isso. Ela obriga juízes e administração. O que pode impedir ou reduzir esse efeito? A falta de vaga não leva automaticamente à prisão domiciliar. Antes, devem ser observadas as soluções que o Supremo definiu. Enquanto essas medidas não estiverem estruturadas, o juiz pode deferir a domiciliar. As condições e os limites estão no texto. O documento que mostra é a decisão de progressão.",
+    "narracao": {
+      "arquivo": "assets/audio/execucao/stf-sv-56-narracao.mp3",
+      "hash": "5681568a75ae1d0c14393401db50e6fb77889c3ce5de8db4407dd6edc59cf3d2",
+      "roteiro_hash": "283bd5013472673f",
+      "voz_id": "bJrNspxJVFovUxNBQ0wh",
+      "modelo": "eleven_multilingual_v2",
+      "velocidade": 1.2,
+      "gerado_em": "2026-10-09",
+      "duracao_s": 61,
+      "caracteres": 1079
+    },
+    "titular": {
+      "arquivo": "assets/audio/execucao/stf-sv-56-titular.m4a",
+      "gravado_em": null,
+      "duracao_s": null
+    }
+  }
+}

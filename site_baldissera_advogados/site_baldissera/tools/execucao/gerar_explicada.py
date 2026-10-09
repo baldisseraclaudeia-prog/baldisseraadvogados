@@ -124,7 +124,7 @@ def audio_html(j: dict) -> str:
         f'<source src="{arq}" type="{tipo}"></audio>' for k, n, arq, tipo, d in faixas)
     return (f'<div class="ex-audio" data-faixas><p class="ex-rotulo">Ouvir este julgado</p>'
             f'<div class="ex-faixas" role="group" aria-label="Escolher a voz"{"" if len(faixas) > 1 else " hidden"}>{botoes}</div>'
-            f'{players}<p class="ex-duracao">O áudio resume o texto deste bloco; o texto é a transcrição completa.</p></div>')
+            f'{players}<p class="ex-duracao">O áudio resume o texto deste bloco; o texto traz as condições e os limites completos.</p></div>')
 
 
 def bloco_rotulado(classe: str, rotulo: str, corpo: str) -> str:
@@ -161,8 +161,8 @@ def julgado_html(j: dict, rascunho: bool = False) -> str:
                                  f'julgado em {fmt_data(s["julgamento"])}' if s.get("julgamento") else "",
                                  f'publicado em {fmt_data(s["publicacao"])}' if s.get("publicacao") else "",
                                  f'trânsito em julgado em {fmt_data(s["transito"])}' if s.get("transito") else ""] if x)
-    rotulo_integra = "Ler a questão submetida, na íntegra" if pend else "Ler a tese oficial, na íntegra"
-    partes.append(f'<details class="ex-integra"><summary>{rotulo_integra}</summary>'
+    rotulo_integra = j.get("rotulo_integra") or ("Ler a questão submetida, na íntegra" if pend else "Ler a tese oficial, na íntegra")
+    partes.append(f'<details class="ex-integra"><summary>{esc(rotulo_integra)}</summary>'
                   f'<blockquote>{esc(s["tese_verbatim"])}<span class="rv-ref">{ref}</span></blockquote>'
                   f'<p class="ex-fonte"><a href="{s["url_oficial"]}" target="_blank" rel="noopener">Conferir no portal do {esc(s["tribunal"])}'
                   f'<span class="so-leitor"> (abre em nova aba, no site do tribunal)</span></a> · conferido em {fmt_data(s["verificado_em"])}'
@@ -287,7 +287,7 @@ def head_html(js: list) -> str:
         nar = (j.get("audio") or {}).get("narracao") or {}
         if nar.get("arquivo") and (PUBLIC / nar["arquivo"]).exists():
             art["audio"] = {"@type": "AudioObject", "contentUrl": f"{comum.BASE}/{nar['arquivo']}", "encodingFormat": "audio/mpeg",
-                            "transcript": j["alcance"]}
+                            "transcript": j["audio"]["roteiro"].strip()}
             if nar.get("duracao_s"):
                 art["audio"]["duration"] = f"PT{int(nar['duracao_s'])}S"
         partes.append(art)

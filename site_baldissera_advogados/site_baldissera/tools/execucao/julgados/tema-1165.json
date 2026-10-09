@@ -1,0 +1,67 @@
+{
+  "id": "tema-1165",
+  "materia": "progressao",
+  "ordem": 10,
+  "situacao": "publicar",
+  "pendente": false,
+  "titulo": "Quem já cumpria os requisitos antes da decisão pode ter a próxima progressão contada da data do direito",
+  "alcance": "Quem progrediu de regime e teve a decisão assinada depois do dia em que já preenchia os requisitos da lei. A contagem para a progressão seguinte pode começar no dia em que o último requisito foi cumprido, e não no dia em que o juiz decidiu.",
+  "parabola": "Imagine um funcionário cujo regulamento da empresa prevê subir de nível ao completar certo tempo no cargo, com boa avaliação, e exige outro período no novo nível para a promoção seguinte. Ele completa o tempo e a avaliação num mês, mas o setor de pessoal só assina a promoção meses depois. A assinatura não criou o direito; reconheceu o que já tinha acontecido. Por isso o tempo para a promoção seguinte conta do dia em que ele completou os requisitos, e não do dia da assinatura. Na execução penal, a empresa é o Estado, o regulamento é a lei, a assinatura é a decisão do juiz, e a promoção representa a progressão de regime, que continua dependendo dessa decisão.",
+  "exemplo": {
+    "premissas": "Requisitos para progredir preenchidos em 1º de março de 2025; decisão do juiz em 1º de setembro de 2025; a próxima progressão exige, neste exemplo fictício, 16 meses de calendário de cumprimento, sem interrupção.",
+    "conta": "Contados de março de 2025, os 16 meses terminam no fim de junho de 2026. Contados de setembro de 2025, terminariam no fim de dezembro de 2026.",
+    "texto": "Contado da data do direito, o requisito de tempo da próxima progressão se completa no fim de junho de 2026. Contado da data da decisão, só se completaria no fim de dezembro: seis meses depois, apenas pela demora em decidir. A próxima progressão depende também dos demais requisitos e de nova decisão."
+  },
+  "decidiu": "A Terceira Seção do STJ fixou, com efeito obrigatório para os demais juízes, que a decisão de progressão apenas declara o direito e que a data-base da progressão seguinte é o dia em que o último requisito foi preenchido.",
+  "limites": [
+    "Se o último requisito cumprido for o de comportamento (o subjetivo), é a data dele que vale, ainda que o tempo de pena já estivesse cumprido antes.",
+    "A falta grave reinicia a contagem para a progressão a partir do dia em que foi cometida (Súmula 534 do STJ).",
+    "O tempo exigido para a próxima etapa depende da fração aplicável a cada condenação; a tese trata da data de início, não da fração."
+  ],
+  "documento": "O atestado de pena e o cálculo de liquidação do processo de execução mostram a data-base usada para a próxima progressão. Se ela coincide com a data da decisão e não com a data em que os requisitos foram preenchidos, a correção é pedida ao juiz da execução.",
+  "em_jogo": null,
+  "ate_la": null,
+  "selagem": {
+    "tribunal": "STJ",
+    "orgao": "Terceira Seção",
+    "classe": "Tema Repetitivo 1.165 (REsp 1.972.187/SP, REsp 1.976.210/RS, REsp 1.973.105/SP, REsp 1.973.589/SP e REsp 1.976.197/RS)",
+    "relator": "Desembargador convocado Jesuíno Rissato (TJDFT)",
+    "julgamento": "2024-08-14",
+    "publicacao": "2024-12-02",
+    "transito": null,
+    "tese_verbatim": "A decisão que defere a progressão de regime não tem natureza constitutiva, senão declaratória. O termo inicial para a progressão de regime deverá ser a data em que preenchidos os requisitos objetivo e subjetivo descritos no art. 112 da Lei 7.210, de 11/07/1984 (Lei de Execução Penal), e não a data em que efetivamente foi deferida a progressão.\nEssa data deverá ser definida de forma casuística, fixando-se como termo inicial o momento em que preenchido o último requisito pendente, seja ele o objetivo ou o subjetivo. Se por último for preenchido o requisito subjetivo, independentemente da anterior implementação do requisito objetivo, será aquele (o subjetivo) o marco para fixação da data-base para efeito de nova progressão de regime.",
+    "url_oficial": "https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?novaConsulta=true&num_processo_classe=1972187&sg_classe=REsp&tipo_pesquisa=T",
+    "situacao_publica": "em vigor",
+    "nota_situacao": "Acórdãos publicados no DJEN de 02/12/2024; o portal registra trânsito em julgado em 13/02/2025 nos REsps 1.973.105/SP e 1.973.589/SP (nos demais, o campo aparece sem data).",
+    "verificado_em": "2026-10-09",
+    "verificado_por": "Codex, portal de precedentes qualificados e SCON do STJ, 09/10/2026, duas passadas independentes; leitura crítica do Claude",
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote1-selagem-1165-1006-1354/02-resposta-codex.md"
+  },
+  "relacionados": {
+    "publicacao": null,
+    "revisao_ancora": "#conferencias",
+    "blocos": [
+      "tema-1006"
+    ],
+    "erros_catalogo": []
+  },
+  "audio": {
+    "roteiro": "Este é um dos direitos de quem cumpre pena, explicado em linguagem simples. Às vezes, a decisão de progressão sai depois do dia em que a pessoa já cumpria os requisitos. Nesse caso, a próxima progressão pode ser contada da data do direito. Não da data da decisão. Imagine um funcionário que completa o tempo e a boa avaliação para subir de nível. O setor de pessoal só assina a promoção meses depois. A assinatura não criou o direito. Reconheceu o que já tinha acontecido. Por isso, o tempo para a promoção seguinte conta do dia em que ele completou os requisitos. Na execução penal, a assinatura é a decisão do juiz. A promoção representa a progressão. Num exemplo fictício, os requisitos foram cumpridos em março, e a decisão veio em setembro. Contado de março, o requisito de tempo seguinte se completa seis meses antes. A próxima progressão depende também dos demais requisitos. O Superior Tribunal de Justiça decidiu isso em tema repetitivo, que obriga os demais juízes. O que pode impedir ou reduzir esse efeito? Há limites. Se o último requisito cumprido foi o de comportamento, vale a data dele. E a falta grave reinicia a contagem. As condições e os limites estão no texto. O documento que mostra é o atestado de pena.",
+    "narracao": {
+      "arquivo": "assets/audio/execucao/tema-1165-narracao.mp3",
+      "hash": "b57fb596b4946f183cc6e3c7123c349822afa6c12c788a75522524f500a1c25f",
+      "roteiro_hash": "32d78faa2fb6dfa9",
+      "voz_id": "bJrNspxJVFovUxNBQ0wh",
+      "modelo": "eleven_multilingual_v2",
+      "velocidade": 1.2,
+      "gerado_em": "2026-10-09",
+      "duracao_s": 70,
+      "caracteres": 1227
+    },
+    "titular": {
+      "arquivo": "assets/audio/execucao/tema-1165-titular.m4a",
+      "gravado_em": null,
+      "duracao_s": null
+    }
+  }
+}

@@ -2,45 +2,164 @@
   "_leia": "Pautas previstas da página de Publicações (ordem do Dr. Luiz, 08/10/2026). Fonte única: pautas.py grava em publicacoes.html. 'tema' é texto público; 'fonte' e 'situacao' são internos e não vão ao site. Item com 'slug' já publicado sai da lista sozinho. A primeira pauta ainda não publicada de cada matéria aparece na visão 'Todas'.",
   "execucao-penal": [
     {
-      "tema": "Quem já cumpria pena e ficou preso preventivamente em outro processo, depois absolvido, pode ter esse tempo descontado da pena.",
-      "slug": "publicacao-detracao-de-quem-ja-cumpria-pena",
-      "fonte": "STJ, EDcl no AgRg no HC 1.032.205/MS (rascunho pronto)",
-      "situacao": "rascunho pronto; julgado NÃO localizado pelo Codex no portal — selar antes de publicar"
+      "tema": "Saída temporária após a derrubada do veto à lei de 2024",
+      "fonte": "Lei 14.843/2024; art. 122 da Lei 7.210/1984",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 1,
+      "data_fato": "2024-05-28"
     },
     {
-      "tema": "Quem passa no ENEM ou no Encceja durante a pena pode ter dias descontados, mesmo que já tivesse concluído o ensino médio antes da prisão.",
-      "fonte": "STJ, Tema Repetitivo 1.357 (REsp 2.117.779/MG, 3ª Seção, j. 18/06/2026, acórdão publicado em 16/07/2026 segundo o Codex)",
-      "situacao": "banco; conferir a tese publicada"
+      "tema": "Restrições de visitas em condenações por crimes contra a mulher",
+      "fonte": "Lei 14.994/2024; art. 41, § 2º, da Lei 7.210/1984",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 2,
+      "data_fato": "2024-10-09"
     },
     {
-      "tema": "Indulto de 2025: quem também tem condenação por crime impeditivo pode ter direito ao benefício na outra parte da pena, sem exame criminológico.",
-      "fonte": "Decreto 12.790/2025, arts. 7º, p.ú., e 8º (verbatim conferido no Planalto em 28/08/2026)",
-      "situacao": "banco"
+      "tema": "Prisão provisória pode integrar o tempo exigido para indulto e comutação",
+      "fonte": "STJ Tema 1.277; REsp 2.069.773/MG",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 3,
+      "data_fato": "2025-02-06"
     },
     {
-      "tema": "Pessoa presa com doença grave: o que o indulto humanitário de 2025 prevê e como se comprova a condição.",
-      "fonte": "Decreto 12.790/2025, art. 9º, XVI",
-      "situacao": "banco"
+      "tema": "Pessoa em regime aberto ou livramento condicional pode visitar familiar preso",
+      "fonte": "STJ Tema 1.274; REsps 2.119.556/DF e 2.109.337/DF",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 4,
+      "data_fato": "2025-02-12"
     },
     {
-      "tema": "Crime comum e crime hediondo cometidos antes de 2019 na mesma execução: cada condenação progride pela fração da lei que lhe é aplicável.",
-      "fonte": "STJ, REsp 2.026.837/SC (5ª T., j. 07/11/2023); Tema 1.354 (REsp 2.037.377/SC) — não confundir com a publicação do Tema 1.354 já no ar",
-      "situacao": "banco"
+      "tema": "Limites da revista íntima de visitantes nos presídios",
+      "fonte": "STF Tema 998; ARE 959.620/RS",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 5,
+      "data_fato": "2025-04-02"
     },
     {
-      "tema": "Quem lê durante o cumprimento da pena, com avaliação validada pelo juízo, pode ter dias descontados.",
-      "fonte": "STJ, Tema 1.278 (REsp 2.121.878/SP, j. 13/8/2025) — Codex 08/10/2026 [SECUNDÁRIA até selagem]",
-      "situacao": "Codex"
+      "tema": "Doença grave e condições de tratamento na análise da prisão domiciliar",
+      "fonte": "Art. 117, II, da Lei 7.210/1984",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 6,
+      "data_fato": "2025-05-01"
     },
     {
-      "tema": "Exame criminológico obrigatório da lei de 2024 não alcança quem cometeu o crime antes dela: o pedido de progressão segue a regra anterior.",
-      "fonte": "STJ, AgRg no HC 975.710/RS (6ª T., j. 1º/7/2025); STF Tema 1.408 pendente — Codex 08/10/2026 [SECUNDÁRIA até selagem]",
-      "situacao": "Codex"
+      "tema": "Cuidados com recém-nascido no presídio podem contar para remição da pena",
+      "fonte": "STJ HC 920.980/SP; art. 126 da Lei 7.210/1984",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 7,
+      "data_fato": "2025-08-13"
     },
     {
-      "tema": "Familiares que visitam pessoas presas estão protegidos contra a revista íntima vexatória.",
-      "fonte": "STF, Tema 998 (ARE 959.620/RS, j. 2/4/2025) — Codex 08/10/2026 [SECUNDÁRIA até selagem]",
-      "situacao": "Codex"
+      "tema": "Leitura durante a pena exige avaliação válida para gerar remição",
+      "fonte": "STJ Tema 1.278; REsp 2.121.878/SP",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 8,
+      "data_fato": "2025-08-13"
+    },
+    {
+      "tema": "Súmula vinculante afasta a natureza hedionda do tráfico privilegiado",
+      "fonte": "STF Súmula Vinculante 63; PSV 125; art. 33, § 4º, da Lei 11.343/2006",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 9,
+      "data_fato": "2025-09-25"
+    },
+    {
+      "tema": "Cancelamento de súmula reforça o limite de perda dos dias remidos por falta grave",
+      "fonte": "STF PSV 60; cancelamento da Súmula Vinculante 9; art. 127 da Lei 7.210/1984, alterado pela Lei 12.433/2011",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 10,
+      "data_fato": "2025-09-25"
+    },
+    {
+      "tema": "Curso a distância precisa integrar o projeto pedagógico do presídio para gerar remição",
+      "fonte": "STJ Tema 1.236; REsps 2.085.556/MG, 2.086.269/MG e 2.087.212/MG",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 11,
+      "data_fato": "2025-11-06"
+    },
+    {
+      "tema": "Regressão cautelar de regime pode ocorrer antes da oitiva da pessoa presa",
+      "fonte": "STJ Tema 1.347; REsp 2.166.900/SP",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 12,
+      "data_fato": "2025-11-12"
+    },
+    {
+      "tema": "Indulto de 2025 e condenações simultâneas por crimes impeditivos e não impeditivos",
+      "fonte": "Decreto 12.790, de 22/12/2025; art. 7º, parágrafo único",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 13,
+      "data_fato": "2025-12-23"
+    },
+    {
+      "tema": "Indulto humanitário de 2025 exige enquadramento e prova da condição de saúde",
+      "fonte": "Decreto 12.790, de 22/12/2025; art. 9º, XVI",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 14,
+      "data_fato": "2025-12-23"
+    },
+    {
+      "tema": "Prescrição da multa criminal continua sujeita aos prazos penais",
+      "fonte": "STJ Tema 1.405; REsp 2.225.431/PR; arts. 51 e 114 do Código Penal",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 15,
+      "data_fato": "2026-03-11"
+    },
+    {
+      "tema": "Lei de 2026 prevê prisão federal para lideranças de organizações criminosas",
+      "fonte": "Lei 15.358/2026, art. 2º, § 7º; Lei 11.671/2008",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 16,
+      "data_fato": "2026-03-24"
+    },
+    {
+      "tema": "Porte de maconha para uso pessoal no presídio pode configurar falta grave",
+      "fonte": "STJ AgRg no REsp 2.234.146/MG",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 17,
+      "data_fato": "2026-03-25"
+    },
+    {
+      "tema": "Nova pena por crime durante o livramento depende da situação do benefício anterior",
+      "fonte": "STJ Tema 1.367; REsp 2.200.477/RJ",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "em vigor",
+      "ordem": 18,
+      "data_fato": "2026-05-07"
+    },
+    {
+      "tema": "STF examina se a exigência de exame criminológico alcança crimes anteriores à lei",
+      "fonte": "STF Tema 1.408; RE 1.536.743; Lei 14.843/2024",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "aguarda o STF",
+      "ordem": 19,
+      "data_fato": "2025-07-08"
+    },
+    {
+      "tema": "STF examina mudanças nas regras de progressão trazidas pela Lei 15.402/2026",
+      "fonte": "Lei 15.402/2026; STF ADIs 7.966 e 7.967",
+      "situacao": "pauta escolhida (Codex por repercussão, 09/10/2026); selar a âncora antes de redigir",
+      "situacao_publica": "aguarda o STF",
+      "ordem": 20,
+      "data_fato": "2026-05-08"
     }
   ],
   "direito-penal": [

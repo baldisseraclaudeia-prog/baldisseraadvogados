@@ -68,16 +68,7 @@ MATERIAS = {  # ordem do sumário
 NOME_CURTO = {"detracao": "Detração", "progressao": "Progressão", "remicao": "Remição", "livramento": "Livramento",
               "indulto": "Indulto", "falta-grave": "Falta grave", "federal": "Sistema federal", "condicoes": "Condições",
               "multa": "Multa"}
-PALAVRAS = [  # "Das palavras usadas nesta página": termo → explicação curta + âncora no glossário da Revisão (quando existir)
-    ("Atestado de pena", "Documento que o juízo da execução deve entregar todo ano, com a pena total, o que já foi cumprido e as datas previstas de cada benefício."),
-    ("Detração", "Desconto, na pena, do tempo de prisão ou de recolhimento já cumprido antes da condenação."),
-    ("Progressão de regime", "Passagem do regime fechado para o semiaberto, e deste para o aberto, depois de cumprida a fração de pena exigida e com bom comportamento."),
-    ("Remição", "Desconto de dias da pena por trabalho, estudo ou leitura, na proporção que a lei fixa."),
-    ("Data-base", "Dia a partir do qual se conta o tempo para o próximo benefício."),
-    ("Falta grave", "Infração disciplinar prevista na Lei de Execução Penal que pode reiniciar a contagem da progressão e custar parte dos dias remidos."),
-    ("Livramento condicional", "Liberdade antecipada, com condições, depois de cumprida parte da pena."),
-    ("Tese repetitiva", "Resposta fixada pelo STJ num tema repetitivo, obrigatória para os demais juízes."),
-]
+PALAVRAS = comum.PALAVRAS   # fonte única em tools/execucao/comum.py (09/10/2026), compartilhada com a Revisão por fases
 
 
 def fmt_data(iso: str) -> str:

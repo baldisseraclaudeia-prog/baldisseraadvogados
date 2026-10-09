@@ -32,6 +32,32 @@ INSTAGRAM = [("luizhbaldissera", "https://www.instagram.com/luizhbaldissera/"),
 WHATSAPP_ESCRITORIO = "https://wa.me/5545991029806"
 
 
+# "Das palavras usadas nesta página" — glossário único das duas páginas do portal (termo → explicação curta).
+# Veio de gerar_explicada.py em 09/10/2026; os quatro últimos entraram para a Revisão por fases na mesma data.
+PALAVRAS = [
+    ("Atestado de pena", "Documento que o juízo da execução deve entregar todo ano, com a pena total, o que já foi cumprido e as datas previstas de cada benefício."),
+    ("Detração", "Desconto, na pena, do tempo de prisão ou de recolhimento já cumprido antes da condenação."),
+    ("Progressão de regime", "Passagem do regime fechado para o semiaberto, e deste para o aberto, depois de cumprida a fração de pena exigida e com bom comportamento."),
+    ("Remição", "Desconto de dias da pena por trabalho, estudo ou leitura, na proporção que a lei fixa."),
+    ("Data-base", "Dia a partir do qual se conta o tempo para o próximo benefício."),
+    ("Falta grave", "Infração disciplinar prevista na Lei de Execução Penal que pode reiniciar a contagem da progressão e custar parte dos dias remidos."),
+    ("Livramento condicional", "Liberdade antecipada, com condições, depois de cumprida parte da pena."),
+    ("Tese repetitiva", "Resposta fixada pelo STJ num tema repetitivo, obrigatória para os demais juízes."),
+    ("Comutação", "Redução de parte da pena por decreto presidencial, para quem preenche os requisitos fixados no decreto."),
+    ("Indulto", "Extinção da pena, total ou parcial, por decreto presidencial, para quem preenche os requisitos fixados no decreto."),
+    ("SEEU", "Sistema Eletrônico de Execução Unificado, mantido pelo CNJ, em que a maior parte dos tribunais registra a execução da pena."),
+    ("Trânsito em julgado", "Momento em que a decisão não admite mais recurso e passa a valer definitivamente."),
+]
+
+
+def palavras_html(termos=None) -> str:
+    """Lista de definições no padrão da linguagem simples (`dl.ex-palavras`); `termos` filtra e ordena."""
+    sel = [(t, d) for t, d in PALAVRAS if termos is None or t in termos]
+    if termos:
+        sel.sort(key=lambda x: termos.index(x[0]))
+    return '<dl class="ex-palavras">\n' + "\n".join(f"  <dt>{esc(t)}</dt><dd>{esc(d)}</dd>" for t, d in sel) + "\n</dl>"
+
+
 def esc(t: str) -> str:
     return html.escape(t or "", quote=False)
 

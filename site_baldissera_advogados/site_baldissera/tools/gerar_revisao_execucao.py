@@ -58,6 +58,7 @@ FASES_ABERTURA = ("O diagnóstico é a primeira fase. Examina os autos da execu�
                   "sido realizadas, sem sequência obrigatória entre elas.")
 FASES = [
     {"nome": "Diagnóstico da execução",
+     "guia": "Lê todo o processo da execução e refaz a conta da pena.",
      "examina": "Leitura integral dos autos da execução, inclusive as folhas digitalizadas como imagem: guias de recolhimento, "
                 "atestado de pena, certidão carcerária, cálculo de pena, decisões, registros de remição e de faltas, certidões "
                 "de trânsito em julgado. A pena é recalculada de forma independente, pela lei aplicável a cada fato, e "
@@ -68,6 +69,7 @@ FASES = [
                 "relatório registra o cálculo conferido e o calendário dos próximos marcos.",
      "parte": "É a porta de entrada: as demais fases partem dele."},
     {"nome": "Conferência dos lançamentos no sistema",
+     "guia": "Compara o que está lançado no sistema com o que está nos autos.",
      "examina": "O que foi lançado no sistema eletrônico de execução (o SEEU, ou o sistema adotado pelo tribunal), aba por aba "
                 "(processos, eventos, incidentes e cálculo), comparado com a linha do tempo do diagnóstico: data-base depois "
                 "de falta; prisão provisória lançada ou não; remição com data e saldo corretos; unificação que efetivamente "
@@ -77,6 +79,7 @@ FASES = [
                 "correspondentes, e o que deve ser retificado.",
      "parte": "Parte da linha do tempo e do cálculo do diagnóstico."},
     {"nome": "Tempo a descontar e benefícios",
+     "guia": "Apura o tempo que deve ser descontado da pena e os benefícios que dependem dele.",
      "examina": "O tempo que deve ser descontado da pena e os benefícios que dependem dele: prisão provisória e recolhimento "
                 "domiciliar noturno não computados, inclusive em outro processo, quando presentes os pressupostos do "
                 "desconto; remição reconhecida e não lançada, ou atestada em outra unidade e nunca juntada; os decretos de "
@@ -86,6 +89,7 @@ FASES = [
                 "prioridade. Decreto não conferido na fonte oficial aparece como não apurado.",
      "parte": "Parte do cálculo conferido no diagnóstico e, se houver divergência de lançamento, na conferência do sistema."},
     {"nome": "Acompanhamento da execução",
+     "guia": "Acompanha a execução, que muda a cada lançamento, e avisa dos marcos que se aproximam.",
      "examina": "A execução muda a cada lançamento. O acompanhamento confere, periodicamente, os novos eventos, faltas, "
                 "decisões, cálculos e decretos, e os marcos que se aproximam.",
      "entrega": "Registro periódico das mudanças, calendário atualizado dos marcos e indicação de cada requisito de tempo "
@@ -103,6 +107,8 @@ FORA_FASES = [
      "A apresentação ao juízo das providências indicadas (pedidos, impugnações ao cálculo, agravos em execução, habeas corpus) "
      "é atuação distinta, subscrita por advogados da banca inscritos na seccional do processo."),
 ]
+GLOSSARIO = ["Atestado de pena", "Data-base", "Detração", "Remição", "Progressão de regime", "Livramento condicional",
+             "Falta grave", "Indulto", "Comutação", "SEEU", "Trânsito em julgado"]
 REGRAS = [
     ("A análise anterior é aproveitada", "cada fase utiliza os documentos, a linha do tempo e os cálculos já produzidos, com "
                                          "novas conferências sempre que necessárias."),
@@ -183,7 +189,7 @@ QUADRO = [
     ("Livramento condicional", "jan/2024", "set/2024"),
     ("Fim da pena", "mai/2029", "jan/2030"),
 ]
-CABECALHOS = ("Etapa", "Data correta (premissas do exemplo)", "Data com o erro", "Diferença")
+CABECALHOS = ("Etapa", "Data correta", "Data com o erro", "Diferença")
 NOTA_FRACOES = ("Em caso real, a fração depende da data do fato, da natureza do crime, da reincidência e de lei posterior mais "
                 "benéfica. O art. 112 da Lei de Execução Penal recebeu alterações das Leis 15.358/2026 e 15.402/2026. A "
                 "aplicação dessas alterações exige conferir também as decisões do Supremo Tribunal Federal que possam alcançar o "
@@ -492,15 +498,16 @@ def grafico_svg() -> str:
 
 def grafico_svg_vertical() -> str:
     """Versão vertical (celular): anos de cima para baixo, duas colunas."""
-    y0, y1, a0, a1 = 40, 600, 2022, 2030.5
+    y0, y1, a0, a1 = 66, 620, 2022, 2030.5
     y = lambda d: round(y0 + (_ano(d) - a0) / (a1 - a0) * (y1 - y0), 1)  # noqa: E731
     xc, xe = 150, 260
-    p = ['<svg class="rv-grafico rv-grafico-v" viewBox="0 0 340 650" role="img" aria-labelledby="gv-tit gv-desc">',
+    p = ['<svg class="rv-grafico rv-grafico-v" viewBox="0 0 340 666" role="img" aria-labelledby="gv-tit gv-desc">',
          '<title id="gv-tit">Exemplo fictício: um erro na data da primeira prisão</title>',
          '<desc id="gv-desc">Duas colunas, data correta e data com o erro, de 2022 a 2030; cada etapa aparece oito meses depois na '
          'coluna com o erro. A mesma informação está no quadro logo abaixo.</desc>',
          f'<text class="g-titulo" x="{xc}" y="22" text-anchor="middle">Correta</text>',
-         f'<text class="g-titulo" x="{xe}" y="22" text-anchor="middle">Com o erro</text>']
+         f'<text class="g-titulo" x="{xe}" y="22" text-anchor="middle">Com o erro</text>',
+         '<text class="g-rotulo" x="205" y="44" text-anchor="middle">cada etapa chega 8 meses depois · exemplo fictício</text>']
     for ano in range(2022, 2031):
         ya = y(f"jan/{ano}")
         p.append(f'<line class="g-fio" x1="60" y1="{ya}" x2="320" y2="{ya}"/><text class="g-rotulo" x="0" y="{ya + 4}">{ano}</text>')
@@ -518,7 +525,7 @@ def quadro_html() -> str:
     linhas = "\n".join(f'        <tr><th scope="row">{esc(n)}</th><td>{r}</td><td>{l}</td><td class="rv-dif">8 meses</td></tr>' for n, r, l in QUADRO)
     cab = "".join(f'<th scope="col">{esc(c)}</th>' for c in CABECALHOS)
     return f'''    <table class="rv-quadro">
-      <caption>Exemplo fictício · frações ilustrativas</caption>
+      <caption>Exemplo fictício, nas premissas acima · frações ilustrativas</caption>
       <thead><tr>{cab}</tr></thead>
       <tbody>
 {linhas}
@@ -564,13 +571,15 @@ def corpo_html(contato: str = "B") -> str:
     </ul>
     <nav class="sumario" aria-label="Nesta página">
       <a href="#fases">As fases</a>
-      <a href="#roteiro">Roteiro de leitura</a>
       <a href="#cascata">Efeito cascata</a>
+      <a href="#roteiro">Roteiro de leitura</a>
       <a href="#conferencias">O que se confere</a>
       <a href="#federal">Execução federal</a>
       <a href="#direitos">Direitos fundamentais</a>
       <a href="#tribunais">Tribunais</a>
       <a href="#perguntas">Perguntas</a>
+      <a href="#pub-area">Publicações</a>
+      <a href="#atendimento">Atendimento</a>
     </nav>
   </section>
 ''')
@@ -580,6 +589,7 @@ def corpo_html(contato: str = "B") -> str:
         fs.append(f'''      <li class="rv-fase">
         <p class="rv-fase-num">Fase {k}</p>
         <h3>{esc(f["nome"])}</h3>
+        <p class="rv-fase-guia">{esc(f["guia"])}</p>
         <dl class="rv-tres">
           <dt>O que examina</dt><dd>{esc(f["examina"])}</dd>
           <dt>O que entrega</dt><dd>{esc(f["entrega"])}</dd>
@@ -610,7 +620,19 @@ def corpo_html(contato: str = "B") -> str:
       <h3 class="sub-secao">Os limites da revisão</h3>
       <p>{esc(LIMITES)}</p>
     </div>
+    <h3 class="sub-secao rv-centro">Palavras desta página</h3>
+    {comum.palavras_html(GLOSSARIO)}
 ''', "Quatro fases, cada uma com o que examina, o que entrega e de onde parte."))
+    # II — cascata
+    s.append(secao("cascata", "II", "Do efeito cascata", f'''    <div class="rv-coluna">
+      <p class="abre">{esc(CASCATA_TEXTO)}</p>
+      <p class="rv-premissas"><span class="rotulo">Exemplo fictício · premissas</span>{esc(PREMISSAS)}</p>
+    </div>
+{grafico_svg()}
+{grafico_svg_vertical()}
+{quadro_html()}
+    <p class="rv-aviso">{esc(NOTA_FRACOES)}</p>
+''', "Como um dado errado na origem pode se refletir nas etapas seguintes."))
     # I — roteiro
     rt = []
     for i, (doc, oque, onde, porque) in enumerate(ROTEIRO, 1):
@@ -624,22 +646,12 @@ def corpo_html(contato: str = "B") -> str:
         </dl>
       </div>
     </details>''')
-    s.append(secao("roteiro", "II", "Roteiro de leitura dos documentos", f'''    <p class="rv-tese">{esc(ROTEIRO_ABERTURA.split(":")[0])}: {esc(ROTEIRO_ABERTURA.split(":", 1)[1].split(". ")[0].strip())}.</p>
+    s.append(secao("roteiro", "III", "Roteiro de leitura dos documentos", f'''    <p class="rv-tese">{esc(ROTEIRO_ABERTURA.split(":")[0])}: {esc(ROTEIRO_ABERTURA.split(":", 1)[1].split(". ")[0].strip())}.</p>
     <div class="rv-coluna"><p class="abre">{esc(ROTEIRO_ABERTURA.split(". ", 1)[1])}</p></div>
     <div class="rv-capitulos rv-roteiro">
 {chr(10).join(rt)}
     </div>
-''', "Oito documentos, o que se confere em cada um e por que importa. Toque em cada documento para abrir."))
-    # II — cascata
-    s.append(secao("cascata", "III", "Do efeito cascata", f'''    <div class="rv-coluna">
-      <p class="abre">{esc(CASCATA_TEXTO)}</p>
-      <p class="rv-premissas"><span class="rotulo">Exemplo fictício · premissas</span>{esc(PREMISSAS)}</p>
-    </div>
-{grafico_svg()}
-{grafico_svg_vertical()}
-{quadro_html()}
-    <p class="rv-aviso">{esc(NOTA_FRACOES)}</p>
-''', "Como um dado errado na origem pode se refletir nas etapas seguintes."))
+''', "Oito documentos, o que se confere em cada um e por que importa. Abra cada documento."))
     # III — o que confere e entrega
     caps = []
     for i, (t, intro, itens) in enumerate(CAPITULOS, 1):
@@ -653,7 +665,7 @@ def corpo_html(contato: str = "B") -> str:
         </ul>
       </div>
     </details>''')
-    me = "\n".join(f'      <li><h3>{esc(t)}</h3><p>{esc(p)}</p></li>' for t, p in METODO)
+    me = "\n".join(f'      <li><h4>{esc(t)}</h4><p>{esc(p)}</p></li>' for t, p in METODO)
     s.append(secao("conferencias", "IV", "Do que a revisão confere", f'''    <div class="rv-capitulos">
 {chr(10).join(caps)}
     </div>
@@ -663,8 +675,8 @@ def corpo_html(contato: str = "B") -> str:
     </ol>
 ''', f"{len(CAPITULOS)} capítulos, na ordem em que a execução é examinada. O diagnóstico percorre os {len(CAPITULOS)} capítulos com "
        "os documentos disponíveis e registra as pendências e os pontos não apurados. A fase 2 detalha a conferência dos "
-       "lançamentos no sistema; a fase 3 aprofunda os pontos de detração, remição e benefícios indicados no diagnóstico. Toque "
-       "em cada capítulo para abrir."))
+       "lançamentos no sistema; a fase 3 aprofunda os pontos de detração, remição e benefícios indicados no diagnóstico. Abra cada "
+       "capítulo."))
     # IV — federal
     fe = "\n".join(f'      <li><strong>{esc(a)}</strong>: {esc(b)}</li>' for a, b in FEDERAL)
     s.append(secao("federal", "V", "Da execução no sistema penitenciário federal", f'''    <div class="rv-coluna">
@@ -673,6 +685,7 @@ def corpo_html(contato: str = "B") -> str:
     <ul class="rv-lista rv-coluna">
 {fe}
     </ul>
+    <div class="rv-coluna"><p class="abre">Esses pontos entram no diagnóstico e, conforme ele indicar, nas fases seguintes.</p></div>
     <p class="rv-aviso">{esc(FEDERAL_FONTE)}</p>
 '''))
     # V — direitos fundamentais

@@ -22,9 +22,9 @@
   "em_jogo": null,
   "ate_la": null,
   "selagem": {
-    "tribunal": "Lei de Execução Penal",
+    "tribunal": "STJ",
     "orgao": "Sexta Turma",
-    "classe": "art. 127 · jurisprudência do STJ: HC 282.265/RS",
+    "classe": "Lei 7.210/1984, art. 127; HC 282.265/RS",
     "relator": "Ministro Rogerio Schietti Cruz",
     "julgamento": null,
     "publicacao": null,
@@ -35,7 +35,8 @@
     "nota_situacao": "HC 282.265/RS: Sexta Turma, relator Ministro Rogerio Schietti Cruz, julgado em 22/04/2014, DJe 02/05/2014; o STJ determinou nova fundamentação da fração, sem fixar redução automática. Art. 127 com redação da Lei 12.433/2011, não alterado pelas Leis 15.358/2026 e 15.402/2026. Contraponto: AgRg no HC 829.229/PR, Quinta Turma, j. 21/08/2023, manteve 1/3 com fundamentação concreta.",
     "verificado_em": "2026-10-09",
     "verificado_por": "Codex, Revista Eletrônica e SCON do STJ e compilação da LEP no Senado, 09/10/2026 (1ª passada); leitura crítica do Claude",
-    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote2-selagem/02-resposta-codex.md"
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-site-execucao-lote2-selagem/02-resposta-codex.md",
+    "rotulo_fonte": "Lei de Execução Penal, art. 127 · jurisprudência do STJ: HC 282.265/RS"
   },
   "relacionados": {
     "publicacao": null,

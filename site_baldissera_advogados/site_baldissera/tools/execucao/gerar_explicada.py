@@ -47,7 +47,7 @@ PREAMBULO = ("Quem cumpre pena, e quem acompanha a execução de um parente, rec
 COMO_LER = [
     ("Tema repetitivo e repercussão geral", "Quando muitos processos levantam a mesma pergunta, o STJ (tema repetitivo) ou o STF "
      "(repercussão geral) escolhe um deles e fixa uma resposta que os demais juízes têm de seguir. No STF, o reconhecimento da repercussão geral só diz que a questão é relevante: para saber se o mérito já foi decidido, é preciso conferir a situação do tema. É por isso que cada bloco desta "
-     "página traz o número do tema: ele identifica a resposta obrigatória."),
+     "página traz o número do tema: ele identifica a questão discutida; a situação do tema informa se já existe tese firmada."),
     ("Em vigor, afetado, pendente", "\"Em vigor\" é a tese já fixada e aplicável. \"Afetado\" é o tema que o STJ escolheu para julgar e "
      "ainda não julgou. \"Repercussão geral reconhecida\" é a questão que o STF admitiu e ainda vai decidir. Nos pendentes, o bloco "
      "diz o que vale até o julgamento."),
@@ -80,7 +80,7 @@ def fmt_data(iso: str) -> str:
 
 def situacao_linha(j: dict) -> str:
     s = j["selagem"]
-    partes = [esc(s["situacao_publica"]).capitalize(), f'{esc(s["tribunal"])}, {esc(s["classe"].split(" (")[0])}']
+    partes = [esc(s["situacao_publica"]).capitalize(), esc(s["rotulo_fonte"]) if s.get("rotulo_fonte") else f'{esc(s["tribunal"])}, {esc(s["classe"].split(" (")[0])}']
     if s.get("julgamento"):
         partes.append(f'tese fixada em {fmt_data(s["julgamento"])}')
     elif s.get("publicacao"):

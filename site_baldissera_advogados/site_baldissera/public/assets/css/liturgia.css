@@ -920,3 +920,59 @@ html { scrollbar-color: #B9AE95 var(--papel); }
 }
 html.contraste .rv-chamada { background: #000; color: #FFF; }
 html.contraste .rv-exemplo, html.contraste .rv-julgado blockquote { background: #FFF; border-color: #000; }
+
+/* ---- execução penal em linguagem simples (julgados explicados), 09/10/2026 ---- */
+.ex-abertura .ex-subtitulo { max-width: var(--medida); margin: 0.75rem auto 0; font: 500 var(--t-3)/1.35 var(--titulo); color: var(--ouro-texto); }
+.ex-como-ler, .ex-palavras { max-width: 46rem; margin: 0 auto; border-top: 1px solid var(--linha); }
+.ex-como-ler dt, .ex-palavras dt { font: 600 var(--t-2)/1.3 var(--titulo); color: var(--toga); padding-top: 1rem; }
+.ex-como-ler dd, .ex-palavras dd { margin: 0.3rem 0 1rem; font-size: var(--t-1); line-height: 1.65; color: var(--tinta-2); padding-bottom: 1rem; border-bottom: 1px solid var(--linha); }
+.ex-materia { max-width: 46rem; margin: 0 auto; }
+.ex-materia[hidden] { display: none; }
+.ex-materia-titulo { font: 500 var(--t-4)/1.2 var(--titulo); color: var(--toga); margin: 2.5rem 0 0.5rem; text-align: center; }
+.ex-julgado { padding: 1.8rem 0 2rem; border-top: 1px solid var(--linha); }
+.ex-julgado:last-child { border-bottom: 1px solid var(--linha); }
+.ex-julgado .ex-trib { margin: 0 0 0.4rem; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.08em; }
+.ex-julgado h3 { font: 600 var(--t-4)/1.25 var(--titulo); color: var(--toga); margin: 0 0 1rem; }
+.ex-ancora { color: inherit; text-decoration: none; }
+.ex-ancora:hover, .ex-ancora:focus-visible { text-decoration: underline; text-decoration-color: var(--ouro); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.ex-rascunho { margin: 0 0 0.5rem; font-size: var(--t-0); color: #8A2E2E; font-variant-caps: all-small-caps; letter-spacing: 0.08em; }
+.ex-bloco { margin: 0 0 1.1rem; }
+.ex-bloco .ex-rotulo, .ex-audio .ex-rotulo { margin: 0 0 0.3rem; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.1em; }
+.ex-bloco p { margin: 0 0 0.6rem; font-size: var(--t-1); line-height: 1.65; text-align: justify; hyphens: auto; }
+.ex-parabola { background: var(--papel-2); border-left: 3px solid var(--ouro); padding: 1rem 1.25rem 0.5rem; }
+.ex-exemplo .ex-premissas { color: var(--tinta-2); font-size: var(--t-0); }
+.ex-exemplo .ex-conta { font-variant-numeric: lining-nums tabular-nums; color: var(--toga); font-size: var(--t-0); border-top: 1px dotted var(--linha); padding-top: 0.5rem; }
+.ex-limites ul { list-style: none; margin: 0; padding: 0; }
+.ex-limites li { padding: 0.45rem 0 0.45rem 1.4rem; position: relative; font-size: var(--t-1); line-height: 1.6; text-align: justify; hyphens: auto; }
+.ex-limites li::before { content: ""; position: absolute; left: 0.2rem; top: 1.05rem; width: 0.45rem; height: 0.45rem; border: 1px solid var(--ouro); transform: rotate(45deg); }
+.ex-documento p::before { content: ""; display: inline-block; width: 0.5rem; height: 0.5rem; border: 1px solid var(--ouro); margin-right: 0.5rem; vertical-align: middle; }
+.ex-audio { background: var(--papel-2); border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); padding: 0.9rem 1.1rem; margin: 0 0 1.25rem; }
+.ex-audio audio { display: block; width: 100%; max-width: 36rem; margin: 0.35rem 0 0.5rem; }
+.ex-faixas { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.5rem; }
+.ex-faixas[hidden] { display: none; }
+.ex-faixa-nome { margin: 0.4rem 0 0; font-size: var(--t-0); color: var(--tinta-2); }
+.ex-faixa-nome[hidden], .ex-audio audio[hidden] { display: none; }
+.ex-duracao { margin: 0; font-size: var(--t-0); color: var(--tinta-2); font-style: italic; }
+.ex-audio-vazio .ex-duracao { font-style: italic; }
+.ex-integra { margin: 0.5rem 0 1rem; }
+.ex-integra summary { cursor: pointer; font-variant-caps: all-small-caps; letter-spacing: 0.08em; color: var(--toga); text-decoration: underline; text-decoration-color: var(--ouro); text-underline-offset: 0.3em; }
+.ex-integra[open] summary { margin-bottom: 0.9rem; }
+.ex-integra blockquote { margin: 0; padding: 1rem 1.25rem; background: var(--papel-2); border-left: 3px solid var(--ouro); font-style: italic; font-size: var(--t-1); line-height: 1.65; text-align: justify; hyphens: auto; }
+.ex-integra .rv-ref { display: block; margin-top: 0.75rem; font-style: normal; font-size: var(--t-0); color: var(--tinta-2); text-align: left; }
+.ex-fonte { margin: 0.6rem 0 0; font-size: var(--t-0); color: var(--tinta-2); }
+.ex-ponte { margin: 0.5rem 0 0.75rem; font-size: var(--t-1); line-height: 1.8; }
+.ex-compartilhar { margin: 0.5rem 0 0; }
+.ex-centro { max-width: 46rem; margin: 0 auto 1rem; text-align: center; font-size: var(--t-1); line-height: 1.65; }
+.filtros .topico { font: 500 var(--t-0)/1 var(--texto); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.55rem 0.9rem; border: 1px solid var(--linha); background: transparent; color: var(--toga); cursor: pointer; }
+.filtros .topico:hover { border-color: var(--ouro); }
+.filtros .topico.ativo, .filtros .topico[aria-pressed="true"] { background: var(--toga); color: #F5F1E8; border-color: var(--toga); }
+.ex-faixas .topico { font: 500 var(--t-0)/1 var(--texto); letter-spacing: 0.04em; padding: 0.4rem 0.7rem; border: 1px solid var(--linha); background: #FFFDF8; color: var(--toga); cursor: pointer; }
+.ex-faixas .topico[aria-pressed="true"] { background: var(--toga); color: #F5F1E8; border-color: var(--toga); }
+@media (max-width: 560px) {
+  .ex-bloco p, .ex-limits li, .ex-integra blockquote { text-align: left; hyphens: manual; }
+}
+html.contraste .ex-parabola, html.contraste .ex-audio, html.contraste .ex-integra blockquote { background: #FFF; border-color: #000; }
+@media print {
+  .ex-audio, .ex-faixas, .ex-compartilhar, .filtros, .voltar-topo { display: none !important; }
+  .ex-materia[hidden] { display: block; }
+}

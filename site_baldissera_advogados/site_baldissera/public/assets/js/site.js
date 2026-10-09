@@ -184,4 +184,25 @@
       if (achados[0]) location.href = achados[Math.max(0, ativo)].url;
     });
   });
+
+  // Julgados explicados: escolha da voz (narração | na voz do advogado) e um áudio por vez
+  Array.prototype.forEach.call(document.querySelectorAll('[data-faixas]'), function (caixa) {
+    var botoes = caixa.querySelectorAll('.ex-faixas [data-faixa]'), faixas = caixa.querySelector('.ex-faixas');
+    var audios = caixa.querySelectorAll('audio[data-faixa]'), nomes = caixa.querySelectorAll('.ex-faixa-nome[data-faixa]');
+    if (audios.length < 2) return;
+    faixas.hidden = false;
+    function mostrar(k) {
+      Array.prototype.forEach.call(audios, function (a) { a.hidden = a.getAttribute('data-faixa') !== k; if (a.hidden) a.pause(); });
+      Array.prototype.forEach.call(nomes, function (n) { n.hidden = n.getAttribute('data-faixa') !== k; });
+      Array.prototype.forEach.call(botoes, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-faixa') === k ? 'true' : 'false'); });
+    }
+    Array.prototype.forEach.call(botoes, function (b) { b.addEventListener('click', function () { mostrar(b.getAttribute('data-faixa')); }); });
+    mostrar(botoes[0].getAttribute('data-faixa'));
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('audio'), function (a) {
+    a.addEventListener('play', function () {
+      Array.prototype.forEach.call(document.querySelectorAll('audio'), function (o) { if (o !== a) o.pause(); });
+    });
+  });
+
 })();

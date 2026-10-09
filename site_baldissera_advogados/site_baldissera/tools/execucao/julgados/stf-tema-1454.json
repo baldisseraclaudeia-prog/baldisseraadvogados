@@ -1,0 +1,46 @@
+{
+  "id": "stf-tema-1454",
+  "materia": "detracao",
+  "ordem": 20,
+  "situacao": "publicar",
+  "pendente": true,
+  "titulo": "O STF vai decidir se o recolhimento domiciliar noturno desconta da pena; até lá, continua valendo a regra do STJ",
+  "alcance": "As mesmas pessoas do julgado anterior: quem cumpriu recolhimento domiciliar noturno durante o processo e foi condenado. O que o STF decidir valerá para todos os processos do país.",
+  "parabola": "Imagine uma conta de luz que a distribuidora já recalculou a favor do consumidor, e a agência reguladora anuncia que vai reexaminar o critério do recálculo. Enquanto a agência não decide, o recálculo já feito continua valendo, e quem tem a conta na mão pode pedir o acerto agora, sem esperar. Na execução penal, o recálculo já feito é a tese do STJ, a agência é o STF, e a conta na mão é o atestado de pena.",
+  "exemplo": {"premissas": null, "conta": null, "texto": null},
+  "decidiu": "O STF reconheceu que a questão tem repercussão geral: o acórdão que a admitiu foi publicado em 6 de maio de 2026; o julgamento de mérito não tem data.",
+  "em_jogo": "O STF vai dizer se a Constituição garante o desconto do recolhimento domiciliar noturno. Três saídas são possíveis: confirmar a regra do STJ, restringi-la (por exemplo, exigindo monitoração) ou ampliá-la. Nenhuma delas tem data.",
+  "ate_la": "A tese do STJ (Tema 1.155) é de observância obrigatória pelos juízes. O pedido de desconto pode ser feito hoje, com a conta em horas e dias, ao juiz da execução.",
+  "limites": [
+    "Se o STF restringir a regra, pode fixar a partir de quando a nova regra vale (modulação); este bloco será atualizado no dia da publicação do acórdão.",
+    "O juiz pode aguardar o STF se houver ordem de suspensão dos processos sobre o tema; na consulta de 9 de outubro de 2026 não havia."
+  ],
+  "documento": "O atestado de pena e a decisão que impôs o recolhimento.",
+  "selagem": {
+    "tribunal": "STF",
+    "orgao": "Plenário (repercussão geral)",
+    "classe": "Tema 1.454 de repercussão geral (RE 1.598.180)",
+    "relator": "Ministro Cristiano Zanin",
+    "julgamento": null,
+    "publicacao": "2026-05-06",
+    "transito": null,
+    "tese_verbatim": "Título: Detração do período em que o apenado se submeteu a recolhimento domiciliar noturno. Descrição: Recurso extraordinário em que se discute, à luz dos artigos 2º; 5; I; II; e XLVI, da Constituição Federal, o direito do apenado à detração do período em que se submeteu à medida cautelar diversa da prisão provisória, consistente em recolhimento domiciliar noturno. Situação: Acórdão de Repercussão Geral publicado - Publicado em: 06/05/2026.",
+    "url_oficial": "https://portal.stf.jus.br/jurisprudenciaRepercussao/tema.asp?num=1454",
+    "situacao_publica": "repercussão geral reconhecida",
+    "nota_situacao": "Mérito sem data de julgamento. Não confundir com o Tema 1.454 do STJ, que trata de honorários.",
+    "verificado_em": "2026-10-09",
+    "verificado_por": "Claude, portal do STF (tema.asp?num=1454), 1ª passada; 2ª passada pendente",
+    "ficha": "dupla-ia-claude-codex/trocas/2026-10-09-execucao-levantamento-L2-stf/04-leitura-portal-claude.md"
+  },
+  "relacionados": {
+    "publicacao": null,
+    "revisao_ancora": "#conferencias",
+    "blocos": ["tema-1155"],
+    "erros_catalogo": []
+  },
+  "audio": {
+    "roteiro": "Este é um julgamento aguardado, explicado em linguagem simples. O Supremo Tribunal Federal vai decidir se o tempo em que a pessoa ficou recolhida em casa à noite, durante o processo, desconta da pena. Imagine uma conta de luz que a distribuidora já recalculou a favor do consumidor, e a agência reguladora anuncia que vai reexaminar o critério. Enquanto a agência não decide, o recálculo continua valendo, e quem tem a conta na mão pode pedir o acerto agora. Na execução penal, o recálculo já feito é a decisão do Superior Tribunal de Justiça, a agência é o Supremo, e a conta na mão é o atestado de pena. Até o julgamento, a regra do STJ obriga os juízes, e o pedido de desconto pode ser feito hoje. O que pode mudar: o Supremo pode confirmar, restringir ou ampliar a regra, e não há data. As condições e os limites estão no texto. O documento que mostra é o atestado de pena.",
+    "narracao": {"arquivo": "assets/audio/execucao/stf-tema-1454-narracao.mp3", "hash": null, "voz_id": null, "modelo": null, "gerado_em": null, "duracao_s": null, "caracteres": null},
+    "titular": {"arquivo": "assets/audio/execucao/stf-tema-1454-titular.m4a", "gravado_em": null, "duracao_s": null}
+  }
+}

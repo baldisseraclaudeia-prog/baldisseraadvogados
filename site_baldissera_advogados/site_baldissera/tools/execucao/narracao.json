@@ -1,0 +1,13 @@
+{
+  "_leia": "Configuração da narração dos julgados explicados (sem segredo; a chave fica em ~/.config/baldissera/elevenlabs.key). Voz escolhida pelo Dr. Luiz em 09/10/2026 entre 5 amostras do mesmo trecho do Tema 1.155.",
+  "voz_nome": "Marcelo Costa - Articulate and Balanced",
+  "voz_id": "bJrNspxJVFovUxNBQ0wh",
+  "voz_origem": "Biblioteca de Vozes do ElevenLabs (português do Brasil; uso comercial permitido na ficha em 09/10/2026)",
+  "modelo": "eleven_v4",
+  "language_code": "pt",
+  "voice_settings": {"stability": 0.6, "similarity_boost": 0.75},
+  "output_format": "mp3_44100_64",
+  "aviso_publico": "voz sintética",
+  "plano": "Creator (131.000 créditos/mês)",
+  "teste": "5 amostras de ~24 s em 09/10/2026, 250 créditos"
+}

@@ -564,12 +564,16 @@ form .enviar { margin-top: 2rem; text-align: center; }
 .pauta-mes { font: 600 var(--t-3)/1 var(--titulo); color: var(--ouro-texto); text-transform: lowercase; }
 .pauta-tema { font-size: var(--t-1); line-height: 1.55; }
 .pauta-area { font-size: var(--t-0); color: var(--tinta-2); font-variant-caps: all-small-caps; letter-spacing: 0.06em; text-align: right; }
+.pautas.sem-mes li { grid-template-columns: 1fr 11rem; }
+.pautas.so-tema li { grid-template-columns: 1fr; }
 .boletim { display: flex; max-width: 34rem; margin: 1.25rem auto 0; }
 .boletim input[type="email"] { flex: 1; font: 400 var(--t-2)/1.3 var(--texto); padding: 0.8rem 1rem; background: #FFFDF8; color: var(--tinta); border: 1px solid #8F8468; border-right: 0; border-radius: 0; }
 .nota-lgpd { font-size: var(--t-0); color: var(--tinta-2); margin-top: 0.9rem; }
 @media (max-width: 560px) {
   .pautas li { grid-template-columns: 3rem 1fr; }
   .pauta-area { grid-column: 2; text-align: left; }
+  .pautas.sem-mes li { grid-template-columns: 1fr; }
+  .pautas.sem-mes .pauta-area { grid-column: 1; }
   .boletim { flex-direction: column; }
   .boletim input[type="email"] { border-right: 1px solid #8F8468; }
 }

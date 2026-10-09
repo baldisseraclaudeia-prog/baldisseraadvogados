@@ -89,7 +89,7 @@ FASES = [
                 "prioridade. Decreto não conferido na fonte oficial aparece como não apurado.",
      "parte": "Parte do cálculo conferido no diagnóstico e, se houver divergência de lançamento, na conferência do sistema."},
     {"nome": "Acompanhamento da execução",
-     "guia": "Acompanha a execução, que muda a cada lançamento, e avisa dos marcos que se aproximam.",
+     "guia": "Confere periodicamente as mudanças na execução e atualiza o calendário dos próximos marcos.",
      "examina": "A execução muda a cada lançamento. O acompanhamento confere, periodicamente, os novos eventos, faltas, "
                 "decisões, cálculos e decretos, e os marcos que se aproximam.",
      "entrega": "Registro periódico das mudanças, calendário atualizado dos marcos e indicação de cada requisito de tempo "

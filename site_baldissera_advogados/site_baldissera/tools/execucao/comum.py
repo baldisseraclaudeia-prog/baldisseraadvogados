@@ -43,9 +43,9 @@ PALAVRAS = [
     ("Falta grave", "Infração disciplinar prevista na Lei de Execução Penal que pode reiniciar a contagem da progressão e custar parte dos dias remidos."),
     ("Livramento condicional", "Liberdade antecipada, com condições, depois de cumprida parte da pena."),
     ("Tese repetitiva", "Resposta fixada pelo STJ num tema repetitivo, obrigatória para os demais juízes."),
-    ("Comutação", "Redução de parte da pena por decreto presidencial, para quem preenche os requisitos fixados no decreto."),
-    ("Indulto", "Extinção da pena, total ou parcial, por decreto presidencial, para quem preenche os requisitos fixados no decreto."),
-    ("SEEU", "Sistema Eletrônico de Execução Unificado, mantido pelo CNJ, em que a maior parte dos tribunais registra a execução da pena."),
+    ("Comutação", "Redução da pena por decreto presidencial, também chamada de indulto parcial, quando o juiz reconhece o cumprimento dos requisitos do decreto."),
+    ("Indulto", "Perdão concedido por decreto presidencial que extingue a pena alcançada pelo benefício, quando o juiz reconhece o cumprimento dos requisitos do decreto."),
+    ("SEEU", "Sistema Eletrônico de Execução Unificado, do Conselho Nacional de Justiça (CNJ), usado por tribunais para acompanhar processos de execução penal, registrar decisões e calcular a pena."),
     ("Trânsito em julgado", "Momento em que a decisão não admite mais recurso e passa a valer definitivamente."),
 ]
 

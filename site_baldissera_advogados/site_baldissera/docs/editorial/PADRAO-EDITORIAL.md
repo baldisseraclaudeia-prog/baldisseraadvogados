@@ -268,3 +268,19 @@ Posicionamento: **logo após o pull quote inicial, antes do primeiro `<h2>`**. A
 ---
 
 *Padrão editorial preparado em 25/04/2026. Atualizado em 25/04/2026 com a seção 13 (Aprendizados consolidados), a partir da Pub Nº 2 (AgRg no HC 1.014.212/ES). Atualizar este documento sempre que uma execução real revelar técnica ou cuidado replicável.*
+
+### 13.9 — Execução Penal: dizer a quem o direito pode alcançar (ordem do Dr. Luiz, 08/10/2026)
+
+Ordem: "nos assuntos de execução penal, temos sempre que chamar o leitor a entender que ele pode ter direito, sem violar a OAB." Em toda publicação, pauta, título e primeira lâmina de Execução Penal:
+
+- o título e a primeira frase dizem **a quem o direito pode alcançar e qual é o efeito**, em terceira pessoa: "quem cumpriu X pode ter direito a Y", "o tempo de Z pode ser descontado da pena", "o pedido é feito ao juiz da execução";
+- sempre "pode", nunca "tem direito" sem condição; as condições aparecem logo em seguida ("se o crime for anterior…", "cumpridos os demais requisitos");
+- vedado dirigir-se a quem precisa de advogado ("se você está preso…", "passou no ENEM?") — TED/SC, Acórdão 071/2026; vedado "procure um advogado", "fale conosco", promessa de resultado (Provimento 205, arts. 2º, VIII, e 3º);
+- a caixa "Em linguagem simples" diz quem é alcançado, um exemplo em números (lei vigente conferida) e qual documento conferir (atestado de pena).
+
+O leitor conclui sozinho que vale revisar a situação; o caminho até o escritório é o bloco do autor e o site (ver memória "efeito prático na 1ª página").
+
+### 13.10 — Pautas previstas (08/10/2026)
+
+As pautas da página de Publicações vivem em `tools/publicador/pautas.json` (fonte única; `pautas.py` grava a página). Cada matéria tem no mínimo 5. Tema de pauta é texto genérico em linguagem leiga; número de julgado só depois de selado. Pauta publicada sai da lista sozinha pelo campo `slug`.
+

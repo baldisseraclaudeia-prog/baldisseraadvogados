@@ -9,6 +9,7 @@ public/publicacoes.html e reescreve, entre marcadores <!-- X-INICIO --> e <!-- X
                     publicado) das publicações mais recentes, uma por matéria antes de repetir,
                     cada uma com o link da sua publicação. Nenhuma frase é escrita aqui.
   PUBLICACOES-AREA  páginas de área: as publicações daquela matéria
+  PAUTAS            publicacoes.html: pautas previstas por matéria (pautas.py + pautas.json)
   (arquivo)         public/assets/busca.json — índice da busca "O que você procura?"
 
 Rodar à mão também serve:  python vitrines.py
@@ -199,6 +200,9 @@ def atualizar_tudo(pub: Path = None) -> list:
         novo = trocar(s, "PUBLICACOES-AREA", bloco_area([c for c in cs if filtro(c)]))
         if novo != s:
             f.write_text(novo, encoding="utf-8", newline="\n"); mudados.append(f)
+
+    import pautas                     # pautas previstas por matéria (publicacoes.html), 08/10/2026
+    mudados += pautas.atualizar(pub)
 
     busca = pub / "assets" / "busca.json"
     dados = json.dumps(indice(cs, pub), ensure_ascii=False, indent=1) + "\n"

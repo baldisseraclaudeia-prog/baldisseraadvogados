@@ -566,6 +566,11 @@ form .enviar { margin-top: 2rem; text-align: center; }
 .pauta-area { font-size: var(--t-0); color: var(--tinta-2); font-variant-caps: all-small-caps; letter-spacing: 0.06em; text-align: right; }
 .pautas.sem-mes li { grid-template-columns: 1fr 11rem; }
 .pautas.so-tema li { grid-template-columns: 1fr; }
+.pautas.pautas-area { margin-bottom: 2rem; }
+.pautas.pautas-area li { grid-template-columns: 1fr 11rem; }
+.pauta-situacao { font-size: var(--t-0); color: var(--tinta-2); font-variant-caps: all-small-caps; letter-spacing: 0.06em; text-align: right; }
+.pautas .pauta-vazia { grid-template-columns: 1fr; color: var(--tinta-2); font-style: italic; }
+.secao h3.sub-secao { max-width: 52rem; margin: 0 auto 0.75rem; }
 .boletim { display: flex; max-width: 34rem; margin: 1.25rem auto 0; }
 .boletim input[type="email"] { flex: 1; font: 400 var(--t-2)/1.3 var(--texto); padding: 0.8rem 1rem; background: #FFFDF8; color: var(--tinta); border: 1px solid #8F8468; border-right: 0; border-radius: 0; }
 .nota-lgpd { font-size: var(--t-0); color: var(--tinta-2); margin-top: 0.9rem; }
@@ -574,6 +579,8 @@ form .enviar { margin-top: 2rem; text-align: center; }
   .pauta-area { grid-column: 2; text-align: left; }
   .pautas.sem-mes li { grid-template-columns: 1fr; }
   .pautas.sem-mes .pauta-area { grid-column: 1; }
+  .pautas.pautas-area li { grid-template-columns: 1fr; }
+  .pauta-situacao { text-align: left; }
   .boletim { flex-direction: column; }
   .boletim input[type="email"] { border-right: 1px solid #8F8468; }
 }
@@ -882,6 +889,8 @@ html { scrollbar-color: #B9AE95 var(--papel); }
 .rv-baixar .b-acao { font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.08em; }
 
 /* destaque na página de área */
+.rv-chamadas { max-width: 68rem; margin: 0 auto 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
+.rv-chamadas .rv-chamada { max-width: none; margin: 0; grid-template-columns: 1fr; align-content: space-between; }
 .rv-chamada { max-width: 52rem; margin: 0 auto 1rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem 2.5rem; align-items: center; background: var(--toga); color: #F5F1E8; padding: 2rem 2.25rem; border-top: 4px double var(--ouro); }
 .rv-chamada .rotulo { margin: 0 0 0.35rem; font-size: var(--t-0); color: #C9B98A; font-variant-caps: all-small-caps; letter-spacing: 0.1em; }
 .rv-chamada h2 { font: 500 var(--t-4)/1.2 var(--titulo); color: #F5F1E8; margin: 0 0 0.5rem; text-align: left; }
@@ -898,6 +907,7 @@ html { scrollbar-color: #B9AE95 var(--papel); }
   .rv-erros, .rv-exemplos, .rv-baixar { grid-template-columns: 1fr; }
   .rv-docs { columns: 1; }
   .rv-chamada { grid-template-columns: 1fr; padding: 1.6rem 1.25rem; }
+  .rv-chamadas { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .rv-capitulos summary { grid-template-columns: 2.2rem 1fr 1.5rem; }

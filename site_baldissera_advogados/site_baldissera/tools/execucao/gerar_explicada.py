@@ -28,6 +28,14 @@ esc = comum.esc
 PUBLIC = comum.PUBLIC
 SLUG = "execucao-penal-em-linguagem-simples"
 URL = f"{comum.BASE}/{SLUG}"
+# A "Revisão completa da execução penal" segue em minuta (v2 em andamento) e fica fora do site até o "publica" do
+# Dr. Luiz (decisão de 09/10/2026). Com False, esta página não faz remissão a ela; trocar para True quando ela for ao ar.
+REVISAO_NO_AR = False
+REVISAO_HTML = ('<p class="ex-centro">Cada direito desta página entra na execução como um lançamento: uma data, uma fração, um número '
+                'de dias. Um lançamento errado não fica onde nasceu; ele repercute nos marcos seguintes. A revisão completa refaz a '
+                'execução documento por documento e confere se o que a lei manda foi aplicado.</p>\n    '
+                '<p class="ex-centro"><a class="remissao" href="execucao-penal-revisao-completa.html">Conhecer a revisão completa '
+                'da execução penal</a></p>')
 TITULO = "Execução penal em linguagem simples"
 SUBTITULO = "O que o STJ e o STF decidiram sobre o cumprimento da pena, a quem pode alcançar e o que conferir."
 DESCRICAO = ("Os julgados do STJ e do STF sobre o cumprimento da pena, sem juridiquês: a quem cada decisão pode alcançar, "
@@ -162,8 +170,9 @@ def julgado_html(j: dict, rascunho: bool = False) -> str:
     links = []
     if rel.get("publicacao"):
         links.append(f'<a class="remissao" href="{rel["publicacao"]}">Análise completa no site</a>')
-    links.append(f'<a class="remissao" href="execucao-penal-revisao-completa.html{rel.get("revisao_ancora") or ""}">'
-                 'Como isso é conferido na revisão completa da execução</a>')
+    if REVISAO_NO_AR:
+        links.append(f'<a class="remissao" href="execucao-penal-revisao-completa.html{rel.get("revisao_ancora") or ""}">'
+                     'Como isso é conferido na revisão completa da execução</a>')
     for b in rel.get("blocos") or []:
         links.append(f'<a class="remissao" href="#{b}">Ver o julgado relacionado</a>')
     partes.append('<p class="ex-ponte">' + " · ".join(links) + "</p>")
@@ -250,10 +259,9 @@ def corpo_html(js: list, contato: str, rascunhos: bool) -> str:
   <section class="secao" id="revisao" aria-labelledby="t-revisao">
     <header>
       <span class="numeral" aria-hidden="true">{n2}</span>
-      <h2 id="t-revisao">Da revisão completa da execução penal</h2>
+      <h2 id="t-revisao">{"Da revisão completa da execução penal" if REVISAO_NO_AR else "Do atendimento"}</h2>
     </header>
-    <p class="ex-centro">Cada direito desta página entra na execução como um lançamento: uma data, uma fração, um número de dias. Um lançamento errado não fica onde nasceu; ele repercute nos marcos seguintes. A revisão completa refaz a execução documento por documento e confere se o que a lei manda foi aplicado.</p>
-    <p class="ex-centro"><a class="remissao" href="execucao-penal-revisao-completa.html">Conhecer a revisão completa da execução penal</a></p>
+    {REVISAO_HTML if REVISAO_NO_AR else ""}
     {comum.contato_html(contato)}
     {comum.aviso_html()}
   </section>

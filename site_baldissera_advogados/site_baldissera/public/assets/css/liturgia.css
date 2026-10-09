@@ -890,6 +890,7 @@ html { scrollbar-color: #B9AE95 var(--papel); }
 
 /* destaque na página de área */
 .rv-chamadas { max-width: 68rem; margin: 0 auto 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
+.rv-chamadas-uma { grid-template-columns: 1fr; max-width: 52rem; }
 .rv-chamadas .rv-chamada { max-width: none; margin: 0; grid-template-columns: 1fr; align-content: space-between; }
 .rv-chamada { max-width: 52rem; margin: 0 auto 1rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem 2.5rem; align-items: center; background: var(--toga); color: #F5F1E8; padding: 2rem 2.25rem; border-top: 4px double var(--ouro); }
 .rv-chamada .rotulo { margin: 0 0 0.35rem; font-size: var(--t-0); color: #C9B98A; font-variant-caps: all-small-caps; letter-spacing: 0.1em; }

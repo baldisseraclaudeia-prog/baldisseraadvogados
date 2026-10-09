@@ -1,6 +1,6 @@
 """
-Conferência independente das contas e da paridade do conteúdo — página, guia, estudo e Word de
-"Revisão completa da execução penal" (plano v2, 08/10/2026).
+Conferência independente das contas e da paridade do conteúdo da página "Revisão da execução penal, por fases"
+(v3, 09/10/2026). Os produtos da v2 (guia, estudo e Word) saíram do site; se voltarem, são conferidos também.
 
 Duas verificações, separadas da aprovação jurídica (que é do especialista):
   1. ARITMÉTICA: cada exemplo é recalculado aqui a partir das premissas declaradas, sem ler o texto,
@@ -8,7 +8,7 @@ Duas verificações, separadas da aprovação jurídica (que é do especialista)
   2. PARIDADE: frases-núcleo (tese, premissas do exemplo, limites do serviço, aviso) têm de ser idênticas
      em todos os produtos que as contêm.
 
-Uso: python tools/materiais/conferir_contas.py    (sai com código 1 se qualquer item falhar)
+Uso: ~/.local/bin/python3.12 tools/execucao/conferir_contas.py    (sai com código 1 se qualquer item falhar)
 Convenção didática: meses de 30 dias para frações de ano; datas contadas em meses inteiros a partir do dia 1.
 """
 import re
@@ -19,7 +19,7 @@ from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 PUBLIC = AQUI.parents[1] / "public"
-PAGINA = PUBLIC / "execucao-penal-revisao-completa.html"
+PAGINA = PUBLIC / "execucao-penal-revisao-por-fases.html"
 GUIA = PUBLIC / "assets" / "docs" / "guia-revisao-execucao-penal.pdf"
 ESTUDO = PUBLIC / "assets" / "docs" / "estudo-revisao-execucao-penal.pdf"
 WORD = PUBLIC / "assets" / "docs" / "estudo-revisao-execucao-penal.docx"
@@ -114,7 +114,8 @@ PARIDADE = [
     ("tese", ["pagina", "guia", "estudo", "word"], "Um erro no cálculo da pena pode repercutir em outros marcos da execução"),
     ("premissa-cascata", ["pagina", "guia", "estudo", "word"], "lançada no cálculo como janeiro de 2022"),
     ("limite-servico", ["pagina", "guia", "estudo", "word"], "Pode concluir que o cálculo está correto ou que não há providência cabível"),
-    ("ressalva-cnj", ["pagina", "guia", "estudo", "word"], "parte dos casos é atraso de lançamento no sistema"),
+    ("ressalva-cnj", ["pagina"], "em parte dos casos, o direito já estava implementado e apenas não fora lançado no sistema"),
+    ("fases-limite", ["pagina"], "Pedidos e recursos são atuação distinta, que não integra as fases"),
 ]
 
 
@@ -149,6 +150,9 @@ def main() -> int:
     fontes = {"pagina": (PAGINA, texto_html), "guia": (GUIA, texto_pdf), "estudo": (ESTUDO, texto_pdf), "word": (WORD, texto_docx)}
     textos = {k: normal(f(p)) for k, (p, f) in fontes.items() if p.exists()}
     faltam = [k for k in fontes if k not in textos]
+    if "pagina" not in textos:
+        print(f"FALHA: página não encontrada ({PAGINA.name}); gere antes com tools/gerar_revisao_execucao.py")
+        return 1
     falhas = 0
     for nome, onde, esperados in casos():
         for prod in onde:

@@ -28,14 +28,14 @@ esc = comum.esc
 PUBLIC = comum.PUBLIC
 SLUG = "execucao-penal-em-linguagem-simples"
 URL = f"{comum.BASE}/{SLUG}"
-# A "Revisão completa da execução penal" segue em minuta (v2 em andamento) e fica fora do site até o "publica" do
-# Dr. Luiz (decisão de 09/10/2026). Com False, esta página não faz remissão a ela; trocar para True quando ela for ao ar.
-REVISAO_NO_AR = False
-REVISAO_HTML = ('<p class="ex-centro">Cada direito desta página entra na execução como um lançamento: uma data, uma fração, um número '
-                'de dias. Um lançamento errado não fica onde nasceu; ele repercute nos marcos seguintes. A revisão completa refaz a '
-                'execução documento por documento e confere se o que a lei manda foi aplicado.</p>\n    '
-                '<p class="ex-centro"><a class="remissao" href="execucao-penal-revisao-completa.html">Conhecer a revisão completa '
-                'da execução penal</a></p>')
+# A "Revisão da execução penal, por fases" só vai ao ar com o "publica" do Dr. Luiz. Com False, esta página não faz
+# remissão a ela; trocar para True quando ela for ao ar (gera-se então esta página de novo, no mesmo envio).
+REVISAO_NO_AR = True
+REVISAO_PAGINA = "execucao-penal-revisao-por-fases.html"
+REVISAO_HTML = ('<p class="ex-centro">Datas, frações e dias reconhecidos precisam estar corretamente registrados na execução. '
+                'Um lançamento incorreto pode repercutir nos marcos seguintes. A revisão por fases começa pelo diagnóstico dos autos '
+                'e indica as conferências adicionais pertinentes.</p>\n    '
+                f'<p class="ex-centro"><a class="remissao" href="{REVISAO_PAGINA}">Revisão da execução penal, por fases</a></p>')
 TITULO = "Execução penal em linguagem simples"
 SUBTITULO = "O que o STJ e o STF decidiram sobre o cumprimento da pena, a quem pode alcançar e o que conferir."
 DESCRICAO = ("Os julgados do STJ e do STF sobre o cumprimento da pena, sem juridiquês: a quem cada decisão pode alcançar, "
@@ -171,8 +171,8 @@ def julgado_html(j: dict, rascunho: bool = False) -> str:
     if rel.get("publicacao"):
         links.append(f'<a class="remissao" href="{rel["publicacao"]}">Análise completa no site</a>')
     if REVISAO_NO_AR:
-        links.append(f'<a class="remissao" href="execucao-penal-revisao-completa.html{rel.get("revisao_ancora") or ""}">'
-                     'Como isso é conferido na revisão completa da execução</a>')
+        links.append(f'<a class="remissao" href="{REVISAO_PAGINA}{rel.get("revisao_ancora") or ""}">'
+                     'Como isso é conferido na revisão da execução</a>')
     for b in rel.get("blocos") or []:
         links.append(f'<a class="remissao" href="#{b}">Ver o julgado relacionado</a>')
     partes.append('<p class="ex-ponte">' + " · ".join(links) + "</p>")
@@ -259,7 +259,7 @@ def corpo_html(js: list, contato: str, rascunhos: bool) -> str:
   <section class="secao" id="revisao" aria-labelledby="t-revisao">
     <header>
       <span class="numeral" aria-hidden="true">{n2}</span>
-      <h2 id="t-revisao">{"Da revisão completa da execução penal" if REVISAO_NO_AR else "Do atendimento"}</h2>
+      <h2 id="t-revisao">{"Da revisão da execução penal, por fases" if REVISAO_NO_AR else "Do atendimento"}</h2>
     </header>
     {REVISAO_HTML if REVISAO_NO_AR else ""}
     {comum.contato_html(contato)}

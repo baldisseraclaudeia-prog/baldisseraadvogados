@@ -1,6 +1,6 @@
 """
 Partes comuns às páginas do portal de execução penal (ordem do Dr. Luiz, 09/10/2026):
-"Execução penal em linguagem simples" (gerar_explicada.py) e "Revisão completa da execução penal"
+"Execução penal em linguagem simples" (gerar_explicada.py) e "Revisão da execução penal, por fases"
 (tools/gerar_revisao_execucao.py). Aqui ficam o aviso do Provimento 205, a biografia do responsável
 técnico, a frase de atendimento e o bloco do autor, para as duas páginas dizerem a mesma coisa.
 """

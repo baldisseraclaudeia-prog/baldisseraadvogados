@@ -165,7 +165,8 @@ def indice(cs: list, pub: Path) -> list:
     paginas = [("Área de atuação", f) for f in PAGINAS_AREA] + [
         ("Página", "areas-de-atuacao.html"), ("Página", "advogados.html"), ("Advogado", "perfil-luiz.html"),
         ("Advogada", "perfil-charys.html"), ("Advogada", "perfil-karla.html"), ("Página", "contato.html"),
-        ("Página", "agendar.html"), ("Página", "sobre.html")]
+        ("Página", "agendar.html"), ("Página", "sobre.html"),
+        ("Página", "execucao-penal-em-linguagem-simples.html"), ("Página", "execucao-penal-revisao-por-fases.html")]
     for tipo, nome in paginas:
         f = pub / nome
         if not f.exists():

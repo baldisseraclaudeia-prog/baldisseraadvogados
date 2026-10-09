@@ -1,10 +1,13 @@
 """
-Gera public/execucao-penal-revisao-completa.html — página "Revisão completa da execução penal" (v2, 08/10/2026).
+Gera public/execucao-penal-revisao-por-fases.html — página "Revisão da execução penal, por fases" (v3, 09/10/2026).
 
-Fonte única do conteúdo: os dados deste arquivo (os PDFs reaproveitam os mesmos dados). Nunca editar o HTML gerado
-à mão: corrige-se aqui e gera-se de novo (python tools/gerar_revisao_execucao.py [A|B], B = contato sem botão, padrão).
+Fonte única do conteúdo: os dados deste arquivo. Nunca editar o HTML gerado à mão: corrige-se aqui e gera-se de novo
+(python tools/gerar_revisao_execucao.py [A|B], B = contato sem botão, padrão).
 
-Trilha (fora do git, ~/.claude/plans/site-execucao-penal/): v2/ROTEIRO-PAGINA.md (texto aprovado), v2/PARECER-ESPECIALISTA.md,
+v3 (09/10/2026): a revisão passa a ser oferecida em quatro fases (ordem do Dr. Luiz: "eu quero cobrar por fase"); revisão
+criminal, pedidos e recursos ficam fora das fases; saem os PDFs da v2. Decisões em ESTUDOS/execucao-penal/
+revisao-completa-v2-decisoes/ (DECISOES-DR-LUIZ.md e PLANO-PAGINA-POR-FASES.md), na pasta do site no OneDrive.
+Trilha da v2 (fora do git, ~/.claude/plans/site-execucao-penal/): v2/ROTEIRO-PAGINA.md, v2/PARECER-ESPECIALISTA.md,
 v2/PARECER-CONSELHO.md, v2/MATRIZ-AFIRMACOES.md, v2/SELAGEM-V2.md, pesquisa/D (dados oficiais) e pesquisa/E (fontes conferidas).
 """
 import json
@@ -12,23 +15,24 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "execucao"))
 import molde  # noqa: E402
+import comum  # noqa: E402
 
 PUBLIC = Path(__file__).resolve().parents[1] / "public"
-SLUG = "execucao-penal-revisao-completa"
+SLUG = "execucao-penal-revisao-por-fases"
 URL = f"https://www.baldisseraadvogados.com.br/{SLUG}"
-TITULO = "Revisão completa da execução penal"
-DESCRICAO = ("O que uma revisão da execução penal confere, documento por documento, como um erro de cálculo pode repercutir "
-             "nos marcos seguintes e o que dizem os dados oficiais e os tribunais.")
-PDF_GUIA = "assets/docs/guia-revisao-execucao-penal.pdf"
-PDF_ESTUDO = "assets/docs/estudo-revisao-execucao-penal.pdf"
-WORD_ESTUDO = "assets/docs/estudo-revisao-execucao-penal.docx"
+TITULO = "Revisão da execução penal, por fases"
+DESCRICAO = ("A revisão da execução penal em quatro fases: diagnóstico, conferência dos lançamentos no sistema, tempo a "
+             "descontar e benefícios, e acompanhamento. O que cada fase examina e entrega, e o que dizem os dados oficiais e "
+             "os tribunais.")
 
 # ---------------------------------------------------------------- 1. abertura
 TESE = "Um erro no cálculo da pena pode repercutir em outros marcos da execução."
 PREAMBULO = ("A pena fixada na sentença passa por sucessivos cálculos, lançamentos e decisões até o último dia de cumprimento. "
-             "A revisão percorre esse caminho desde o início, documento por documento, e confere se a pena que está sendo cumprida "
-             "corresponde à que a lei e as decisões do processo determinam.")
+             "A revisão percorre esse caminho por fases: primeiro o diagnóstico, documento por documento; depois, conforme o "
+             "que ele indicar, a conferência dos lançamentos no sistema, o tempo a descontar e os benefícios, e o "
+             "acompanhamento da execução.")
 HONESTIDADE = "A revisão pode concluir que o cálculo está correto."
 MOLDURA = ("Os dados oficiais não medem erros de cálculo: medem quanto do que o cálculo já indica ainda espera decisão ou "
            "cumprimento.")
@@ -46,6 +50,66 @@ NUMEROS = [
      "Número mínimo: 673 unidades declararam não controlar esse dado.",
      "SENAPPEN, Relatório de Informações Penais, 2º semestre de 2025, p. 36",
      "https://www.gov.br/senappen/pt-br/servicos/sisdepen/relatorios"),
+]
+
+# ---------------------------------------------------------------- 1b. as fases (decisões do Dr. Luiz, 09/10/2026)
+FASES_ABERTURA = ("O diagnóstico é a primeira fase. Examina os autos da execução e indica, com justificativa, quais análises "
+                  "adicionais são pertinentes. As demais fases partem dele e aproveitam os resultados de outras fases que tenham "
+                  "sido realizadas, sem sequência obrigatória entre elas.")
+FASES = [
+    {"nome": "Diagnóstico da execução",
+     "examina": "Leitura integral dos autos da execução, inclusive as folhas digitalizadas como imagem: guias de recolhimento, "
+                "atestado de pena, certidão carcerária, cálculo de pena, decisões, registros de remição e de faltas, certidões "
+                "de trânsito em julgado. A pena é recalculada de forma independente, pela lei aplicável a cada fato, e "
+                "comparada com o cálculo oficial.",
+     "entrega": "Relatório escrito; linha do tempo da execução, com data e folha de cada marco; memória de cálculo; quadro de "
+                "benefícios (requisito de tempo já atingido, próximos, dependentes de documento e não apurados); mapa das "
+                "divergências, com a indicação, e o motivo, das fases seguintes que cabem. Se não houver divergência, o "
+                "relatório registra o cálculo conferido e o calendário dos próximos marcos.",
+     "parte": "É a porta de entrada: as demais fases partem dele."},
+    {"nome": "Conferência dos lançamentos no sistema",
+     "examina": "O que foi lançado no sistema eletrônico de execução (o SEEU, ou o sistema adotado pelo tribunal), aba por aba "
+                "(processos, eventos, incidentes e cálculo), comparado com a linha do tempo do diagnóstico: data-base depois "
+                "de falta; prisão provisória lançada ou não; remição com data e saldo corretos; unificação que efetivamente "
+                "chegou ao cálculo; guia em duplicidade ou com dados divergentes (datas do fato e do trânsito, fração); "
+                "incidentes registrados e seus efeitos no cálculo; decretos lançados.",
+     "entrega": "Relatório das divergências entre os autos e os lançamentos, cada uma com o documento e o lançamento "
+                "correspondentes, e o que deve ser retificado.",
+     "parte": "Parte da linha do tempo e do cálculo do diagnóstico."},
+    {"nome": "Tempo a descontar e benefícios",
+     "examina": "O tempo que deve ser descontado da pena e os benefícios que dependem dele: prisão provisória e recolhimento "
+                "domiciliar noturno não computados, inclusive em outro processo, quando presentes os pressupostos do "
+                "desconto; remição reconhecida e não lançada, ou atestada em outra unidade e nunca juntada; os decretos de "
+                "indulto e comutação do período, um a um, na data prevista em cada um; progressão e livramento condicional "
+                "com as datas refeitas.",
+     "entrega": "Relatório por benefício, com a conta exposta e os documentos que faltam, e as providências em ordem de "
+                "prioridade. Decreto não conferido na fonte oficial aparece como não apurado.",
+     "parte": "Parte do cálculo conferido no diagnóstico e, se houver divergência de lançamento, na conferência do sistema."},
+    {"nome": "Acompanhamento da execução",
+     "examina": "A execução muda a cada lançamento. O acompanhamento confere, periodicamente, os novos eventos, faltas, "
+                "decisões, cálculos e decretos, e os marcos que se aproximam.",
+     "entrega": "Registro periódico das mudanças, calendário atualizado dos marcos e indicação de cada requisito de tempo "
+                "atingido.",
+     "parte": "Parte do diagnóstico. O acompanhamento documental é prestado quando não há advogado constituído na execução ou "
+              "em atuação conjunta com o advogado que já acompanha o processo, com prévio conhecimento dele e definição das "
+              "atribuições de cada profissional. A apresentação de pedidos e recursos não integra esta fase."},
+]
+FORA_FASES = [
+    ("Revisão criminal",
+     "Não integra as fases: tem por objeto a condenação, e não a execução, e corre em outros autos. Quando o diagnóstico "
+     "identifica possível hipótese de cabimento (Código de Processo Penal, art. 621), o relatório a indica, com o motivo; o "
+     "exame específico da revisão criminal não integra estas fases. Mudança de jurisprudência, por si, em regra não abre a revisão criminal."),
+    ("Pedidos e recursos",
+     "A apresentação ao juízo das providências indicadas (pedidos, impugnações ao cálculo, agravos em execução, habeas corpus) "
+     "é atuação distinta, subscrita por advogados da banca inscritos na seccional do processo."),
+]
+REGRAS = [
+    ("A análise anterior é aproveitada", "cada fase utiliza os documentos, a linha do tempo e os cálculos já produzidos, com "
+                                         "novas conferências sempre que necessárias."),
+    ("A prioridade não espera a fase", "requisito de tempo já atingido, com a pessoa presa, é indicado de imediato, sem "
+                                       "aguardar a conclusão do relatório."),
+    ("As fases têm escopos distintos", "o diagnóstico indica quais análises adicionais são pertinentes; nem toda execução "
+                                       "exige as fases seguintes."),
 ]
 
 # ---------------------------------------------------------------- 2. roteiro de leitura (o que conferir · onde está · por que importa)
@@ -120,10 +184,10 @@ QUADRO = [
     ("Fim da pena", "mai/2029", "jan/2030"),
 ]
 CABECALHOS = ("Etapa", "Data correta (premissas do exemplo)", "Data com o erro", "Diferença")
-NOTA_FRACOES = ("Em caso real, a fração depende da data do fato, da natureza do crime, da reincidência e de lei posterior que "
-                "seja mais benéfica. As frações do art. 112 da Lei de Execução Penal foram alteradas mais de uma vez, a última "
-                "pelas Leis 15.358/2026 e 15.402/2026; a Lei 15.402/2026 é questionada no Supremo Tribunal Federal, sem "
-                "julgamento até 8/10/2026. Na revisão, cada data é calculada com a conta exposta.")
+NOTA_FRACOES = ("Em caso real, a fração depende da data do fato, da natureza do crime, da reincidência e de lei posterior mais "
+                "benéfica. O art. 112 da Lei de Execução Penal recebeu alterações das Leis 15.358/2026 e 15.402/2026. A "
+                "aplicação dessas alterações exige conferir também as decisões do Supremo Tribunal Federal que possam alcançar o "
+                "caso. Na revisão, cada data é calculada com a conta exposta.")
 
 # ---------------------------------------------------------------- 4. o que confere e entrega
 CAPITULOS = [
@@ -205,25 +269,18 @@ CAPITULOS = [
      [("Posição processual", "o que já foi pedido, decidido e recorrido, para escolher a via (novo pedido, recurso ou habeas corpus) sem perder o prazo do recurso."),
       ("Ordem por urgência", "requisito já atingido primeiro; depois impugnação ao cálculo; depois as medidas de mais longo prazo."),
       ("Memória de cálculo", "a conta exposta, parcela a parcela, com o documento de cada número."),
-      ("Retificação das datas", "desconto reconhecido sempre acompanhado do pedido de retificação do cálculo e das datas-base.")]),
+      ("Retificação das datas", "indicação da necessidade de retificar o cálculo e, quando cabível, as datas-base em razão do desconto reconhecido. A elaboração e a apresentação do pedido não integram as fases.")]),
 ]
-ENTREGA = [
-    ("Relatório escrito", "a situação da execução e as divergências encontradas, cada uma com o documento que a sustenta e o argumento que pode afastá-la."),
-    ("Linha do tempo", "todos os marcos da execução, com data e folha."),
-    ("Memória de cálculo", "a conta de cada benefício, refeita e comparada com o cálculo oficial."),
-    ("Quadro de benefícios", "com requisito de tempo já atingido, próximos, dependentes de documento e não apurados."),
-    ("Plano de providências", "as providências cabíveis, em ordem de urgência."),
-]
-LIMITES = ("A revisão é uma análise documental da execução. Pode concluir que o cálculo está correto ou que não há providência "
-           "cabível. Pedidos, recursos e o acompanhamento da execução são atuação distinta, que não integra a revisão. Questões da "
-           "própria condenação seguem outra via, avaliada separadamente; a aplicação de lei posterior mais benéfica, porém, cabe ao "
-           "juízo da execução.")
+LIMITES = ("A revisão é uma análise documental da execução, feita por fases. Pode concluir que o cálculo está correto ou que "
+           "não há providência cabível. Pedidos e recursos são atuação distinta, que não integra as fases. Questões da própria "
+           "condenação seguem outra via, avaliada separadamente; a aplicação de lei posterior mais benéfica, porém, cabe ao juízo "
+           "da execução.")
 METODO = [
-    ("Leitura integral", "Todas as folhas, inclusive as digitalizadas como imagem."),
+    ("Leitura integral, no diagnóstico", "Todas as folhas, inclusive as digitalizadas como imagem."),
     ("Linha do tempo", "Cada fato ligado à folha ou ao evento em que está."),
     ("Conta refeita do zero", "Pela lei aplicável a cada fato (a da data do fato ou a posterior mais benéfica), com a conta exposta."),
     ("Confronto com o cálculo oficial e com o título", "Cada divergência é conferida antes de ser apontada, inclusive a que hoje beneficia o condenado e cuja correção o prejudicaria."),
-    ("Revisão e assinatura", "Relatório revisado e assinado pelo advogado responsável antes da entrega; pedidos e recursos subscritos por advogado inscrito na seccional do processo."),
+    ("Revisão e assinatura", "Relatório revisado e assinado por advogado da banca antes da entrega; pedidos e recursos subscritos por advogados da banca inscritos na seccional do processo."),
 ]
 
 # ---------------------------------------------------------------- 5a. sistema penitenciário federal (Lei 11.671/2008, selada)
@@ -362,8 +419,13 @@ FAQ = [
      "pode concluir que o cálculo está correto."),
     ("Quem constitui o advogado na execução?",
      "O próprio condenado, em regra por procuração."),
+    ("Todas as fases são necessárias?",
+     "Não. O diagnóstico indica, com o motivo, quais análises adicionais são pertinentes. Pode concluir que nenhuma outra é "
+     "necessária."),
     ("O advogado que já atua na execução pode solicitar a revisão?",
-     "Sim. A revisão pode ser feita em apoio à defesa constituída, que continua responsável pelo processo."),
+     "Sim. A revisão pode apoiar a defesa constituída, sem substituí-la na condução do processo. O acompanhamento documental "
+     "também pode ser realizado em conjunto, com prévio conhecimento do advogado e definição das atribuições de cada "
+     "profissional."),
     ("Um erro antigo ainda pode ser apontado?",
      "Sim. O cálculo de pena acompanha toda a execução e é revisto a cada incidente: erro demonstrado pode ser levado ao juízo "
      "da execução enquanto houver pena a cumprir e, diante de ilegalidade flagrante, cabe habeas corpus a qualquer tempo. A via "
@@ -375,8 +437,8 @@ FAQ = [
 AVISO = ("Conteúdo informativo, nos termos do Provimento CFOAB 205/2021. Os exemplos são fictícios e não se referem a casos do "
          "escritório. O resultado de cada execução depende dos documentos e das circunstâncias do caso. Dados oficiais com fonte e "
          "página indicadas; consulta em 8 de outubro de 2026.")
-CONTATO_FRASE = "Atendimento virtual em todo o Brasil e atendimento presencial nas unidades de Cascavel, Porto Alegre, Foz do Iguaçu e Porto Belo, mediante agendamento prévio."
-BIO = "Defesa criminal, habeas corpus e recursos perante o STJ e o STF, execução penal e sistema penitenciário federal."
+CONTATO_FRASE = comum.CONTATO_FRASE     # a mesma frase e a mesma biografia da página de linguagem simples
+BIO = comum.BIO
 
 
 # ================================================================= montagem
@@ -405,7 +467,7 @@ def _ano(d: str) -> float:
 
 
 def grafico_svg() -> str:
-    """Versão horizontal (computador e PDF)."""
+    """Versão horizontal (computador)."""
     x0, x1, a0, a1 = 190, 690, 2022, 2030.5
     x = lambda d: round(x0 + (_ano(d) - a0) / (a1 - a0) * (x1 - x0), 1)  # noqa: E731
     p = ['<svg class="rv-grafico rv-grafico-h" viewBox="0 0 700 270" role="img" aria-labelledby="gh-tit gh-desc">',
@@ -488,25 +550,20 @@ def corpo_html(contato: str = "B") -> str:
         f'<span class="rv-num-ressalva">{esc(rs)}</span>'
         f'<span class="rv-num-fonte"><a href="{u}" target="_blank" rel="noopener">{esc(f)}<span class="so-leitor"> (abre em nova aba)</span></a></span></li>'
         for n, r, rs, f, u in NUMEROS)
-    s.append(f'''  <p class="trilha"><a href="areas-de-atuacao.html">Áreas de atuação</a> / <a href="area-execucao-penal.html">Execução Penal</a> / Revisão completa</p>
+    s.append(f'''  <p class="trilha"><a href="areas-de-atuacao.html">Áreas de atuação</a> / <a href="area-execucao-penal.html">Execução Penal</a> / Revisão por fases</p>
 
-  <section class="rv-abertura" aria-labelledby="t-abertura">
-    <div class="rv-abertura-interna">
-      <p class="rv-sobre">Execução Penal</p>
-      <h1 id="t-abertura">{TITULO}</h1>
-      <p class="rv-tese-ab">{esc(TESE)}</p>
-      <p class="rv-pre">{esc(PREAMBULO)}</p>
-      <p class="rv-pre rv-honesto">{esc(HONESTIDADE)}</p>
-      <p class="rv-moldura">{esc(MOLDURA)}</p>
-      <ul class="rv-numeros">
+  <section class="abertura abertura-area rv-abertura" aria-labelledby="t-abertura">
+    <p class="rv-sobre">Execução Penal</p>
+    <h1 id="t-abertura">{TITULO}</h1>
+    <p class="preambulo">{esc(PREAMBULO)}</p>
+    <p class="preambulo rv-honesto">{esc(HONESTIDADE)}</p>
+    <p class="rv-tese">{esc(TESE)}</p>
+    <p class="rv-moldura">{esc(MOLDURA)}</p>
+    <ul class="rv-numeros rv-numeros-dois">
 {nums}
-      </ul>
-      <p class="rv-remissoes"><a href="#roteiro">Roteiro de leitura</a> <a href="#materiais">Guia em PDF</a></p>
-    </div>
-  </section>
-
-  <div class="abertura abertura-area">
+    </ul>
     <nav class="sumario" aria-label="Nesta página">
+      <a href="#fases">As fases</a>
       <a href="#roteiro">Roteiro de leitura</a>
       <a href="#cascata">Efeito cascata</a>
       <a href="#conferencias">O que se confere</a>
@@ -515,8 +572,45 @@ def corpo_html(contato: str = "B") -> str:
       <a href="#tribunais">Tribunais</a>
       <a href="#perguntas">Perguntas</a>
     </nav>
-  </div>
+  </section>
 ''')
+    # I — fases
+    fs = []
+    for k, f in enumerate(FASES, 1):
+        fs.append(f'''      <li class="rv-fase">
+        <p class="rv-fase-num">Fase {k}</p>
+        <h3>{esc(f["nome"])}</h3>
+        <dl class="rv-tres">
+          <dt>O que examina</dt><dd>{esc(f["examina"])}</dd>
+          <dt>O que entrega</dt><dd>{esc(f["entrega"])}</dd>
+          <dt>De onde parte</dt><dd>{esc(f["parte"])}</dd>
+        </dl>
+      </li>''')
+    fora = "\n".join(f'          <dt>{esc(a)}</dt><dd>{esc(b)}</dd>' for a, b in FORA_FASES)
+    rg = "\n".join(f'          <li><strong>{esc(a)}</strong>: {esc(b)}</li>' for a, b in REGRAS)
+    s.append(secao("fases", "I", "Das fases da revisão", f'''    <div class="rv-coluna"><p class="abre">{esc(FASES_ABERTURA)}</p></div>
+    <ol class="rv-fases">
+{chr(10).join(fs)}
+    </ol>
+    <div class="rv-duas">
+      <div>
+        <h3 class="sub-secao">Fora das fases</h3>
+        <dl class="rv-tres">
+{fora}
+        </dl>
+      </div>
+      <div>
+        <h3 class="sub-secao">Três regras</h3>
+        <ul class="rv-lista">
+{rg}
+        </ul>
+      </div>
+    </div>
+    <div class="rv-limites">
+      <h3 class="sub-secao">Os limites da revisão</h3>
+      <p>{esc(LIMITES)}</p>
+    </div>
+''', "Quatro fases, cada uma com o que examina, o que entrega e de onde parte."))
     # I — roteiro
     rt = []
     for i, (doc, oque, onde, porque) in enumerate(ROTEIRO, 1):
@@ -530,14 +624,14 @@ def corpo_html(contato: str = "B") -> str:
         </dl>
       </div>
     </details>''')
-    s.append(secao("roteiro", "I", "Roteiro de leitura dos documentos", f'''    <p class="rv-tese">{esc(ROTEIRO_ABERTURA.split(":")[0])}: {esc(ROTEIRO_ABERTURA.split(":", 1)[1].split(". ")[0].strip())}.</p>
+    s.append(secao("roteiro", "II", "Roteiro de leitura dos documentos", f'''    <p class="rv-tese">{esc(ROTEIRO_ABERTURA.split(":")[0])}: {esc(ROTEIRO_ABERTURA.split(":", 1)[1].split(". ")[0].strip())}.</p>
     <div class="rv-coluna"><p class="abre">{esc(ROTEIRO_ABERTURA.split(". ", 1)[1])}</p></div>
     <div class="rv-capitulos rv-roteiro">
 {chr(10).join(rt)}
     </div>
 ''', "Oito documentos, o que se confere em cada um e por que importa. Toque em cada documento para abrir."))
     # II — cascata
-    s.append(secao("cascata", "II", "Do efeito cascata", f'''    <div class="rv-coluna">
+    s.append(secao("cascata", "III", "Do efeito cascata", f'''    <div class="rv-coluna">
       <p class="abre">{esc(CASCATA_TEXTO)}</p>
       <p class="rv-premissas"><span class="rotulo">Exemplo fictício · premissas</span>{esc(PREMISSAS)}</p>
     </div>
@@ -560,30 +654,20 @@ def corpo_html(contato: str = "B") -> str:
       </div>
     </details>''')
     me = "\n".join(f'      <li><h3>{esc(t)}</h3><p>{esc(p)}</p></li>' for t, p in METODO)
-    en = "\n".join(f'        <li><strong>{esc(a)}</strong>: {esc(b)}</li>' for a, b in ENTREGA)
-    s.append(secao("conferencias", "III", "Do que a revisão confere e entrega", f'''    <div class="rv-capitulos">
+    s.append(secao("conferencias", "IV", "Do que a revisão confere", f'''    <div class="rv-capitulos">
 {chr(10).join(caps)}
-    </div>
-    <div class="rv-duas">
-      <div>
-        <h3 class="sub-secao">O que a revisão entrega</h3>
-        <ul class="rv-lista">
-{en}
-        </ul>
-      </div>
-      <div class="rv-limites">
-        <h3 class="sub-secao">Os limites da revisão</h3>
-        <p>{esc(LIMITES)}</p>
-      </div>
     </div>
     <h3 class="sub-secao rv-centro">Método</h3>
     <ol class="rv-metodo">
 {me}
     </ol>
-''', f"{len(CAPITULOS)} capítulos, na ordem em que a execução é examinada. Toque em cada capítulo para abrir."))
+''', f"{len(CAPITULOS)} capítulos, na ordem em que a execução é examinada. O diagnóstico percorre os {len(CAPITULOS)} capítulos com "
+       "os documentos disponíveis e registra as pendências e os pontos não apurados. A fase 2 detalha a conferência dos "
+       "lançamentos no sistema; a fase 3 aprofunda os pontos de detração, remição e benefícios indicados no diagnóstico. Toque "
+       "em cada capítulo para abrir."))
     # IV — federal
     fe = "\n".join(f'      <li><strong>{esc(a)}</strong>: {esc(b)}</li>' for a, b in FEDERAL)
-    s.append(secao("federal", "IV", "Da execução no sistema penitenciário federal", f'''    <div class="rv-coluna">
+    s.append(secao("federal", "V", "Da execução no sistema penitenciário federal", f'''    <div class="rv-coluna">
       <p class="abre">{esc(FEDERAL_TEXTO)}</p>
     </div>
     <ul class="rv-lista rv-coluna">
@@ -593,7 +677,7 @@ def corpo_html(contato: str = "B") -> str:
 '''))
     # V — direitos fundamentais
     ad = "\n".join(f'      <p>{t}</p>' for t in ADPF)
-    s.append(secao("direitos", "V", "Das condições de cumprimento e dos direitos fundamentais", f'''    <div class="rv-coluna">
+    s.append(secao("direitos", "VI", "Das condições de cumprimento e dos direitos fundamentais", f'''    <div class="rv-coluna">
       <h3 class="sub-secao">Súmula Vinculante 56</h3>
       <blockquote class="rv-enunciado">{esc(SV56)}<span class="rv-ref">(Súmula Vinculante 56, Supremo Tribunal Federal, aprovada na sessão plenária de 29/6/2016.)</span></blockquote>
       <p class="abre">{esc(SV56_EXPL)}</p>
@@ -602,40 +686,24 @@ def corpo_html(contato: str = "B") -> str:
     </div>
 '''))
     # VI — tribunais
-    s.append(secao("tribunais", "VI", "Do que dizem os tribunais", f'''    <div class="rv-julgados">
+    s.append(secao("tribunais", "VII", "Do que dizem os tribunais", f'''    <div class="rv-julgados">
 {chr(10).join(julgado_html(j) for j in JULGADOS)}
     </div>
 ''', "Precedentes conferidos na fonte oficial. O texto oficial abre ao toque, sem cortes."))
     # VII — perguntas
     fq = "\n".join(f'    <details><summary>{esc(q)}</summary><p>{esc(r)}</p></details>' for q, r in FAQ)
-    s.append(secao("perguntas", "VII", "Das perguntas frequentes", f'''    <div class="rv-faq">
+    s.append(secao("perguntas", "VIII", "Das perguntas frequentes", f'''    <div class="rv-faq">
 {fq}
     </div>
 '''))
-    # VIII — materiais e contato
-    ico = ('<svg viewBox="0 0 24 28" aria-hidden="true" focusable="false"><path d="M3 1h12l6 6v20H3z"/><path d="M15 1v6h6"/>'
-           '<path d="M7 14h10M7 18h10M7 22h6"/></svg>')
+    # IX — atendimento
     botao = '\n      <p><a class="botao" href="agendar.html">Agendar atendimento</a></p>' if contato == "A" else ""
-    s.append(secao("materiais", "VIII", "Dos materiais", f'''    <ul class="rv-baixar">
-      <li><a href="{PDF_GUIA}" download>{ico}<span class="b-titulo">Guia da revisão</span><span class="b-desc">Quatro páginas: o que a revisão confere, o efeito cascata, o roteiro de leitura e os documentos examinados.</span><span class="b-acao">Baixar PDF</span></a></li>
-      <li><a href="{PDF_ESTUDO}" download>{ico}<span class="b-titulo">Estudo completo</span><span class="b-desc">O catálogo de erros, os exemplos com a conta, os dados oficiais, os precedentes e o que pesa contra.</span><span class="b-acao">Baixar PDF</span></a></li>
-    </ul>
-    <div class="atendimento rv-contato">
+    s.append(secao("atendimento", "IX", "Do atendimento", f'''    <div class="atendimento rv-contato">
       <p>{esc(CONTATO_FRASE)}</p>{botao}
     </div>
     <p class="rv-aviso">{esc(AVISO)}</p>
 '''))
-    s.append(f'''  <section class="autor-bloco" aria-label="Responsável técnico">
-    <img src="assets/images/luiz-henrique-baldissera.jpg" alt="Luiz Henrique Baldissera" width="600" height="750" loading="lazy">
-    <div>
-      <p class="rotulo">Responsável técnico</p>
-      <h2>Luiz Henrique Baldissera</h2>
-      <p class="cargo">Advogado criminalista · OAB/PR 55.717 · OAB/SC 78.938-A</p>
-      <p class="bio">{esc(BIO)}</p>
-      <a class="remissao" href="perfil-luiz.html">Ver perfil</a>
-    </div>
-  </section>
-''')
+    s.append(comum.autor_html())
     return "\n".join(s)
 
 

@@ -922,6 +922,58 @@ html { scrollbar-color: #B9AE95 var(--papel); }
 html.contraste .rv-chamada { background: #000; color: #FFF; }
 html.contraste .rv-exemplo, html.contraste .rv-julgado blockquote { background: #FFF; border-color: #000; }
 
+/* ---- revisão da execução penal, por fases (09/10/2026) ---- */
+.rv-abertura .rv-sobre { margin: 0 0 0.4rem; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.12em; }
+.rv-abertura h1 { text-wrap: balance; }
+.rv-abertura .rv-honesto { margin-top: 0.75rem; color: var(--toga); font-weight: 600; }
+.rv-abertura .rv-tese { margin: 2.25rem auto 1.25rem; }
+.rv-moldura { max-width: var(--medida); margin: 0 auto; font-size: var(--t-1); color: var(--tinta-2); text-wrap: pretty; }
+.rv-numeros-dois { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 50rem; }
+.rv-numeros .rv-num-ressalva { display: block; margin-top: 0.5rem; font-size: var(--t-0); line-height: 1.5; color: var(--tinta-2); font-style: italic; }
+.rv-abertura .sumario { margin-top: 2.5rem; }
+
+.rv-fases { list-style: none; margin: 2rem auto 0; padding: 0; max-width: 60rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
+.rv-fase { background: #FFFDF8; border: 1px solid var(--linha); border-top: 4px double var(--ouro); padding: 1.5rem 1.6rem 1.25rem; }
+.rv-fase .rv-fase-num { margin: 0; font: 500 var(--t-1)/1 var(--titulo); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.12em; }
+.rv-fase h3 { font: 600 var(--t-4)/1.2 var(--titulo); color: var(--toga); margin: 0.35rem 0 0.9rem; text-wrap: balance; }
+.rv-tres { margin: 0; }
+.rv-tres dt { font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.1em; padding-top: 0.7rem; border-top: 1px dotted var(--linha); }
+.rv-tres dt:first-child { border-top: 0; padding-top: 0; }
+.rv-tres dd { margin: 0.2rem 0 0.7rem; font-size: var(--t-1); line-height: 1.6; text-align: justify; hyphens: auto; }
+.rv-duas { max-width: 60rem; margin: 2.75rem auto 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 3rem; }
+.rv-duas .sub-secao, .rv-limites .sub-secao { margin-left: 0; }
+.rv-lista { list-style: none; margin: 0; padding: 0; }
+.rv-lista li { padding: 0.55rem 0 0.55rem 1.4rem; position: relative; font-size: var(--t-1); line-height: 1.6; border-top: 1px dotted var(--linha); text-align: justify; hyphens: auto; }
+.rv-lista li:first-child { border-top: 0; }
+.rv-lista li::before { content: ""; position: absolute; left: 0.2rem; top: 1.15rem; width: 0.45rem; height: 0.45rem; border: 1px solid var(--ouro); transform: rotate(45deg); }
+.rv-lista li strong { color: var(--toga); font-weight: 600; }
+.rv-coluna.rv-lista { margin: 0 auto; }
+.rv-limites { max-width: 60rem; margin: 2.25rem auto 0; background: var(--papel-2); border-left: 3px solid var(--ouro); padding: 1.25rem 1.5rem 0.5rem; }
+.rv-limites p { margin: 0 0 0.9rem; font-size: var(--t-1); line-height: 1.65; text-align: justify; hyphens: auto; }
+.rv-centro { text-align: center; margin-top: 3rem; }
+
+.rv-premissas { font-size: var(--t-1); color: var(--tinta-2); background: var(--papel-2); border-left: 3px solid var(--ouro); padding: 1rem 1.25rem; text-indent: 0; }
+.rv-premissas .rotulo { display: block; margin-bottom: 0.3rem; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.1em; }
+.rv-coluna > p.rv-premissas { text-indent: 0; }
+.rv-grafico-v { display: none; max-width: 22rem; }
+.rv-grafico .g-liga { stroke: var(--ouro); stroke-width: 1; stroke-dasharray: 3 3; }
+.rv-julgado .rv-parte { margin: 0.9rem 0 0.4rem; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.08em; }
+.rv-enunciado { margin: 0 0 1.1rem; padding: 1rem 1.25rem; background: var(--papel-2); border-left: 3px solid var(--ouro); font-style: italic; font-size: var(--t-1); line-height: 1.65; text-align: justify; hyphens: auto; }
+.rv-enunciado .rv-ref { display: block; margin-top: 0.75rem; font-style: normal; font-size: var(--t-0); color: var(--tinta-2); text-align: left; }
+.rv-roteiro .cap-corpo { padding-bottom: 1.25rem; }
+.rv-contato p { font-size: var(--t-2); }
+
+@media (max-width: 860px) {
+  .rv-fases, .rv-duas, .rv-numeros-dois { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .rv-grafico-h { display: none; }
+  .rv-grafico-v { display: block; }
+  .rv-fase { padding: 1.25rem 1.1rem 1rem; }
+  .rv-tres dd, .rv-lista li, .rv-limites p, .rv-enunciado { text-align: left; hyphens: manual; }
+}
+html.contraste .rv-fase, html.contraste .rv-limites, html.contraste .rv-premissas, html.contraste .rv-enunciado { background: #FFF; border-color: #000; }
+
 /* ---- execução penal em linguagem simples (julgados explicados), 09/10/2026 ---- */
 .ex-abertura .ex-subtitulo { max-width: var(--medida); margin: 0.75rem auto 0; font: 500 var(--t-3)/1.35 var(--titulo); color: var(--ouro-texto); }
 .ex-como-ler, .ex-palavras { max-width: 46rem; margin: 0 auto; border-top: 1px solid var(--linha); }

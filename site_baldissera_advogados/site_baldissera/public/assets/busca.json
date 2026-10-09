@@ -254,5 +254,21 @@
   "data": "",
   "resumo": "Baldissera Advogados, sociedade de advogados fundada em 2010, com unidades em Cascavel, Foz do Iguaçu, Porto Alegre e Porto Belo: como trabalhamos e o que este site não diz.",
   "url": "sobre.html"
+ },
+ {
+  "tipo": "Página",
+  "titulo": "Execução penal em linguagem simples",
+  "area": "",
+  "data": "",
+  "resumo": "Os julgados do STJ e do STF sobre o cumprimento da pena, sem juridiquês: a quem cada decisão pode alcançar, um exemplo em números, o que pode impedir o efeito, o documento que mostra e a tese oficial, para ler ou ouvir.",
+  "url": "execucao-penal-em-linguagem-simples.html"
+ },
+ {
+  "tipo": "Página",
+  "titulo": "Revisão da execução penal, por fases",
+  "area": "",
+  "data": "",
+  "resumo": "A revisão da execução penal em quatro fases: diagnóstico, conferência dos lançamentos no sistema, tempo a descontar e benefícios, e acompanhamento. O que cada fase examina e entrega, e o que dizem os dados oficiais e os tribunais.",
+  "url": "execucao-penal-revisao-por-fases.html"
  }
 ]

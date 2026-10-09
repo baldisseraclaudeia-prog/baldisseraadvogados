@@ -698,7 +698,8 @@ def corpo_html(contato: str = "B") -> str:
 '''))
     # IX — atendimento
     botao = '\n      <p><a class="botao" href="agendar.html">Agendar atendimento</a></p>' if contato == "A" else ""
-    s.append(secao("atendimento", "IX", "Do atendimento", f'''    <div class="atendimento rv-contato">
+    s.append("  " + comum.publicacoes_html("IX") + "\n")
+    s.append(secao("atendimento", "X", "Do atendimento", f'''    <div class="atendimento rv-contato">
       <p>{esc(CONTATO_FRASE)}</p>{botao}
     </div>
     <p class="rv-aviso">{esc(AVISO)}</p>

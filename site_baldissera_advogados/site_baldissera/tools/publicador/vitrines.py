@@ -41,6 +41,13 @@ PAGINAS_AREA = {
     "area-leiloes.html": lambda c: "leil" in (c["titulo"] + " " + c["resumo"]).lower(),
 }
 
+# páginas do portal de execução penal que também listam as publicações da matéria (ordem do Dr. Luiz, 09/10/2026);
+# fora de PAGINAS_AREA para não entrarem na busca como "Área de atuação"
+PAGINAS_PORTAL = {
+    "execucao-penal-em-linguagem-simples.html": lambda c: c["area"] == "execucao-penal",
+    "execucao-penal-revisao-por-fases.html": lambda c: c["area"] == "execucao-penal",
+}
+
 CARTAO = re.compile(r'(?s)<a href="([^"]+\.html)" class="pub-card[^"]*"([^>]*)>(.*?)</a>')
 
 
@@ -193,7 +200,7 @@ def atualizar_tudo(pub: Path = None) -> list:
     if novo != s:
         home.write_text(novo, encoding="utf-8", newline="\n"); mudados.append(home)
 
-    for nome, filtro in PAGINAS_AREA.items():
+    for nome, filtro in {**PAGINAS_AREA, **PAGINAS_PORTAL}.items():
         f = pub / nome
         if not f.exists():
             continue

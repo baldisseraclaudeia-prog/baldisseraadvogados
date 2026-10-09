@@ -254,7 +254,8 @@ def corpo_html(js: list, contato: str, rascunhos: bool) -> str:
     for t, d in PALAVRAS:
         out.append(f"      <dt>{esc(t)}</dt><dd>{esc(d)}</dd>")
     out.append("    </dl>\n  </section>")
-    n2 = "V" if pend else "IV"
+    n2 = "VI" if pend else "V"
+    out.append("\n  " + comum.publicacoes_html("V" if pend else "IV"))
     out.append(f'''
   <section class="secao" id="revisao" aria-labelledby="t-revisao">
     <header>

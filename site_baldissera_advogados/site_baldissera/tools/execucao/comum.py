@@ -61,3 +61,24 @@ def contato_html(modo: str = None) -> str:
 
 def aviso_html() -> str:
     return f'<p class="rv-aviso">{esc(AVISO)}</p>'
+
+
+def publicacoes_html(numeral: str) -> str:
+    """Seção "Das publicações sobre execução penal" ao fim das páginas do portal (ordem do Dr. Luiz, 09/10/2026).
+    O miolo fica entre os marcadores PUBLICACOES-AREA e é reescrito pelo publicador a cada nova publicação
+    (tools/publicador/vitrines.py, PAGINAS_AREA), como na página da área."""
+    sys.path.insert(0, str(RAIZ / "tools" / "publicador"))
+    import vitrines
+    miolo = vitrines.bloco_area([x for x in vitrines.cartoes(PUBLIC) if x["area"] == "execucao-penal"])
+    return f'''<section class="secao" id="pub-area" aria-labelledby="t-pub-area">
+    <header>
+      <span class="numeral" aria-hidden="true">{numeral}</span>
+      <h2 id="t-pub-area">Das publicações sobre execução penal</h2>
+      <p class="nota-secao">Atualizada a cada nova publicação desta matéria.</p>
+    </header>
+    <ul class="pub-grade">
+<!-- PUBLICACOES-AREA-INICIO -->
+{miolo}
+<!-- PUBLICACOES-AREA-FIM -->
+    </ul>
+  </section>'''

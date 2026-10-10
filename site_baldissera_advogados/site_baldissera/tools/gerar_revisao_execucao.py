@@ -68,10 +68,10 @@ CONFERIR_ABERTURA = ("O atestado de pena a cumprir deve ser entregue ao preso to
                      "examinar nos autos.")
 CONFERIR = [
     ("A data da primeira prisão",
-     "A data em que a pessoa foi presa pela primeira vez neste processo (flagrante ou preventiva), e não a data do mandado de "
-     "prisão definitivo.",
-     "no atestado, o campo de início do cumprimento ou de prisão; a data real está no auto de prisão em flagrante ou no mandado "
-     "cumprido."),
+     "A data em que a pessoa foi presa pela primeira vez neste processo (flagrante ou preventiva), e não a data em que a guia "
+     "de recolhimento foi expedida, depois do trânsito em julgado.",
+     "no atestado, o campo de início do cumprimento ou de prisão; a data real está no auto de prisão em flagrante ou na "
+     "certidão de cumprimento da prisão preventiva."),
     ("Prisão em outro processo",
      "Período em que a pessoa ficou presa por outro processo, depois absolvida ou com o caso arquivado. Quando presentes os "
      "pressupostos, esse tempo é descontado.",
@@ -224,7 +224,7 @@ ROTEIRO = [
 CASCATA_TEXTO = ("Os marcos da execução se apoiam nos mesmos dados lançados no início: a pena e as datas. Por isso, um dado "
                  "errado na origem pode se refletir nas etapas seguintes. Um exemplo fictício:")
 PREMISSAS = ("Pena de 8 anos (96 meses), em regime inicial fechado; prisão preventiva iniciada em maio de 2021, contínua desde "
-             "então, lançada no cálculo como janeiro de 2022 (data do mandado definitivo); frações ilustrativas de um sexto para "
+             "então, lançada no cálculo como janeiro de 2022 (data da expedição da guia de recolhimento); frações ilustrativas de um sexto para "
              "cada progressão, a segunda sobre o saldo, e de um terço para o livramento; contagem em meses inteiros a partir do "
              "primeiro dia do mês; sem remição, falta ou interrupção; requisitos não temporais pressupostos.")
 CONTAS = "96 × 1/6 = 16 meses · saldo de 80 × 1/6 = 13 meses e 10 dias · 96 × 1/3 = 32 meses."
@@ -261,7 +261,7 @@ CAPITULOS = [
       ("Pena já extinta", "condenação extinta antes do início das demais que continua pesando na base dos requisitos.")]),
     ("Prisão, detração e tempo cumprido",
      "O tempo de prisão provisória, e as restrições que a lei e a jurisprudência equiparam a ela, se descontam da pena. O que não é lançado deixa de ser contado no cálculo.",
-     [("Prisão provisória do próprio processo", "flagrante e preventiva lançados com as datas reais, e não com a data do mandado definitivo."),
+     [("Prisão provisória do próprio processo", "flagrante e preventiva lançados com as datas reais, e não com a data da guia de recolhimento."),
       ("Prisão em outro processo", "período de prisão em processo que terminou em absolvição ou arquivamento, quando presentes os pressupostos do desconto."),
       ("Recolhimento domiciliar noturno", "as horas de recolhimento convertidas em dias de pena cumprida."),
       ("Método do desconto", "a forma como o desconto incide sobre o requisito de cada benefício."),

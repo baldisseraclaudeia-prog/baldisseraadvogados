@@ -718,6 +718,7 @@ def corpo_html(contato: str = "B") -> str:
     <p class="rv-aviso">{esc(AVISO)}</p>
 '''))
     s.append(comum.autor_html())
+    s.append(comum.compartilhar_html(TITULO, URL, "Compartilhar esta página"))
     return "\n".join(s)
 
 

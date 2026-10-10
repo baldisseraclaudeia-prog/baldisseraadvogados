@@ -206,3 +206,12 @@
   });
 
 })();
+
+/* Copiar o link da página (bloco "Compartilhar", 09/10/2026) */
+document.addEventListener("click", function (e) {
+  var b = e.target.closest && e.target.closest("[data-copiar]"); if (!b) return;
+  var url = b.getAttribute("data-copiar");
+  var ok = function () { var n = b.closest(".compartilhar").querySelector("[data-copiado]"); if (n) { n.hidden = false; setTimeout(function () { n.hidden = true; }, 2500); } };
+  var velho = function () { var t = document.createElement("textarea"); t.value = url; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch (x) {} t.remove(); ok(); };
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(ok, velho); else velho();
+});

@@ -463,6 +463,9 @@ form .enviar { margin-top: 2rem; text-align: center; }
 .autor-bloco .bio { margin: 0.6rem 0 0.6rem; font-size: var(--t-1); color: var(--tinta-2); line-height: 1.6; }
 .compartilhar { max-width: var(--medida); margin: 2.5rem auto 4rem; text-align: center; }
 .compartilhar .rotulo { margin: 0 0 1rem; color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.08em; }
+.compartilhar .acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
+.compartilhar .botao-claro { background: transparent; color: var(--toga); border-color: var(--toga); }
+.compartilhar .botao-claro:hover { background: var(--toga); color: var(--papel); }
 .compartilhar .nota { margin: 0.9rem 0 0; font-size: var(--t-0); color: var(--tinta-2); font-style: italic; }
 .compartilhar .redes { margin: 0.9rem 0 0; font-size: var(--t-1); }
 .mais-publicacoes { text-align: center; margin: 0 0 4rem; }

@@ -108,3 +108,23 @@ def publicacoes_html(numeral: str) -> str:
 <!-- PUBLICACOES-AREA-FIM -->
     </ul>
   </section>'''
+
+
+def compartilhar_html(titulo: str, url: str, rotulo: str = "Compartilhar esta análise") -> str:
+    """Bloco de compartilhar (09/10/2026, aprovado pelo Dr. Luiz): WhatsApp e e-mail levam só o título e o link;
+    sem resumo e sem o WhatsApp do escritório na mensagem; "Copiar link" via site.js ([data-copiar])."""
+    from urllib.parse import quote
+    import molde
+    msg = f"{titulo}\n{url}"
+    wa = "https://wa.me/?text=" + quote(msg, safe="")
+    mail = "mailto:?subject=" + quote(titulo, safe="") + "&body=" + quote(msg, safe="")
+    return (f'''<aside class="compartilhar" aria-label="Compartilhar">
+  <p class="rotulo">{esc(rotulo)}</p>
+  <div class="acoes">
+    <a class="botao" href="{esc(wa)}" target="_blank" rel="noopener">{molde.ICO_WHATS}WhatsApp</a>
+    <a class="botao botao-claro" href="{esc(mail)}">E-mail</a>
+    <button type="button" class="botao botao-claro" data-copiar="{esc(url)}">Copiar link</button>
+  </div>
+  <p class="nota" data-copiado hidden>Link copiado.</p>
+  <p class="redes">{redes_html()}</p>
+</aside>''')

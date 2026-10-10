@@ -829,13 +829,13 @@ def head_html() -> str:
 <meta property="og:title" content="{t}">
 <meta property="og:description" content="{DESCRICAO}">
 <meta property="og:url" content="{URL}">
-<meta property="og:image" content="https://www.baldisseraadvogados.com.br/assets/images/og-default.png">
+<meta property="og:image" content="https://www.baldisseraadvogados.com.br/assets/images/capas/execucao-penal-revisao-por-fases-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{t}">
 <meta name="twitter:description" content="{DESCRICAO}">
-<meta name="twitter:image" content="https://www.baldisseraadvogados.com.br/assets/images/og-default.png">
+<meta name="twitter:image" content="https://www.baldisseraadvogados.com.br/assets/images/capas/execucao-penal-revisao-por-fases-og.png">
 <script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>
 <script defer src="/_vercel/insights/script.js"></script>
 '''

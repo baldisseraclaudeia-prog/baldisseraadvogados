@@ -304,13 +304,13 @@ def head_html(js: list) -> str:
 <meta property="og:title" content="{t}">
 <meta property="og:description" content="{esc(DESCRICAO)}">
 <meta property="og:url" content="{URL}">
-<meta property="og:image" content="{comum.BASE}/assets/images/og-default.png">
+<meta property="og:image" content="{comum.BASE}/assets/images/capas/execucao-penal-em-linguagem-simples-og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{t}">
 <meta name="twitter:description" content="{esc(DESCRICAO)}">
-<meta name="twitter:image" content="{comum.BASE}/assets/images/og-default.png">
+<meta name="twitter:image" content="{comum.BASE}/assets/images/capas/execucao-penal-em-linguagem-simples-og.png">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 <script defer src="/_vercel/insights/script.js"></script>
 '''

@@ -139,6 +139,8 @@ html.contraste a { text-decoration-line: underline; }
 .manchete-lista img { width: 6.5rem; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--linha); }
 .lista-titulo { display: block; font: 500 var(--t-3)/1.25 var(--titulo); margin-top: 0.2rem; }
 .manchete-lista a:hover .lista-titulo { text-decoration: underline; text-decoration-color: var(--ouro); }
+/* item sem miniatura: o texto ocupa a linha inteira, nunca a coluna da imagem (10/10/2026) */
+.manchete-lista a > span:only-child { grid-column: 1 / -1; }
 
 /* "Você sabia?": faixa escura de ponta a ponta */
 .voce-sabia { width: 100vw; margin-left: calc(50% - 50vw); background: var(--toga); color: #E7E1D2; }

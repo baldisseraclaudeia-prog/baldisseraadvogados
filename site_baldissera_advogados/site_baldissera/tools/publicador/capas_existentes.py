@@ -16,8 +16,11 @@ def dados(f: Path) -> dict:
     s = BeautifulSoup(f.read_text(encoding="utf-8"), "html.parser")
     titulo = re.sub(r"\s+", " ", s.find("h1").get_text(" ", strip=True))
     meta = s.select_one(".post-meta")
+    lit = s.select_one("header.cabeca-pub p.meta")
     if meta:                                   # modelo das publicações Nº 3 a 7
         area = meta.find("span").get_text(strip=True)
+    elif lit:                                  # molde "liturgia": "Execução Penal, outubro de 2026"
+        area = lit.get_text(strip=True).rsplit(",", 1)[0].strip()
     else:                                      # modelo "PUBLICAÇÃO · ÁREA · MÊS"
         kick = s.find(string=re.compile(r"PUBLICAÇÃO\s*·"))
         area = kick.split("·")[1].strip()

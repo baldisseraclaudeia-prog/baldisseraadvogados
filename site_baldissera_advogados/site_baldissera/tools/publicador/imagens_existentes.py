@@ -52,6 +52,16 @@ def grade(s: str, fig: str) -> "tuple[str, str]":
     s = FIG_ANTIGA.sub("", s)
     if 'class="pub-hero-grid"' in s:
         return s, "já tinha"
+    # molde "liturgia" (publicar.py: montar_publicacao): a figura entra no fim de <header class="cabeca-pub">
+    if '<header class="cabeca-pub sem-figura">' in s:
+        i = s.index('<header class="cabeca-pub sem-figura">')
+        j = s.index("\n</header>", i)
+        img = re.search(r'<img [^>]+>', fig).group(0)
+        s = (s[:i] + '<header class="cabeca-pub">' + s[i + len('<header class="cabeca-pub sem-figura">'):j]
+             + f"\n  <figure>{img}</figure>" + s[j:])
+        return s, "liturgia"
+    if '<header class="cabeca-pub">' in s:
+        return s, "já tinha"
     # molde antigo: post-meta + h1.post-title + p.post-deck
     m = re.search(r'(\n[ \t]*)(<div class="post-meta">.*?<p class="post-deck">.*?</p>)', s, re.S)
     if m:
@@ -91,11 +101,16 @@ def cartoes_com_capa(conferir: bool) -> int:
     def troca(m):
         nonlocal n
         slug, card = m.group(1), m.group(0)
-        if "com-capa" in card or not (P.IMAGENS_SITE / f"{slug}-lateral.jpg").exists():
+        if "com-capa" in card or "pub-card-capa" in card or not (P.IMAGENS_SITE / f"{slug}-lateral.jpg").exists():
             return card
+        abre = card.index(">") + 1
+        if "<h3" in card and '<span class="pub-meta">' in card:
+            # cartão do molde "liturgia" (publicar.py: cartao): a miniatura vem antes da matéria, sem invólucro
+            n += 1
+            return (card[:abre] + f'\n<img class="pub-card-capa" src="assets/images/publicacoes/{slug}-lateral.jpg" '
+                    'alt="" width="800" height="800" loading="lazy" decoding="async">' + card[abre:])
         tit = re.search(r"<h3[^>]*>(.*?)</h3>", card, re.S)
         titulo = re.sub(r"<[^>]+>", "", tit.group(1)).strip() if tit else slug
-        abre = card.index(">") + 1
         fecha = card.rindex("</a>")
         n += 1
         return (card[:abre].replace('class="pub-card"', 'class="pub-card com-capa"', 1) + '\n<div class="pub-card-texto">'

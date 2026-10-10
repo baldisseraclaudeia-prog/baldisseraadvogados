@@ -35,10 +35,10 @@ WHATSAPP_ESCRITORIO = "https://wa.me/5545991029806"
 # "Das palavras usadas nesta página" — glossário único das duas páginas do portal (termo → explicação curta).
 # Veio de gerar_explicada.py em 09/10/2026; os quatro últimos entraram para a Revisão por fases na mesma data.
 PALAVRAS = [
-    ("Atestado de pena", "Documento que o juízo da execução deve entregar todo ano, com a pena total, o que já foi cumprido e as datas previstas de cada benefício."),
+    ("Atestado de pena", "Documento que o juízo da execução deve entregar todo ano, com a pena total, o que já foi cumprido e as datas previstas de cada benefício; previsão não equivale à concessão."),
     ("Detração", "Desconto, na pena, do tempo de prisão ou de recolhimento já cumprido antes da condenação."),
-    ("Progressão de regime", "Passagem do regime fechado para o semiaberto, e deste para o aberto, depois de cumprida a fração de pena exigida e com bom comportamento."),
-    ("Remição", "Desconto de dias da pena por trabalho, estudo ou leitura, na proporção que a lei fixa."),
+    ("Progressão de regime", "Passagem para regime menos rigoroso, por decisão judicial, após o cumprimento do tempo exigido e dos demais requisitos aplicáveis ao caso."),
+    ("Remição", "Reconhecimento de tempo como pena cumprida por trabalho, estudo ou leitura, conforme as regras aplicáveis."),
     ("Data-base", "Dia a partir do qual se conta o tempo para o próximo benefício."),
     ("Falta grave", "Infração disciplinar prevista na Lei de Execução Penal que pode reiniciar a contagem da progressão e custar parte dos dias remidos."),
     ("Livramento condicional", "Liberdade antecipada, com condições, depois de cumprida parte da pena."),

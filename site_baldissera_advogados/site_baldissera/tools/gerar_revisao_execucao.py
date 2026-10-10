@@ -29,14 +29,14 @@ DESCRICAO = ("Na execução penal, o erro aparece como uma data. Cinco pontos qu
 
 # ---------------------------------------------------------------- 1. abertura
 TESE = "Um erro no cálculo da pena pode repercutir em outros marcos da execução."
-GANCHO = ("Uma data lançada errado no início da execução pode manter a pessoa presa por mais tempo do que a pena determina. "
-          "Em um exemplo fictício, uma diferença de oito meses se repete em cada marco: progressão, livramento e fim da pena.")
+GANCHO = ("Um período de prisão que não entra no cálculo desloca as datas da execução: progressão, livramento e fim da pena. "
+          "Em um exemplo fictício, cada uma dessas datas fica oito meses adiante.")
 FRASE_MAE = "Na execução, o erro não aparece como erro: aparece como uma data."
 EM_UM_MINUTO = [
     "A pena da sentença vira datas: de progressão, de livramento, de fim da pena. Cada data depende dos dados lançados no início.",
-    "O atestado de pena mostra essas datas. Cinco pontos dele podem ser conferidos por qualquer pessoa, com o documento em mãos.",
-    "A revisão da execução lê o processo inteiro, refaz a conta e compara com o que está lançado. Pode concluir que está tudo certo.",
-    "Requisito de tempo já atingido, com a pessoa presa, é indicado de imediato, antes de qualquer outra etapa.",
+    "O atestado de pena mostra as datas previstas. Alguns registros dele podem ser comparados com outros documentos; a comparação indica pontos para exame, não uma conclusão.",
+    "A revisão da execução lê todos os autos disponibilizados, refaz a conta e compara com o que está lançado. Pode concluir que está tudo certo.",
+    "Quando o tempo exigido para um benefício já foi cumprido, isso é registrado de imediato, junto com os demais requisitos que ainda precisam ser examinados.",
 ]
 PREAMBULO = ("A pena fixada na sentença passa por sucessivos cálculos, lançamentos e decisões até o último dia de cumprimento. "
              "A revisão percorre esse caminho por fases: primeiro o diagnóstico, documento por documento; depois, conforme o "
@@ -63,26 +63,29 @@ NUMEROS = [
 
 # ---------------------------------------------------------------- 1a. cinco pontos que se conferem no atestado de pena
 CONFERIR_ABERTURA = ("O atestado de pena a cumprir deve ser entregue ao preso todo ano (Lei de Execução Penal, art. 41, XVI). Ele "
-                     "traz a pena total, o que já foi cumprido e a data prevista de cada benefício. Cinco pontos dele podem ser "
-                     "comparados com documentos que a família costuma ter. Uma diferença não significa erro: significa um ponto a "
-                     "examinar nos autos.")
+                     "informa a situação da pena e as datas previstas para benefícios como progressão e livramento; essas previsões "
+                     "não equivalem à concessão do benefício. Alguns registros podem ser comparados com os documentos disponíveis, "
+                     "como autos de prisão, certidões e decisões. A comparação pode indicar pontos para exame dos autos; não permite "
+                     "concluir, sozinha, que existe erro ou benefício devido.")
 CONFERIR = [
-    ("A data da primeira prisão",
-     "A data em que a pessoa foi presa pela primeira vez neste processo (flagrante ou preventiva), e não a data em que a guia "
-     "de recolhimento foi expedida, depois do trânsito em julgado.",
-     "no atestado, o campo de início do cumprimento ou de prisão; a data real está no auto de prisão em flagrante ou na "
-     "certidão de cumprimento da prisão preventiva."),
+    ("As datas da prisão provisória",
+     "Se houve prisão provisória neste processo (flagrante ou preventiva), as datas de início e de fim e se o período foi "
+     "computado. A data da guia de recolhimento, expedida depois do trânsito em julgado, não substitui o período anterior "
+     "efetivamente cumprido. A data-base de cada benefício exige conferência própria.",
+     "no atestado, o campo de início do cumprimento ou de prisão; as datas reais estão no auto de prisão em flagrante, na "
+     "certidão de cumprimento da prisão preventiva e no alvará de soltura, se houve."),
     ("Prisão em outro processo",
-     "Período em que a pessoa ficou presa por outro processo, depois absolvida ou com o caso arquivado. Quando presentes os "
-     "pressupostos, esse tempo é descontado.",
+     "Período de prisão provisória em outro processo, conforme o desfecho dele e os pressupostos aplicáveis. Entre eles, o "
+     "crime da pena em execução deve ser anterior ao período que se pretende descontar.",
      "no atestado, na parte de detração ou de tempo descontado; se não aparece, a conferência é nos autos do outro processo."),
     ("Dias remidos reconhecidos e dias lançados",
-     "Os dias de trabalho, estudo ou leitura que o juiz reconheceu, comparados com os dias que entraram no cálculo. O saldo "
-     "que sobra de uma conta passa para a seguinte.",
+     "O tempo remido reconhecido pelo juiz por trabalho, estudo ou leitura conta como pena cumprida e deve estar refletido no "
+     "cálculo. O saldo que sobra de uma conta passa para a seguinte.",
      "no atestado, o total de dias remidos; nas decisões de remição e nas certidões de cada unidade por onde a pessoa passou."),
     ("A data-base depois de uma falta grave",
-     "A contagem para a progressão recomeça na data em que a falta foi cometida, e não na data em que o juiz a homologou. O "
-     "livramento condicional tem data-base própria, que a falta não altera.",
+     "A falta grave reconhecida reinicia a contagem para a progressão na data em que foi cometida, e não na data em que o juiz "
+     "a homologou. Não reinicia o prazo do livramento condicional, mas pode afetar os requisitos de comportamento exigidos "
+     "para ele.",
      "no atestado, a data-base de cada benefício; no procedimento disciplinar, a data do fato."),
     ("Os decretos de indulto e comutação do período",
      "Cada decreto presidencial publicado durante o cumprimento, examinado na data que ele mesmo fixa. Decreto antigo pode "
@@ -93,14 +96,16 @@ CONFERIR_FECHO = ("Estes são cinco pontos. A revisão examina todos os document
                   "guias em duplicidade, fração aplicada a cada condenação, prescrição e incidentes pendentes.")
 
 # ---------------------------------------------------------------- 1b. as fases (decisões do Dr. Luiz, 09/10/2026)
-FASES_ABERTURA = ("A prioridade não espera a fase: requisito de tempo já atingido, com a pessoa presa, é indicado de imediato. "
+FASES_ABERTURA = ("A prioridade não espera a fase: requisito de tempo já atingido é registrado de imediato, com a indicação dos "
+                  "demais requisitos e pendências. "
                   "O diagnóstico é a primeira fase. Examina os autos da execução e indica, com justificativa, quais análises "
                   "adicionais são pertinentes. As demais fases partem dele e aproveitam os resultados de outras fases que tenham "
                   "sido realizadas, sem sequência obrigatória entre elas.")
 FASES = [
     {"nome": "Diagnóstico da execução",
-     "guia": "Lê todo o processo da execução e refaz a conta da pena.",
-     "examina": "Leitura integral dos autos da execução, inclusive as folhas digitalizadas como imagem: guias de recolhimento, "
+     "guia": "Lê todos os autos disponibilizados da execução e refaz a conta da pena.",
+     "examina": "Leitura de todos os autos da execução disponibilizados, inclusive as folhas digitalizadas como imagem, com "
+                "registro das folhas ilegíveis, dos documentos ausentes e dos pontos não apurados: guias de recolhimento, "
                 "atestado de pena, certidão carcerária, cálculo de pena, decisões, registros de remição e de faltas, certidões "
                 "de trânsito em julgado. A pena é recalculada de forma independente, pela lei aplicável a cada fato, e "
                 "comparada com o cálculo oficial.",
@@ -141,7 +146,7 @@ FASES = [
      "parte": "Parte do diagnóstico. O acompanhamento documental é prestado quando não há advogado constituído na execução ou "
               "em atuação conjunta com o advogado que já acompanha o processo, com prévio conhecimento dele e definição das "
               "atribuições de cada profissional. A apresentação de pedidos e recursos não integra esta fase.",
-     "pessoa": "A família sabe, com antecedência, quando chega cada marco e se algum lançamento novo o deslocou."},
+     "pessoa": "O acompanhamento atualiza as datas previstas e registra alterações decorrentes dos novos lançamentos."},
 ]
 FORA_FASES = [
     ("Revisão criminal",
@@ -157,8 +162,8 @@ GLOSSARIO = ["Atestado de pena", "Data-base", "Detração", "Remição", "Progre
 REGRAS = [
     ("A análise anterior é aproveitada", "cada fase utiliza os documentos, a linha do tempo e os cálculos já produzidos, com "
                                          "novas conferências sempre que necessárias."),
-    ("A prioridade não espera a fase", "requisito de tempo já atingido, com a pessoa presa, é indicado de imediato, sem "
-                                       "aguardar a conclusão do relatório."),
+    ("A prioridade não espera a fase", "requisito de tempo já atingido é registrado de imediato, com a indicação dos demais "
+                                       "requisitos e pendências, sem aguardar a conclusão do relatório."),
     ("As fases têm escopos distintos", "o diagnóstico indica quais análises adicionais são pertinentes; nem toda execução "
                                        "exige as fases seguintes."),
 ]
@@ -228,7 +233,8 @@ PREMISSAS = ("Pena de 8 anos (96 meses), em regime inicial fechado; prisão prev
              "cada progressão, a segunda sobre o saldo, e de um terço para o livramento; contagem em meses inteiros a partir do "
              "primeiro dia do mês; sem remição, falta ou interrupção; requisitos não temporais pressupostos.")
 CONTAS = "96 × 1/6 = 16 meses · saldo de 80 × 1/6 = 13 meses e 10 dias · 96 × 1/3 = 32 meses."
-CASCATA_DIAS = "Oito meses correspondem a cerca de 240 dias a mais em cada marco, no exemplo."
+CASCATA_DIAS = ("Nas premissas do exemplo, cada data fica oito meses adiante. São efeitos do mesmo período não computado; "
+                "as diferenças não se somam.")
 QUADRO = [
     ("Primeira progressão", "set/2022", "mai/2023"),
     ("Segunda progressão", "out/2023", "jun/2024"),
@@ -244,7 +250,7 @@ NOTA_FRACOES = ("Em caso real, a fração depende da data do fato, da natureza d
 # ---------------------------------------------------------------- 4. o que confere e entrega
 CAPITULOS = [
     ("Leitura dos autos e linha do tempo",
-     "A revisão começa pela leitura integral dos autos. Cada marco da execução é localizado no documento em que está.",
+     "A revisão começa pela leitura de todos os autos disponibilizados. Cada marco da execução é localizado no documento em que está.",
      [("Leitura de todas as folhas", "inclusive sentenças, denúncias e acórdãos antigos digitalizados como imagem; o que for ilegível é anotado no ponto exato."),
       ("Linha do tempo de marcos", "cada prisão, soltura, fuga, recaptura, falta e decisão de benefício, com data e folha."),
       ("Cadeia recursal até o trânsito", "a fundamentação que governa é a da última decisão, não a da sentença isolada."),
@@ -267,14 +273,14 @@ CAPITULOS = [
       ("Método do desconto", "a forma como o desconto incide sobre o requisito de cada benefício."),
       ("Suspensão e interrupção", "liberdade provisória e situações análogas não zeram o tempo já cumprido.")]),
     ("Remição por trabalho e estudo",
-     "Os dias de trabalho e as horas de estudo só contam como pena cumprida depois de reconhecidos e lançados.",
+     "O tempo remido reconhecido judicialmente conta como pena cumprida e deve estar refletido no cálculo.",
      [("Atestado convertido em dias", "trabalho e estudo convertidos na proporção legal, com o saldo que sobra levado ao período seguinte."),
       ("Dias atestados e nunca homologados", "certidões juntadas sem pedido nem decisão."),
       ("Remição de outra unidade", "trabalho feito em estabelecimento anterior cujas certidões nunca chegaram."),
       ("Decisão lançada", "a remição reconhecida pelo juiz conferida contra o número efetivamente digitado no cálculo."),
       ("Perda por falta grave", "perda de até um terço, dependente de decisão que justifique a fração aplicada.")]),
     ("Progressão de regime e datas-base",
-     "O requisito de tempo da progressão depende de três dados: a pena, a fração legal e a data-base. Um erro em qualquer deles desloca as etapas seguintes; os demais requisitos são avaliados à parte.",
+     "O requisito de tempo da progressão depende de três dados: a pena, a fração legal e a data-base. Um erro pode deslocar os marcos que dependem do dado incorreto; os demais requisitos são avaliados à parte.",
      [("Fração da lei do fato", "a fração conferida no texto legal vigente na data de cada crime; lei posterior mais grave não alcança fato anterior, e a posterior mais benéfica alcança."),
       ("Duas leis, duas contas", "quando a lei mudou, as duas contas lado a lado, com a regra que decide qual se aplica."),
       ("Fração sobre o saldo", "a partir da segunda progressão, a fração incide sobre o que resta de pena."),
@@ -319,7 +325,7 @@ CAPITULOS = [
     ("Providências indicadas",
      "A revisão indica, para cada divergência, a via e a ordem de urgência; a apresentação ao juízo é atuação distinta.",
      [("Posição processual", "o que já foi pedido, decidido e recorrido, para escolher a via (novo pedido, recurso ou habeas corpus) sem perder o prazo do recurso."),
-      ("Ordem por urgência", "requisito já atingido primeiro; depois impugnação ao cálculo; depois as medidas de mais longo prazo."),
+      ("Ordem por urgência", "as providências são ordenadas pela urgência identificada, inclusive excesso de execução, requisitos de tempo atingidos e prazos processuais."),
       ("Memória de cálculo", "a conta exposta, parcela a parcela, com o documento de cada número."),
       ("Retificação das datas", "indicação da necessidade de retificar o cálculo e, quando cabível, as datas-base em razão do desconto reconhecido. A elaboração e a apresentação do pedido não integram as fases.")]),
 ]
@@ -328,7 +334,7 @@ LIMITES = ("A revisão é uma análise documental da execução, feita por fases
            "condenação seguem outra via, avaliada separadamente; a aplicação de lei posterior mais benéfica, porém, cabe ao juízo "
            "da execução.")
 METODO = [
-    ("Leitura integral, no diagnóstico", "Todas as folhas, inclusive as digitalizadas como imagem."),
+    ("Leitura dos autos, no diagnóstico", "Todos os autos disponibilizados, inclusive as folhas digitalizadas como imagem; folhas ilegíveis e documentos ausentes ficam registrados."),
     ("Linha do tempo", "Cada fato ligado à folha ou ao evento em que está."),
     ("Conta refeita do zero", "Pela lei aplicável a cada fato (a da data do fato ou a posterior mais benéfica), com a conta exposta."),
     ("Confronto com o cálculo oficial e com o título", "Cada divergência é conferida antes de ser apontada, inclusive a que hoje beneficia o condenado e cuja correção o prejudicaria."),
@@ -472,8 +478,8 @@ FAQ = [
     ("Quem constitui o advogado na execução?",
      "O próprio condenado, em regra por procuração."),
     ("O que a família pode conferir por conta própria?",
-     "Os cinco pontos do atestado de pena indicados no início desta página, com o atestado e os documentos em mãos. Uma "
-     "diferença encontrada é um ponto a examinar nos autos, não uma conclusão."),
+     "Os cinco pontos do atestado de pena indicados no início desta página, comparados com os documentos disponíveis. Uma "
+     "diferença encontrada é um ponto a examinar nos autos, não uma conclusão; o tempo cumprido não garante, sozinho, o benefício."),
     ("Todas as fases são necessárias?",
      "Não. O diagnóstico indica, com o motivo, quais análises adicionais são pertinentes. Pode concluir que nenhuma outra é "
      "necessária."),
@@ -483,8 +489,8 @@ FAQ = [
      "profissional."),
     ("Um erro antigo ainda pode ser apontado?",
      "Sim. O cálculo de pena acompanha toda a execução e é revisto a cada incidente: erro demonstrado pode ser levado ao juízo "
-     "da execução enquanto houver pena a cumprir e, diante de ilegalidade flagrante, cabe habeas corpus a qualquer tempo. A via "
-     "adequada depende do caso."),
+     "da execução enquanto houver pena a cumprir e, diante de constrangimento ilegal à liberdade de locomoção, pode caber "
+     "habeas corpus, conforme a situação e os limites dessa via. A via adequada depende do caso."),
     ("E se a revisão encontrar erro que hoje beneficia o condenado?",
      "Ele é registrado em seção própria do relatório, com a análise de seus riscos, para que a defesa conheça toda a situação "
      "da execução."),
@@ -666,7 +672,7 @@ def corpo_html(contato: str = "B") -> str:
     <ul class="rv-numeros rv-numeros-dois">
 {nums}
     </ul>
-''', "Não é situação isolada. Dois levantamentos oficiais, com a unidade e a ressalva de cada um."))
+''', "Os levantamentos registram pendências de análise, de atualização do sistema e de transferência de regime; não medem erros de cálculo."))
     # IV — fases
     fs = []
     for k, f in enumerate(FASES, 1):

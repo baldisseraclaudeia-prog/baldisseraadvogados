@@ -115,6 +115,7 @@ PARIDADE = [
     ("premissa-cascata", ["pagina", "guia", "estudo", "word"], "lançada no cálculo como janeiro de 2022"),
     ("limite-servico", ["pagina", "guia", "estudo", "word"], "Pode concluir que o cálculo está correto ou que não há providência cabível"),
     ("ressalva-cnj", ["pagina"], "em parte dos casos, o direito já estava implementado e apenas não fora lançado no sistema"),
+    ("cascata-dias", ["pagina"], "Oito meses correspondem a cerca de 240 dias a mais em cada marco"),
     ("fases-limite", ["pagina"], "Pedidos e recursos são atuação distinta, que não integra as fases"),
 ]
 

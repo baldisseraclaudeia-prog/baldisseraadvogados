@@ -945,6 +945,28 @@ html.contraste .rv-exemplo, html.contraste .rv-julgado blockquote { background: 
 .rv-numeros-dois { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 50rem; }
 .rv-numeros .rv-num-ressalva { display: block; margin-top: 0.5rem; font-size: var(--t-0); line-height: 1.5; color: var(--tinta-2); font-style: italic; }
 .rv-abertura .sumario { margin-top: 2.5rem; }
+/* revisão por fases: abertura para a família (09/10/2026) */
+.rv-abertura .rv-gancho { font-size: var(--t-2); color: var(--tinta); font-weight: 500; }
+.rv-minuto { max-width: var(--leitura); margin: 2.25rem auto 0; text-align: left; background: var(--papel-2); border-left: 3px solid var(--ouro); padding: 1.1rem 1.5rem 0.9rem; }
+.rv-minuto .rotulo { margin: 0 0 0.6rem; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.12em; }
+.rv-minuto ol { margin: 0; padding-left: 1.3rem; }
+.rv-minuto li { margin: 0 0 0.55rem; font-size: var(--t-1b); line-height: 1.6; text-wrap: pretty; }
+.rv-pontos { list-style: none; margin: 2rem auto 0; padding: 0; max-width: 60rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.rv-ponto { background: #FFFDF8; border: 1px solid var(--linha); border-top: 4px double var(--ouro); padding: 1.35rem 1.5rem 1.1rem; }
+.rv-ponto h3 { display: flex; gap: 0.8rem; align-items: baseline; font: 600 var(--t-3)/1.25 var(--titulo); color: var(--toga); margin: 0 0 0.7rem; text-wrap: balance; }
+.rv-ponto .rv-ponto-num { font: 500 var(--t-5)/1 var(--titulo); color: var(--ouro); }
+.rv-ponto p { margin: 0 0 0.7rem; font-size: var(--t-1b); line-height: 1.6; text-align: justify; hyphens: auto; }
+.rv-ponto .rv-onde { margin: 0; padding-top: 0.6rem; border-top: 1px dotted var(--linha); color: var(--tinta-2); font-size: var(--t-1); text-align: left; }
+.rv-ponto .rv-onde .rotulo { display: block; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.1em; margin-bottom: 0.15rem; }
+.rv-pontos li:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 29rem; justify-self: center; width: 100%; }
+.rv-fase .rv-fase-pessoa { margin: 0 0 0.9rem; font-size: var(--t-1b); line-height: 1.6; color: var(--tinta); }
+.rv-fase-mais summary { list-style: none; cursor: pointer; font-size: var(--t-0); color: var(--ouro-texto); font-variant-caps: all-small-caps; letter-spacing: 0.1em; padding: 0.5rem 0; border-top: 1px solid var(--linha); }
+.rv-fase-mais summary::-webkit-details-marker { display: none; }
+.rv-fase-mais summary::after { content: " +" / ""; }
+.rv-fase-mais[open] summary::after { content: " −" / ""; }
+.rv-fase-mais .rv-tres { margin-top: 0.5rem; }
+@media (max-width: 760px) { .rv-pontos { grid-template-columns: 1fr; } .rv-pontos li:last-child:nth-child(odd) { max-width: none; } }
+@media print { .rv-fase-mais, .rv-capitulos details, .rv-faq details { open: true; } }
 
 .rv-fases { list-style: none; margin: 2rem auto 0; padding: 0; max-width: 60rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
 .rv-fase { background: #FFFDF8; border: 1px solid var(--linha); border-top: 4px double var(--ouro); padding: 1.5rem 1.6rem 1.25rem; }

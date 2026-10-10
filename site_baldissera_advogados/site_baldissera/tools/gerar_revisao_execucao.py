@@ -29,8 +29,9 @@ DESCRICAO = ("Na execução penal, o erro aparece como uma data. Cinco pontos qu
 
 # ---------------------------------------------------------------- 1. abertura
 TESE = "Um erro no cálculo da pena pode repercutir em outros marcos da execução."
-GANCHO = ("Um período de prisão que não entra no cálculo desloca as datas da execução: progressão, livramento e fim da pena. "
-          "Em um exemplo fictício, cada uma dessas datas fica oito meses adiante.")
+GANCHO = ("Um período de prisão indevidamente omitido do cálculo pode alterar as datas previstas da execução: progressão, "
+          "livramento e fim da pena. No exemplo fictício abaixo, nas condições indicadas, os marcos apresentados ficam oito "
+          "meses adiante.")
 FRASE_MAE = "Na execução, o erro não aparece como erro: aparece como uma data."
 EM_UM_MINUTO = [
     "A pena da sentença vira datas: de progressão, de livramento, de fim da pena. Cada data depende dos dados lançados no início.",
@@ -70,10 +71,11 @@ CONFERIR_ABERTURA = ("O atestado de pena a cumprir deve ser entregue ao preso to
 CONFERIR = [
     ("As datas da prisão provisória",
      "Se houve prisão provisória neste processo (flagrante ou preventiva), as datas de início e de fim e se o período foi "
-     "computado. A data da guia de recolhimento, expedida depois do trânsito em julgado, não substitui o período anterior "
-     "efetivamente cumprido. A data-base de cada benefício exige conferência própria.",
-     "no atestado, o campo de início do cumprimento ou de prisão; as datas reais estão no auto de prisão em flagrante, na "
-     "certidão de cumprimento da prisão preventiva e no alvará de soltura, se houve."),
+     "computado. A data de expedição da guia de recolhimento definitiva, após o trânsito em julgado, não substitui as datas "
+     "da prisão efetivamente cumprida. Também pode haver guia provisória, anterior ao trânsito. A data-base de cada benefício "
+     "exige conferência própria.",
+     "no atestado, o campo de início do cumprimento ou de prisão; as datas efetivas estão nos registros de prisão e soltura, "
+     "nas certidões de cumprimento e, quando houver, no alvará acompanhado do registro de seu cumprimento."),
     ("Prisão em outro processo",
      "Período de prisão provisória em outro processo, conforme o desfecho dele e os pressupostos aplicáveis. Entre eles, o "
      "crime da pena em execução deve ser anterior ao período que se pretende descontar.",
@@ -92,7 +94,8 @@ CONFERIR = [
      "continuar aplicável se os requisitos estavam presentes naquela data.",
      "no atestado, a redução ou extinção lançada; nos decretos publicados em cada ano e nas decisões de indulto e comutação."),
 ]
-CONFERIR_FECHO = ("Estes são cinco pontos. A revisão examina todos os documentos da execução, inclusive o que o atestado não mostra: "
+CONFERIR_FECHO = ("Estes são cinco pontos. A revisão examina os documentos disponibilizados da execução, inclusive aspectos que o "
+                  "atestado não mostra, e registra documentos ausentes e pontos não apurados: "
                   "guias em duplicidade, fração aplicada a cada condenação, prescrição e incidentes pendentes.")
 
 # ---------------------------------------------------------------- 1b. as fases (decisões do Dr. Luiz, 09/10/2026)
@@ -229,9 +232,11 @@ ROTEIRO = [
 CASCATA_TEXTO = ("Os marcos da execução se apoiam nos mesmos dados lançados no início: a pena e as datas. Por isso, um dado "
                  "errado na origem pode se refletir nas etapas seguintes. Um exemplo fictício:")
 PREMISSAS = ("Pena de 8 anos (96 meses), em regime inicial fechado; prisão preventiva iniciada em maio de 2021, contínua desde "
-             "então, lançada no cálculo como janeiro de 2022 (data da expedição da guia de recolhimento); frações ilustrativas de um sexto para "
+             "então, lançada no cálculo como janeiro de 2022 (data da expedição da guia de recolhimento definitiva); frações ilustrativas de um sexto para "
              "cada progressão, a segunda sobre o saldo, e de um terço para o livramento; contagem em meses inteiros a partir do "
-             "primeiro dia do mês; sem remição, falta ou interrupção; requisitos não temporais pressupostos.")
+             "primeiro dia do mês; sem remição, falta ou interrupção; requisitos não temporais pressupostos. Modelo didático "
+             "calculado em meses, com fração de mês convertida em dias de 30 dias por mês; o quadro apresenta apenas mês e ano. "
+             "Não substitui a contagem penal pelo calendário.")
 CONTAS = "96 × 1/6 = 16 meses · saldo de 80 × 1/6 = 13 meses e 10 dias · 96 × 1/3 = 32 meses."
 CASCATA_DIAS = ("Nas premissas do exemplo, cada data fica oito meses adiante. São efeitos do mesmo período não computado; "
                 "as diferenças não se somam.")
@@ -296,7 +301,7 @@ CAPITULOS = [
       ("Falta afastada", "quando a falta é afastada, a data-base é restabelecida e os benefícios que ela impedia são reexaminados.")]),
     ("Livramento condicional",
      "O livramento corre em paralelo à progressão, com prazo e data-base próprios.",
-     [("Data-base própria", "conta-se da primeira prisão e não se altera por falta grave."),
+     [("Contagem própria", "conferir os períodos computáveis e as interrupções. A falta grave não reinicia o prazo do livramento, mas pode afetar os demais requisitos."),
       ("Primariedade e reincidência", "conferidas nas certidões e nas datas de cada condenação, e não apenas no cadastro do sistema."),
       ("Extinção que apaga a primeira prisão", "encerrar uma guia antiga pode deslocar o marco do livramento para uma prisão posterior."),
       ("Fim do período de prova", "suspensão ou revogação decretada depois de terminado o período de prova."),
